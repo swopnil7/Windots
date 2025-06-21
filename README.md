@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/your-image-path/windots-logo.png" width="80" alt="Windots Logo" />
+    <img src="https://img.icons8.com/fluency/96/windows-10.png" width="64" alt="Windots Icon" />
 </p>
 
 <h1 align="center">windots</h1>
