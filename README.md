@@ -10,7 +10,7 @@
 
 <div align="center" style="background-color:#1e1e2e; border-radius:12px; padding:18px 0 10px 0; margin-bottom:12px; box-shadow:0 2px 8px rgba(30,30,46,0.12);">
 
-<p align="center">
+<p align="center" style="margin:0;">
     <a href="https://github.com/swopnil7/windots/stargazers">
         <img alt="GitHub stars" src="https://img.shields.io/github/stars/swopnil7/windots?style=for-the-badge&logo=github&logoColor=%23cdd6f4&labelColor=%23313244&color=%23a6e3a1"/>
     </a>
