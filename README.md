@@ -18,7 +18,9 @@
     <img alt="Last commit" src="https://img.shields.io/github/last-commit/swopnil7/windots?style=for-the-badge&logo=git&logoColor=%23cdd6f4&labelColor=%23313244&color=%2389b4fa"/>
     <img alt="License" src="https://img.shields.io/github/license/swopnil7/windots?style=for-the-badge&logo=open-source-initiative&logoColor=%23cdd6f4&labelColor=%23313244&color=%23f38ba8"/>
 </p>
+</div>
 
 <p align="center" style="background:#181825; border-radius:14px; padding:24px 0 18px 0; margin:18px 0 0 0; box-shadow:0 2px 12px rgba(30,30,46,0.18); display:block;">
     <img src="images/fastfetch.png" alt="fastfetch" style="width:96%; border-radius:10px; display:block; margin:auto;"/>
 </p>
+
