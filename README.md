@@ -7,7 +7,7 @@
 <hr/>
 
 <p align="center">
-    <img src="https://github.com/catppuccin/catppuccin/blob/main/assets/palette/macchiato.png?raw=true" alt="Catppuccin Macchiato Palette Bar" width="400" height="16" style="border-radius: 8px; margin: 8px 0; display: inline-block;" />
+    <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/palette/macchiato.png" alt="Catppuccin Macchiato Palette Bar" width="400" height="16" style="border-radius: 8px; margin: 8px 0; display: inline-block;" />
 </p>
 
 <div align="center" style="background-color:#1e1e2e; border-radius:12px; padding:18px 0 10px 0; margin-bottom:12px; box-shadow:0 2px 8px rgba(30,30,46,0.12);">
