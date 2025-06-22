@@ -341,7 +341,6 @@ Special mention to the following resources and projects that were especially hel
 
 ---
 
-```
 ## 💫 Star History
 
 <p align="center"> <img src="https://starchart.cc/swopnil7/windots.svg?background=%231e1e2e&axis=%23cdd6f4&line=%23cba6f7" alt="Stargazers over time" width="600"/> </p>
