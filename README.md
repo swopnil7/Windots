@@ -295,7 +295,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 
 ## 🖼️ Gallery
 
-> You can check out the **wallpapers** [**here**](https://github.com/swopnil7/windots/tree/main/wallies/) if you're interested!
+> You can check out the **wallpapers** [**here**](https://github.com/swopnil7/windots/tree/main/wallies#readme) if you're interested!
 
 <div align="center">
 
