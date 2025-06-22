@@ -1,0 +1,130 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "file",
+    "source": "C:/Users/swopnil/.config/fastfetch/windows.txt",
+    "padding": { "top": 1, "left": 0, "right": 4 }
+  },
+  "display": {
+    "separator": ": ",
+    "color": {
+      "keys": "blue",
+      "title": "magenta"
+    },
+    "key": {
+      "width": 12,
+      "type": "string"
+    },
+    "percent": {
+      "type": 1,
+      "color": {
+        "green": "green",
+        "yellow": "yellow",
+        "red": "red"
+      }
+    }
+  },
+  "modules": [
+    "break",
+    {
+      "type": "title",
+      "format": "{#34}@{user-name}{#}"
+    },
+    {
+      "type": "custom",
+      "format": "-----------------------"
+    },
+    {
+      "type": "os",
+      "key": "OS",
+      "format": "{name} {version}"
+    },
+    {
+      "type": "kernel",
+      "key": "Kernel",
+      "format": "{sysname} {release}"
+    },
+    {
+      "type": "host",
+      "key": "Device",
+      "format": "{family}"
+    },
+    {
+      "type": "bios",
+      "key": "BIOS",
+      "format": "{vendor} {version} ({date})"
+    },
+    {
+      "type": "chassis",
+      "key": "Chassis",
+      "format": "{type}"
+    },
+    {
+      "type": "uptime",
+      "key": "Uptime"
+    },
+    {
+      "type": "datetime",
+      "key": "Date/Time"
+    },
+    {
+      "type": "shell",
+      "key": "Shell",
+      "format": "{pretty-name} ({version})"
+    },
+    {
+      "type": "terminal",
+      "key": "Term"
+    },
+    {
+      "type": "cpu",
+      "key": "CPU",
+      "format": "{name}"
+    },
+    {
+      "type": "cpuusage",
+      "key": "CPU Usage"
+    },
+    {
+      "type": "gpu",
+      "key": "GPU",
+      "format": "{name}"
+    },
+    {
+      "type": "memory",
+      "key": "Memory"
+    },
+    {
+      "type": "disk",
+      "key": "Disk",
+      "folders": [
+      "C:/",
+      "D:/"
+      ]
+    },
+    {
+      "type": "battery",
+      "key": "Battery",
+      "format": "{capacity} {status}"
+    },
+    {
+      "type": "wifi",
+      "key": "Wi-Fi",
+      "format": "{ssid}"
+    },
+    {
+      "type": "processes",
+      "key": "Processes"
+    },
+    {
+      "type": "packages",
+      "key": "Packages"
+    },
+    "break",
+    {
+      "type": "colors",
+      "symbol": "circle"
+    },
+    "break"
+  ]
+}
