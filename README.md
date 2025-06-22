@@ -307,17 +307,13 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 |:--:|:--:|
 | ![](previews/spotify.png) | ![](previews/yasbpowermenu.png) |
 
-| **Tiling Window Manager** | **Flow Launcher** |
+| **GlazeWM Window Manager** | **Flow Launcher** |
 |:--:|:--:|
 | ![](previews/glazewmtiling.png) | ![](previews/flowlauncher.png) |
 
-| **Spotify Client** | **Web Browser** |
+| **Discord Client** | **Web Browser** |
 |:--:|:--:|
-| ![](previews/spotify.png) | ![](previews/zen.png) |
-
-| **Discord Client** |  |
-|:--:|:--:|
-| ![](previews/discord.png) |  |
+| ![](previews/discord.png) | ![](previews/zen.png) |
 
 </div>
 
