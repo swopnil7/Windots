@@ -7,7 +7,7 @@
 <h1 align="center">
   <span align="center">
 
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=36&pause=1000&color=89B4FA&center=true&vCenter=true&width=435&lines=Windots+%F0%9F%8C%9F;Catppuccin+for+Windows" alt="Windots Animated Title" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=36&pause=1000&color=89B4FA&center=true&vCenter=true&width=435&lines=Windots+%F0%9F%8C%9F;Catppuccin+for+Win" alt="Windots Animated Title" />
 
   <br>
 
