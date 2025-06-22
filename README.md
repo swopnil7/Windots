@@ -62,7 +62,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 | 🐚 **PowerShell** enhancements | 🎨 **Oh My Posh** prompt |
 | ⚙️ **fastfetch** system info | 🚀 **Flow Launcher** workflow |
 | 🦅 Themed Start menu, Taskbar, Notification Center | 🧱 [Wallpapers](https://github.com/swopnil7/windots/tree/main/wallies#readme) |
-| 🐈‍⬛ [Catppuccin Mocha](https://github.com/catppuccin) color scheme everywhere | |
+| 🐈‍⬛ [Catppuccin Mocha](https://github.com/catppuccin) color scheme everywhere | 🌺 Theme for Almost Everything |
 
 </div>
 
