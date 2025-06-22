@@ -5,7 +5,19 @@
 </p>
 
 <h1 align="center">
+  <span align="center">
+
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=36&pause=1000&color=89B4FA&center=true&vCenter=true&width=435&lines=Windots+%F0%9F%8C%9F;Catppuccin+Mocha+for+Windows" alt="Windots Animated Title" />
+
+  <br>
+
+  <b>
+    <span style="color:#89B4FA;">Windots</span>
+    <span style="color:#A6E3A1;">•</span>
+    <span style="color:#F38BA8;">Catppuccin Mocha for Windows</span>
+  </b>
+
+  </span>
 </h1>
 
 <p align="center">
