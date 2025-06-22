@@ -338,3 +338,4 @@ Special mention to the following resources and projects that were especially hel
 - [**GlazeWM**](https://github.com/glzr-io/glazewm) for delivering an outstanding **tiling window manager** that boosts productivity ✨
 - [**YASB**](https://github.com/amnweb/yasb) for a **customizable and feature-rich status bar** that fits seamlessly into the setup 🚀
 - [**Catppuccin**](https://catppuccin.com) for creating the **best color scheme** ever 🖌️
+- [**Ashish**](https://github.com/ashish0kumar) for some of the **file configs** 🤍
