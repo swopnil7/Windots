@@ -312,37 +312,6 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 
 > You can check out the **wallpapers** [**here**](https://github.com/swopnil7/windots/tree/main/wallies/) if you're interested!
 
-<div align="center">
-
-| **GUI Text Editor** | **Start Menu, Taskbar and Notification Center** |
-|:--:|:--:|
-| ![](images/code.png) | ![](images/hawktchoua.png) |
-
-| **Music Player and CLI Music Visualiser** | **Power Menu** |
-|:--:|:--:|
-| ![](images/spotify.png) | ![](images/yasbpowermenu.png) |
-
-| **Tiling Window Manager** | **Flow Launcher** |
-|:--:|:--:|
-| ![](images/glazewmtiling.png) | ![](images/flowlauncher.png) |
-
-| **Spotify Client** | **Web Browser** |
-|:--:|:--:|
-| ![](images/spotify.png) | ![](images/zen.png) |
-
-| **Discord Client** |  |
-|:--:|:--:|
-| ![](images/discord.png) |  |
-
-</div>
-
----
-
-## 📌 Todo
-
-- [ ] Add an **install script** to set up the configs easily.
-- [ ] Write **dedicated README files** inside each config folder with detailed information and usage instructions.
-
 ---
 
 ## 📢 Discussions
@@ -367,14 +336,9 @@ Special mention to the following resources and projects that were especially hel
 
 ---
 
+```
 ## 💫 Star History
 
 <p align="center">
   <img src="https://starchart.cc/swopnil7/windots.svg?background=%231e1e2e&axis=%23cdd6f4&line=%23cba6f7" alt="Stargazers over time" width="600"/>
-</p>
-
-<br>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/images/footers/gray0_ctp_on_line.svg?sanitize=true" />
 </p>
