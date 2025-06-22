@@ -9,14 +9,6 @@
 
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=36&pause=1000&color=89B4FA&center=true&vCenter=true&width=435&lines=Windots+%F0%9F%8C%9F;Catppuccin+for+Win" alt="Windots Animated Title" />
 
-  <br>
-
-  <b>
-    <span style="color:#89B4FA;">Windots</span>
-    <span style="color:#A6E3A1;">•</span>
-    <span style="color:#F38BA8;">Catppuccin Mocha for Windows</span>
-  </b>
-
   </span>
 </h1>
 
@@ -42,7 +34,7 @@
 <br>
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=soft&color=6c7086&height=120&section=header&text=Catppuccin%20Mocha%20Windows%20Dotfiles&fontColor=cdd6f4&fontSize=32&animation=twinkling" alt="Capsule Banner"/>
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=8aadf4,89b4fa,b4befe,a6e3a1,f9e2af,f38ba8,cba6f7&height=120&section=header&text=Catppuccin%20Mocha%20Windows%20Dotfiles&fontColor=cdd6f4&fontSize=32&animation=twinkling" alt="Capsule Banner"/>
 </p>
 
 <p align="center">
