@@ -122,7 +122,6 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 | **Clipboard Manager** | [CopyQ](https://github.com/hluk/CopyQ) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/copyq/) |
 | **Torrent Manager** | [qBittorrent](https://www.qbittorrent.org/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/qBittorrent/) |
 | **Discord Client** | 🤍 [Vencord](https://vencord.dev/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/vencord/) |
-| **Spotify Client** | 🤍 [Spicetify](https://spicetify.app/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/spicetify/) |
 | **YouTube Music Client** | [Th-Ch YouTube Music](https://github.com/th-ch/youtube-music) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/youtubemusic/) |
 | **Web Themer** | 🤍 [Stylus](https://addons.mozilla.org/en-US/firefox/addon/stylus/) (for Firefox) with 🤍 [Catppuccin Mocha](https://github.com/catppuccin/userstyles) [⚙️](https://github.com/catppuccin/userstyles/blob/main/docs/USAGE.md) |
 
