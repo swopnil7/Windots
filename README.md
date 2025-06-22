@@ -338,9 +338,3 @@ Special mention to the following resources and projects that were especially hel
 - [**GlazeWM**](https://github.com/glzr-io/glazewm) for delivering an outstanding **tiling window manager** that boosts productivity ✨
 - [**YASB**](https://github.com/amnweb/yasb) for a **customizable and feature-rich status bar** that fits seamlessly into the setup 🚀
 - [**Catppuccin**](https://catppuccin.com) for creating the **best color scheme** ever 🖌️
-
----
-
-## 💫 Star History
-
-<p align="center"> <img src="https://starchart.cc/swopnil7/windots.svg?background=%231e1e2e&axis=%23cdd6f4&line=%23cba6f7" alt="Stargazers over time" width="600"/> </p>
