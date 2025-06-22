@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+/* Catppuccin Mocha Colors */
+:root {
+    --ctp-bg: rgba(24, 24, 37, 0.7);         /* base */
+    --ctp-surface: rgba(30, 30, 46, 0.7);    /* mantle */
+    --ctp-overlay: rgba(49, 50, 68, 0.5);    /* overlay */
+    --ctp-accent: #c39ff1;                   /* lavender */
+    --ctp-accent2: #f5c2e7;                  /* pink */
+    --ctp-text: #cdd6f4;                     /* text */
+    --ctp-subtext: #a6adc8;                  /* subtext1 */
+    --ctp-border: rgba(108, 112, 134, 0.5);  /* surface1 */
+    --ctp-shadow: rgba(30, 30, 46, 0.8);
+
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    color: var(--ctp-text);
+    background: linear-gradient(135deg, #1e1e2e 0%, #181825 100%);
+    overflow: hidden;
+}
+
+.title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    position: relative;
+}
+
+.title-bar::before {
+    content: "Hala Madrid Y Nada Mas";
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ctp-accent);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 8px var(--ctp-shadow);
+}
+
+.title-bar::after {
+    content: "@Swops";
+    opacity: 0.8;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ctp-accent);
+    position: absolute;
+    right: 150px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.title-bar h4 {
+    visibility: hidden;
+}
+
+#root {
+    background: url('https://preview.redd.it/need-real-madrid-wallpapers-for-pc-v0-lo797ifjaese1.jpeg?width=1680&format=pjpg&auto=webp&s=b13c289d361c52db5373a28ec2d800876fa8a426') no-repeat center center fixed;
+    background-size: cover;
+    opacity: 1;
+    image-rendering: auto;
+    backdrop-filter: blur(12px);
+}
+
+.sidebar, .header, .container__content, .bottom-panel {
+    background: var(--ctp-bg);
+    border: 2px solid var(--ctp-border);
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 0 16px var(--ctp-shadow);
+}
+
+.text-field-container__text-field--dark,
+.text-field-container__text-field--primary,
+.header__search,
+.game-item,
+.settings__content,
+.catalogue__filters-container,
+.friends-box__box,
+.user-stats__box,
+.recent-games__box {
+    background-color: var(--ctp-surface);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--ctp-border);
+    border-radius: 10px;
+}
+
+.container__content .button--outline {
+    background-color: var(--ctp-overlay);
+    border: 2px solid var(--ctp-accent);
+    color: var(--ctp-accent);
+    padding: 10px 15px;
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+}
+
+.container__content .button--outline:hover {
+    background-color: var(--ctp-accent);
+    color: #1e1e2e;
+    box-shadow: 0 0 15px var(--ctp-accent2);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--ctp-accent);
+    text-shadow: 2px 2px 8px var(--ctp-shadow);
+}
+
+@keyframes glow {
+    0% { text-shadow: 0 0 5px var(--ctp-accent2); }
+    100% { text-shadow: 0 0 15px var(--ctp-accent); }
+}
+
+.glow-text {
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 5px var(--ctp-accent2); }
+    50% { box-shadow: 0 0 15px var(--ctp-accent); }
+    100% { box-shadow: 0 0 5px var(--ctp-accent2); }
+}
+
+.pulse-hover:hover {
+    animation: pulse 0.8s infinite alternate;
+}
+
+* {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><polygon points="12,2 22,12 12,22 2,12" fill="white"/><polygon points="12,4 20,12 12,20 4,12" fill="none" stroke="%23cba6f7" stroke-width="2"/></svg>') 12 12, auto !important;
+}
+
+a, button, [role="button"], .clickable, .interactive {
+    cursor: inherit !important;
+}
