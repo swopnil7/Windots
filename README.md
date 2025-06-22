@@ -123,7 +123,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 | **Torrent Manager** | [qBittorrent](https://www.qbittorrent.org/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/qBittorrent/) |
 | **Discord Client** | 🤍 [Vencord](https://vencord.dev/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/vencord/) |
 | **YouTube Music Client** | [Th-Ch YouTube Music](https://github.com/th-ch/youtube-music) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/youtubemusic/) |
-| **Web Themer** | 🤍 [Stylus](https://addons.mozilla.org/en-US/firefox/addon/stylus/) (for Firefox) with 🤍 [Catppuccin Mocha](https://github.com/catppuccin/userstyles) [⚙️](https://github.com/catppuccin/userstyles/blob/main/docs/USAGE.md) |
+| **Web Themer** | 🤍 [Stylus](https://addons.mozilla.org/en-US/firefox/addon/stylus/) (for Firefox) with 🤍 [Catppuccin Mocha](https://github.com/catppuccin) [⚙️](https://github.com/catppuccin/userstyles/blob/main/docs/USAGE.md) |
 
 #### 🔍 Other
 
