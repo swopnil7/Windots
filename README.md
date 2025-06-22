@@ -303,7 +303,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 |:--:|:--:|
 | ![](previews/code.png) | ![](previews/hawktchoua.png) |
 
-| **Music Player and CLI Music Visualiser** | **Power Menu** |
+| **Spotify with Spicetify** | **Power Menu** |
 |:--:|:--:|
 | ![](previews/spotify.png) | ![](previews/yasbpowermenu.png) |
 
