@@ -17,18 +17,12 @@
 </p>
 
 <div align="center">
-  <a href="https://github.com/swopnil7/windots/stargazers">
-    <img src="https://img.shields.io/github/stars/swopnil7/windots?style=for-the-badge&logo=github&logoColor=%23cdd6f4&labelColor=%23313244&color=%23a6e3a1" alt="GitHub stars">
-  </a>
-  <a href="https://github.com/swopnil7/windots/">
-    <img src="https://img.shields.io/github/repo-size/swopnil7/windots?style=for-the-badge&logo=databricks&logoColor=%23cdd6f4&labelColor=%23313244&color=%23f9e2af" alt="Repo size">
-  </a>
-  <a href="https://github.com/swopnil7/windots/commits/main/">
-    <img src="https://img.shields.io/github/last-commit/swopnil7/windots?style=for-the-badge&logo=git&logoColor=%23cdd6f4&labelColor=%23313244&color=%2389b4fa" alt="Last commit">
-  </a>
-  <a href="https://github.com/swopnil7/windots/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/swopnil7/windots?style=for-the-badge&logo=open-source-initiative&logoColor=%23cdd6f4&labelColor=%23313244&color=%23f38ba8" alt="License">
-  </a>
+<p>
+<a href="https://github.com/swopnil7/windots/stargazers"><img src="https://img.shields.io/github/stars/swopnil7/windots?style=for-the-badge&logo=starship&color=89B4FA&logoColor=89B4FA&labelColor=1E1E2E" alt="stars"></a>&nbsp;&nbsp;
+<a href="https://github.com/swopnil7/windots/"><img src="https://img.shields.io/github/repo-size/swopnil7/windots?style=for-the-badge&logo=hyprland&logoColor=F38BA8&label=Size&labelColor=1E1E2E&color=F38BA8" alt="REPO SIZE"></a>&nbsp;&nbsp;
+<a href="https://github.com/swopnil7/windots/commits/main/"><img src="https://img.shields.io/github/last-commit/swopnil7/windots?style=for-the-badge&logo=github&logoColor=A6E3A1&label=Last%20Commit&labelColor=1E1E2E&color=A6E3A1" alt="Last Commit"></a>&nbsp;&nbsp;
+<a href="https://github.com/swopnil7/windots/blob/main/LICENSE"><img src="https://img.shields.io/github/license/swopnil7/windots?style=for-the-badge&color=FAB387&logoColor=FAB387&labelColor=1E1E2E" alt="LICENSE"></a>&nbsp;&nbsp;
+</p>
 </div>
 
 <br>
