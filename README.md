@@ -33,19 +33,13 @@
 
 <br>
 
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=soft&color=8aadf4,89b4fa,b4befe,a6e3a1,f9e2af,f38ba8,cba6f7&height=120&section=header&text=Catppuccin%20Mocha%20Windows%20Dotfiles&fontColor=cdd6f4&fontSize=32&animation=twinkling" alt="Capsule Banner"/>
-</p>
-
-<p align="center">
-  <img src="previews/fastfetch.png" width="320" alt="Fastfetch Preview"/>
-  <img src="previews/code.png" width="320" alt="VSCode Preview"/>
-  <img src="previews/start.png" width="320" alt="Start Menu Preview"/>
-  <img src="previews/hawktchoua.png" width="320" alt="Notification Center Preview"/>
-  <img src="previews/hydra.png" width="320" alt="Hydra Preview"/>
-  <img src="previews/explorer.png" width="320" alt="Explorer Preview"/>
-  <img src="previews/controlpanel.png" width="320" alt="Control Panel Preview"/>
-</p>
+![](previews/fastfetch.png)<br/><br/>
+![](previews/code.png)<br/><br/>
+![](previews/start.png)<br/><br/>
+![](previews/hawktchoua.png)<br/><br/>
+![](previews/hydra.png)<br/><br/>
+![](previews/explorer.png)<br/><br/>
+![](previews/controlpanel.png)<br/>
 
 <hr>
 
@@ -304,6 +298,30 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 
 > You can check out the **wallpapers** [**here**](https://github.com/swopnil7/windots/tree/main/wallies/) if you're interested!
 
+<div align="center">
+
+| **GUI Text Editor** | **Start Menu, Taskbar and Notification Center** |
+|:--:|:--:|
+| ![](previews/code.png) | ![](previews/hawktchoua.png) |
+
+| **Music Player and CLI Music Visualiser** | **Power Menu** |
+|:--:|:--:|
+| ![](previews/spotify.png) | ![](previews/yasbpowermenu.png) |
+
+| **Tiling Window Manager** | **Flow Launcher** |
+|:--:|:--:|
+| ![](previews/glazewmtiling.png) | ![](previews/flowlauncher.png) |
+
+| **Spotify Client** | **Web Browser** |
+|:--:|:--:|
+| ![](previews/spotify.png) | ![](previews/zen.png) |
+
+| **Discord Client** |  |
+|:--:|:--:|
+| ![](previews/discord.png) |  |
+
+</div>
+
 ---
 
 ## 📢 Discussions
@@ -331,6 +349,4 @@ Special mention to the following resources and projects that were especially hel
 ```
 ## 💫 Star History
 
-<p align="center">
-  <img src="https://starchart.cc/swopnil7/windots.svg?background=%231e1e2e&axis=%23cdd6f4&line=%23cba6f7" alt="Stargazers over time" width="600"/>
-</p>
+<p align="center"> <img src="https://starchart.cc/swopnil7/windots.svg?background=%231e1e2e&axis=%23cdd6f4&line=%23cba6f7" alt="Stargazers over time" width="600"/> </p>
