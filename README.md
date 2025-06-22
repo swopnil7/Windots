@@ -35,11 +35,11 @@
 
 ![](previews/fastfetch.png)<br/><br/>
 ![](previews/code.png)<br/><br/>
-![](previews/start.png)<br/><br/>
 ![](previews/hawktchoua.png)<br/><br/>
 ![](previews/hydra.png)<br/><br/>
 ![](previews/explorer.png)<br/><br/>
-![](previews/controlpanel.png)<br/>
+![](previews/controlpanel.png)<br/><br/>
+![](previews/yasbpowermenu.png)<br>
 
 <hr>
 
