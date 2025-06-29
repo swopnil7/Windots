@@ -183,6 +183,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
   - [`windots/.dotfiles/zen/userChrome.css`](.dotfiles/zen/userChrome.css) → `<Your Profile Folder>/chrome/userChrome.css`
   - [`windots/.dotfiles/zen/userContent.css`](.dotfiles/zen/userContent.css) → `<Your Profile Folder>/chrome/userContent.css`
 - **Restart your browser** for the changes to take effect.
+- My custom [**Start Page**](https://github.com/swopnil7/Windots) if you want it. Go to your browser settings and set it as the default home page by pasting the link.
 
 ### 🚀 Flow Launcher
 
