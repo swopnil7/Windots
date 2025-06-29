@@ -162,6 +162,11 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 - [`windots/.dotfiles/vscode/settings.json`](.dotfiles/vscode/settings.json) → `%APPDATA%\Code\User\settings.json`
 - **Restart VSCode** to load the updated settings.
 
+### 📂 Windows Explorer
+- **Install** [**Niivu's Catpuccin Mocha theme**](https://www.deviantart.com/niivu/art/Catppuccin-for-Windows-11-1076249390)
+- **Get** the [**LinuxFx 11 Icon Pack**](https://github.com/niivu/resource-redirect-icon-themes/blob/main/Resource%20Redirect%20themes/Linuxfx-11-AIO.zip) to be used along with the [**Resource Redirect**](https://windhawk.net/mods/icon-resource-redirect) mod on Windhawk.
+- Also get this [**Tweak**](https://github.com/Maplespe/ExplorerBlurMica) if you want the blur effect.
+
 ### 🌐 Browser
 
 > [!NOTE]
