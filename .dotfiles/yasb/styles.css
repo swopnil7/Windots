@@ -559,6 +559,14 @@ Example: "Windows Media" becomes "windows-media" */
     color: var(--maroon);
 }
 
+.weather-widget .label {
+    font-size: 14px;
+    color: var(--subtext0);
+    font-weight: 700;
+    font-family: "JetBrainsMono NFP";
+    background: transparent;
+}
+
 .weather-card {
     background: rgb(24, 24, 37); /* #181825, fully opaque */
     border: 1.5px solid rgba(69, 71, 90, 0.5); /* #45475a, 0.5 opacity */
@@ -654,6 +662,13 @@ Example: "Windows Media" becomes "windows-media" */
 .wifi-widget .icon {
     color: var(--yellow);
 }
+.wifi-widget .label {
+    font-size: 12px;
+    color: var(--subtext0);
+    font-weight: 700;
+    font-family: "JetBrainsMono NFP";
+    background: transparent;
+}
 
 /* ===================== */
 /* === BATTERY WIDGET === */
@@ -663,11 +678,19 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .battery-widget {
-    padding: 0 0px;
-    margin-left: 2px;
+    padding: 0;
+    margin: 0 0 0 2px;
     background: transparent;
     box-shadow: 0 2px 8px 0 rgba(24, 24, 37, 0.15);
     border-radius: 6px;
+}
+
+.battery-widget .label {
+    color: var(--subtext0);
+    font-size: 12px;
+    font-weight: 700;
+    font-family: "JetBrainsMono NFP";
+    background: transparent;
 }
 
 /* ==================== */
@@ -677,13 +700,21 @@ Example: "Windows Media" becomes "windows-media" */
     color: var(--red);
 }
 
+.memory-widget .label {
+    font-size: 12px;
+    color: var(--subtext0);
+    font-weight: 700;
+    font-family: "JetBrainsMono NFP";
+    background: transparent;
+}
+
 /* ================= */
 /* === UPTIME WIDGET === */
 /* ================= */
 .uptime {
     font-size: 14px;
     margin-bottom: 10px;
-    color: var(--surface2);
+    color: var(--subtext0);
     font-weight: 600;
 }
 
@@ -786,11 +817,6 @@ Example: "Windows Media" becomes "windows-media" */
     font-size: 12px;
     font-family: "JetBrainsMono NFP";
     font-weight: 700;
-    background: transparent;
-}
-
-.libre-monitor-widget .widget-container .label.alt {
-    color: var(--lavender);
     background: transparent;
 }
 
