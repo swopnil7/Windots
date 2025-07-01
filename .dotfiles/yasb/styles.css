@@ -57,11 +57,10 @@
 /* ================= */
 .yasb-bar {
     padding: 0;
-    margin: 0;
-    background: rgb(24, 24, 37); /* #181825, fully opaque */
+    margin: 1px 4px;
+    background: rgba(18, 18, 30, 0.91); /* #181825, fully opaque */
     /* Catppuccin Mocha border */
-    border: 2px solid rgb(37, 40, 65);
-    border-radius: 14px;
+    border-radius: 6px;
 }
 
 .power-menu-popup,
@@ -124,7 +123,7 @@
     padding: 0 2px;
     margin-left: -2px;
     margin-right: 4px;
-    background: rgb(24, 24, 37); /* #181825, fully opaque */
+    background: transparent;
     box-shadow: 0 2px 8px 0 rgba(24, 24, 37, 0.15);
     border-radius: 6px;
     display: flex;
@@ -247,7 +246,7 @@
     min-width: 420px;
     max-width: 420px;
     background: rgb(24, 24, 37); /* #181825, fully opaque */
-    border: 1.5px solid var(--og); /* Use og accent */
+    border: 1.5px solid rgba(69, 71, 90, 0.5); /* #45475a, 0.5 opacity */
     border-radius: 6px;
     box-shadow: 0 4px 24px 0 rgba(24, 24, 37, 0.25);
     backdrop-filter: blur(16px) saturate(1.2);
@@ -617,19 +616,18 @@ Example: "Windows Media" becomes "windows-media" */
 /* === WORKSPACE WIDGET === */
 /* ====================== */
 .glazewm-workspaces {
-    background-color: rgba(100, 67, 157, 0.171);
-    margin: 0 4px;
-    border: 1px solid rgba(69, 71, 90, 0.5);
-    border-radius: 2px;
+    background-color: rgba(108, 82, 165, 0.171);
+    margin: 4px 4px;
+    border-radius: 10px;
     box-shadow: 0 4px 24px 0 rgba(24, 24, 37, 0.25);
-    padding: 4px 0;
+    padding: 4px 2px;
 }
 
 .glazewm-workspaces .ws-btn {
     font-size: 14px;
     border: none;
     color: var(--overlay2);
-    padding: 0 6px;
+    padding: 0 5px;
     cursor: pointer;
 }
 
@@ -637,7 +635,7 @@ Example: "Windows Media" becomes "windows-media" */
 .glazewm-workspaces .ws-btn.active_populated:hover {
     background-color: var(--og);
     color: var(--surface0);
-    border-radius: 8px;
+    border-radius: 6px;
 }
 
 .glazewm-workspaces .ws-btn.empty{
@@ -667,7 +665,7 @@ Example: "Windows Media" becomes "windows-media" */
 .battery-widget {
     padding: 0 0px;
     margin-left: 2px;
-    background: rgb(24, 24, 37); /* #181825, fully opaque */
+    background: transparent;
     box-shadow: 0 2px 8px 0 rgba(24, 24, 37, 0.15);
     border-radius: 6px;
 }
@@ -725,22 +723,11 @@ Example: "Windows Media" becomes "windows-media" */
 /* ================= */
 .systray {
     background: var(--base);
-    background-color: var(--mantle);
+    background-color: transparent;
     border-radius: 8px;
-    box-shadow: 0 4px 24px 0 rgba(24, 24, 37, 0.25);
-    padding: 0 0px;
     margin: 0 3px;
     display: flex;
     align-items: center;
-}
-
-.systray .pinned-container {
-    background: transparent;
-}
-
-.systray .pinned-container[forceshow=true] {
-    background: rgba(43, 191, 166, 0.08);
-    border-radius: 6px;
 }
 
 .systray .unpinned-container {
@@ -773,12 +760,10 @@ Example: "Windows Media" becomes "windows-media" */
 
 .systray .unpinned-visibility-btn {
     border-radius: 6px;
-    height: 16px;
-    width: 16px;
     background: var(--pink);
     color: var(--crust);
-    border: 1px solid rgba(69, 71, 90, 0.5);
-    margin: 1px 0.5px; /* reduced horizontal margin */
+    border: 1px solid transparent;
+    margin: 7px 0.5px;
     font-size: 17px;
 }
 
@@ -835,7 +820,7 @@ Example: "Windows Media" becomes "windows-media" */
     color: var(--og);
     font-family: "JetBrainsMono NFP", "Segoe UI", sans-serif;
     padding: 4px 0 4px 0;
-    margin: 0 0 4px 0;
+    margin: 8px 0 4px 0;
     letter-spacing: 0.5px;
     background: transparent;
 }

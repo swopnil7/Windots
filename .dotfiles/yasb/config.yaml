@@ -14,7 +14,7 @@ bars:
       position: "top"
       center: true
     blur_effect:
-      enabled: true 
+      enabled: true
       acrylic: false
       dark_mode: true
       round_corners: true
@@ -24,7 +24,7 @@ bars:
       windows_app_bar: true
     dimensions:
       width: "100%"
-      height: 32
+      height: 33
     padding:
       top: 0
       left: 0
