@@ -396,6 +396,14 @@ Example: "Windows Media" becomes "windows-media" */
     margin: 1px 2px 0 0;
 }
 
+.volume-widget .label {
+    font-size: 12px;
+    color: var(--subtext0);
+    font-weight: 700;
+    font-family: "JetBrainsMono NFP";
+    background: transparent;
+}
+
 .audio-container .device {
     font-size: 10px;
     background-color: transparent;
@@ -938,13 +946,17 @@ Example: "Windows Media" becomes "windows-media" */
 /* ================ */
 /* === VSCode Widget === */
 /* ================ */
+.vscode-widget {
+    padding: 0;
+    background: transparent;
+}
 
 .vscode-widget .widget-container .icon {
     color: var(--sapphire);
 }
 
 .vscode-menu {
-    max-height: 500px;
+    max-height: 410px;
     min-width: 300px;
 }
 
@@ -994,23 +1006,21 @@ Example: "Windows Media" becomes "windows-media" */
 /* ================= */
 
 .wallpapers-widget {
-    padding: 4px 0px;
+    padding: 0;
     background: transparent;
-    border-radius: 12px;
-    box-shadow: 0 2px 16px 0 rgba(24,24,37,0.13);
 }
 
 .wallpapers-gallery-window {
     background: var(--base);
     border: 1.5px solid var(--surface1);
-    border-radius: 12px;
+    border-radius: 8px;
     margin: 0;
 }
 
 .wallpapers-gallery-buttons {
-    background: var(--crust);
+    background: rgba(100, 67, 157, 0.171);
     color: var(--text);
-    border: none;
+    border: 1px solid var(--og);
     font-size: 13px;
     padding: 10px 0;
     border-radius: 8px;
@@ -1020,8 +1030,8 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .wallpapers-gallery-buttons:hover {
-    background: var(--surface2);
-    color: var(--og);
+    background: var(--og);
+    color: var(--surface0);
 }
 
 .wallpapers-gallery-image {
@@ -1032,8 +1042,7 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .wallpapers-gallery-image:hover {
-    border: 2px solid var(--blue);
-    box-shadow: 0 4px 18px 0 rgba(195,159,241,0.13);
+    border: 2.5px solid var(--maroon);
 }
 
 .wallpapers-gallery-image.focused {
