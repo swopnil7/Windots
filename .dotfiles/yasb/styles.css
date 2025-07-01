@@ -57,9 +57,8 @@
 /* ================= */
 .yasb-bar {
     padding: 0;
-    margin: 1px 4px;
-    background: rgba(18, 18, 30, 0.91); /* #181825, fully opaque */
-    /* Catppuccin Mocha border */
+    margin: 1px 0;
+    background: var(--base);
     border-radius: 6px;
 }
 
@@ -69,8 +68,8 @@
 .calendar,
 .weather-card,
 .home-menu {
-    background: rgb(24, 24, 37); /* #181825, fully opaque */
-    border: 1.5px solid rgba(69, 71, 90, 0.5); /* #45475a, 0.5 opacity */
+    background: rgb(24, 24, 37);
+    border: 1.5px solid rgba(69, 71, 90, 0.5);
     border-radius: 6px;
 }
 
@@ -142,8 +141,7 @@
     border-radius: 8px;
     background-color: var(--base);
     border: 8px solid rgba(58, 59, 83, 0);
-    margin: 0px;
-    /* Use og accent for focus/active border if needed */
+    margin: 0;
 }
 
 .power-menu-popup .button.hover {
@@ -164,7 +162,6 @@
     color: var(--og);
 }
 
-/* Cancel button specific styles */
 .power-menu-popup .button.cancel {
     height: 32px;
     border-radius: 4px;
@@ -189,8 +186,8 @@
 /* === MEDIA WIDGET      === */
 /* ========================= */
 .media-widget {
-    background: rgb(24, 24, 37); /* Match menu background */
-    border: 0.5px solid rgba(69, 71, 90, 0.5); /* #45475a, 0.5 opacity */
+    background: rgb(24, 24, 37);
+    border: 0.5px solid rgba(69, 71, 90, 0.5);
     border-radius: 6px;
     box-shadow: 0 4px 24px 0 rgba(24, 24, 37, 0.25);
     backdrop-filter: blur(16px) saturate(1.2);
@@ -237,7 +234,7 @@
 .media-widget .btn.disabled:hover {
     color: var(--overlay0);
     background-color: rgba(0, 0, 0, 0);
-    border-color: rgba(195, 159, 241, 0.15); /* og accent with opacity */
+    border-color: rgba(195, 159, 241, 0.15);
     cursor: not-allowed;
     opacity: 0.7;
 }
@@ -245,8 +242,8 @@
 .media-menu {
     min-width: 420px;
     max-width: 420px;
-    background: rgb(24, 24, 37); /* #181825, fully opaque */
-    border: 1.5px solid rgba(69, 71, 90, 0.5); /* #45475a, 0.5 opacity */
+    background: rgb(24, 24, 37);
+    border: 1.5px solid rgba(69, 71, 90, 0.5);
     border-radius: 6px;
     box-shadow: 0 4px 24px 0 rgba(24, 24, 37, 0.25);
     backdrop-filter: blur(16px) saturate(1.2);
@@ -268,7 +265,7 @@
 }
 
 .media-menu .title {
-    color: var(--og); /* Use og accent */
+    color: var(--og);
     font-size: 16px;
     margin-bottom: 2px;
 }
@@ -285,7 +282,7 @@
     color: var(--surface0);
     font-weight: normal;
     border-radius: 3px;
-    background-color: var(--og); /* Use og accent */
+    background-color: var(--og);
     color: #fff;
     padding: 2px 6px;
     margin-bottom: 8px;
@@ -320,8 +317,8 @@ Example: "Windows Media" becomes "windows-media" */
     max-height: 28px;
     border-radius: 8px;
     background: transparent;
-    color: var(--og); /* Use og accent */
-    border: 1px solid var(--og); /* Use og accent */
+    color: var(--og);
+    border: 1px solid var(--og);
     transition: background 0.15s, color 0.15s, border 0.15s;
     display: inline-flex;
     align-items: center;
@@ -335,22 +332,22 @@ Example: "Windows Media" becomes "windows-media" */
 
 .media-menu .btn:hover {
     color: var(--surface0);
-    background-color: var(--og); /* Use og accent */
-    border-color: var(--og); /* Use og accent */
+    background-color: var(--og);
+    border-color: var(--og);
 }
 
 .media-menu .btn.play {
-    background-color: var(--og); /* Use og accent */
+    background-color: var(--og);
     color: var(--surface0);
     font-size: 17px;
-    border-color: var(--og); /* Use og accent */
+    border-color: var(--og);
 }
 
 .media-menu .btn.disabled,
 .media-menu .btn.disabled:hover {
     color: var(--overlay0);
     background-color: rgba(0, 0, 0, 0);
-    border-color: rgba(195, 159, 241, 0.15); /* og accent with opacity */
+    border-color: rgba(195, 159, 241, 0.15);
     cursor: not-allowed;
     opacity: 0.7;
 }
@@ -373,17 +370,17 @@ Example: "Windows Media" becomes "windows-media" */
     background: transparent;
     height: 2px;
     border-radius: 3px;
-    background: rgba(195, 159, 241, 0.3); /* og accent with opacity */
+    background: rgba(195, 159, 241, 0.3);
 }
 
 .media-menu .progress-slider::groove:hover {
-    background: rgba(195, 159, 241, 0.5); /* og accent with opacity */
+    background: rgba(195, 159, 241, 0.5);
     height: 6px;
     border-radius: 3px;
 }
 
 .media-menu .progress-slider::sub-page {
-    background: var(--og); /* Use og accent */
+    background: var(--og);
     border-radius: 3px;
     height: 4px;
 }
@@ -422,8 +419,8 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .audio-menu {
-    background: rgb(24, 24, 37); /* #181825, fully opaque */
-    border: 1.5px solid rgba(69, 71, 90, 0.5); /* #45475a, 0.5 opacity */
+    background: rgb(24, 24, 37);
+    border: 1.5px solid rgba(69, 71, 90, 0.5);
     border-radius: 6px;
     box-shadow: 0 4px 24px 0 rgba(24, 24, 37, 0.25);
     backdrop-filter: blur(16px) saturate(1.2);
@@ -491,8 +488,8 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .calendar {
-    background: rgb(24, 24, 37); /* #181825, fully opaque */
-    border: 1.5px solid rgba(69, 71, 90, 0.5); /* #45475a, 0.5 opacity */
+    background: rgb(24, 24, 37);
+    border: 1.5px solid rgba(69, 71, 90, 0.5);
     border-radius: 6px;
     box-shadow: 0 4px 24px 0 rgba(24, 24, 37, 0.25);
     backdrop-filter: blur(16px) saturate(1.2);
@@ -517,7 +514,7 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .calendar .calendar-table::item:hover {
-    background-color: rgba(241, 159, 208, 0.8); /* og accent with opacity */
+    background-color: rgba(241, 159, 208, 0.8); 
     color: var(--surface0);
 }
 
@@ -576,8 +573,8 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .weather-card {
-    background: rgb(24, 24, 37); /* #181825, fully opaque */
-    border: 1.5px solid rgba(69, 71, 90, 0.5); /* #45475a, 0.5 opacity */
+    background: rgb(24, 24, 37);
+    border: 1.5px solid rgba(69, 71, 90, 0.5);
     border-radius: 6px;
     box-shadow: 0 4px 24px 0 rgba(24, 24, 37, 0.25);
     backdrop-filter: blur(16px) saturate(1.2);
@@ -589,7 +586,7 @@ Example: "Windows Media" becomes "windows-media" */
 .weather-card-today {
     border: 1.5px solid var(--og);
     border-radius: 8px;
-    background-color: rgba(195, 159, 241, 0.07); /* og accent, subtle */
+    background-color: rgba(195, 159, 241, 0.07);
     box-shadow: 0 2px 8px 0 rgba(195, 159, 241, 0.10);
 }
 .weather-card-today .label {
@@ -605,7 +602,7 @@ Example: "Windows Media" becomes "windows-media" */
 .weather-card-today .label.alert {
     font-size: 12px;
     font-weight: 700;
-    background-color: rgba(250, 179, 135, 0.10); /* peach accent, subtle */
+    background-color: rgba(250, 179, 135, 0.10);
     border: 1px solid rgba(250, 179, 135, 0.18);
     color: var(--yellow);
     border-radius: 6px;
@@ -616,7 +613,7 @@ Example: "Windows Media" becomes "windows-media" */
 .weather-card-day {
     border: 1px solid var(--surface1);
     border-radius: 8px;
-    background-color: rgba(195, 159, 241, 0.04); /* og accent, more subtle */
+    background-color: rgba(195, 159, 241, 0.04);
     transition: background 0.15s, border 0.15s;
 }
 .weather-card-day .label {
@@ -778,10 +775,10 @@ Example: "Windows Media" becomes "windows-media" */
 
 .systray .button {
     border-radius: 6px;
-    padding: 1px 1px 1px 1px; /* reduced padding */
+    padding: 1px;
     background: transparent;
     color: var(--text);
-    margin: 1px 0.5px; /* reduced horizontal margin */
+    margin: 1px 0.5px;
     transition: background 0.15s, color 0.15s;
     font-size: 13px;
 }
@@ -816,10 +813,6 @@ Example: "Windows Media" becomes "windows-media" */
 /* === lIBRE HM === */
 /* ================= */
 
-.libre-monitor-widget {}
-
-.libre-monitor-widget .widget-container {}
-
 .libre-monitor-widget .widget-container .label {
     color: var(--subtext0);
     font-size: 12px;
@@ -835,7 +828,7 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .libre-menu {
-    background: rgb(24, 24, 37); /* #181825, fully opaque, matches media_menu */
+    background: rgb(24, 24, 37);
     border: 1px solid var(--og);
     border-radius: 6px;
     box-shadow: 0 4px 24px 0 rgba(24, 24, 37, 0.25);
@@ -906,9 +899,9 @@ Example: "Windows Media" becomes "windows-media" */
     background: transparent;
 }
 
-/* ================= */
-/* === Notification Widget === */
-/* ================= */
+/* ============================== */
+/* ==== Notification Widget ==== */
+/* ============================ */
 
 .notification-widget {
     padding: 0 0px;
@@ -931,21 +924,21 @@ Example: "Windows Media" becomes "windows-media" */
     color: var(--flamingo);
 }
 
-/* ================= */
+/* ======================== */
 /* === Traffic Widget === */
-/* ================= */
+/* ===================== */
 
 .traffic-widget {
     padding: 0 0px;
     margin: 0px;
-    background: rgb(24, 24, 37); /* #181825, fully opaque */
+    background: rgb(24, 24, 37);
     box-shadow: 0 2px 8px 0 rgba(24, 24, 37, 0.15);
     backdrop-filter: blur(12px) saturate(1.1);
 }
 
-/* ================ */
+/* ======================= */
 /* === VSCode Widget === */
-/* ================ */
+/* ==================== */
 .vscode-widget {
     padding: 0;
     background: transparent;
@@ -987,23 +980,23 @@ Example: "Windows Media" becomes "windows-media" */
 .vscode-menu .contents .item .folder-icon {
     font-size: 16px;
     margin-left: 8px;
-    color: #89b4fa; /* blue */
+    color: #89b4fa;
 }
 
 .vscode-menu .contents .item .file-icon {
     font-size: 16px;
     margin-left: 8px;
-    color: #f5c2e7; /* pink */
+    color: #f5c2e7;
 }
 
 .vscode-menu .contents .item:hover {
-    background-color: rgba(195, 159, 241, 0.4); /* og accent with opacity */
+    background-color: rgba(195, 159, 241, 0.4); 
     border-bottom: 1px solid rgba(255, 255, 255, 0);
 }
 
-/* ================= */
+/* ========================= */
 /* === Wallpaper Widget === */
-/* ================= */
+/* ======================= */
 
 .wallpapers-widget {
     padding: 0;
