@@ -23,7 +23,7 @@ bars:
       always_on_top: false
       windows_app_bar: true
     dimensions:
-      width: "100%"
+      width: 1530
       height: 33
     padding:
       top: 0
@@ -199,6 +199,11 @@ widgets:
       callbacks:
         on_left: "do_nothing"
         on_right: "exec start ms-settings:about"
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
   disk:
     type: "yasb.disk.DiskWidget"
     options:
@@ -227,6 +232,11 @@ widgets:
       max_length: 20
       max_length_ellipsis: "..."
       monitor_exclusive: true
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
   clock:
     type: "yasb.clock.ClockWidget"
     options:
@@ -242,6 +252,11 @@ widgets:
         alignment: "center"
         direction: "down"
         offset_top: 0
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
   weather:
     type: "yasb.weather.WeatherWidget"
     options:
@@ -275,6 +290,11 @@ widgets:
         direction: "down"
         offset_top: 0
         icon_size: 48
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
   wifi:
     type: "yasb.wifi.WifiWidget"
     options:
@@ -295,6 +315,11 @@ widgets:
         "\udb82\udd25",  # Icon for 41-80% strength
         "\udb82\udd28"   # Icon for 81-100% strength
       ]
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
   volume:
     type: "yasb.volume.VolumeWidget"
     options:
@@ -316,6 +341,11 @@ widgets:
       callbacks:
         on_middle: "toggle_mute"
         on_right: "exec start ms-settings:apps-volume"
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
   battery:
     type: "yasb.battery.BatteryWidget"
     options:
@@ -326,6 +356,11 @@ widgets:
       #hide_unsupported: true
       charging_options:
         icon_format: "{charging_icon}" 
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
   power_menu:
     type: "yasb.power_menu.PowerMenuWidget"
     options:

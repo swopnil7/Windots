@@ -186,24 +186,21 @@
 /* === MEDIA WIDGET      === */
 /* ========================= */
 .media-widget {
-    background: rgb(24, 24, 37);
-    border: 0.5px solid rgba(69, 71, 90, 0.5);
-    border-radius: 6px;
-    box-shadow: 0 4px 24px 0 rgba(24, 24, 37, 0.25);
-    backdrop-filter: blur(16px) saturate(1.2);
-    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    background: rgba(0, 0, 0, 0);
     padding: 0;
     color: var(--text);
-    min-width: 180px;
-    display: flex;
-    align-items: center;
-    margin: 0;
+    min-width: 150px;
+    margin: 3px;
+    border-radius: 6px;
+    border-bottom: 1px solid rgba(177, 140, 225, 0.385);
+    border-style: double;
 }
 .media-widget .label {
     font-size: 14px;
     background-color: transparent;
-    margin-left: 8px;
+    margin-left: 6px;
     margin-right: 4px;
+    letter-spacing: -1px;
 }
 .media-widget .btn {
     background: transparent;
@@ -219,10 +216,10 @@
 .media-widget .btn.prev {
     background-color: transparent;
     border: 1px solid var(--og); /* og accent */
-    padding: 0 4px;
-    margin: 4px 0 4px 4px;
+    padding: 0 3px;
+    margin: 3px 0 3px 4px;
     color: var(--og);
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 12px;
 }
 .media-widget .btn:hover {
@@ -631,7 +628,7 @@ Example: "Windows Media" becomes "windows-media" */
 .glazewm-workspaces {
     background-color: rgba(108, 82, 165, 0.171);
     margin: 4px 4px;
-    border-radius: 10px;
+    border-radius: 4px;
     box-shadow: 0 4px 24px 0 rgba(24, 24, 37, 0.25);
     padding: 4px 2px;
 }
