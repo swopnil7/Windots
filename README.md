@@ -131,8 +131,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 
 ---
 
-<details>
-<summary><strong>## 🔧 Setup</strong></summary>
+## 🔧 Setup
 
 > **⚠️ Backup your current configuration files before continuing.**  
 > Applying these settings may overwrite existing configs, so be sure to manually merge or restore as needed.
