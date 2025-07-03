@@ -146,7 +146,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 ### 📊 YASB (Yet Another Status Bar)
 
 > [!NOTE]
-> Ensure you have a Nerd Font installed for correct icon display. I use **JetBrainsMono Nerd Font**; if you use another Nerd Font, adjust the font settings in the YASB `styles.css` as needed.
+> Ensure you have a Nerd Font installed for correct icon display. I use [**JetBrainsMono Nerd Font**](https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip); if you use another Nerd Font, adjust the font settings in the YASB `styles.css` as needed.
 
 - **Install** [**YASB**](https://github.com/amnweb/yasb/releases/).
 - [`windots/.dotfiles/yasb/`](.dotfiles/yasb/) → `%USERPROFILE%\.config\yasb\`
