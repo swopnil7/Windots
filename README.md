@@ -166,39 +166,39 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 ### 📂 Windows Explorer
 
 - **Install** [**SecureUxTheme**](https://github.com/namazso/SecureUxTheme/releases/tag/v4.0.0) tool and reboot your PC.
-- Copy the files and folder inside [`windots/.dotfiles/explorer/Theme/`](.dotfiles/explorer/Theme/) to → `C:\Windows\Resources\Themes\'.
+- Copy the files and folder inside [`windots/.dotfiles/explorer/Theme/`](.dotfiles/explorer/Theme/) to → `C:\Windows\Resources\Themes\`
 - **Open** SecureUX Theme and then select Catppuccin Mocha as the theme.
 - **Get** the [**Resource Redirect**](https://windhawk.net/mods/icon-resource-redirect) mod on Windhawk and **select** Linuxfx 11 AIO as the icon theme.
-- **Copy** the [`windots/.dotfiles/explorer/Explorerblur'](.dotfiles/explorer/Explorerblur/) folder (I suggest creating a seperate folder in the C drive for windows rice tools, named scripts in my case) to somewhere safe. Then, run the register.cmd file.
+- **Copy** the [Explorerblur](.dotfiles/explorer/Explorerblur/) folder (I suggest creating a seperate folder in the C drive for windows rice tools, named scripts in my case) to somewhere safe. Then, run the register.cmd file.
 
 ### 🌐 Browser
 
 > [!NOTE]
 > These configs are applicable **only for Firefox-based browsers**.
 
-## Enable userChrome.css and userContent.css
+#### Enable userChrome.css and userContent.css
 
 1. Open `about:config` in the address bar.
 2. Search for `toolkit.legacyUserProfileCustomizations.stylesheets`.
 3. Set it to `true`.
 
-## Locate your profile folder
+#### Locate your profile folder
 
 1. Open `about:support` in the address bar.
 2. Find "Profile Folder" and click "Open Folder."
 
-## Copy the browser styling configs
+#### Copy the browser styling configs
 
 - [`windots/.dotfiles/zen/userChrome.css`](.dotfiles/zen/userChrome.css) → `<Your Profile Folder>/chrome/`
 - [`windots/.dotfiles/zen/userContent.css`](.dotfiles/zen/userContent.css) → `<Your Profile Folder>/chrome/`
 - **Restart your browser** for the changes to take effect.
 
-## Optional: Theme websites
+#### Optional: Theme websites
 
 - **Install** the [**Stylus**](https://addons.mozilla.org/en-GB/firefox/addon/styl-us/) extension.
 - **Install** the [**Catppuccin Mocha Userstyles**](https://raw.githubusercontent.com/catppuccin/userstyles/main/styles/stylus/catppuccin.user.less).
 
-For websites without userstyles, you can use the Dark Reader extension:
+For websites without userstyles, you can use the [**Dark Reader**](https://addons.mozilla.org/en-US/firefox/addon/darkreader/) extension:
 
 1. Open Dark Reader extension settings.
 2. Click on Dev tools > Advance > Preview New Design and close the window.
@@ -208,7 +208,7 @@ For websites without userstyles, you can use the Dark Reader extension:
   - **Selection**: `#585b70`
 4. Close the settings tab (no apply button).
 
-## Custom Start Page
+#### Custom Start Page
 
 - Get my [**Catppuccin Themed Start Page**](https://github.com/swopnil7/startpage) or fork it to create your own.
 - **Host it** on Github Pages or Vercel. I suggest using [**Vercel**](https://vercel.com/) as it's faster and easier to set up.
@@ -268,8 +268,9 @@ For websites without userstyles, you can use the Dark Reader extension:
 ### 🐈‍⬛ Discord
 
 - **Install** [**Discord**](https://discord.com/download) if you haven't already.
-- **Install** [**Vencord**](https://vencord.dev/) by following the instructions on their website.
+- **Download** [**Vencord**](https://github.com/Vencord/Installer/releases/latest/download/VencordInstaller.exe) and **Install** it.
 - Open Discord and the click on the **Settings** icon at the bottom beside your profile. Under the **Vencord** section, click on **Themes** and then click on **Edit QuickCSS**. Paste the text below into the editor:
+
   ```css
   @import url("https://catppuccin.github.io/discord/dist/catppuccin-mocha-pink.theme.css");
   ```
