@@ -140,7 +140,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 ### 🪟 GlazeWM
 
 - **Install** [**GlazeWM**](https://github.com/glzr-io/glazewm/releases/).
-- [`windots/.dotfiles/glazewm/config.yaml`](.dotfiles/glazewm/config.yaml) → `%USERPROFILE%\.glzr\glazewm\config.yaml`
+- [`windots/.dotfiles/glazewm/config.yaml`](.dotfiles/glazewm/config.yaml) → `%USERPROFILE%\.glzr\glazewm\`
 - **Restart GlazeWM** for the changes to take effect.
 
 ### 📊 YASB (Yet Another Status Bar)
@@ -149,7 +149,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 > Ensure you have a Nerd Font installed for correct icon display. I use **JetBrainsMono Nerd Font**; if you use another Nerd Font, adjust the font settings in the YASB `styles.css` as needed.
 
 - **Install** [**YASB**](https://github.com/amnweb/yasb/releases/).
-- [`windots/.dotfiles/yasb/`](.dotfiles/yasb/) → `%USERPROFILE%\.dotfiles\yasb\`
+- [`windots/.dotfiles/yasb/`](.dotfiles/yasb/) → `%USERPROFILE%\.config\yasb\`
 - **Restart YASB** for the changes to take effect.
 
 ### 📝 VSCode
@@ -160,7 +160,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 - Enhance your **VSCode UI** with these **extensions**:
   - [APC Customize UI](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension) - Customize the VSCode interface
   - [GlassIt-VSC](https://marketplace.visualstudio.com/items?itemName=s-nlf-fh.glassit) - Add a transparent/glass effect (optional)
-- [`windots/.dotfiles/vscode/settings.json`](.dotfiles/vscode/settings.json) → `%APPDATA%\Code\User\settings.json`
+- [`windots/.dotfiles/vscode/settings.json`](.dotfiles/vscode/settings.json) → `%APPDATA%\Code\User\`
 - **Restart VSCode** to load the updated settings.
 
 ### 📂 Windows Explorer
@@ -181,15 +181,15 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
   - Open `about:support` in the address bar.
   - Find "Profile Folder" and click "Open Folder."
 - **Copy the browser styling configs**:
-  - [`windots/.dotfiles/zen/userChrome.css`](.dotfiles/zen/userChrome.css) → `<Your Profile Folder>/chrome/userChrome.css`
-  - [`windots/.dotfiles/zen/userContent.css`](.dotfiles/zen/userContent.css) → `<Your Profile Folder>/chrome/userContent.css`
+  - [`windots/.dotfiles/zen/userChrome.css`](.dotfiles/zen/userChrome.css) → `<Your Profile Folder>/chrome/`
+  - [`windots/.dotfiles/zen/userContent.css`](.dotfiles/zen/userContent.css) → `<Your Profile Folder>/chrome/`
 - **Restart your browser** for the changes to take effect.
 - My custom [**Start Page**](https://github.com/swopnil7/startpage) if you want it. Go to your browser settings and set it as the default home page by pasting the link.
 
 ### 🚀 Flow Launcher
 
 - **Install** [**Flow Launcher**](https://www.flowlauncher.com/)
-- [`windots/.dotfiles/FlowLauncher/settings.json`](.dotfiles/FlowLauncher/settings.json) → `%APPDATA%\FlowLauncher\Settings\Settings.json`
+- [`windots/.dotfiles/FlowLauncher/settings.json`](.dotfiles/FlowLauncher/settings.json) → `%APPDATA%\FlowLauncher\Settings\`
 - **Restart Flow Launcher**
 
 ### 🦅 Windhawk
@@ -206,7 +206,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 ### 🐚 Nilesoft Shell
 
 - **Install** [**Nilesoft Shell**](https://nilesoft.org/).
-- **Copy** the shell config files from [`windots/.dotfiles/nilesoftshell/`](.dotfiles/nilesoftshell/) → `C:\Program Files\Nilesoft Shell`
+- **Copy** the shell theme file from [`windots/.dotfiles/nilesoftshell/`](.dotfiles/nilesoftshell/) → `C:\Program Files\Nilesoft Shell\imports\`
 - **Open** the app with admin permissions and click on **Register**
 
 ### 🚀 Hydra Launcher
@@ -228,7 +228,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 ### ©️ CopyQ
 
 - **Install** [**CopyQ**](https://github.com/hluk/CopyQ/releases).
-- **Copy** the config files from [`windots/.dotfiles/copyq/`](.dotfiles/copyq/catppuccin mocha.ini) → `%APPDATA%\Roaming\CopyQ\themes`
+- **Copy** the config files from [`windots/.dotfiles/copyq/`](.dotfiles/copyq/catppuccin mocha.ini) → `%APPDATA%\Roaming\CopyQ\themes\`
 - **Open** CopyQ, on the top bar go to **File** > **Preferences** > **Appearance**, click on load theme, select the `catppuccin mocha.ini` file you copied earlier, and click on **Apply**.
 
 ### \>_ Terminal & Shell Setup
@@ -236,12 +236,12 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 #### 🖥️ Windows Terminal
 
 - **Install** [**Windows Terminal**](https://github.com/microsoft/terminal)
-- [`windots/.dotfiles/terminal/settings.json`](.dotfiles/terminal/settings.json) → `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`
+- [`windots/.dotfiles/terminal/settings.json`](.dotfiles/terminal/settings.json) → `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\`
 - **Restart Windows Terminal** to see the updated config.
 
 #### 🐚 PowerShell
 
-- [`windots/.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1`](.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1) → `%USERPROFILE%\Documents\WindowsPowerShell(Powershell)\Microsoft.PowerShell_profile.ps1`
+- [`windots/.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1`](.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1) → `%USERPROFILE%\Documents\WindowsPowerShell(Powershell)\Microsoft.`
 - Restart PowerShell to apply the changes.
 
 #### 🎨 Oh My Posh
@@ -252,7 +252,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
   winget install JanDeDobbeleer.OhMyPosh -s winget
   ```
 
-- [`windots/.dotfiles/ohmyposh/zen.toml`](.dotfiles/ohmyposh/zen.toml) → `%USERPROFILE%\.dotfiles\ohmyposh\zen.toml`
+- [`windots/.dotfiles/ohmyposh/zen.toml`](.dotfiles/ohmyposh/zen.toml) → `%USERPROFILE%\.config\ohmyposh\`
 
 #### ⚙️ Fastfetch
 
@@ -262,8 +262,8 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
   winget install fastfetch
   ```
 
-- [`windots/.dotfiles/fastfetch/config.jsonc`](.dotfiles/fastfetch/config.jsonc) → `%USERPROFILE%\.dotfiles\fastfetch\config.jsonc`
-- [`windots/.dotfiles/fastfetch/windows.txt`](.dotfiles/fastfetch/windows.txt) → `%USERPROFILE%\.dotfiles\fastfetch\windows.txt`
+- [`windots/.dotfiles/fastfetch/config.jsonc`](.dotfiles/fastfetch/config.jsonc) → `%USERPROFILE%\.config\fastfetch\`
+- [`windots/.dotfiles/fastfetch/windows.txt`](.dotfiles/fastfetch/windows.txt) → `%USERPROFILE%\.config\fastfetch\`
 - **Run fastfetch**.
 
 </details>
