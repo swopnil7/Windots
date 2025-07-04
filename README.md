@@ -289,7 +289,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 ### ©️ CopyQ
 
 - **Install** [**CopyQ**](https://github.com/hluk/CopyQ/releases).
-- **Copy** the config files from [`windots/.dotfiles/copyq/`](.dotfiles/copyq/catppuccin mocha.ini) → `%APPDATA%\Roaming\CopyQ\themes\`
+- **Copy** the config files from [`windots/.dotfiles/copyq/`](.dotfiles/copyq/catppuccin mocha.ini) → `%APPDATA%\CopyQ\themes\`
 - **Open** CopyQ, on the top bar go to **File** > **Preferences** > **Appearance**, click on load theme, select the `catppuccin mocha.ini` file you copied earlier, and click on **Apply**.
 
 ### \>_ Terminal & Shell Setup
@@ -302,7 +302,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 #### 🐚 PowerShell
 
-- [`windots/.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1`](.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1) → `%USERPROFILE%\Documents\WindowsPowerShell(Powershell)\Microsoft.`
+- [`windots/.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1`](.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1) → `%USERPROFILE%\Documents\Powershell\Microsoft.`
 - Restart PowerShell to apply the changes.
 
 #### 🎨 Oh My Posh
