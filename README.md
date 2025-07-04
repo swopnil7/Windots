@@ -164,9 +164,14 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 
 ### 📂 Windows Explorer
 
-- **Install** [**SecureUxTheme**](https://github.com/namazso/SecureUxTheme/releases/tag/v4.0.0) tool and reboot your PC.
+- **Install** [**SecureUxTheme**](https://github.com/namazso/SecureUxTheme/releases/tag/v4.0.0) tool and reboot your PC. You can also use the winget command below to install it:
+
+  ```bash
+  winget install namazso.SecureUXTheme
+  ```
+
 - Copy the files and folder inside [`windots/.dotfiles/explorer/Theme/`](.dotfiles/explorer/Theme/) to → `C:\Windows\Resources\Themes\`
-- **Open** SecureUX Theme and then select Catppuccin Mocha as the theme.
+- **Open** settings & go to themes under the personalization section and then select Catppuccin Mocha as the theme.
 - **Get** the [**Resource Redirect**](https://windhawk.net/mods/icon-resource-redirect) mod on Windhawk and **select** Linuxfx 11 AIO as the icon theme.
 - **Copy** the [Explorerblur](.dotfiles/explorer/Explorerblur/) folder (I suggest creating a seperate folder in the C drive for windows rice tools, named scripts in my case) to somewhere safe. Then, run the register.cmd file.
 
