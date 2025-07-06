@@ -50,7 +50,6 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 
 <div align="center">
 
-|  |  |
 |:--:|:--:|
 | 🪟 **GlazeWM** tiling window manager | 🍫 **YASB** status bar |
 | 🧑‍💻 **VSCode** clean setup | \>_ **Windows Terminal** modern look |
@@ -112,11 +111,11 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 | **Music Player** | 🤍 [Spotify](https://open.spotify.com/) (patched with [Spicetify](https://spicetify.app/)) |
 | **Web Browser** | 🤍 [Zen-Browser](https://zen-browser.app) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/zen/) |
 | **Note Taking App** | 🤍 [Obsidian](https://obsidian.md/) |
-| **File Manager** | [File Explorer](https://www.microsoft.com/en-us/windows/tips/file-explorer) |
-| **Game Launcher** | [Hydra Launcher](https://hydralauncher.gg/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/HydraLauncher/) |
-| **Clipboard Manager** | [CopyQ](https://github.com/hluk/CopyQ) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/copyq/) |
-| **Torrent Manager** | [qBittorrent](https://www.qbittorrent.org/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/qBittorrent/) |
-| **Discord Client** | 🤍 [Vencord](https://vencord.dev/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/vencord/) |
+| **File Manager** | [File Explorer](https://www.microsoft.com/en-us/windows/tips/file-explorer) | [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/explorer/) |
+| **Game Launcher** | [Hydra Launcher](https://hydralauncher.gg/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/HydraLauncher/styles.css) |
+| **Clipboard Manager** | [CopyQ](https://github.com/hluk/CopyQ) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/copyq/catppuccin-mocha.ini) |
+| **Torrent Manager** | [qBittorrent](https://www.qbittorrent.org/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/qBittorrent/catppuccin-mocha.qbtheme) |
+| **Discord Client** | 🤍 [Vencord](https://vencord.dev/) |
 | **YouTube Music Client** | [Th-Ch YouTube Music](https://github.com/th-ch/youtube-music) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/youtubemusic/) |
 | **Web Themer** | 🤍 [Stylus](https://addons.mozilla.org/en-US/firefox/addon/stylus/) (for Firefox) with 🤍 [Catppuccin Mocha](https://github.com/catppuccin) [⚙️](https://github.com/catppuccin/userstyles/blob/main/docs/USAGE.md) |
 
@@ -289,7 +288,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 ### ©️ CopyQ
 
 - **Install** [**CopyQ**](https://github.com/hluk/CopyQ/releases).
-- **Copy** the config files from [`windots/.dotfiles/copyq/`](.dotfiles/copyq/catppuccin mocha.ini) → `%APPDATA%\CopyQ\themes\`
+- **Copy** the config files from [`windots/.dotfiles/copyq/`](.dotfiles/copyq/catppuccin-mocha.ini) → `%APPDATA%\CopyQ\themes\`
 - **Open** CopyQ, on the top bar go to **File** > **Preferences** > **Appearance**, click on load theme, select the `catppuccin mocha.ini` file you copied earlier, and click on **Apply**.
 
 ### 🔗 ShareX
