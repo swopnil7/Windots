@@ -238,7 +238,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 ### 🐚 Nilesoft Shell
 
 - **Install** [**Nilesoft Shell**](https://nilesoft.org/).
-- **Copy** the shell theme file from [`windots/.dotfiles/nilesoftshell/`](.dotfiles/nilesoftshell/) → `C:\Program Files\Nilesoft Shell\imports\`
+- **Copy** the shell theme file from [`windots/.dotfiles/nilesoftshell/theme.nss`](.dotfiles/nilesoftshell/theme.nss) → `C:\Program Files\Nilesoft Shell\imports\`
 - **Open** the app with admin permissions and click on **Register**.
 
 ### 🚀 Hydra Launcher
@@ -248,7 +248,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 ### 🌐 qBittorrent
 
-- **Download** the config from [`windots/.dotfiles/qBittorrent/`](.dotfiles\qBittorrent\catppuccin-mocha.qbtheme) & place it anywhere safe into a folder of your choice. I suggest making a separate folder for themes inside the script folder I asked to create earlier like `C:\scripts\themes\`
+- **Download** the config from [`windots/.dotfiles/qBittorrent/mocha.qbtheme`](.dotfiles\qBittorrent\catppuccin-mocha.qbtheme) & place it anywhere safe into a folder of your choice. I suggest making a separate folder for themes inside the script folder I asked to create earlier like `C:\scripts\themes\`
 - **Open** qBittorrent and on the top bar go to **Tools** > **Options**, check the Use custom UI Theme options & then browse and select the downloaded theme file.
 
 ### 🎵 Spotify
@@ -282,13 +282,13 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 ### 🎥 YouTube Music
 
 - **Install** [**Th-Ch YouTube Music**](https://github.com/th-ch/youtube-music/releases).
-- **Download** the config from [`windots/.dotfiles/youtubemusic/`](.dotfiles/youtubemusic/yt-music.css) & place it anywhere safe into a folder of your choice, probably the same folder you used for the qBittorrent theme.
+- **Download** the config from [`windots/.dotfiles/youtubemusic/ytmusic.css`](.dotfiles/youtubemusic/ytmusic.css) & place it anywhere safe into a folder of your choice, probably the same folder you used for the qBittorrent theme.
 - **Open** YouTube Music and on the top bar go to **Options** > **Visual Tweaks** > **Theme** and click on Import custom css file, then browse and select the downloaded theme file.
 
 ### ©️ CopyQ
 
 - **Install** [**CopyQ**](https://github.com/hluk/CopyQ/releases).
-- **Copy** the config files from [`windots/.dotfiles/copyq/`](.dotfiles/copyq/catppuccin-mocha.ini) → `%APPDATA%\CopyQ\themes\`
+- **Copy** the config files from [`windots/.dotfiles/copyq/catppuccin-mocha.ini`](.dotfiles/copyq/catppuccin-mocha.ini) → `%APPDATA%\CopyQ\themes\`
 - **Open** CopyQ, on the top bar go to **File** > **Preferences** > **Appearance**, click on load theme, select the `catppuccin mocha.ini` file you copied earlier, and click on **Apply**.
 
 ### 🔗 ShareX
