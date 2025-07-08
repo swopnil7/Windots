@@ -153,11 +153,12 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 ### 📝 VSCode
 
 > [!WARNING]
-> Use VSCode `v1.91.1`, as newer versions do not support the **APC Customize UI extension**.
+> If you want the **APC Customize UI Extension**, Use VSCode `v1.91.1` or below, as newer versions do not support it. It is not compulsory though and VSCode will still look good without it.
 
 - Enhance your **VSCode UI** with these **extensions**:
-  - [APC Customize UI](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension) - Customize the VSCode interface
+  - [APC Customize UI](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension) - Customize the VSCode interface (optional)
   - [GlassIt-VSC](https://marketplace.visualstudio.com/items?itemName=s-nlf-fh.glassit) - Add a transparent/glass effect (optional)
+- **Install** the [Alt Catppuccin Theme](https://marketplace.visualstudio.com/items?itemName=dooez.alt-catppuccin-vsc) extension.
 - [`windots/.dotfiles/vscode/settings.json`](.dotfiles/vscode/settings.json) → `%APPDATA%\Code\User\`
 - **Restart VSCode** to load the updated settings.
 
@@ -171,7 +172,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 
 - Copy the files and folder inside [`windots/.dotfiles/explorer/Theme/`](.dotfiles/explorer/Theme/) to → `C:\Windows\Resources\Themes\`
 - **Open** settings & go to themes under the personalization section and then select Catppuccin Mocha as the theme.
-- **Get** the [**Resource Redirect**](https://windhawk.net/mods/icon-resource-redirect) mod on Windhawk and **select** Linuxfx 11 AIO as the icon theme.
+- **Get** the [**Resource Redirect**](https://windhawk.net/mods/icon-resource-redirect) mod on Windhawk and **select** Linuxfx 11 AIO as the icon theme from the available presets.
 - **Copy** the [Explorerblur](.dotfiles/explorer/Explorerblur/) folder (I suggest creating a seperate folder in the C drive for windows rice tools, named scripts in my case) to somewhere safe. Then, run the register.cmd file.
 
 ### 🌐 Browser
@@ -199,16 +200,16 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 #### Optional: Theme websites
 
 - **Install** the [**Stylus**](https://addons.mozilla.org/en-GB/firefox/addon/styl-us/) extension.
-- **Install** the [**Catppuccin Mocha Userstyles**](https://raw.githubusercontent.com/catppuccin/userstyles/main/styles/stylus/catppuccin.user.less).
+- **Download the [**Userstyles**](https://github.com/catppuccin/userstyles/releases/download/all-userstyles-export/import.json) import file.
+- Open the Stylus "manage" page.
+- On the sidebar panel, click the Import button in the Backup section, and select the downloaded Userstyles file.
+
 
 For websites without userstyles, you can use the [**Dark Reader**](https://addons.mozilla.org/en-US/firefox/addon/darkreader/) extension:
 
 1. Open Dark Reader extension settings.
 2. Click on Dev tools > Advance > Preview New Design and close the window.
-3. Go to See all options > Colors & copy and paste the following values:
-  - **Background**: `#1e1e2e`
-  - **Text**: `#cdd6f4`
-  - **Selection**: `#585b70`
+3. Go to See all options > Colors > Color Schemes & choose Catppuccin from the list of presets.
 4. Close the settings tab (no apply button).
 
 #### Custom Start Page
@@ -221,7 +222,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 ### 🚀 Flow Launcher
 
 - **Install** [**Flow Launcher**](https://www.flowlauncher.com/)
-- [`windots/.dotfiles/FlowLauncher/settings.json`](.dotfiles/FlowLauncher/settings.json) → `%APPDATA%\FlowLauncher\Settings\`
+- [`windots/.dotfiles/FlowLauncher/settings.json`](.dotfiles/FlowLauncher/Settings.json) → `%APPDATA%\FlowLauncher\Settings\`
 - **Restart Flow Launcher**
 
 ### 🦅 Windhawk
@@ -232,6 +233,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
   - Start Menu Styler
   - Taskbar Styler
   - Windows 11 File Explorer Styler
+  - Taskbar auto-hide when maximized
 - **Copy** the Windhawk config files from [`windots/.dotfiles/windhawk/`](.dotfiles/windhawk/)
 - Open the relevant mod’s **details page**, go to **Advanced > Mod Settings**, paste the config, and click **"Load"** to apply it.
 
@@ -248,7 +250,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 ### 🌐 qBittorrent
 
-- **Download** the config from [`windots/.dotfiles/qBittorrent/mocha.qbtheme`](.dotfiles\qBittorrent\catppuccin-mocha.qbtheme) & place it anywhere safe into a folder of your choice. I suggest making a separate folder for themes inside the script folder I asked to create earlier like `C:\scripts\themes\`
+- **Download** the config from [`windots/.dotfiles/qBittorrent/mocha.qbtheme`](.dotfiles/qBittorrent/catppuccin-mocha.qbtheme) & place it anywhere safe into a folder of your choice. I suggest making a separate folder for themes inside the script folder I asked to create earlier like `C:\scripts\themes\`
 - **Open** qBittorrent and on the top bar go to **Tools** > **Options**, check the Use custom UI Theme options & then browse and select the downloaded theme file.
 
 ### 🎵 Spotify
@@ -307,7 +309,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 #### 🐚 PowerShell
 
-- [`windots/.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1`](.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1) → `%USERPROFILE%\Documents\Powershell\Microsoft.`
+- [`windots/.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1`](.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1) → `%USERPROFILE%\Documents\WindowsPowershell\`
 - Restart PowerShell to apply the changes.
 
 #### 🎨 Oh My Posh
