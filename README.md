@@ -50,8 +50,12 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 
 <div align="center">
 
-| Feature | Feature |
-|:--:|:--:|
+<style>
+table thead { display: none; }
+</style>
+
+| | |
+|---|---|
 | 🪟 **GlazeWM** tiling window manager | 🍫 **YASB** status bar |
 | 🧑‍💻 **VSCode** clean setup | >_ **Windows Terminal** modern look |
 | 🐚 **PowerShell** enhancements | 🎨 **Oh My Posh** prompt |
