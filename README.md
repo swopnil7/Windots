@@ -50,10 +50,6 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 
 <div align="center">
 
-<style>
-table thead { display: none; }
-</style>
-
 | | |
 |---|---|
 | 🪟 **GlazeWM** tiling window manager | 🍫 **YASB** status bar |
