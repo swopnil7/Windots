@@ -50,9 +50,10 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 
 <div align="center">
 
+| Feature | Feature |
 |:--:|:--:|
 | 🪟 **GlazeWM** tiling window manager | 🍫 **YASB** status bar |
-| 🧑‍💻 **VSCode** clean setup | \>_ **Windows Terminal** modern look |
+| 🧑‍💻 **VSCode** clean setup | >_ **Windows Terminal** modern look |
 | 🐚 **PowerShell** enhancements | 🎨 **Oh My Posh** prompt |
 | ⚙️ **fastfetch** system info | 🚀 **Flow Launcher** workflow |
 | 🦅 Themed Start menu, Taskbar, Notification Center | 🧱 [Wallpapers](https://github.com/swopnil7/windots/tree/main/wallies#readme) |
