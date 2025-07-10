@@ -18,7 +18,7 @@ bars:
       acrylic: false
       dark_mode: true
       round_corners: true
-      border_color: None
+      border_color: "#282939"
     window_flags:
       always_on_top: false
       windows_app_bar: true
@@ -134,7 +134,6 @@ widgets:
     options:
       label: "<span>\uf2db</span> {info[value]}{info[unit]}"
       sensor_id: "/intelcpu/0/temperature/1"
-      label_alt:
       update_interval: 500
       precision: 2
       class_name: "libre-monitor-widget"

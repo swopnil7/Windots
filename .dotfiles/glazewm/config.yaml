@@ -75,8 +75,10 @@ workspaces:
     keep_alive: true
   - name: "2"
     display_name: "2"
+    keep_alive: true
   - name: "3"
     display_name: "3"
+    keep_alive: true
   - name: "4"
     display_name: "4"
   - name: "5"
@@ -108,15 +110,23 @@ window_rules:
   - commands: ["toggle-floating --centered"]
     match:
       - window_class: { regex: "WinUIDesktopWin32WindowClass" }
+      - window_process: { equals: "AutoHotkey64" }
+        window_title: { equals: "Windows Utilities Settings" }
+      - window_process: { equals: "AutoHotkey64" }
+        window_title: { equals: "⚙️ Path Selector Settings" }
+      - window_process: { equals: "AutoHotkey64" }
+        window_title: { equals: "Text Expander Settings" }
 
-keybindings:
-
-  # When enabled, all keybindings are disabled except for alt+shift+p which
-  # returns to default keybindings.
+binding_modes:
   - name: "pause"
     keybindings:
       - commands: ["wm-disable-binding-mode --name pause"]
         bindings: ["alt+shift+p"]
+
+keybindings:
+  # Disables all keybindings until alt+shift+p is pressed again.
+  - commands: ["wm-enable-binding-mode --name pause"]
+    bindings: ["alt+shift+p"]
 
   # Resize focused window.
   - commands: ["resize --width -2%"]
@@ -151,10 +161,6 @@ keybindings:
     bindings: ["alt+shift+k", "alt+shift+up"]
   - commands: ["move --direction down"]
     bindings: ["alt+shift+j", "alt+shift+down"]
-
-  # Disables all keybindings until alt+shift+p is pressed again.
-  - commands: ["wm-enable-binding-mode --name pause"]
-    bindings: ["alt+shift+p"]
 
   # Change tiling direction. This determines where new tiling windows will
   # be inserted.
@@ -197,20 +203,20 @@ keybindings:
   - commands: ["wm-redraw"]
     bindings: ["alt+shift+w"]
 
-  # Launch CMD terminal. Alternatively, use `shell-exec wt` or
-  # `shell-exec %ProgramFiles%/Git/git-bash.exe` to start Windows
-  # Terminal and Git Bash respectively.
-  - commands: ["shell-exec C:\\Users\\Swopnil\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe"]
+  # Launch terminal
+  - commands: ["shell-exec wt"]
     bindings: ["alt+enter"]
 
+  #Launch terminal as administrator
+  # This requires a script to be created that runs the terminal as admin.
   - commands: ["shell-exec wscript C:\\Scripts\\wtadmin.vbs"]
     bindings: ["alt+shift+enter"]
 
   # Focus the next/previous workspace defined in `workspaces` config.
-  # - commands: ["focus --next-workspace"]
-  #   bindings: ["alt+s"]
-  # - commands: ["focus --prev-workspace"]
-  #   bindings: ["alt+a"]
+  - commands: ["focus --next-workspace"]
+    bindings: ["alt+shift+s"]
+  - commands: ["focus --prev-workspace"]
+    bindings: ["alt+shift+a"]
 
   # Focus the workspace that last had focus.
   - commands: ["focus --recent-workspace"]
@@ -238,14 +244,14 @@ keybindings:
 
   # Move the focused window's parent workspace to a monitor in a given
   # direction.
-  - commands: ["move-workspace --direction left"]
-    bindings: ["alt+shift+a"]
-  - commands: ["move-workspace --direction right"]
-    bindings: ["alt+shift+f"]
-  - commands: ["move-workspace --direction up"]
-    bindings: ["alt+shift+d"]
-  - commands: ["move-workspace --direction down"]
-    bindings: ["alt+shift+s"]
+  # - commands: ["move-workspace --direction left"]
+  #   bindings: ["alt+shift+a"]
+  # - commands: ["move-workspace --direction right"]
+  #   bindings: ["alt+shift+f"]
+  # - commands: ["move-workspace --direction up"]
+  #   bindings: ["alt+shift+d"]
+  # - commands: ["move-workspace --direction down"]
+  #   bindings: ["alt+shift+s"]
 
   # Move focused window to a workspace defined in `workspaces` config.
   - commands: ["move --workspace 1", "focus --workspace 1"]
