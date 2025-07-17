@@ -26,13 +26,14 @@ bars:
       width: 1530
       height: 33
     padding:
-      top: 0
+      top: 2
       left: 0
       bottom: 0
       right: 0
     widgets:
       left: [
-          "home", 
+          #"home",
+          "launchpad", 
           "glazewm_workspaces", 
           "active_window",
           "media",
@@ -77,6 +78,37 @@ widgets:
       alignment: "left"
       offset_left: 4
       offset_top: 0
+  launchpad:
+    type: "yasb.launchpad.LaunchpadWidget"
+    options:
+      label: "<span>\uf4cc</span>"
+      search_placeholder: "Search apps..."
+      app_icon_size: 48
+      window:
+        fullscreen: true
+        width: 800
+        height: 600
+        overlay_block: true
+      window_style:
+        enable_blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "system"
+      window_animation:
+        fade_in_duration: 200
+        fade_out_duration: 200
+      callbacks:
+        on_left: "toggle_launchpad"
+      app_title_shadow:
+        enabled: true
+        color: "#00000090"
+        offset: [1, 1]
+        radius: 2
+      app_icon_shadow:
+        enabled: true
+        color: "#00000090"
+        offset: [0, 2]
+        radius: 8
   glazewm_workspaces:
     type: "glazewm.workspaces.GlazewmWorkspacesWidget"
     options:
@@ -228,8 +260,8 @@ widgets:
       label_no_window: ""
       label_icon: true
       label_icon_size: 14
-      max_length: 20
-      max_length_ellipsis: "..."
+      max_length: 25
+      max_length_ellipsis: ".."
       monitor_exclusive: true
       label_shadow:
         enabled: true
@@ -304,9 +336,9 @@ widgets:
       ethernet_icon: "\uf108"
       update_interval: 5000
       callbacks:
-        on_left: "exec quick_settings"
+        on_left: "toggle_menu"
         on_right: "exec start ms-settings:network"
-        on_middle: "toggle_label"
+        on_middle: "exec quick_settings"
       wifi_icons: [
         "\udb82\udd2e",  # Icon for 0% strength
         "\udb82\udd1f",  # Icon for 1-20% strength
@@ -319,6 +351,27 @@ widgets:
         color: "black"
         radius: 3
         offset: [ 1, 1 ]
+      menu_config:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "System"
+        alignment: "right"
+        direction: "down"
+        offset_top: 0
+        offset_left: 0
+        wifi_icons_secured: [
+          "\ue670",
+          "\ue671",
+          "\ue672",
+          "\ue673",
+        ]
+        wifi_icons_unsecured: [
+          "\uec3c",
+          "\uec3d",
+          "\uec3e",
+          "\uec3f",
+        ]
   volume:
     type: "yasb.volume.VolumeWidget"
     options:
@@ -354,7 +407,20 @@ widgets:
         on_right: "exec start ms-settings:batterysaver"
       #hide_unsupported: true
       charging_options:
-        icon_format: "{charging_icon}" 
+        icon_format: "{charging_icon}"
+      status_thresholds:
+        critical: 10
+        low: 30
+        medium: 70
+        high: 90
+        full: 100
+      status_icons:
+        icon_charging: "\udb80\udc85"
+        icon_critical: "\udb80\udc7a"
+        icon_low: "\udb80\udc7c"
+        icon_medium: "\udb80\udc80"
+        icon_high: "\udb80\udc82"
+        icon_full: "\udb80\udc79"
       label_shadow:
         enabled: true
         color: "black"

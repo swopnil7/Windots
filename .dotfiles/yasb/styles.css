@@ -115,6 +115,10 @@
     
 }
 
+QPushButton  {
+    outline: none
+} 
+
 /* ==================== */
 /* === POWER MENU === */
 /* ==================== */
@@ -475,7 +479,7 @@ Example: "Windows Media" becomes "windows-media" */
 
 .clock-widget .icon {
     font-size: 14px;
-    color: var(--sky)
+    color: var(--green);
 }
 
 .clock-widget .label {
@@ -672,6 +676,197 @@ Example: "Windows Media" becomes "windows-media" */
     background: transparent;
 }
 
+.wifi-menu {
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    background-color: var(--crust);
+    min-height: 400px;
+    min-width: 400px;
+}
+
+.wifi-menu .progress-bar {
+    max-height: 2px;
+    background: var(--surface1);
+    border-radius: 4px;
+    margin: 6px;
+}
+
+.wifi-menu .progress-bar::chunk {
+    background-color: var(--og);
+}
+
+.wifi-menu .header {
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+    padding: 12px;
+    background-color: var(--mantle);
+    color: var(--og);
+    border-bottom: 1px solid var(--og);
+}
+
+.wifi-menu .error-message {
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px;
+    background-color: var(--red);
+    color: var(--crust);
+}
+
+.wifi-menu .wifi-list {
+    background-color: var(--base);
+    margin: 0;
+}
+
+.wifi-menu .wifi-item {
+    min-height: 35px;
+    margin: 2px 6px;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+
+.wifi-menu .wifi-item:hover {
+    background-color: rgba(195, 159, 241, 0.10);
+}
+
+.wifi-menu .wifi-item[active=true] {
+    background-color: rgba(195, 159, 241, 0.18);
+    font-size: 14px;
+    border-radius: 6px;
+    min-height: 80px;
+    border: 1.5px solid var(--og);
+}
+
+.wifi-menu .wifi-item .icon {
+    font-family: 'Segoe Fluent Icons';
+    font-size: 26px;
+    margin-right: 10px;
+    color: var(--og);
+}
+
+.wifi-menu .wifi-item .name {
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    font-size: 14px;
+    margin-right: 10px;
+    color: var(--text);
+}
+
+.wifi-menu .wifi-item .password {
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    background-color: var(--crust);
+    font-size: 14px;
+    color: var(--subtext1);
+    padding: 2px;
+}
+
+.wifi-menu .wifi-item .status {
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    font-size: 14px;
+    color: var(--subtext0);
+}
+
+.wifi-menu .wifi-item .strength {
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    font-size: 14px;
+    color: var(--og);
+}
+
+.wifi-menu .wifi-item .controls-container {
+    padding-top: 8px;
+}
+
+.wifi-menu .wifi-item .connect {
+    padding: 4px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    font-weight: 700;
+}
+
+.wifi-menu .wifi-item .connect:active {
+    background-color: var(--crust);
+    color: var(--og);
+}
+
+.wifi-menu .wifi-item .connect:active:hover{
+    background-color: var(--mauve);
+    color: var(--surface0);
+}
+
+.wifi-menu .footer {
+    padding: 12px;
+    margin-top: 2px;
+    background-color: var(--mantle);
+    border-top: 1px solid var(--og);
+    border-radius: 0 0 8px 8px;
+}
+
+.wifi-menu .footer .settings-button {
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    background-color: transparent;
+    border: none;
+    padding: 0 2px;
+    min-width: 26px;
+    min-height: 26px;
+    color: var(--og);
+    border-radius: 4px;
+    transition: background 0.15s, color 0.15s;
+}
+
+.wifi-menu .footer .settings-button:hover {
+    background-color: var(--og);
+    color: var(--surface0);
+}
+
+.wifi-menu .footer .refresh-icon {
+    font-family: 'Segoe Fluent Icons';
+    background-color: transparent;
+    border: none;
+    min-width: 26px;
+    min-height: 26px;
+    color: var(--og);
+    border-radius: 4px;
+}
+
+.wifi-menu .footer .refresh-icon:hover {
+    background-color: var(--og);
+    color: var(--surface0);
+}
+
+.context-menu {
+    background: var(--base);
+    border-radius: 4px;
+    border: 1px solid var(--surface1);
+    padding: 4px;
+}
+
+.context-menu .menu-checkbox {
+    border-radius: 3px;
+    color: var(--text);
+}
+
+.context-menu .menu-checkbox .checkbox {
+    margin: 2px;
+}
+
+.context-menu::item {
+    font-size: 13px;
+    color: var(--text);
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    margin: 2px;
+}
+
+.context-menu::item:selected,
+.context-menu .menu-checkbox:hover,
+.context-menu .menu-checkbox .checkbox:hover {
+    background: var(--og);
+    color: var(--surface0);
+}
+
+
 /* ===================== */
 /* === BATTERY WIDGET === */
 /* ===================== */
@@ -807,7 +1002,7 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 /* ================= */
-/* === lIBRE HM === */
+/* === lIBRE SM === */
 /* ================= */
 
 .libre-monitor-widget .widget-container .label {
@@ -828,14 +1023,10 @@ Example: "Windows Media" becomes "windows-media" */
     background: rgb(24, 24, 37);
     border: 1px solid var(--og);
     border-radius: 6px;
-    box-shadow: 0 4px 24px 0 rgba(24, 24, 37, 0.25);
-    backdrop-filter: blur(16px) saturate(1.2);
-    -webkit-backdrop-filter: blur(16px) saturate(1.2);
     padding: 10px 12px 6px 12px;
     color: var(--og);
     min-width: 260px;
     max-width: 340px;
-    overflow-y: auto;
 }
 
 .libre-menu .header {
@@ -1038,4 +1229,241 @@ Example: "Windows Media" becomes "windows-media" */
 .wallpapers-gallery-image.focused {
     border: 2px solid var(--og);
     box-shadow: 0 0 16px 2px var(--og);
+}
+
+/* ===================== */
+/* === Launchpad === */
+/* =================== */
+
+/* Widget style */
+.launchpad-widget {
+    padding: 0 0 0 6px;
+}
+
+.launchpad-widget .icon {
+    font-size: 16px;
+    color: #a2bbe2;
+}
+
+/* Launchpad context menu style */
+.launchpad .context-menu {
+    background-color: var(--base);
+    border: none;
+    border-radius: 6px;
+    padding: 4px 0px;
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 600;
+}
+.launchpad .context-menu::item {
+    background-color: transparent;
+    padding: 6px 12px;
+    margin: 2px 6px;
+    border-radius: 4px;
+    min-width: 100px;
+}
+.launchpad .context-menu::item:selected {
+    background-color: var(--surface1);
+    color: var(--og);
+}
+.launchpad .context-menu::item:pressed {
+    background-color: var(--surface2);
+}
+.launchpad .context-menu::separator {
+    height: 1px;
+    background-color: var(--surface1);
+    margin: 4px 8px;
+}
+.launchpad .context-menu::item:disabled {
+    color: var(--overlay0);
+    background-color: transparent;
+}
+
+/* Launchpad App dialog style */
+.launchpad .app-dialog {
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    background-color: var(--mantle);
+}
+.launchpad .app-dialog .buttons-container {
+    background-color: var(--crust);
+    margin-top: 16px;
+    border-top: 1px solid var(--surface1);
+    max-height: 80px;
+    min-height: 80px;
+    padding: 0 20px 0 20px;
+}
+.launchpad .app-dialog .message {
+    color: var(--text);
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 10px 0;
+}
+.launchpad .app-dialog .title-field,
+.launchpad .app-dialog .path-field,
+.launchpad .app-dialog .icon-field {
+    background-color: var(--surface0);
+    border: 1px solid var(--surface1);
+    border-radius: 4px;
+    padding: 0 6px;
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 10px 0px 5px 0;
+    min-height: 30px;
+}
+.launchpad .app-dialog .title-field:focus,
+.launchpad .app-dialog .path-field:focus,
+.launchpad .app-dialog .icon-field:focus {
+    border-bottom-color: var(--og);
+}
+.launchpad .app-dialog .button {
+    background-color: var(--surface1);
+    border: none;
+    border-radius: 4px;
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    min-width: 80px;
+    padding: 0 6px;
+    margin: 10px 0 5px 6px;
+    min-height: 28px;
+    outline: none;
+    transition: background 0.15s, color 0.15s, border 0.15s;
+}
+.launchpad .app-dialog .buttons-container .button {
+    margin: 10px 0 5px 0px;
+    font-size: 13px;
+}
+.launchpad .app-dialog .button:focus {
+    border: 2px solid var(--og);
+}
+.launchpad .app-dialog .button:focus,
+.launchpad .app-dialog .button:hover {
+    background-color: var(--og);
+    color: var(--surface0);
+}
+.launchpad .app-dialog .button:pressed {
+    background-color: var(--surface2);
+}
+.launchpad .app-dialog .button.add,
+.launchpad .app-dialog .button.save {
+    background-color: var(--blue);
+    color: var(--surface0);
+}
+.launchpad .app-dialog .button.add:focus,
+.launchpad .app-dialog .button.save:focus,
+.launchpad .app-dialog .button.add:hover,
+.launchpad .app-dialog .button.save:hover {
+    background-color: var(--sapphire);
+    color: var(--surface0);
+}
+.launchpad .app-dialog .button.add:pressed,
+.launchpad .app-dialog .button.save:pressed {
+    background-color: var(--og);
+    color: var(--surface0);
+}
+.launchpad .app-dialog .button.delete {
+    background-color: var(--red);
+    color: var(--surface0);
+}
+.launchpad .app-dialog .button.delete:focus,
+.launchpad .app-dialog .button.delete:hover {
+    background-color: var(--maroon);
+    color: var(--surface0);
+}
+.launchpad .app-dialog .button.delete:pressed {
+    background-color: var(--flamingo);
+    color: var(--surface0);
+}
+.launchpad .app-dialog .warning-message {
+    background-color: rgba(243, 139, 168, 0.12);
+    border: 1px solid var(--flamingo);
+    border-radius: 4px;
+    color: var(--flamingo);
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 12px;
+    margin: 4px 0px;
+}
+/* Launchpad popup style */
+.launchpad .drop-overlay {
+    background-color: rgba(30, 30, 46, 0.8);
+    border: 4px dashed var(--blue);
+}
+.launchpad .drop-overlay .text {
+    color: var(--og);
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    font-size: 64px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.launchpad .launchpad-container {
+    background-color: rgba(30, 30, 46, 0.8);
+}
+.launchpad .search-container {
+    min-height: 80px;
+    margin: 0;
+    padding: 0;
+}
+.launchpad .search-input {
+    max-width: 400px;
+    padding: 8px 12px;
+    font-size: 14px;
+    min-height: 24px;
+    max-height: 24px;
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    border-radius: 20px;
+    border: 2px solid var(--surface2);
+    background-color: var(--crust);
+    color: var(--subtext0);
+}
+.launchpad .search-input:focus  {
+    border: 2px solid var(--blue);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+.launchpad .launchpad-scroll-area {
+    background-color: transparent;
+    border: none;
+
+}
+.launchpad .app-icon {
+    background-color: rgba(195, 159, 241, 0.03);
+    border-radius: 12px;
+    border: 2px solid rgba(195, 159, 241, 0);
+    padding-top: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 24px 6px 6px 6px;
+    max-width: 130px;
+    min-width: 130px;
+    min-height: 90px;
+    transition: border 0.15s, background 0.15s;
+}
+.launchpad .app-icon:focus {
+    border: 2px solid var(--og);
+    background-color: rgba(195, 159, 241, 0.13);
+}
+.launchpad .app-icon:hover {
+    border: 2px solid var(--og);
+    background-color: rgba(195, 159, 241, 0.18);
+}
+.launchpad .app-icon .title {
+    color: var(--subtext0);
+    font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
+    font-size: 12px;
+    margin-top: 10px;
+    font-weight: 600;
+}
+/* App icon .launchpad .app-icon or URL icon .launchpad .app-icon.url */
+.launchpad .app-icon.url .title{
+    color: var(--teal);
+}
+.launchpad .app-icon .icon {
+    padding: 0;
+    margin: 0;
 }

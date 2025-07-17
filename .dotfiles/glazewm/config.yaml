@@ -1,6 +1,6 @@
 general:
   # Commands to run when the WM has started (e.g. to run a script or launch
-  # another application). Here we are running a batch script to start Zebar.
+  # another application). Here we are running a batch script to start Yasb.
   startup_commands: ["shell-exec C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Yasb.lnk"]
 
   # Whether to automatically focus windows underneath the cursor.
@@ -25,10 +25,10 @@ gaps:
 
   # Gap between windows and the screen edge.
   outer_gap:
-    top: "10px"
-    right: "10px"
-    bottom: "10px"
-    left: "10px"
+    top: "8px"
+    right: "8px"
+    bottom: "8px"
+    left: "8px"
 
 window_effects:
   # Visual effects to apply to the focused window.
@@ -203,15 +203,6 @@ keybindings:
   - commands: ["wm-redraw"]
     bindings: ["alt+shift+w"]
 
-  # Launch terminal
-  - commands: ["shell-exec wt"]
-    bindings: ["alt+enter"]
-
-  #Launch terminal as administrator
-  # This requires a script to be created that runs the terminal as admin.
-  - commands: ["shell-exec wscript C:\\Scripts\\wtadmin.vbs"]
-    bindings: ["alt+shift+enter"]
-
   # Focus the next/previous workspace defined in `workspaces` config.
   - commands: ["focus --next-workspace"]
     bindings: ["alt+shift+s"]
@@ -273,31 +264,39 @@ keybindings:
   - commands: ["move --workspace 9", "focus --workspace 9"]
     bindings: ["alt+shift+9"]
 
-  # Custom keybindings for applications.
+  ## Custom keybindings for applications.
+
+  # Launch terminal
+  - commands: ["shell-exec %LocalAppData%\\Microsoft\\WindowsApps\\wt.exe"]
+    bindings: ["alt+enter"]
+
+  # Launch terminal as administrator (requires a script to be created that runs the terminal as admin).
+  - commands: ["shell-exec wscript C:\\Scripts\\wtadmin.vbs"]
+    bindings: ["alt+shift+enter"]
 
   - commands: ["shell-exec zen"]
     bindings: ["alt+b"]
 
-  - commands: ["shell-exec C:\\Users\\Swopnil\\Desktop\\VSCode.lnk"]
+  - commands: ["shell-exec %USERPROFILE%\\Desktop\\VSCode.lnk"]
     bindings: ["alt+v"]
 
-  - commands: ["shell-exec C:\\Users\\Swopnil\\Desktop\\Obsidian.lnk"]
+  - commands: ["shell-exec C:\\Windows\\SysWOW64\\notepad.exe"]
     bindings: ["alt+n"]
 
-  - commands: ["shell-exec C:\\Users\\Swopnil\\Desktop\\Discord.lnk"]
+  - commands: ["shell-exec %LocalAppData%\\Discord\\Discord.exe"]
     bindings: ["alt+d"]
 
-  - commands: ["shell-exec C:\\Users\\Swopnil\\Desktop\\Spotify.lnk"]
+  - commands: ["shell-exec %AppData%\\Spotify\\Spotify.exe"]
     bindings: ["alt+s"]
 
-  - commands: ["shell-exec C:\\Users\\Swopnil\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Files.lnk"]
+  - commands: ["shell-exec explorer.exe"]
     bindings: ["alt+e"]
 
-  - commands: ["shell-exec C:\\Users\\Swopnil\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Android Settings.lnk"]
-    bindings: ["alt+i"]
-
-  - commands: ["shell-exec C:\\Users\\Swopnil\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\fanControl\\fanControl.lnk"]
+  - commands: ["shell-exec %AppData%\\Microsoft\\Windows\\Start Menu\\Programs\\fanControl\\fanControl.lnk"]
     bindings: ["alt+c"]
 
-  - commands: ["shell-exec C:\\Users\\Swopnil\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\YouTube Music.lnk"]
+  - commands: ["shell-exec %LocalAppData%\\Programs\\youtube-music\\YouTube Music.exe"]
     bindings: ["alt+y"]
+
+  - commands: ["shell-exec --hide-window yasbc toggle-widget launchpad --follow-mouse"]
+    bindings: ["alt+shift+l"]
