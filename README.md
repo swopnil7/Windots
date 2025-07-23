@@ -300,7 +300,9 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 - **Copy** the content of [`windots/.dotfiles/sharex/sharex.json`](.dotfiles/sharex/sharex.json) to your clipboard.
 - **Open** ShareX's **Application Settings** and click to **Theme** > **Import** > **From Clipboard**.
 
-#### \>_ Terminal & Shell Setup
+---
+
+## \>_ Terminal & Shell Setup
 
 ### 🖥️ Windows Terminal
 
