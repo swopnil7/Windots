@@ -335,6 +335,18 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 - [`windots/.dotfiles/fastfetch/windows.txt`](.dotfiles/fastfetch/windows.txt) → `%USERPROFILE%\.config\fastfetch\`
 - **Run fastfetch**.
 
+
+#### ⌨️AutoHotKey
+
+- [`windots/.dotfiles/AutoHotKey/`](.dotfiles/AutoHotkey/) → `%USERPROFILE%\Documents\`
+- **Open** the AutoHotkey Folder and **Launch** the **WindowsUtilities.ahk** script.. You will see it appear in the tray menu.
+
+> To configure the script to start with the system on boot:
+
+- Create a shortcut of the **WindowsUtilities.ahk** filescript.
+- Open **Run** (Win+R) and type shell:startup then hit Enter. Copy the created shortcut to the just launched directory.
+
+
 </details>
 
 ---
