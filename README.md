@@ -300,20 +300,20 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 - **Copy** the content of [`windots/.dotfiles/sharex/sharex.json`](.dotfiles/sharex/sharex.json) to your clipboard.
 - **Open** ShareX's **Application Settings** and click to **Theme** > **Import** > **From Clipboard**.
 
-### \>_ Terminal & Shell Setup
+#### \>_ Terminal & Shell Setup
 
-#### 🖥️ Windows Terminal
+### 🖥️ Windows Terminal
 
 - **Install** [**Windows Terminal**](https://github.com/microsoft/terminal)
 - [`windots/.dotfiles/terminal/settings.json`](.dotfiles/terminal/settings.json) → `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\`
 - **Restart Windows Terminal** to see the updated config.
 
-#### 🐚 PowerShell
+### 🐚 PowerShell
 
 - [`windots/.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1`](.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1) → `%USERPROFILE%\Documents\WindowsPowershell\`
 - Restart PowerShell to apply the changes.
 
-#### 🎨 Oh My Posh
+### 🎨 Oh My Posh
 
 - **Install** [**Oh My Posh**](https://ohmyposh.dev/docs/installation/windows) using winget:
 
@@ -323,7 +323,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 - [`windots/.dotfiles/ohmyposh/zen.toml`](.dotfiles/ohmyposh/zen.toml) → `%USERPROFILE%\.config\ohmyposh\`
 
-#### ⚙️ Fastfetch
+### ⚙️ Fastfetch
 
 - **Install** [**fastfetch**](https://github.com/fastfetch-cli/fastfetch) using **winget**:
 
@@ -336,7 +336,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 - **Run fastfetch**.
 
 
-#### ⌨️AutoHotKey
+### ⌨️AutoHotKey
 
 - [`windots/.dotfiles/AutoHotKey/`](.dotfiles/AutoHotkey/) → `%USERPROFILE%\Documents\`
 - **Open** the AutoHotkey Folder and **Launch** the **WindowsUtilities.ahk** script.. You will see it appear in the tray menu.
