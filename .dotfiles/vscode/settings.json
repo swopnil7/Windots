@@ -34,5 +34,7 @@
         }
     },
     "git.confirmSync": false,
-    "git.autofetch": true
+    "git.autofetch": true,
+    "workbench.iconTheme": "catppuccin-mocha",
+    "github.copilot.nextEditSuggestions.enabled": true
 }

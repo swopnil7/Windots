@@ -223,7 +223,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 ### 🚀 Flow Launcher
 
 - **Install** [**Flow Launcher**](https://www.flowlauncher.com/)
-- [`windots/.dotfiles/FlowLauncher/settings.json`](.dotfiles/FlowLauncher/Settings.json) → `%APPDATA%\FlowLauncher\Settings\`
+- [`windots/.dotfiles/FlowLauncher/`](.dotfiles/FlowLauncher/) → `%APPDATA%\FlowLauncher\`
 - **Restart Flow Launcher**
 
 ### 🦅 Windhawk
@@ -246,7 +246,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 ### 🚀 Hydra Launcher
 
-- **Copy the content inside [`windots/.dotfiles/HydraLauncher/settings.json`](.dotfiles/HydraLauncher/settings.json)
+- **Copy the content inside [`windots/.dotfiles/HydraLauncher/styles.css`](.dotfiles/HydraLauncher/styles.css)
 - **Open** Hydra Launcher and go to **Settings** > **Appearance** > **Create**, type any name and press enter, then paste the config and save the file to apply it.
 
 ### 🌐 qBittorrent
@@ -297,7 +297,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 ### 🔗 ShareX
 
 - **Install** [**ShareX**](https://getsharex.com/).
-- **Copy** the content of [`windots/.dotfiles/sharex/sharex.json`](.dotfiles\sharex\sharex.json) to your clipboard.
+- **Copy** the content of [`windots/.dotfiles/sharex/sharex.json`](.dotfiles/sharex/sharex.json) to your clipboard.
 - **Open** ShareX's **Application Settings** and click to **Theme** > **Import** > **From Clipboard**.
 
 ### \>_ Terminal & Shell Setup
