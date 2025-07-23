@@ -340,7 +340,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 ### ⌨️AutoHotKey
 
-- [`windots/.dotfiles/AutoHotKey/`](.dotfiles/AutoHotkey/) → `%USERPROFILE%\Documents\`
+- [`windots/.dotfiles/AutoHotKey/`](.dotfiles/AutoHotkey/) → `%USERPROFILE%\Documents\AutoHotKey`
 - **Open** the AutoHotkey Folder and **Launch** the **WindowsUtilities.ahk** script.. You will see it appear in the tray menu.
 
 > To configure the script to start with the system on boot:
