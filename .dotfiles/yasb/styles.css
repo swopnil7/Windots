@@ -109,10 +109,11 @@
 .traffic-widget .icon:hover,
 .home-widget .icon:hover,
 .wallpapers-widget .icon:hover,
-.systray .unpinned-visibility-btn:hover
+.systray .unpinned-visibility-btn:hover,
+.launchpad-widget .icon:hover,
+.active-window-widget .widget-container .icon:hover
 {
     color: rgba(230, 84, 171, 0.903);
-    
 }
 
 QPushButton  {
