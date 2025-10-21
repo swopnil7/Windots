@@ -125,13 +125,15 @@ class WindowsUtilitiesManager {
         ; Add utility controls
         A_TrayMenu.Add("🚀 App Launcher", (*) => this.ToggleAppLauncher())
         A_TrayMenu.Add("📝 Quick Notes", (*) => this.ToggleQuickNotes())
-        A_TrayMenu.Add("📋 To-Do & Reminders", (*) => this.ToggleTodoReminder())
+        A_TrayMenu.Add("📋 To-Do", (*) => this.ToggleTodoReminder())
+        A_TrayMenu.Add("🖥️ Icon Toggle", (*) => DesktopIconToggle_ToggleIcons())
         A_TrayMenu.Add()  ; Separator
         
         ; Explorer Dialog submenu
         explorerMenu := Menu()
         explorerMenu.Add("⚙️ Explorer Settings", (*) => this.ShowExplorerSettings())
         A_TrayMenu.Add("📁 Explorer Dialog", explorerMenu)
+
         
         ; Text Expander submenu
         expanderMenu := Menu()
@@ -370,6 +372,9 @@ class WindowsUtilitiesManager {
 ; Include To-Do & Reminders class
 #Include "Classes\Todo_Class.ahk"
 
+; Include Desktop Icon Toggle class
+#Include "Classes\DesktopIconToggle_Class.ahk"
+
 ; ========================================
 ; INITIALIZATION
 ; ========================================
@@ -383,8 +388,7 @@ try {
 }
 
 ; ========================================
-; GLOBAL HOTKEYS
-; ========================================
+
 
 ; Toggle Text Expander on/off
 ^+e:: {
@@ -406,6 +410,9 @@ try {
     }
 }
 
+; Toggle Desktop Icons
+^!i::DesktopIconToggle_ToggleIcons()
+
 ; Show startup notification
-TrayTip("Windows Utilities Manager", "All utilities loaded successfully!`n🚀 Win+Space: App Launcher`n📁 Middle-click: Explorer Dialog`n📝 Ctrl+Shift+N: Quick Notes`n📋 Alt+Shift+T: To-Do & Reminders`n✨ Ctrl+Shift+E: Toggle Text Expander`n💬 Type @@@, addr, date to expand", "Icon!")
+TrayTip("Windows Utilities Manager", "All utilities loaded successfully!`n🚀 Win+Space: App Launcher`n📁 Middle-click: Explorer Dialog`n📝 Ctrl+Shift+N: Quick Notes`n📋 Alt+Shift+T: To-Do & Reminders`n✨ Ctrl+Shift+E: Toggle Text Expander`n🖥️ Ctrl+Alt+I: Toggle Desktop Icons`n💬 Type @@@, addr, date to expand", "Icon!")
 SetTimer(() => TrayTip(), -5000)
