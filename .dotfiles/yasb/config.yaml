@@ -1,10 +1,6 @@
 watch_stylesheet: true
 watch_config: true
 debug: false
-komorebi:
-  start_command: "komorebic start --whkd"
-  stop_command: "komorebic stop --whkd"
-  reload_command: "komorebic stop --whkd && komorebic start --whkd"
 bars:
   primary-bar:
     enabled: true
@@ -33,18 +29,17 @@ bars:
     widgets:
       left: [
           #"home",
-          "launchpad", 
-          "glazewm_workspaces", 
+          "launchpad",
+          "glazewm_workspaces",
           "active_window",
           "media",
       ]
       center: [
           "clock",
+          "power_menu",
           "weather",
-          
         ]
       right: [
-          "systray",
           "wallpapers",
           "vscode",
           #"traffic",
@@ -55,7 +50,7 @@ bars:
           "volume",
           "battery",
           "notifications",
-          "power_menu"
+          "systray"
       ]
 widgets:
   home:
@@ -151,6 +146,7 @@ widgets:
         max_title_size: 80
         max_artist_size: 40
         show_source: true
+        show_volume_slider: true
       media_menu_icons:
         play: "\ue768"
         pause: "\ue769"
@@ -278,6 +274,8 @@ widgets:
       locale: "en_US.UTF-8"
       timezones: []
       calendar:
+        show_holidays: true
+        country_code: 'NP'
         round_corners: true
         round_corners_type: "normal"
         alignment: "center"
@@ -293,9 +291,10 @@ widgets:
     options:
       label: "<span>{icon}</span> {temp}"
       label_alt: "{location}: {conditions}, Min {min_temp}, Max {max_temp}, Humidity {humidity}"
-      api_key: '84959eb9fbea404999f124644252106'
+      api_key: 'ba7ceb84ccd540faa6540108253107' ## Get your free API key from https://www.weatherapi.com/
       update_interval: 600
       hide_decimal: true
+      show_alerts: true
       location: "Kathmandu, NP"
       units: "metric"
       callbacks:
@@ -321,6 +320,8 @@ widgets:
         direction: "down"
         offset_top: 0
         icon_size: 48
+        show_hourly_forecast: true
+        current_line_width: 2
       label_shadow:
         enabled: true
         color: "black"
@@ -447,17 +448,17 @@ widgets:
     options:
       label: "<span>\uf476</span> {count}"
       label_alt: "{count} notifications"
-      hide_empty: false
-      tooltip: false
+      hide_empty: true
+      tooltip: true
       callbacks:
         on_left: "toggle_notification"
         on_middle: "do_nothing"
         on_right: "exec start ms-settings:notifications"
       container_padding:
         top: 0
-        left: 8
+        left: 5
         bottom: 0
-        right: 8
+        right: 5
       label_shadow:
         enabled: true
         color: "black"
@@ -468,7 +469,7 @@ widgets:
     options:
       label: "\ueab4 {download_speed} | \ueab7 {upload_speed}"
       label_alt: "Download {download_speed} | Upload {upload_speed}"
-      update_interval: 1000 # Icon for download
+      update_interval: 1000
       callbacks:
         on_left: "toggle_label"
         on_right: "exec cmd /c Taskmgr"
