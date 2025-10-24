@@ -1,4 +1,4 @@
-<!-- Windots README - Enhanced Aesthetics -->
+<!-- Windots -->
 
 <p align="center">
   <img src="https://img.icons8.com/fluency/96/windows-10.png" width="64" alt="Windots Icon" />
@@ -103,6 +103,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 | **Terminal Emulator** | [windows terminal](https://github.com/microsoft/terminal) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/terminal/settings.json) |
 | **Shell Prompt** | [ohmyposh](https://ohmyposh.dev/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/ohmyposh/zen.toml) |
 | **System Fetch** | 🤍 [fastfetch](https://github.com/fastfetch-cli/fastfetch) [⚙️](https://github.com/swopnil7/dotfiles/blob/master/.dotfiles/fastfetch/config.jsonc) |
+| **Terminal File Manager** | [superfile](https://github.com/yorukot/superfile) |
 
 #### 🖱️ GUI Apps
 
@@ -336,6 +337,15 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 - [`windots/.dotfiles/fastfetch/config.jsonc`](.dotfiles/fastfetch/config.jsonc) → `%USERPROFILE%\.config\fastfetch\`
 - [`windots/.dotfiles/fastfetch/windows.txt`](.dotfiles/fastfetch/windows.txt) → `%USERPROFILE%\.config\fastfetch\`
 - **Run fastfetch**.
+
+
+### 📂 Superfile
+
+- **Run** this command in **powershell**:
+
+  ```bash
+  winget install --id yorukot.superfile
+  ```
 
 
 ### ⌨️AutoHotKey
