@@ -177,12 +177,6 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 - **Get** the [**Resource Redirect**](https://windhawk.net/mods/icon-resource-redirect) mod on Windhawk and **select** Linuxfx 11 AIO as the icon theme from the available presets.
 - **Copy** the [Explorerblur](.dotfiles/explorer/Explorerblur/) folder (I suggest creating a seperate folder in the C drive for windows rice tools, named scripts in my case) to somewhere safe. Then, run the register.cmd file.
 
-> 🚨 **Optional — Explorerblur**
->
-> The new Translucent Windows Windhawk mod already gives Explorer a polished, Mocha-styled look. Install Explorerblur only if you want an even darker, higher‑contrast interface than the Windhawk mod provides.
->
-> Recommendation: try the Translucent Windows mod first; add Explorerblur only if you still prefer a deeper, dimmed appearance.
-
 ### 🌐 Browser
 
 > [!NOTE]
