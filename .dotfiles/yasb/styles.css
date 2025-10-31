@@ -214,15 +214,8 @@ QPushButton  {
 }
 .media-widget .btn {
     background: transparent;
-    border: none;
     color: var(--og);
     font-family: "Segoe Fluent Icons";
-}
-.media-widget .btn.play,
-.media-widget .btn.pause,
-.media-widget .btn.next,
-.media-widget .btn.prev {
-    background-color: transparent;
     border: 1px solid var(--og); /* og accent */
     padding: 0 3px;
     margin: 3px 0 3px 4px;
@@ -430,7 +423,20 @@ Example: "Windows Media" becomes "windows-media" */
     background: transparent;
 }
 
-.audio-container .device {
+.audio-menu {
+    background: rgb(24, 24, 37);
+    border: 1.5px solid rgba(69, 71, 90, 0.5);
+    border-radius: 6px;
+    padding: 8px;
+    min-width: 220px;
+}
+
+.audio-menu .system-volume-container .volume-slider {
+    border: none;
+    margin-top: 15px;
+}
+
+.audio-menu .audio-container .device {
     font-size: 10px;
     background-color: transparent;
     border: none;
@@ -439,19 +445,56 @@ Example: "Windows Media" becomes "windows-media" */
     border-radius: 4px;
 }
 
-.audio-container .device.selected {
+.audio-menu .audio-container .device.selected {
     background-color: rgba(211, 133, 188, 0.264);
 }
 
-.audio-container .device:hover {
+.audio-menu .audio-container .device.selected:hover {
+    background-color: rgba(211, 133, 188, 0.364);
+}
+
+.audio-menu .audio-container .device:hover {
     background-color: rgba(124, 88, 113, 0.264);
 }
 
-.audio-menu {
-    background: rgb(24, 24, 37);
-    border: 1.5px solid rgba(69, 71, 90, 0.5);
+/* Toggle button for application volumes (if is enabled) */
+.audio-menu .toggle-apps {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    min-height: 15px;
+    min-width: 15px;
     border-radius: 6px;
-    padding: 8px;
+}
+.audio-menu .toggle-apps.expanded {
+    background-color: transparent;
+}
+.audio-menu .toggle-apps:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Container for application volumes (if is enabled) */
+.audio-menu .apps-container {
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.062);
+}
+.audio-menu .apps-container .app-volume .app-icon-container {
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 6px;
+    margin-right: 5px;
+}
+.audio-menu .apps-container .app-volume .app-slider {
+    min-height: 40px;
+    max-height: 40px;
+}
+.audio-menu .apps-container .app-volume .app-icon-container:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 

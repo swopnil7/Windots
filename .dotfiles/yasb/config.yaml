@@ -72,7 +72,7 @@ widgets:
       round_corners_type: "large"
       alignment: "left"
       offset_left: 4
-      offset_top: 0
+      offset_top: 7
   launchpad:
     type: "yasb.launchpad.LaunchpadWidget"
     options:
@@ -140,7 +140,7 @@ widgets:
         round_corners_type: "small"
         alignment: "center"
         direction: "down"
-        offset_top: 0
+        offset_top: 7
         thumbnail_corner_radius: 12
         thumbnail_size: 100
         max_title_size: 80
@@ -181,7 +181,7 @@ widgets:
         border_color: "System"
         alignment: "right"
         direction: "down"
-        offset_top: 0
+        offset_top: 7
         offset_left: 0
         header_label: "System Monitor"
         precision: 1
@@ -243,7 +243,7 @@ widgets:
           round_corners: true
           round_corners_type: "small"
           alignment: 'center'
-          offset_top: 0
+          offset_top: 7
         callbacks:
           on_left: "toggle_group"
           on_middle: "toggle_label"
@@ -280,7 +280,7 @@ widgets:
         round_corners_type: "normal"
         alignment: "center"
         direction: "down"
-        offset_top: 0
+        offset_top: 7
       label_shadow:
         enabled: true
         color: "black"
@@ -318,7 +318,7 @@ widgets:
         round_corners_type: "small"
         alignment: "center"
         direction: "down"
-        offset_top: 0
+        offset_top: 7
         icon_size: 48
         show_hourly_forecast: true
         current_line_width: 2
@@ -359,7 +359,7 @@ widgets:
         border_color: "System"
         alignment: "right"
         direction: "down"
-        offset_top: 0
+        offset_top: 7
         offset_left: 0
         wifi_icons_secured: [
           "\ue670",
@@ -390,7 +390,14 @@ widgets:
         round_corners_type: "small"
         alignment: "center"
         direction: "down"
-        offset_top: 0
+        offset_top: 7
+        show_apps: true
+        show_app_labels: false
+        show_app_icons: true
+        show_apps_expanded: true
+        app_icons: # Icons for the toggle button to expand/collapse application volumes
+          toggle_down: "\uf078" # Icon for btn collapsed state
+          toggle_up: "\uf077" # Icon for btn expanded state
       callbacks:
         on_middle: "toggle_mute"
         on_right: "exec start ms-settings:apps-volume"
@@ -481,6 +488,7 @@ widgets:
   vscode:
     type: "yasb.vscode.VSCodeWidget"
     options:
+      menu_title: "Recents"
       max_field_size: 50
       folder_icon: "\uf114"
       file_icon: "\uf016"
@@ -488,7 +496,9 @@ widgets:
       hide_folder_icon: false
       hide_file_icon: false
       max_number_of_folders: 15
-      max_number_of_files: 10 # set to 0 if you only want folders
+      max_number_of_files: 10
+      cli_command: "code"
+      state_storage_path: "C:\\Users\\Swopnil\\scoop\\persist\\vscode\\data\\user-data\\User\\globalStorage\\state.vscdb"
       callbacks:
         on_right: "exec code"
       menu:
@@ -496,7 +506,7 @@ widgets:
         round_corners: true
         round_corners_type: "small"
         alignment: 'center'
-        offset_top: 0
+        offset_top: 7
   wallpapers:
     type: "yasb.wallpapers.WallpapersWidget"
     options:
