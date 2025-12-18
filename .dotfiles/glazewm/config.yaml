@@ -107,17 +107,12 @@ workspaces:
 window_rules:
   - commands: ["ignore"]
     match:
-      # Ignores any Zebar windows.
-      - window_process: { equals: "zebar" }
-
       # Ignores picture-in-picture windows for browsers.
       - window_title: { regex: "[Pp]icture.in.[Pp]icture" }
         window_class: { regex: "Chrome_WidgetWin_1|MozillaDialogClass" }
 
       # Ignore rules for various 3rd-party apps.
       - window_process: { equals: "PowerToys.PowerAccent" }
-      - window_process: { equals: "FIFA23" }
-      - window_process: { equals: "Lively" }
         window_class: { regex: "HwndWrapper*" }
 
   - commands: ["toggle-floating --centered"]
