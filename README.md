@@ -369,20 +369,39 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 <details>
 <summary>Show Keybindings</summary>
 
+### Window Management
+
+| Keys | Action |
+|---|---|
+| <kbd>alt</kbd> + <kbd>h</kbd> / <kbd>j</kbd> / <kbd>k</kbd> / <kbd>l</kbd> | Focus window left / down / up / right |
+| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>h</kbd> / <kbd>j</kbd> / <kbd>k</kbd> / <kbd>l</kbd> | Move focusing window left / down / up / right |
+| <kbd>alt</kbd> + <kbd>q</kbd> | Close focusing window |
+| <kbd>alt</kbd> + <kbd>m</kbd> | Toggle window minimization |
+| <kbd>alt</kbd> + <kbd>f</kbd> | Toggle fullscreen |
+| <kbd>alt</kbd> + <kbd>t</kbd> | Toggle tiling mode |
+| <kbd>alt</kbd> + <kbd>space</kbd> | Toggle floating (centered) |
+| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>v</kbd> | Toggle tiling direction |
+| <kbd>alt</kbd> + <kbd>1-9</kbd> | Focus workspace {n} |
+| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>1-9</kbd> | Move focusing window to workspace {n} |
+| <kbd>alt</kbd> + <kbd>,</kbd> / <kbd>.</kbd> | Resize active window's width -/+ 2% |
+| <kbd>alt</kbd> + <kbd>⬆️</kbd> / <kbd>⬇️</kbd> | Resize acive window's height +/- 2% |
+| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>e</kbd> | Exit GlazeWM |
+| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>r</kbd> | Reload GlazeWM config |
+| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>p</kbd> | Pause/Resume all GlazeWM keybindings |
+| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>l</kbd> | Toggle YASB launchpad widget |
+| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>w</kbd> | Toggle YASB wallpapers widget |
+
+### Application Shortcuts
+
 | Keys | Action |
 |---|---|
 | <kbd>alt</kbd> + <kbd>enter</kbd> | Open terminal |
-| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>enter</kbd> | Open terminal as administrator |
-| <kbd>alt</kbd> + <kbd>h</kbd> / <kbd>j</kbd> / <kbd>k</kbd> / <kbd>l</kbd> | Focus window left / top / bottom / right |
-| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>⬅️</kbd> / <kbd>⬆️</kbd> / <kbd>⬇️</kbd> / <kbd>➡️</kbd> | Move focusing window left / top / bottom / right |
-| <kbd>alt</kbd> + <kbd>q</kbd> | Close focusing window |
-| <kbd>alt</kbd> + <kbd>1-9</kbd> | Focus workspace {n} |
-| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>1-9</kbd> | Move focusing window to workspace {n} |
-| <kbd>alt</kbd> + <kbd>m</kbd> | Toggle window minimization |
-| <kbd>alt</kbd> + <kbd>f</kbd> | Toggle window maximization |
-| <kbd>alt</kbd> + <kbd>v</kbd> | Change tiling direction |
-| <kbd>alt</kbd> + <kbd>t</kbd> | Make focusing window float/tiled |
-| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>e</kbd> | Exit glazewm |
+| <kbd>alt</kbd> + <kbd>e</kbd> | Open File Explorer |
+| <kbd>alt</kbd> + <kbd>v</kbd> | Open VSCode |
+| <kbd>alt</kbd> + <kbd>n</kbd> | Open Notepad |
+| <kbd>alt</kbd> + <kbd>b</kbd> | Open Zen Browser |
+| <kbd>alt</kbd> + <kbd>s</kbd> | Open Spotify |
+| <kbd>alt</kbd> + <kbd>y</kbd> | Open Youtube Music |
 
 </details>
 

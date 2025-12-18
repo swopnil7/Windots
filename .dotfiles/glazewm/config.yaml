@@ -19,6 +19,18 @@ general:
     # - 'window_focus': Jump when focus changes between windows.
     trigger: "monitor_focus"
 
+     # How windows should be hidden when switching workspaces.
+  # - 'cloak': Recommended. Hides windows with no animation.
+  # - 'hide': Legacy method (v3.5 and earlier) that has a brief animation,
+  # but has stability issues with some apps.
+  hide_method: "cloak"
+
+  # Affects which windows get shown in the native Windows taskbar. Has no
+  # effect if `hide_method: 'hide'`.
+  # - 'true': Show all windows (regardless of workspace).
+  # - 'false': Only show windows from the currently shown workspaces.
+  show_all_in_taskbar: false
+
 gaps:
   # Gap between adjacent windows.
   inner_gap: "5px"
@@ -104,6 +116,7 @@ window_rules:
 
       # Ignore rules for various 3rd-party apps.
       - window_process: { equals: "PowerToys.PowerAccent" }
+      - window_process: { equals: "FIFA23" }
       - window_process: { equals: "Lively" }
         window_class: { regex: "HwndWrapper*" }
 
@@ -165,15 +178,15 @@ keybindings:
   # Change tiling direction. This determines where new tiling windows will
   # be inserted.
   - commands: ["toggle-tiling-direction"]
-    bindings: ["alt+v"]
+    bindings: ["alt+shift+v"]
 
   # Change focus from tiling windows -> floating -> fullscreen.
   - commands: ["wm-cycle-focus"]
-    bindings: ["alt+space"]
+    bindings: ["alt+shift+space"]
 
   # Change the focused window to be floating.
   - commands: ["toggle-floating --centered"]
-    bindings: ["alt+shift+space"]
+    bindings: ["alt+space"]
 
   # Change the focused window to be tiling.
   - commands: ["toggle-tiling"]
@@ -201,7 +214,7 @@ keybindings:
 
   # Redraw all windows.
   - commands: ["wm-redraw"]
-    bindings: ["alt+shift+w"]
+    bindings: ["alt+shift+d"]
 
   # Focus the next/previous workspace defined in `workspaces` config.
   - commands: ["focus --next-workspace"]
@@ -266,8 +279,8 @@ keybindings:
 
   ## Custom keybindings for applications.
 
-  # Launch terminal
-  - commands: ["shell-exec %LocalAppData%\\Microsoft\\WindowsApps\\wt.exe"]
+  # Launch terminal with the default profile.
+  - commands: ["shell-exec wt"]
     bindings: ["alt+enter"]
 
   # Launch terminal as administrator (requires a script to be created that runs the terminal as admin).
@@ -277,13 +290,13 @@ keybindings:
   - commands: ["shell-exec zen"]
     bindings: ["alt+b"]
 
-  - commands: ["shell-exec %USERPROFILE%\\Desktop\\VSCode.lnk"]
+  - commands: ["shell-exec code"]
     bindings: ["alt+v"]
 
   - commands: ["shell-exec C:\\Windows\\SysWOW64\\notepad.exe"]
     bindings: ["alt+n"]
 
-  - commands: ["shell-exec %LocalAppData%\\Discord\\Discord.exe"]
+  - commands: ["shell-exec %USERPROFILE%\\Desktop\\Discord.lnk"]
     bindings: ["alt+d"]
 
   - commands: ["shell-exec %AppData%\\Spotify\\Spotify.exe"]
@@ -292,11 +305,12 @@ keybindings:
   - commands: ["shell-exec explorer.exe"]
     bindings: ["alt+e"]
 
-  - commands: ["shell-exec %AppData%\\Microsoft\\Windows\\Start Menu\\Programs\\fanControl\\fanControl.lnk"]
-    bindings: ["alt+c"]
-
+  # An open source YouTube Music client: https://github.com/th-ch/youtube-music
   - commands: ["shell-exec %LocalAppData%\\Programs\\youtube-music\\YouTube Music.exe"]
     bindings: ["alt+y"]
 
   - commands: ["shell-exec --hide-window yasbc toggle-widget launchpad --follow-mouse"]
     bindings: ["alt+shift+l"]
+
+  - commands: ["shell-exec --hide-window yasbc toggle-widget wallpapers --follow-mouse"]
+    bindings: ["alt+shift+w"]
