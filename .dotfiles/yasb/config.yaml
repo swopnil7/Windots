@@ -40,6 +40,7 @@ bars:
           "weather",
         ]
       right: [
+          "cava",
           "wallpapers",
           "vscode",
           #"traffic",
@@ -47,6 +48,7 @@ bars:
           "memory",
           "disk",
           "wifi",
+          "bluetooth",
           "volume",
           "battery",
           "notifications",
@@ -152,11 +154,38 @@ widgets:
         pause: "\ue769"
         prev_track: "\ue892"
         next_track: "\ue893"
+      scrolling_label:
+        enabled: false
+        update_interval_ms: 33
+        style: "left"  # can be "left", "right", "bounce", "bounce-ease"
+        separator: " | "
+        label_padding: 0
+        always_scroll: false
+        # Easing curve params: https://www.desmos.com/calculator/j7eamemxzi
+        ease_slope: 20
+        ease_pos: 0.8
+        ease_min: 0.5
       label_shadow:
         enabled: true
         color: "black"
         radius: 3
         offset: [ 1, 1 ]
+  cava:
+    type: "yasb.cava.CavaWidget"
+    options:
+      bar_height: 12
+      min_bar_height: 0
+      gradient: 1
+      foreground: "#89b4fa"
+      gradient_color_1: '#74c7ec'
+      gradient_color_2: '#89b4fa'
+      gradient_color_3: '#cba6f7'
+      bars_number: 8
+      bar_spacing: 2
+      bar_width: 4
+      bar_type: "bars"
+      framerate: 60
+      hide_empty: true
   libre_gpu:
     type: "yasb.libre_monitor.LibreHardwareMonitorWidget"
     options:
@@ -209,6 +238,7 @@ widgets:
     type: "yasb.systray.SystrayWidget"
     options:
       class_name: "systray"
+      pin_click_modifier: "ctrl"
       show_unpinned: false
       show_unpinned_button: true
       show_battery: false
@@ -218,6 +248,11 @@ widgets:
       label_collapsed: "󰁊"
       label_expanded: "󰁒"
       label_position: "right"
+      btn_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
   memory:
     type: "yasb.memory.MemoryWidget"
     options:
@@ -256,7 +291,7 @@ widgets:
       label_no_window: ""
       label_icon: true
       label_icon_size: 14
-      max_length: 25
+      max_length: 20
       max_length_ellipsis: ".."
       monitor_exclusive: true
       label_shadow:
@@ -319,7 +354,9 @@ widgets:
         alignment: "center"
         direction: "down"
         offset_top: 7
-        icon_size: 48
+        icon_size: 64
+        icon_smoothing: true
+        hourly_point_spacing: 76
         show_hourly_forecast: true
         current_line_width: 2
       label_shadow:
@@ -373,6 +410,29 @@ widgets:
           "\uec3e",
           "\uec3f",
         ]
+  bluetooth:
+    type: "yasb.bluetooth.BluetoothWidget"
+    options:
+      label: "<span>{icon}</span> {device_count}"
+      label_alt: "<span>{icon}</span> {device_name}"
+      label_device_separator: ", "
+      max_length: 10
+      max_length_ellipsis: ".."
+      icons: 
+        bluetooth_on: "\udb80\udcaf"
+        bluetooth_off: "\udb80\udcb2"
+        bluetooth_connected: "\udb80\udcb1"
+      device_aliases:
+      - name: "T5.0"
+        alias: "\uf025"
+      callbacks:
+        on_left: "toggle_label"
+        on_right: "exec cmd.exe /c start ms-settings:bluetooth"
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
   volume:
     type: "yasb.volume.VolumeWidget"
     options:
@@ -413,9 +473,10 @@ widgets:
       label_alt: "<span>{icon}</span> {percent}% | time: {time_remaining}"
       callbacks:
         on_right: "exec start ms-settings:batterysaver"
-      #hide_unsupported: true
       charging_options:
         icon_format: "{charging_icon}"
+        blink_charging_icon: true
+        blink_interval: 1000
       status_thresholds:
         critical: 10
         low: 30
@@ -423,7 +484,7 @@ widgets:
         high: 90
         full: 100
       status_icons:
-        icon_charging: "\udb80\udc85"
+        icon_charging: "\udb80\udc84"
         icon_critical: "\udb80\udc7a"
         icon_low: "\udb80\udc7c"
         icon_medium: "\udb80\udc80"
@@ -511,17 +572,17 @@ widgets:
     type: "yasb.wallpapers.WallpapersWidget"
     options:
       label: "<span>\udb83\ude09</span>"
-      image_path: "C:\\Users\\Swopnil\\Pictures\\Walls" # Example path to folder with images
+      image_path: "C:\\Users\\Swopnil\\Pictures\\Walls" # Path to folder with images
       change_automatically: false # Automatically change wallpaper
       update_interval: 60 # If change_automatically is true, update interval in seconds
       gallery:
           enabled: true
-          blur: true
-          image_width: 200
-          image_per_page: 7
+          blur: false
+          image_width: 235
+          image_per_page: 6
           show_buttons: true
-          orientation: "portrait"
-          image_spacing: 8
+          orientation: "landscape"
+          image_spacing: 10
           lazy_load: true
           lazy_load_delay: 80
           lazy_load_fadein: 400

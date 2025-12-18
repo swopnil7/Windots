@@ -36,8 +36,8 @@
 
 /* Base colors */
     --base: #1e1e2e;
-    --mantle: rgba(24, 24, 37, 0.5);
-    --crust: rgba(17, 17, 27, 0.75);
+    --mantle: rgba(24, 24, 37, 0.75);
+    --crust: rgba(17, 17, 27, 0.85);
 }
 
 /* ================= */
@@ -89,7 +89,7 @@
 
 .icon {
     font-size: 16px;
-    margin: 0 4px 0 0;
+    margin: 0 2px;
 }
 
 /* Icon hover effect */
@@ -200,10 +200,10 @@ QPushButton  {
     color: var(--text);
     padding: 0;
     max-width: 300px;
-    margin: 3px;
+    margin: 3px 0;
     border-radius: 6px;
-    border-bottom: 1px solid rgba(177, 140, 225, 0.385);
-    border-style: double;
+    border-bottom: 1px solid rgba(177, 140, 225, 0.45);
+    border-style: solid;
 }
 .media-widget .label {
     font-size: 14px;
@@ -412,7 +412,6 @@ Example: "Windows Media" becomes "windows-media" */
 /* ==================== */
 .volume-widget .icon {
     color: var(--blue);
-    margin: 1px 2px 0 0;
 }
 
 .volume-widget .label {
@@ -496,6 +495,16 @@ Example: "Windows Media" becomes "windows-media" */
 .audio-menu .apps-container .app-volume .app-icon-container:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
+
+/* ================== */
+/* === CAVA WIDGET === */
+/* ================= */
+
+.cava-widget {
+    padding: 0;
+    margin: 0;
+}
+.cava-widget .widget-container {}
 
 
 /* ================= */
@@ -623,7 +632,6 @@ Example: "Windows Media" becomes "windows-media" */
 /* ==================== */
 .weather-widget .icon {
     font-size: 20px;
-    margin: 0 2px 1px 0;
     color: var(--maroon);
 }
 
@@ -959,6 +967,25 @@ Example: "Windows Media" becomes "windows-media" */
     background: transparent;
 }
 
+.battery-widget .widget-container .icon.status-charging {
+    color: var(--teal);
+}
+.battery-widget .widget-container .icon.status-charging.blink {
+    color: var(--yellow);
+}
+.battery-widget .widget-container .icon.status-low {
+    color: var(--red);
+}
+.battery-widget .widget-container .icon.status-medium {
+    color: var(--yellow);
+}
+.battery-widget .widget-container .icon.status-high {
+    color: var(--green);
+}
+.battery-widget .widget-container .icon.status-full {
+    color: var(--blue);
+}
+
 /* ==================== */
 /* === MEMORY WIDGET === */
 /* ==================== */
@@ -1037,7 +1064,7 @@ Example: "Windows Media" becomes "windows-media" */
     padding: 0;
     background: transparent;
     color: var(--text);
-    margin: 1px 0.5px;
+    margin: 2px 0;
 }
 
 .systray .button:hover {
@@ -1165,7 +1192,6 @@ Example: "Windows Media" becomes "windows-media" */
 .notification-widget .icon {
     font-size: 14px;
     color: var(--rosewater);
-    margin: 0;
 }
 
 .notification-widget .icon.new-notification {
@@ -1250,8 +1276,8 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .wallpapers-gallery-window {
-    background: var(--base);
-    border: 1.5px solid var(--surface1);
+    background: var(--crust);
+    border: 2.5px solid var(--surface1);
     border-radius: 8px;
     margin: 0;
 }
@@ -1260,11 +1286,12 @@ Example: "Windows Media" becomes "windows-media" */
     background: rgba(100, 67, 157, 0.171);
     color: var(--text);
     border: 1px solid var(--og);
-    font-size: 13px;
-    padding: 10px 0;
+    font-size: 15px;
+    font-weight: 900;
+    padding: 5px;
     border-radius: 8px;
-    margin: 0 10px 14px 10px;
-    width: 210px;
+    margin: 5px 5px 10px 5px;
+    width: 100px;
 }
 
 .wallpapers-gallery-buttons:hover {
@@ -1278,11 +1305,11 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .wallpapers-gallery-image:hover {
-    border: 2.5px solid var(--maroon);
+    border: 1.5px solid var(--maroon);
 }
 
 .wallpapers-gallery-image.focused {
-    border: 2px solid var(--og);
+    border: 1.5px solid var(--og);
 }
 
 /* ===================== */
@@ -1484,9 +1511,9 @@ Example: "Windows Media" becomes "windows-media" */
 
 }
 .launchpad .app-icon {
-    background-color: rgba(195, 159, 241, 0.03);
+    background-color: var(--mantle);
     border-radius: 12px;
-    border: 2px solid rgba(195, 159, 241, 0);
+    border: 2px solid var(--surface0);
     padding-top: 15px;
     padding-left: 5px;
     padding-right: 5px;
@@ -1516,5 +1543,28 @@ Example: "Windows Media" becomes "windows-media" */
 }
 .launchpad .app-icon .icon {
     padding: 0;
+    margin: 0;
+}
+
+/* ==================== */
+/* === BLUETOOTH WIDGET === */
+/* ==================== */
+
+.bluetooth-widget {
+    padding: 0;
+    margin: 0;
+}
+.bluetooth-widget .icon {
+    color: var(--sky);
+}
+
+/* ==================== */
+/* === ACTIVE WINDOW WIDGET === */
+/* ==================== */
+
+.active-window-widget {
+    margin: 0;
+}
+.active-window-widget .widget-container .icon {
     margin: 0;
 }
