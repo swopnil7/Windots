@@ -2,129 +2,120 @@
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
     "type": "file",
-    "source": "C:/Users/swopnil/.config/fastfetch/windows.txt",
+    "source": "C:/Users/Swopnil/.config/fastfetch/windows.txt",
     "padding": { "top": 1, "left": 0, "right": 4 }
-  },
-  "display": {
-    "separator": ": ",
-    "color": {
-      "keys": "blue",
-      "title": "magenta"
     },
-    "key": {
-      "width": 12,
-      "type": "string"
+  "display": {
+    "separator": "  ",
+    "color": {
+      "keys": "#6c7086",
+      "title": "#cba6f7"
     },
     "percent": {
-      "type": 1,
+      "type": 3,
       "color": {
-        "green": "green",
-        "yellow": "yellow",
-        "red": "red"
+        "green": "#a6e3a1",
+        "yellow": "#f9e2af",
+        "red": "#f38ba8"
       }
     }
   },
   "modules": [
-    "break",
     {
       "type": "title",
-      "format": "{#34}@{user-name}{#}"
+      "key": " ",
+      "color": {
+        "user": "#89b4fa",
+        "host": "#cba6f7"
+      }
     },
     {
       "type": "custom",
-      "format": "-----------------------"
+      "format": "\u001b[38;2;108;112;134m••••••••••••••••••••••••••••••••••••••••••••••"
     },
     {
       "type": "os",
-      "key": "OS",
-      "format": "{name} {version}"
+      "key": " OS        >",
+      "keyColor": "#89b4fa"
     },
     {
       "type": "kernel",
-      "key": "Kernel",
+      "key": " Kernel    >",
+      "keyColor": "#f38ba8",
       "format": "{sysname} {release}"
     },
     {
       "type": "host",
-      "key": "Device",
+      "key": "󰌢 Device    >",
+      "keyColor": "#a6e3a1",
       "format": "{family}"
     },
     {
-      "type": "bios",
-      "key": "BIOS",
-      "format": "{vendor} {version} ({date})"
-    },
-    {
-      "type": "chassis",
-      "key": "Chassis",
-      "format": "{type}"
-    },
-    {
       "type": "uptime",
-      "key": "Uptime"
+      "key": "󰅐 Uptime    >",
+      "keyColor": "#fab387"
     },
-    {
-      "type": "datetime",
-      "key": "Date/Time"
-    },
-    {
-      "type": "shell",
-      "key": "Shell",
-      "format": "{pretty-name} ({version})"
-    },
-    {
-      "type": "terminal",
-      "key": "Term"
-    },
+    "break",
     {
       "type": "cpu",
-      "key": "CPU",
+      "key": " CPU       >",
+      "keyColor": "#89b4fa",
       "format": "{name}"
     },
     {
       "type": "cpuusage",
-      "key": "CPU Usage"
+      "key": "󰘚 CPU Usage >",
+      "keyColor": "#cba6f7"
     },
     {
       "type": "gpu",
-      "key": "GPU",
+      "key": "󰾲 GPU       >",
+      "keyColor": "#f38ba8",
       "format": "{name}"
     },
+    "break",
     {
       "type": "memory",
-      "key": "Memory"
+      "key": " Memory    >",
+      "keyColor": "#a6e3a1",
+      "format": "{used} / {total} ({percentage})"
     },
     {
       "type": "disk",
-      "key": "Disk",
-      "folders": [
-      "C:/",
-      "D:/"
-      ]
+      "key": " Disk      >",
+      "keyColor": "#94e2d5",
+      "folders": "",
+      "format": "{size-used} / {size-total} ({size-percentage})",
+      "showExternal": true
     },
+    "break",
     {
       "type": "battery",
-      "key": "Battery",
+      "key": "󰂄 Battery   >",
+      "keyColor": "#f9e2af",
       "format": "{capacity} {status}"
     },
     {
       "type": "wifi",
-      "key": "Wi-Fi",
+      "key": "󰖩 Wi-Fi     >",
+      "keyColor": "#fab387",
       "format": "{ssid}"
+    },
+    "break",
+    {
+      "type": "packages",
+      "key": "󰏖 Packages  >",
+      "keyColor": "#94e2d5"
     },
     {
       "type": "processes",
-      "key": "Processes"
-    },
-    {
-      "type": "packages",
-      "key": "Packages"
+      "key": "󰍹 Processes >",
+      "keyColor": "#89dceb"
     },
     "break",
     {
       "type": "colors",
       "symbol": "circle"
-    },
-    "break"
+    }
   ]
 }
