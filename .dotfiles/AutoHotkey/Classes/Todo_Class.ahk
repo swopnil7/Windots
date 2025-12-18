@@ -519,7 +519,7 @@ class CatppuccinTodoReminder {
         
         for task in filteredTasks {
             dueDateStr := task.dueDate ? this.FormatDate(task.dueDate) : ""
-            daysLeftStr := task.dueDate ? this.GetDaysLeft(task.dueDate) : ""
+            daysLeftStr := (task.dueDate && !task.completed) ? this.GetDaysLeft(task.dueDate) : ""
             createdStr := this.FormatDate(task.created)
             
             ; Add row: Columns are Priority, Task, Due Date, Days Left, Created

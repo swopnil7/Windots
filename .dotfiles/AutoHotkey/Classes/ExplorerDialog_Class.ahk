@@ -179,18 +179,15 @@ class FixedExplorerDialogPathSelector {
         if !windowID {
             return
         }
-        
         try {
             windowClass := WinGetClass("ahk_id " . windowID)
         } catch {
             return
         }
-        
-        ; Only show menu for dialog windows
-        if !(windowClass ~= "i)^(#32770|ConsoleWindowClass|SunAwtDialog)$") {
+        ; Allow menu for dialogs, consoles, Java dialogs, and Explorer windows
+        if !(windowClass ~= "i)^(#32770|ConsoleWindowClass|SunAwtDialog|CabinetWClass|ExplorerWClass)$") {
             return
         }
-        
         ; Create menu
         pathMenu := Menu()
         itemCount := 0
@@ -267,13 +264,11 @@ class FixedExplorerDialogPathSelector {
         if !path || !windowID || !windowClass {
             return
         }
-        
         ; Check if path exists
         if !DirExist(path) {
             MsgBox("❌ Path does not exist: " . path, "⚠️ Error", "Icon!")
             return
         }
-        
         ; Activate the target window
         try {
             WinActivate("ahk_id " . windowID)
@@ -281,7 +276,6 @@ class FixedExplorerDialogPathSelector {
         } catch {
             return
         }
-        
         ; Verify window is still valid
         try {
             currentClass := WinGetClass("ahk_id " . windowID)
@@ -291,15 +285,37 @@ class FixedExplorerDialogPathSelector {
         } catch {
             return
         }
-        
         ; Handle different window types
         switch windowClass {
             case "ConsoleWindowClass":
                 this.NavigateConsole(path)
             case "SunAwtDialog":
                 this.NavigateJavaDialog(path)
+            case "CabinetWClass", "ExplorerWClass":
+                this.NavigateExplorerWindow(path, windowID)
             default:
                 this.NavigateStandardDialog(path, windowID)
+        }
+    }
+
+    NavigateExplorerWindow(path, windowID) {
+        ; Activate the window and use F4 to focus the address bar, then enter the path
+        try {
+            WinActivate("ahk_id " . windowID)
+            Sleep(100)
+            ; Use F4 to focus the address bar (works in Explorer windows)
+            SendInput("{F4}")
+            Sleep(100)
+            SendInput("^a") ; Ctrl+A to select all
+            Sleep(50)
+            SendInput(path)
+            Sleep(50)
+            SendInput("{Enter}")
+            Sleep(100)
+            ; Fallback: if path did not change, try clicking address bar
+            ; Optionally, you can add ControlClick or UIA automation here if needed
+        } catch {
+            MsgBox("❌ Failed to navigate Explorer window.", "⚠️ Error", "Icon!")
         }
     }
     

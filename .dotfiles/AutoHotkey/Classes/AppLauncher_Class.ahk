@@ -197,7 +197,7 @@ class CatppuccinAppLauncher {
         
         ; Results list
         this.listBox := this.gui.AddListBox("xm y+10 w" . (this.settings.windowWidth - 20) . " h" . (this.settings.windowHeight - 100) . " Background" . this.colors.surface0 . " c" . this.colors.text . " VScroll")
-        this.listBox.OnEvent("DoubleClick", (*) => this.LaunchSelected())
+        this.listBox.OnEvent("DoubleClick", (*) => this.HandleDoubleClick())
         this.listBox.OnEvent("Change", (*) => this.OnListSelection())
         
         ; Status bar
@@ -242,6 +242,7 @@ class CatppuccinAppLauncher {
     EnableHotkeys() {
         try {
             Hotkey("Enter", (*) => this.HandleEnter(), "On")
+            Hotkey("^Enter", (*) => this.HandleCtrlEnter(), "On")
             Hotkey("Escape", (*) => this.HandleEscape(), "On") 
             Hotkey("Up", (*) => this.HandleUp(), "On")
             Hotkey("Down", (*) => this.HandleDown(), "On")
@@ -255,6 +256,7 @@ class CatppuccinAppLauncher {
     DisableHotkeys() {
         try {
             Hotkey("Enter", "Off")
+            Hotkey("^Enter", "Off")
             Hotkey("Escape", "Off")
             Hotkey("Up", "Off")
             Hotkey("Down", "Off")
@@ -268,6 +270,12 @@ class CatppuccinAppLauncher {
     HandleEnter() {
         if this.isVisible && WinActive(this.gui.Hwnd) {
             this.LaunchSelected()
+        }
+    }
+    
+    HandleCtrlEnter() {
+        if this.isVisible && WinActive(this.gui.Hwnd) {
+            this.OpenSelectedDirectory()
         }
     }
     
@@ -310,6 +318,14 @@ class CatppuccinAppLauncher {
     OnListSelection() {
         ; Update selectedIndex when user clicks on an item
         this.selectedIndex := this.listBox.Value
+    }
+    
+    HandleDoubleClick() {
+        if GetKeyState("Ctrl", "P") {
+            this.OpenSelectedDirectory()
+        } else {
+            this.LaunchSelected()
+        }
     }
     
     FilterApps(query) {
@@ -441,6 +457,45 @@ class CatppuccinAppLauncher {
             }
         } catch as err {
             MsgBox("Failed to launch " . app.displayName . "`n" . err.Message, "Launch Error", "Icon!")
+        }
+    }
+    
+    OpenSelectedDirectory() {
+        ; Get the currently selected item from the listbox
+        selectedListIndex := this.listBox.Value
+        if selectedListIndex < 1 || selectedListIndex > this.filteredApps.Length {
+            return
+        }
+        
+        app := this.filteredApps[selectedListIndex]
+        this.OpenContainingFolder(app)
+        this.Hide()
+    }
+    
+    OpenContainingFolder(app) {
+        try {
+            ; Determine the actual file path
+            filePath := ""
+            
+            switch app.type {
+                case "exe":
+                    filePath := app.path
+                case "lnk":
+                    ; For shortcuts, use the target if available, otherwise the shortcut itself
+                    filePath := app.HasOwnProp("target") && app.target ? app.target : app.path
+                case "builtin":
+                    ; For built-in apps, try to find the executable
+                    if InStr(app.path, "shell:")
+                        return  ; Can't open directory for shell: commands
+                    filePath := app.path
+            }
+            
+            if filePath && FileExist(filePath) {
+                ; Open Explorer and select the file
+                Run('explorer.exe /select,"' . filePath . '"')
+            }
+        } catch as err {
+            MsgBox("Failed to open directory for " . app.displayName . "`n" . err.Message, "Directory Error", "Icon!")
         }
     }
     

@@ -1,5 +1,5 @@
 ; Quick Note Taker Class
-; A floating notepad for quick notes with simple JSON storage and search
+; A floating notepad for quick notes with Base64-encoded storage and search
 ; Features: Multiple notes, search, auto-save, Catppuccin theming
 
 class QuickNoteTaker {
@@ -46,10 +46,30 @@ class QuickNoteTaker {
     
     ; Constructor
     __New() {
-        this.notesFile := A_ScriptDir . "\Settings\quick_notes.json"
+        this.notesFile := A_ScriptDir . "\Settings\quick_notes.dat"
+        
+        ; Initialize change tracking variables
+        this.originalTitle := ""
+        this.originalContent := ""
+        
         ; Load settings from INI file BEFORE creating GUI so hotkey/exportPath are correct
         this.LoadSettingsFromFile()
         this.CreateGUI()
+        
+        ; Set default sort dropdown value based on settings
+        sortOptions := ["modified", "created", "title", "length"]
+        sortIndex := 1  ; Default to "Modified"
+        Loop sortOptions.Length {
+            if sortOptions[A_Index] = this.settings.sortBy {
+                sortIndex := A_Index
+                break
+            }
+        }
+        this.sortButton.Choose(sortIndex)
+        
+        ; Set direction button icon
+        this.sortDirectionButton.Text := (this.settings.sortDirection = "asc") ? "↑" : "↓"
+        
         this.LoadNotes()
         this.SetupHotkey()
         
@@ -79,7 +99,7 @@ class QuickNoteTaker {
         this.gui.OnEvent("ContextMenu", (*) => "")  ; Disable right-click context menu
         
         ; Top section - Title and Search in one row
-        this.gui.AddText("xm ym w100 c" . this.colors.subtext1, "Title:")
+        this.gui.AddText("xm ym w40 c" . this.colors.subtext1, "Title:")
         this.titleEdit := this.gui.AddEdit("x+5 yp-3 w120 h20 Background" . this.colors.surface0 . " c" . this.colors.text)
         this.titleEdit.OnEvent("Change", (*) => this.OnTitleChange())
         this.titleEdit.OnEvent("LoseFocus", (*) => this.OnTitleLoseFocus())
@@ -87,9 +107,18 @@ class QuickNoteTaker {
         ; We'll handle Enter key with global hotkey when visible
         
         this.gui.AddText("x+10 yp+3 w45 c" . this.colors.subtext1, "Search:")
-        this.searchEdit := this.gui.AddEdit("x+5 yp-3 w100 h20 Background" . this.colors.surface0 . " c" . this.colors.text)
+        this.searchEdit := this.gui.AddEdit("x+5 yp-3 w90 h20 Background" . this.colors.surface0 . " c" . this.colors.text)
         this.searchEdit.OnEvent("Change", (*) => this.OnSearchChange())
         this.searchEdit.OnEvent("ContextMenu", (*) => "")  ; Disable right-click
+        
+        ; Sort dropdown on same line as search
+        this.gui.AddText("x+10 yp+3 w30 c" . this.colors.subtext1, "Sort:")
+        this.sortButton := this.gui.AddDropDownList("x+5 yp-3 w85 Background" . this.colors.surface0 . " c" . this.colors.text, ["Modified", "Created", "Title", "Length"])
+        this.sortButton.OnEvent("Change", (*) => this.OnSortChange())
+        
+        ; Direction toggle button
+        this.sortDirectionButton := this.gui.AddButton("x+2 yp w25 h20 Background" . this.colors.surface0 . " c" . this.colors.text, "↑")
+        this.sortDirectionButton.OnEvent("Click", (*) => this.ToggleSortDirection())
         
         ; Button row - more compact
         this.gui.AddButton("xm y+10 w50 h23 Background" . this.colors.blue . " c" . this.colors.bg, "New").OnEvent("Click", (*) => this.CreateNewNote())
@@ -117,7 +146,7 @@ class QuickNoteTaker {
         
         ; Status bar - positioned closer to boxes with reduced gap
         statusY := this.settings.windowHeight - 20  ; Reduced from 25 to minimize gap
-        this.statusBar := this.gui.AddText("xm y" . statusY . " w300 c" . this.colors.subtext1, "Ctrl+S: Save • Ctrl+N: New • Esc: Hide")
+        this.statusBar := this.gui.AddText("xm y" . statusY . " w400 c" . this.colors.subtext1, "Ctrl+S: Save • Ctrl+N: New • Ctrl+Del: Delete Note • Esc: Hide")
         
         ; Position and hide initially
         this.gui.Show("w" . this.settings.windowWidth . " h" . this.settings.windowHeight . " Hide")
@@ -166,6 +195,10 @@ class QuickNoteTaker {
         this.titleEdit.Value := ""
         this.textBox.Value := ""
         
+        ; Reset original values for change tracking
+        this.originalTitle := ""
+        this.originalContent := ""
+        
         ; Re-enable auto-save
         this.settings.autoSave := autoSaveState
         
@@ -191,15 +224,20 @@ class QuickNoteTaker {
             this.titleEdit.Value := title
         }
         
-        ; Create note object
+        ; Create note object with timestamps
         note := {title: title, content: content}
         
         ; Update existing note or add new one
         if this.currentNoteIndex >= 0 && this.currentNoteIndex < this.notes.Length {
-            ; Update existing note
+            ; Update existing note - preserve created timestamp, update modified
+            existingNote := this.notes[this.currentNoteIndex + 1]
+            note.created := existingNote.HasOwnProp("created") ? existingNote.created : A_Now
+            note.modified := A_Now
             this.notes[this.currentNoteIndex + 1] := note
         } else {
-            ; Add new note to beginning of array
+            ; Add new note - set both timestamps to now
+            note.created := A_Now
+            note.modified := A_Now
             this.notes.InsertAt(1, note)
             this.currentNoteIndex := 0
         }
@@ -211,6 +249,10 @@ class QuickNoteTaker {
         
         this.SaveNotesToFile()
         this.RefreshNotesList()
+        
+        ; Update original values after save
+        this.originalTitle := title
+        this.originalContent := content
         
         ; Visual feedback
         this.gui.Title := "Quick Notes - Saved!"
@@ -253,9 +295,16 @@ class QuickNoteTaker {
             return
         }
         
-        ; Save current note before switching
+        ; Save current note before switching, only if changed
         if this.currentNoteIndex >= 0 && (this.textBox.Value || this.titleEdit.Value) {
-            this.SaveCurrentNote()
+            currentTitle := this.titleEdit.Value
+            currentContent := this.textBox.Value
+            titleChanged := currentTitle != this.originalTitle
+            contentChanged := currentContent != this.originalContent
+            
+            if titleChanged || contentChanged {
+                this.SaveCurrentNote()
+            }
         }
         
         ; Load the selected note by index
@@ -280,6 +329,10 @@ class QuickNoteTaker {
         ; Update the UI
         this.titleEdit.Value := note.title
         this.textBox.Value := note.content
+        
+        ; Store original values for change detection
+        this.originalTitle := note.title
+        this.originalContent := note.content
         
         ; Ensure the correct list item is selected
         this.notesList.Choose(noteIndex + 1)
@@ -344,21 +397,148 @@ class QuickNoteTaker {
     }
     
     OnTitleLoseFocus() {
-        ; Auto-save when title field loses focus
+        ; Auto-save when title field loses focus, only if changed
         if this.settings.autoSave {
-            this.SaveCurrentNote()
+            currentTitle := this.titleEdit.Value
+            currentContent := this.textBox.Value
+            
+            ; Check if either title or content changed
+            titleChanged := !this.HasOwnProp("originalTitle") || currentTitle != this.originalTitle
+            contentChanged := !this.HasOwnProp("originalContent") || currentContent != this.originalContent
+            
+            if titleChanged || contentChanged {
+                this.SaveCurrentNote()
+            }
         }
     }
     
     OnTextLoseFocus() {
-        ; Auto-save when content field loses focus
+        ; Auto-save when content field loses focus, only if changed
         if this.settings.autoSave {
-            this.SaveCurrentNote()
+            currentTitle := this.titleEdit.Value
+            currentContent := this.textBox.Value
+            
+            ; Check if either title or content changed
+            titleChanged := !this.HasOwnProp("originalTitle") || currentTitle != this.originalTitle
+            contentChanged := !this.HasOwnProp("originalContent") || currentContent != this.originalContent
+            
+            if titleChanged || contentChanged {
+                this.SaveCurrentNote()
+            }
         }
     }
     
     ; ========================================
-    ; FILE OPERATIONS (JSON)
+    ; SORTING
+    ; ========================================
+    
+    OnSortChange() {
+        ; Map dropdown selection to sort type
+        sortTypes := ["modified", "created", "title", "length"]
+        selectedIndex := this.sortButton.Value
+        
+        if selectedIndex >= 1 && selectedIndex <= sortTypes.Length {
+            this.settings.sortBy := sortTypes[selectedIndex]
+            this.SaveSettingsToFile()
+            this.SortNotes()
+            this.RefreshNotesList()
+        }
+    }
+    
+    ToggleSortDirection() {
+        ; Toggle between asc and desc
+        this.settings.sortDirection := (this.settings.sortDirection = "asc") ? "desc" : "asc"
+        
+        ; Update button text
+        this.sortDirectionButton.Text := (this.settings.sortDirection = "asc") ? "↑" : "↓"
+        
+        this.SaveSettingsToFile()
+        this.SortNotes()
+        this.RefreshNotesList()
+    }
+    
+    SortNotes() {
+        if this.notes.Length <= 1 {
+            return
+        }
+        
+        ; Store current note title to restore selection after sort
+        currentTitle := ""
+        if this.currentNoteIndex >= 0 && this.currentNoteIndex < this.notes.Length {
+            currentTitle := this.notes[this.currentNoteIndex + 1].title
+        }
+        
+        ; Determine sort direction
+        isAsc := (this.settings.sortDirection = "asc")
+        
+        ; Sort based on current setting
+        switch this.settings.sortBy {
+            case "modified":
+                ; Sort by modified date
+                this.notes := this.BubbleSort(this.notes, (a, b) => 
+                    isAsc 
+                        ? (a.HasOwnProp("modified") ? a.modified : "0") > (b.HasOwnProp("modified") ? b.modified : "0")
+                        : (a.HasOwnProp("modified") ? a.modified : "0") < (b.HasOwnProp("modified") ? b.modified : "0")
+                )
+            case "created":
+                ; Sort by created date
+                this.notes := this.BubbleSort(this.notes, (a, b) => 
+                    isAsc
+                        ? (a.HasOwnProp("created") ? a.created : "0") > (b.HasOwnProp("created") ? b.created : "0")
+                        : (a.HasOwnProp("created") ? a.created : "0") < (b.HasOwnProp("created") ? b.created : "0")
+                )
+            case "title":
+                ; Sort by title
+                this.notes := this.BubbleSort(this.notes, (a, b) => 
+                    isAsc
+                        ? StrCompare(String(a.title), String(b.title), 0) < 0
+                        : StrCompare(String(a.title), String(b.title), 0) > 0
+                )
+            case "length":
+                ; Sort by content length
+                this.notes := this.BubbleSort(this.notes, (a, b) => 
+                    isAsc
+                        ? StrLen(a.content) > StrLen(b.content)
+                        : StrLen(a.content) < StrLen(b.content)
+                )
+        }
+        
+        ; Restore current note index by finding the note with matching title
+        if currentTitle {
+            Loop this.notes.Length {
+                if this.notes[A_Index].title = currentTitle {
+                    this.currentNoteIndex := A_Index - 1
+                    break
+                }
+            }
+        }
+    }
+    
+    BubbleSort(arr, compareFunc) {
+        ; Simple bubble sort implementation
+        n := arr.Length
+        if n <= 1 {
+            return arr
+        }
+        
+        Loop n - 1 {
+            i := A_Index
+            Loop n - i {
+                j := A_Index
+                if !compareFunc(arr[j], arr[j + 1]) {
+                    ; Swap elements
+                    temp := arr[j]
+                    arr[j] := arr[j + 1]
+                    arr[j + 1] := temp
+                }
+            }
+        }
+        
+        return arr
+    }
+    
+    ; ========================================
+    ; FILE OPERATIONS (BASE64)
     ; ========================================
     
     LoadNotes() {
@@ -370,31 +550,46 @@ class QuickNoteTaker {
         
         try {
             ; Try reading with explicit encoding
-            content := FileRead(this.notesFile, "UTF-8-RAW")
+            content := FileRead(this.notesFile, "UTF-8")
             if !content {
                 return
             }
             
-            ; Remove BOM if present
-            if SubStr(content, 1, 3) = Chr(0xEF) . Chr(0xBB) . Chr(0xBF) {
-                content := SubStr(content, 4)
-            }
-            
-            ; Simple JSON parsing
+            ; Parse line-based format: TITLE|BASE64_TITLE|CONTENT|BASE64_CONTENT
             content := Trim(content)
-            if SubStr(content, 1, 1) = "[" && SubStr(content, -1) = "]" {
-                ; Extract note objects
-                objContent := SubStr(content, 2, StrLen(content) - 2)
-                objects := this.SplitJSONObjects(objContent)
+            lines := StrSplit(content, "`n", "`r")
+            
+            for line in lines {
+                line := Trim(line)
+                if !line || line = "" {
+                    continue
+                }
                 
-                for objStr in objects {
-                    note := this.ParseJSONObject(objStr)
-                    if note && note.HasOwnProp("title") {
-                        this.notes.Push(note)
+                ; Parse format: TITLE|base64title|CONTENT|base64content|CREATED|timestamp|MODIFIED|timestamp
+                parts := StrSplit(line, "|")
+                if parts.Length >= 4 && parts[1] = "TITLE" && parts[3] = "CONTENT" {
+                    note := {}
+                    note.title := this.Base64Decode(parts[2])
+                    note.content := this.Base64Decode(parts[4])
+                    
+                    ; Load timestamps if available
+                    if parts.Length >= 6 && parts[5] = "CREATED" {
+                        note.created := parts[6]
+                    } else {
+                        note.created := A_Now  ; Default to current time
                     }
+                    
+                    if parts.Length >= 8 && parts[7] = "MODIFIED" {
+                        note.modified := parts[8]
+                    } else {
+                        note.modified := A_Now  ; Default to current time
+                    }
+                    
+                    this.notes.Push(note)
                 }
             }
             
+            this.SortNotes()
             this.RefreshNotesList()
             
         } catch as err {
@@ -411,28 +606,30 @@ class QuickNoteTaker {
                 DirCreate(dir)
             }
             
-            ; Convert notes to JSON - use format that's easier to parse for AHK
-            jsonStr := "["
+            ; Convert notes to Base64-encoded format (one note per line)
+            ; Format: TITLE|base64title|CONTENT|base64content|CREATED|timestamp|MODIFIED|timestamp
+            output := ""
             
-            for i, note in this.notes {
-                if i > 1 {
-                    jsonStr .= ","
+            for note in this.notes {
+                titleB64 := this.Base64Encode(note.title)
+                contentB64 := this.Base64Encode(note.content)
+                
+                ; Ensure timestamps exist
+                if !note.HasOwnProp("created") {
+                    note.created := A_Now
+                }
+                if !note.HasOwnProp("modified") {
+                    note.modified := A_Now
                 }
                 
-                ; Build JSON object with concatenation that AHK handles better
-                jsonStr .= "`n  {"
-                jsonStr .= "`n    " . Chr(34) . "title" . Chr(34) . ": " . Chr(34) . this.EscapeJSON(note.title) . Chr(34) . ","
-                jsonStr .= "`n    " . Chr(34) . "content" . Chr(34) . ": " . Chr(34) . this.EscapeJSON(note.content) . Chr(34)
-                jsonStr .= "`n  }"
+                output .= "TITLE|" . titleB64 . "|CONTENT|" . contentB64 . "|CREATED|" . note.created . "|MODIFIED|" . note.modified . "`n"
             }
-            
-            jsonStr .= "`n]"
             
             ; Write to file
             if FileExist(this.notesFile) {
                 FileDelete(this.notesFile)
             }
-            FileAppend(jsonStr, this.notesFile, "UTF-8")
+            FileAppend(output, this.notesFile, "UTF-8")
             
         } catch as err {
             MsgBox("Error saving notes: " . err.Message, "Save Error", "Icon!")
@@ -440,133 +637,86 @@ class QuickNoteTaker {
     }
     
     ; ========================================
-    ; JSON UTILITIES
+    ; BASE64 ENCODING UTILITIES
     ; ========================================
     
-    JoinArray(arr, separator) {
-        result := ""
-        for i, item in arr {
-            if i > 1 {
-                result .= separator
-            }
-            result .= item
-        }
-        return result
-    }
-    
-    SplitJSONObjects(content) {
-        ; Split JSON objects in array
-        objects := []
-        braceDepth := 0
-        current := ""
-        inString := false
-        escaped := false
-        i := 1
-        
-        while i <= StrLen(content) {
-            char := SubStr(content, i, 1)
-            
-            if escaped {
-                current .= char
-                escaped := false
-                i++
-                continue
-            }
-            
-            if char = "\" && inString {
-                current .= char
-                escaped := true
-                i++
-                continue
-            }
-            
-            if char = '"' {
-                inString := !inString
-                current .= char
-                i++
-                continue
-            }
-            
-            if !inString {
-                if char = "{" {
-                    braceDepth++
-                    current .= char
-                } else if char = "}" {
-                    braceDepth--
-                    current .= char
-                    
-                    if braceDepth = 0 && Trim(current) {
-                        ; Complete object found
-                        objects.Push(Trim(current))
-                        current := ""
-                    }
-                } else if char = "," && braceDepth = 0 {
-                    ; Skip commas between objects at top level
-                    ; Don't add to current
-                } else {
-                    current .= char
-                }
-            } else {
-                current .= char
-            }
-            i++
-        }
-        
-        ; Add final object if exists and complete
-        if Trim(current) && braceDepth = 0 {
-            objects.Push(Trim(current))
-        }
-        
-        return objects
-    }
-    
-    ParseJSONObject(objStr) {
-        ; Parse a single JSON object for title and content
-        objStr := Trim(objStr)
-        
-        if !objStr || !RegExMatch(objStr, "^\s*\{[\s\S]*\}\s*$") {
-            return ""
-        }
-        
-        note := {}
-        
-        ; Extract title
-        if RegExMatch(objStr, '"title"\s*:\s*"([^"]*(?:\\.[^"]*)*)"', &match) {
-            note.title := this.UnescapeJSON(match[1])
-        }
-        
-        ; Extract content (handle multiline)
-        if RegExMatch(objStr, '"content"\s*:\s*"([^"]*(?:\\.[^"]*)*)"', &match) {
-            note.content := this.UnescapeJSON(match[1])
-        }
-        
-        return note
-    }
-    
-    EscapeJSON(str) {
-        ; Simple JSON string escaping
+    Base64Encode(str) {
+        ; Encode string to Base64 using Windows COM
         if !str {
             return ""
         }
         
-        str := StrReplace(str, "\", "\\")
-        str := StrReplace(str, '"', '\"')
-        str := StrReplace(str, "`n", "\\n")
-        str := StrReplace(str, "`r", "\\r")
-        str := StrReplace(str, "`t", "\\t")
-        
-        return str
+        try {
+            ; Convert string to bytes
+            bytes := Buffer(StrPut(str, "UTF-8"))
+            StrPut(str, bytes, "UTF-8")
+            byteCount := StrPut(str, "UTF-8") - 1  ; Exclude null terminator
+            
+            ; Use MSXML2.DOMDocument for Base64 encoding
+            xml := ComObject("MSXML2.DOMDocument")
+            node := xml.createElement("b64")
+            node.dataType := "bin.base64"
+            
+            ; Write bytes to node
+            stream := ComObject("ADODB.Stream")
+            stream.Type := 1  ; Binary
+            stream.Open()
+            stream.Write(bytes)
+            stream.Position := 0
+            node.nodeTypedValue := stream.Read(byteCount)
+            stream.Close()
+            
+            return node.text
+        } catch {
+            ; Fallback: simple character code encoding
+            result := ""
+            Loop Parse str {
+                if result
+                    result .= ","
+                result .= Ord(A_LoopField)
+            }
+            return "FALLBACK:" . result
+        }
     }
     
-    UnescapeJSON(str) {
-        ; Simple JSON string unescaping
-        str := StrReplace(str, "\\n", "`n")
-        str := StrReplace(str, "\\r", "`r")
-        str := StrReplace(str, "\\t", "`t")
-        str := StrReplace(str, '\"', '"')
-        str := StrReplace(str, "\\", "\")
+    Base64Decode(encoded) {
+        ; Decode Base64 string using Windows COM
+        if !encoded {
+            return ""
+        }
         
-        return str
+        try {
+            ; Check for fallback encoding
+            if SubStr(encoded, 1, 9) = "FALLBACK:" {
+                codes := StrSplit(SubStr(encoded, 10), ",")
+                result := ""
+                for code in codes {
+                    result .= Chr(code)
+                }
+                return result
+            }
+            
+            ; Use MSXML2.DOMDocument for Base64 decoding
+            xml := ComObject("MSXML2.DOMDocument")
+            node := xml.createElement("b64")
+            node.dataType := "bin.base64"
+            node.text := encoded
+            
+            ; Get decoded bytes
+            stream := ComObject("ADODB.Stream")
+            stream.Type := 1  ; Binary
+            stream.Open()
+            stream.Write(node.nodeTypedValue)
+            stream.Position := 0
+            stream.Type := 2  ; Text
+            stream.Charset := "utf-8"
+            result := stream.ReadText()
+            stream.Close()
+            
+            return result
+        } catch {
+            return encoded  ; Return as-is if decoding fails
+        }
     }
 
     ; ========================================
@@ -582,12 +732,8 @@ class QuickNoteTaker {
         this.gui.Show()
         this.SetupGUIHotkeys()  ; Enable GUI-specific hotkeys
         
-        ; Focus on title field if we have a new note, otherwise content
-        if !this.titleEdit.Value && !this.textBox.Value {
-            this.titleEdit.Focus()
-        } else {
-            this.textBox.Focus()
-        }
+        ; Always focus on search field when opening
+        this.searchEdit.Focus()
     }
     
     Hide() {
@@ -634,8 +780,8 @@ class QuickNoteTaker {
             Hotkey("Escape", (*) => this.Hide(), "On")
             Hotkey("^s", (*) => this.SaveCurrentNote(), "On")
             Hotkey("^n", (*) => this.CreateNewNote(), "On")
-            ; Add Delete key to delete current note
-            Hotkey("Delete", (*) => this.OnDeleteKeyPressed(), "On")
+            ; Add Ctrl+Delete to delete current note (so regular Delete works for text editing)
+            Hotkey("^Delete", (*) => this.DeleteCurrentNote(), "On")
             ; Add Enter key handler for title field navigation
             Hotkey("Enter", (*) => this.OnEnterPressed(), "On")
         } catch as err {
@@ -658,22 +804,14 @@ class QuickNoteTaker {
         return false
     }
     
-    ; Handle Delete key press
-    OnDeleteKeyPressed() {
-        ; Only delete if we have a valid current note
-        if this.currentNoteIndex >= 0 && this.currentNoteIndex < this.notes.Length {
-            this.DeleteCurrentNote()
-        }
-    }
-    
     ; Remove GUI hotkeys when hidden
     RemoveGUIHotkeys() {
         try {
             Hotkey("Escape", "Off")
             Hotkey("^s", "Off") 
             Hotkey("^n", "Off")
-            Hotkey("Delete", "Off") ; Also turn off Delete key
-            Hotkey("Enter", "Off")  ; Also turn off Enter key
+            Hotkey("^Delete", "Off")
+            Hotkey("Enter", "Off")
         } catch as err {
             ; Ignore hotkey errors
         }
@@ -784,18 +922,27 @@ SaveSettings(gui, hotkeyEdit, fontEdit, sizeEdit, maxNotesEdit, alwaysOnTopCheck
             if !DirExist(exportDir) {
                 DirCreate(exportDir)
             }
-            exportFile := exportDir . "\quick_notes_export_" . FormatTime(A_Now, "yyyyMMdd_HHmmss") . ".txt"
-            exportContent := "Quick Notes Export - " . FormatTime(A_Now, "yyyy-MM-dd HH:mm:ss") . "`n"
-            exportContent .= "=" . this.StrRepeat("=", 50) . "`n`n"
-            ; Export each note
+            
+            exportedCount := 0
+            
+            ; Export each note as a separate file
             for note in this.notes {
-                exportContent .= "Title: " . note.title . "`n"
-                exportContent .= this.StrRepeat("-", 40) . "`n"
-                exportContent .= note.content . "`n`n"
-                exportContent .= this.StrRepeat("=", 50) . "`n`n"
+                ; Create safe filename from title
+                safeTitle := RegExReplace(note.title, "[^a-zA-Z0-9_-]", "_")
+                exportFile := exportDir . "\" . safeTitle . ".txt"
+                
+                ; If file exists, append number
+                counter := 1
+                while FileExist(exportFile) {
+                    exportFile := exportDir . "\" . safeTitle . "_" . counter . ".txt"
+                    counter++
+                }
+                
+                FileAppend(note.content, exportFile, "UTF-8")
+                exportedCount++
             }
-            FileAppend(exportContent, exportFile, "UTF-8")
-            MsgBox("Notes exported to: " . exportFile, "Export Complete", "Icon!")
+            
+            MsgBox("Exported " . exportedCount . " notes to:`n" . exportDir, "Export Complete", "Icon!")
         } catch as err {
             MsgBox("Error exporting notes: " . err.Message, "Export Error", "Icon!")
         }
@@ -867,6 +1014,8 @@ SaveSettings(gui, hotkeyEdit, fontEdit, sizeEdit, maxNotesEdit, alwaysOnTopCheck
             this.settings.windowWidth := Integer(IniRead(settingsFile, "Settings", "WindowWidth", this.settings.windowWidth))
             this.settings.windowHeight := Integer(IniRead(settingsFile, "Settings", "WindowHeight", this.settings.windowHeight))
             this.settings.exportPath := IniRead(settingsFile, "Settings", "ExportPath", this.settings.exportPath)
+            this.settings.sortBy := IniRead(settingsFile, "Settings", "SortBy", "modified")
+            this.settings.sortDirection := IniRead(settingsFile, "Settings", "SortDirection", "asc")
             
             return true
         } catch as err {

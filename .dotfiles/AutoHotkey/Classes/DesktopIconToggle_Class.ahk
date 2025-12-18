@@ -1,4 +1,7 @@
 ﻿DesktopIconToggle_ToggleIcons() {
+    ; Store the currently active window
+    activeWindow := WinGetID("A")
+    
     ; Show desktop first (Win+D)
     Send("#d")
     Sleep 300
@@ -25,4 +28,10 @@
     
     ; Show desktop again to restore windows
     Send("#d")
+    Sleep 300
+    
+    ; Restore the previously active window
+    try {
+        WinActivate("ahk_id " activeWindow)
+    }
 }

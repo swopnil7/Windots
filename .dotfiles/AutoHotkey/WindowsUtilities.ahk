@@ -39,6 +39,9 @@ class WindowsUtilitiesManager {
         version: "1.0.0"
     }
     
+    ; Hotkey state
+    hotkeysSuspended := false
+    
     ; Utility instances
     appLauncher := ""
     explorerDialog := ""
@@ -143,6 +146,10 @@ class WindowsUtilitiesManager {
         A_TrayMenu.Add("✨ Text Expander", expanderMenu)
         A_TrayMenu.Add()  ; Separator
         
+        ; Add hotkey suspension toggle
+        A_TrayMenu.Add("⏸️ Suspend All Hotkeys", (*) => this.ToggleSuspendHotkeys())
+        A_TrayMenu.Add()  ; Separator
+        
         ; Add utility management
         A_TrayMenu.Add("⚙️ Manager Settings", (*) => this.ShowSettings())
         A_TrayMenu.Add("🔄 Reload All", (*) => this.ReloadAll())
@@ -157,7 +164,7 @@ class WindowsUtilitiesManager {
         A_TrayMenu.Default := "🚀 App Launcher"
         
         ; Set custom tray tip
-        A_IconTip := "Windows Utilities Manager`nApp Launcher • Explorer Dialog • Quick Notes • Text Expander • To-Do & Reminders"
+        A_IconTip := "Windows Utilities Manager"
     }
     
     ; ========================================
@@ -211,6 +218,28 @@ class WindowsUtilitiesManager {
         } else {
             MsgBox("Text Expander is not available.", "Error", "Icon!")
         }
+    }
+    
+    ToggleSuspendHotkeys() {
+        this.hotkeysSuspended := !this.hotkeysSuspended
+        Suspend(this.hotkeysSuspended ? 1 : 0)
+        this.UpdateSuspendStatus()
+    }
+    
+    UpdateSuspendStatus() {
+        statusText := this.hotkeysSuspended ? "suspended" : "resumed"
+        icon := this.hotkeysSuspended ? "⏸️" : "▶️"
+        menuText := this.hotkeysSuspended ? "▶️ Resume All Hotkeys" : "⏸️ Suspend All Hotkeys"
+        
+        ; Update tray menu text
+        try {
+            A_TrayMenu.Rename(this.hotkeysSuspended ? "⏸️ Suspend All Hotkeys" : "▶️ Resume All Hotkeys", menuText)
+        }
+        
+        TrayTip("Hotkeys " . statusText, "All hotkeys have been " . statusText . ".`nPress Ctrl+Win+P to toggle.", "Icon!")
+        SetTimer(() => TrayTip(), -3000)
+        
+        this.ShowDebug("Hotkeys " . statusText)
     }
     
     UpdateTrayMenu() {
@@ -311,16 +340,23 @@ class WindowsUtilitiesManager {
         help .= "• Middle-click in file dialogs`n"
         help .= "• Quick access to common paths`n"
         help .= "• Browse and navigate easily`n`n"
-        help .= "� Quick Notes:`n"
-        help .= "• Ctrl+Shift+N: Open floating notepad`n"
-        help .= "• Auto-save and always accessible`n"
-        help .= "• Perfect for quick thoughts`n`n"
+        help .= "📝 Quick Notes:`n"
+        help .= "• Alt+Shift+N: Open floating notepad`n"
+        help .= "• Ctrl+S: Save current note`n"
+        help .= "• Ctrl+N: Create new note`n"
+        help .= "• Auto-save and always accessible`n`n"
+        help .= "📋 To-Do & Reminders:`n"
+        help .= "• Alt+Shift+T: Open To-Do manager`n"
+        help .= "• Manage tasks and reminders`n`n"
         help .= "✨ Text Expander:`n"
-        help .= "• @@ → your email address`n"
-        help .= "• addr → your full address`n"
-        help .= "• date → current date`n"
-        help .= "• Manage custom shortcuts in tray menu`n`n"
-        help .= "�💡 Tip: Double-click tray icon for quick launcher access"
+        help .= "• Ctrl+Shift+E: Toggle expansion on/off`n"
+        help .= "• Manage custom shortcuts to expand`n`n"
+        help .= "🖥️ Desktop Icons:`n"
+        help .= "• Ctrl+Win+I: Toggle desktop icons visibility`n`n"
+        help .= "⏸️ Suspend All Hotkeys:`n"
+        help .= "• Ctrl+Win+P: Suspend/Resume all hotkeys`n"
+        help .= "• Use to prevent AHK from intercepting shortcuts`n`n"
+        help .= "💡 Tip: Double-click tray icon for quick launcher access"
         
         MsgBox(help, "Help", "Icon!")
     }
@@ -411,8 +447,22 @@ try {
 }
 
 ; Toggle Desktop Icons
-^!i::DesktopIconToggle_ToggleIcons()
+^#i::DesktopIconToggle_ToggleIcons()
 
 ; Show startup notification
-TrayTip("Windows Utilities Manager", "All utilities loaded successfully!`n🚀 Win+Space: App Launcher`n📁 Middle-click: Explorer Dialog`n📝 Ctrl+Shift+N: Quick Notes`n📋 Alt+Shift+T: To-Do & Reminders`n✨ Ctrl+Shift+E: Toggle Text Expander`n🖥️ Ctrl+Alt+I: Toggle Desktop Icons`n💬 Type @@@, addr, date to expand", "Icon!")
+TrayTip("Windows Utilities Manager", "All utilities loaded successfully!`n🚀 Win+Space: App Launcher`n📁 Middle-click: Explorer Dialog`n📝 Alt+Shift+N: Quick Notes`n📋 Alt+Shift+T: To-Do & Reminders`n✨ Ctrl+Shift+E: Toggle Text Expander`n🖥️ Ctrl+Win+I: Toggle Desktop Icons`n⏸️ Ctrl+Win+P: Suspend All Hotkeys`n💬 Type @@@, addr, date to expand", "Icon!")
 SetTimer(() => TrayTip(), -5000)
+
+; Create Ctrl+Win+P hotkey that works even when suspended (placed after Suspend call)
+#SuspendExempt
+^#p:: {
+    global UtilitiesManager
+    if UtilitiesManager && IsObject(UtilitiesManager) {
+        UtilitiesManager.ToggleSuspendHotkeys()
+    } else {
+        Suspend(-1)
+        TrayTip("Hotkeys " . (A_IsSuspended ? "suspended" : "resumed"), "Hotkeys have been " . (A_IsSuspended ? "suspended" : "resumed") . ".", "Icon!")
+        SetTimer(() => TrayTip(), -3000)
+    }
+}
+#SuspendExempt False
