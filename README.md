@@ -76,7 +76,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 | **Launcher** | [Flow Launcher](https://www.flowlauncher.com/) 🔍 |
 | **File Managers** | [File Explorer](https://www.microsoft.com/en-us/windows/tips/file-explorer) 🗂️ |
 | **Web Browser** | [Zen-Browser](https://zen-browser.app) 🌎 |
-| **Theme** | [Catppuccin](https://catppuccin.com/) 🧁 |
+| **Theme** | [Catppuccin Mocha](https://catppuccin.com/) 🧁 |
 
 ---
 
@@ -137,13 +137,17 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 > **⚠️ Backup your current configuration files before continuing.**  
 > Applying these settings may overwrite existing configs, so be sure to manually merge or restore as needed.
 
-### 🪟 GlazeWM
+<details>
+<summary><strong>🪟 GlazeWM</strong></summary>
 
 - **Install** [**GlazeWM**](https://github.com/glzr-io/glazewm/releases/).
 - [`windots/.dotfiles/glazewm/config.yaml`](.dotfiles/glazewm/config.yaml) → `%USERPROFILE%\.glzr\glazewm\`
 - **Restart GlazeWM** for the changes to take effect.
 
-### 📊 YASB (Yet Another Status Bar)
+</details>
+
+<details>
+<summary><strong>📊 YASB (Yet Another Status Bar)</strong></summary>
 
 > [!NOTE]
 > Ensure you have a Nerd Font installed for correct icon display. I use [**JetBrainsMono Nerd Font**](https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip); if you use another Nerd Font, adjust the font settings in the YASB `styles.css` as needed.
@@ -152,32 +156,70 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 - [`windots/.dotfiles/yasb/`](.dotfiles/yasb/) → `%USERPROFILE%\.config\yasb\`
 - **Restart YASB** for the changes to take effect.
 
-### 📝 VSCode
+</details>
 
-> [!WARNING]
-> If you want the **APC Customize UI Extension**, Use VSCode `v1.91.1` or below, as newer versions do not support it. It is not compulsory though and VSCode will still look good without it.
+<details>
+<summary><strong>📝 VSCode</strong></summary>
 
-- Enhance your **VSCode UI** with these **extensions**:
-  - [APC Customize UI](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension) - Customize the VSCode interface (optional)
-  - [GlassIt-VSC](https://marketplace.visualstudio.com/items?itemName=s-nlf-fh.glassit) - Add a transparent/glass effect (optional)
 - **Install** the [Alt Catppuccin Theme](https://marketplace.visualstudio.com/items?itemName=dooez.alt-catppuccin-vsc) extension.
+- **Install** the [GlassIt-VSC](https://marketplace.visualstudio.com/items?itemName=s-nlf-fh.glassit) extension and set the transparency level between 240-250 in its settings. *(Optional)*
 - [`windots/.dotfiles/vscode/settings.json`](.dotfiles/vscode/settings.json) → `%APPDATA%\Code\User\`
 - **Restart VSCode** to load the updated settings.
 
-### 📂 Windows Explorer
+</details>
 
-- **Install** [**SecureUxTheme**](https://github.com/namazso/SecureUxTheme/releases/tag/v4.0.0) tool and reboot your PC. You can also use the winget command below to install it:
+<details>
+<summary><strong>📂 Windows Explorer</strong></summary>
+
+> [!WARNING]
+> This process requires **administrator privileges** and system modifications.
+
+#### Step 1: Install SecureUxTheme
+
+SecureUxTheme allows custom themes to be applied on Windows 11.
+
+- **Install** [**SecureUxTheme**](https://github.com/namazso/SecureUxTheme/releases/tag/v4.0.0) using winget:
 
   ```bash
   winget install namazso.SecureUXTheme
   ```
 
-- Copy the files and folder inside [`windots/.dotfiles/explorer/Theme/`](.dotfiles/explorer/Theme/) to → `C:\Windows\Resources\Themes\`
-- **Open** settings & go to themes under the personalization section and then select Catppuccin Mocha as the theme.
-- **Get** the [**Resource Redirect**](https://windhawk.net/mods/icon-resource-redirect) mod on Windhawk and **select** Linuxfx 11 AIO as the icon theme from the available presets.
-- **Copy** the [Explorerblur](.dotfiles/explorer/Explorerblur/) folder (I suggest creating a seperate folder in the C drive for windows rice tools, named scripts in my case) to somewhere safe. Then, run the register.cmd file.
+- **Run SecureUxTheme** as administrator
+- **Check** the `Hook SystemSettings` and `Remove DefaultColors` checkbox.
+- **DO NOT** check `Hook Explorer` (can cause instability)
+- Click **Install**
+- **Reboot** your PC
 
-### 🌐 Browser
+#### Step 2: Install the Catppuccin Theme
+
+- **Copy** all files and folders from [`windots/.dotfiles/explorer/Theme/`](.dotfiles/explorer/Theme/) → `C:\Windows\Resources\Themes\`
+- After reboot, **open SecureUxTheme** again as administrator
+- **Select** `Catppuccin Mocha` theme from the list
+- Click **Patch and Apply**
+- The theme is now active! You can now change it anytime from **Settings** → **Personalization** → **Themes**
+
+#### Step 3: Apply Custom Icons (Windhawk)
+
+> [!NOTE]
+> Ensure you have [**Windhawk**](https://windhawk.net/) installed first.
+
+- Open **Windhawk** and install the [**Icon Resource Redirect**](https://windhawk.net/mods/icon-resource-redirect) mod
+- Open the mod's **settings**
+- Select **Linuxfx 11 AIO** from the available icon theme presets
+- Click **Apply**
+
+#### Step 4: Add Explorer Blur Effect
+
+- **Create** a folder for custom scripts (e.g., `C:\scripts\`)
+- **Copy** the [`Explorerblur`](.dotfiles/explorer/Explorerblur/) folder → `C:\scripts\`
+- **Navigate** to `C:\scripts\Explorerblur\`
+- **Right-click** `register.cmd` and select **Run as administrator**
+- The blur effect is now active!
+
+</details>
+
+<details>
+<summary><strong>🌐 Browser</strong></summary>
 
 > [!NOTE]
 > These configs are applicable **only for Firefox-based browsers**.
@@ -221,13 +263,19 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 - Set it as your default home page in browser settings.
 - For Firefox, you can also set it as the new tab page using the [**New Tab Override**](https://addons.mozilla.org/en-US/firefox/addon/new-tab-override/) extension.
 
-### 🚀 Flow Launcher
+</details>
+
+<details>
+<summary><strong>🚀 Flow Launcher</strong></summary>
 
 - **Install** [**Flow Launcher**](https://www.flowlauncher.com/)
 - [`windots/.dotfiles/FlowLauncher/`](.dotfiles/FlowLauncher/) → `%APPDATA%\FlowLauncher\`
 - **Restart Flow Launcher**
 
-### 🦅 Windhawk
+</details>
+
+<details>
+<summary><strong>🦅 Windhawk</strong></summary>
 
 - **Install** [**Windhawk**](https://windhawk.net/).
 - **Install Relevant Mods** from the [Windhawk Store](https://windhawk.net/explore):
@@ -240,23 +288,35 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 - **Copy** the Windhawk config files from [`windots/.dotfiles/windhawk/`](.dotfiles/windhawk/)
 - Open the relevant mod’s **details page**, go to **Advanced > Mod Settings**, paste the config, and click **"Load"** to apply it.
 
-### 🐚 Nilesoft Shell
+</details>
+
+<details>
+<summary><strong>🐚 Nilesoft Shell</strong></summary>
 
 - **Install** [**Nilesoft Shell**](https://nilesoft.org/).
 - **Copy** the shell theme file from [`windots/.dotfiles/nilesoftshell/theme.nss`](.dotfiles/nilesoftshell/theme.nss) → `C:\Program Files\Nilesoft Shell\imports\`
 - **Open** the app with admin permissions and click on **Register**.
 
-### 🚀 Hydra Launcher
+</details>
+
+<details>
+<summary><strong>🚀 Hydra Launcher</strong></summary>
 
 - **Copy the content inside [`windots/.dotfiles/HydraLauncher/styles.css`](.dotfiles/HydraLauncher/styles.css)
 - **Open** Hydra Launcher and go to **Settings** > **Appearance** > **Create**, type any name and press enter, then paste the config and save the file to apply it.
 
-### 🌐 qBittorrent
+</details>
+
+<details>
+<summary><strong>🌐 qBittorrent</strong></summary>
 
 - **Download** the config from [`windots/.dotfiles/qBittorrent/mocha.qbtheme`](.dotfiles/qBittorrent/catppuccin-mocha.qbtheme) & place it anywhere safe into a folder of your choice. I suggest making a separate folder for themes inside the script folder I asked to create earlier like `C:\scripts\themes\`
 - **Open** qBittorrent and on the top bar go to **Tools** > **Options**, check the Use custom UI Theme options & then browse and select the downloaded theme file.
 
-### 🎵 Spotify
+</details>
+
+<details>
+<summary><strong>🎵 Spotify</strong></summary>
 
 - **Install** [**Spotify**](https://www.spotify.com/download/windows/) if you haven't already.
 - **Open** Powershell and run the following commands to install **Spicetify** and **Spicetify Marketplace**:
@@ -273,7 +333,10 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 - Open **Spotify** and in the top bar, click on the **Marketplace** icon, then search for **Comfy** theme and install it. Then, select Catppuccin Mocha as the scheme.
 
-### 🐈‍⬛ Discord
+</details>
+
+<details>
+<summary><strong>🐈‍⬛ Discord</strong></summary>
 
 - **Install** [**Discord**](https://discord.com/download) if you haven't already.
 - **Download** [**Vencord**](https://github.com/Vencord/Installer/releases/latest/download/VencordInstaller.exe) and **Install** it.
@@ -284,40 +347,61 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
   ```
 - **Save** the changes with Ctrl + S and quit the editor.
 
-### 🎥 YouTube Music
+</details>
+
+<details>
+<summary><strong>🎥 YouTube Music</strong></summary>
 
 - **Install** [**Th-Ch YouTube Music**](https://github.com/th-ch/youtube-music/releases).
 - **Download** the config from [`windots/.dotfiles/youtubemusic/ytmusic.css`](.dotfiles/youtubemusic/ytmusic.css) & place it anywhere safe into a folder of your choice, probably the same folder you used for the qBittorrent theme.
 - **Open** YouTube Music and on the top bar go to **Options** > **Visual Tweaks** > **Theme** and click on Import custom css file, then browse and select the downloaded theme file.
 
-### ©️ CopyQ
+</details>
+
+<details>
+<summary><strong>©️ CopyQ</strong></summary>
 
 - **Install** [**CopyQ**](https://github.com/hluk/CopyQ/releases).
 - **Copy** the config files from [`windots/.dotfiles/copyq/catppuccin-mocha.ini`](.dotfiles/copyq/catppuccin-mocha.ini) → `%APPDATA%\CopyQ\themes\`
 - **Open** CopyQ, on the top bar go to **File** > **Preferences** > **Appearance**, click on load theme, select the `catppuccin mocha.ini` file you copied earlier, and click on **Apply**.
 
-### 🔗 ShareX
+</details>
+
+<details>
+<summary><strong>🔗 ShareX</strong></summary>
 
 - **Install** [**ShareX**](https://getsharex.com/).
 - **Copy** the content of [`windots/.dotfiles/sharex/sharex.json`](.dotfiles/sharex/sharex.json) to your clipboard.
 - **Open** ShareX's **Application Settings** and click to **Theme** > **Import** > **From Clipboard**.
 
+</details>
+
 ---
 
 ## \>_ Terminal & Shell Setup
 
-### 🖥️ Windows Terminal
+<details>
+<summary><strong>🖥️ Windows Terminal</strong></summary>
 
 - **Install** [**Windows Terminal**](https://github.com/microsoft/terminal)
 - [`windots/.dotfiles/terminal/settings.json`](.dotfiles/terminal/settings.json) → `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\`
 - **Restart Windows Terminal** to see the updated config.
 
-### 🐚 PowerShell
+</details>
 
-- [`windots/.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1`](.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1) → `%USERPROFILE%\Documents\WindowsPowershell\`
+<details>
+<summary><strong>🐚 PowerShell</strong></summary>
+
+> [!TIP]
+> For the best experience, install the latest version of PowerShell from the [official GitHub releases](https://github.com/PowerShell/PowerShell/releases) instead of using the default Windows PowerShell.
+
+- [`windots/.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1`](.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1) → `%USERPROFILE%\Documents\PowerShell\`
 - Restart PowerShell to apply the changes.
 
-### 🎨 Oh My Posh
+</details>
+
+<details>
+<summary><strong>🎨 Oh My Posh</strong></summary>
 
 - **Install** [**Oh My Posh**](https://ohmyposh.dev/docs/installation/windows) using winget:
 
@@ -327,7 +411,10 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 - [`windots/.dotfiles/ohmyposh/zen.toml`](.dotfiles/ohmyposh/zen.toml) → `%USERPROFILE%\.config\ohmyposh\`
 
-### ⚙️ Fastfetch
+</details>
+
+<details>
+<summary><strong>⚙️ Fastfetch</strong></summary>
 
 - **Install** [**fastfetch**](https://github.com/fastfetch-cli/fastfetch) using **winget**:
 
@@ -339,8 +426,10 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 - [`windots/.dotfiles/fastfetch/windows.txt`](.dotfiles/fastfetch/windows.txt) → `%USERPROFILE%\.config\fastfetch\`
 - **Run fastfetch**.
 
+</details>
 
-### 📂 Superfile
+<details>
+<summary><strong>📂 Superfile</strong></summary>
 
 - **Run** this command in **powershell**:
 
@@ -348,8 +437,10 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
   winget install --id yorukot.superfile
   ```
 
+</details>
 
-### ⌨️AutoHotKey
+<details>
+<summary><strong>⌨️ AutoHotKey</strong></summary>
 
 - [`windots/.dotfiles/AutoHotKey/`](.dotfiles/AutoHotkey/) → `%USERPROFILE%\Documents\AutoHotKey`
 - **Open** the AutoHotkey Folder and **Launch** the **WindowsUtilities.ahk** script.. You will see it appear in the tray menu.
@@ -358,7 +449,6 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 - Create a shortcut of the **WindowsUtilities.ahk** filescript.
 - Open **Run** (Win+R) and type shell:startup then hit Enter. Copy the created shortcut to the just launched directory.
-
 
 </details>
 
