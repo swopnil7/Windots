@@ -1,73 +1,79 @@
 console_title_template = '{{ .Shell }} in {{ .Folder }}'
-version = 3
-auto_upgrade = true
+version = 4
 final_space = true
-
-[secondary_prompt]
-  template = '❯❯ '
-  foreground = 'magenta'
-  background = 'transparent'
-
-[transient_prompt]
-  template = '❯ '
-  background = 'transparent'
-  foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}magenta{{end}}']
 
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
-  newline = true
 
   [[blocks.segments]]
-    template = '{{ .Path }}'
-    foreground = 'blue'
-    background = 'transparent'
+    type = 'session'
+    style = 'plain'
+    foreground = '#1e1e2e'
+    background = '#c39ff1'
+    template = '  {{ .UserName }} '
+
+  [[blocks.segments]]
     type = 'path'
     style = 'plain'
+    foreground = '#1e1e2e'
+    background = '#89b4fa'
+    template = ' 󰉋  {{ .Path }} '
 
     [blocks.segments.properties]
-      cache_duration = 'none'
-      style = 'full'
+      style = 'folder'
+      folder_separator_icon = '  '
+      home_icon = '~'
 
   [[blocks.segments]]
-    template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
-    foreground = 'p:grey'
-    background = 'transparent'
     type = 'git'
     style = 'plain'
+    foreground = '#1e1e2e'
+    background = '#b4befe'
+    template = '  {{ .HEAD }} '
 
     [blocks.segments.properties]
-      branch_icon = ''
-      cache_duration = 'none'
-      commit_icon = '@'
-      fetch_status = true
+      fetch_status = false
+
+  [[blocks.segments]]
+    type = 'node'
+    style = 'plain'
+    foreground = '#1e1e2e'
+    background = '#a6e3a1'
+    template = '  {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} '
+
+    [blocks.segments.properties]
+      fetch_version = true
+
+  [[blocks.segments]]
+    type = 'python'
+    style = 'plain'
+    foreground = '#1e1e2e'
+    background = '#f9e2af'
+    template = '  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} '
+
+    [blocks.segments.properties]
+      display_mode = 'files'
+      fetch_virtual_env = false
+
+  [[blocks.segments]]
+    type = 'exit'
+    style = 'plain'
+    foreground = '#1e1e2e'
+    background = '#a6e3a1'
+    background_templates = ['{{ if gt .Code 0 }}#f38ba8{{ end }}']
+    template = ' {{ if gt .Code 0 }}{{ else }}{{ end }} '
+
+    [blocks.segments.properties]
+      always_enabled = true
 
 [[blocks]]
   type = 'rprompt'
   overflow = 'hidden'
 
   [[blocks.segments]]
-    template = '{{ .FormattedMs }}'
-    foreground = 'yellow'
-    background = 'transparent'
-    type = 'executiontime'
+    type = 'time'
     style = 'plain'
-
-    [blocks.segments.properties]
-      cache_duration = 'none'
-      threshold = 5000
-
-[[blocks]]
-  type = 'prompt'
-  alignment = 'left'
-  newline = true
-
-  [[blocks.segments]]
-    template = '❯'
+    foreground = '#89dceb'
     background = 'transparent'
-    type = 'text'
-    style = 'plain'
-    foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}magenta{{end}}']
-
-    [blocks.segments.properties]
-      cache_duration = 'none'
+    template = '{{ .CurrentDate | date "15:04" }}'
