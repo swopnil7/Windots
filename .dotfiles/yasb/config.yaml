@@ -10,7 +10,7 @@ bars:
       position: "top"
       center: true
     blur_effect:
-      enabled: true
+      enabled: false
       acrylic: false
       dark_mode: true
       round_corners: true
@@ -20,7 +20,7 @@ bars:
       windows_app_bar: true
     dimensions:
       width: 1530
-      height: 33
+      height: 28
     padding:
       top: 2
       left: 0
@@ -28,33 +28,96 @@ bars:
       right: 0
     widgets:
       left: [
-          #"home",
           "launchpad",
-          "glazewm_workspaces",
-          "active_window",
-          "media",
+          "left-grouper",
+          "active-window-grouper",
+          "media-grouper",
       ]
       center: [
-          "clock",
-          "power_menu",
-          "weather",
+          "center-grouper",
         ]
       right: [
-          "cava",
-          "wallpapers",
-          "vscode",
-          #"traffic",
-          "libre_gpu",
-          "memory",
-          "disk",
-          "wifi",
-          "bluetooth",
-          "volume",
-          "battery",
-          "notifications",
-          "systray"
+          "utils-grouper",
+          "right-grouper",
+          "systray-grouper"
       ]
 widgets:
+  left-grouper:
+    type: "yasb.grouper.GrouperWidget"
+    options:
+      class_name: "left-grouper"
+      widgets: [
+        "glazewm_workspaces",
+      ]
+      collapse_options:
+        enabled: false
+  active-window-grouper:
+    type: "yasb.grouper.GrouperWidget"
+    options:
+      class_name: "active-window-grouper"
+      widgets: [
+        "active_window",
+      ]
+      hide_empty: true
+      collapse_options:
+        enabled: false
+  media-grouper:
+    type: "yasb.grouper.GrouperWidget"
+    options:
+      class_name: "media-grouper"
+      widgets: [
+        "media",
+      ]
+      hide_empty: true
+      collapse_options:
+        enabled: false
+  center-grouper:
+    type: "yasb.grouper.GrouperWidget"
+    options:
+      class_name: "center-grouper"
+      widgets: [
+        "clock",
+        "power_menu",
+        "weather",
+      ]
+      collapse_options:
+        enabled: false
+  right-grouper:
+    type: "yasb.grouper.GrouperWidget"
+    options:
+      class_name: "right-grouper"
+      widgets: [
+        "libre_gpu",
+        "memory",
+        "wifi",
+        "bluetooth",
+        "volume",
+        "battery",
+        "notifications",
+      ]
+      collapse_options:
+        enabled: false
+  utils-grouper:
+    type: "yasb.grouper.GrouperWidget"
+    options:
+      class_name: "utils-grouper"
+      widgets: [
+        "cava",
+        "disk",
+        "wallpapers",
+        "vscode",
+      ]
+      collapse_options:
+        enabled: false
+  systray-grouper:
+    type: "yasb.grouper.GrouperWidget"
+    options:
+      class_name: "systray-grouper"
+      widgets: [
+        "systray",
+      ]
+      collapse_options:
+        enabled: false
   home:
     type: "yasb.home.HomeWidget"
     options:
@@ -109,11 +172,11 @@ widgets:
   glazewm_workspaces:
     type: "glazewm.workspaces.GlazewmWorkspacesWidget"
     options:
-      offline_label: "GlazeWM Offline"
-      populated_label: "{name}"
-      empty_label: "{name}"
-      active_populated_label: "{name}"
-      active_empty_label: "{name}"
+      offline_label: "GlazeWM"
+      populated_label: ""
+      empty_label: ""
+      active_populated_label: ""
+      active_empty_label: ""
       hide_empty_workspaces: true
       hide_if_offline: false
   media:
@@ -122,8 +185,8 @@ widgets:
       label: "{title}"
       label_alt: "{artist}"
       max_field_size:
-        label: 25
-        label_alt: 25
+        label: 20
+        label_alt: 20
       show_thumbnail: false
       controls_hide: false
       hide_empty: true
@@ -185,6 +248,7 @@ widgets:
       bar_width: 4
       bar_type: "bars"
       framerate: 60
+      sleep_timer: 3
       hide_empty: true
   libre_gpu:
     type: "yasb.libre_monitor.LibreHardwareMonitorWidget"
@@ -273,7 +337,7 @@ widgets:
         label_alt: "<span>\uf473</span>disks"
         group_label:
           volume_labels: ["C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-          show_label_name: false 
+          show_label_name: true
           blur: true
           round_corners: true
           round_corners_type: "small"
@@ -291,7 +355,7 @@ widgets:
       label_no_window: ""
       label_icon: true
       label_icon_size: 14
-      max_length: 20
+      max_length: 30
       max_length_ellipsis: ".."
       monitor_exclusive: true
       label_shadow:
@@ -299,11 +363,30 @@ widgets:
         color: "black"
         radius: 3
         offset: [ 1, 1 ]
+      rewrite:
+        - pattern: "^(.+?)\\.exe$"
+          replacement: "\\1"
+        - pattern: "(.*)Zen Browser(.*)$"
+          replacement: "Zen"
+        - pattern: "(.*)Thorium(.*)$"
+          replacement: "Thorium"
+        - pattern: "(.*)Google Chrome(.*)$"
+          replacement: "Chrome"
+        - pattern: "(.*)Firefox(.*)$"
+          replacement: "Firefox"
+        - pattern: "(.*)Edge(.*)$"
+          replacement: "Edge"
+        - pattern: "Visual Studio Code(.*)$"
+          replacement: "VSCode"
+        - pattern: "(.*)Discord(.*)$"
+          replacement: "Discord"
+        - pattern: "File Explorer(.*)$"
+          replacement: "Explorer"
   clock:
     type: "yasb.clock.ClockWidget"
     options:
       label: "<span>\uf017</span>{%H:%M}"
-      label_alt: "<span>\uf017</span>{%A, %B %d. %Y %H:%M}"
+      label_alt: "<span>\uf017</span>{%a, %d %b %H:%M}"
       callbacks:
         on_middle: "exec start ms-settings:dateandtime"
       locale: "en_US.UTF-8"
@@ -499,9 +582,9 @@ widgets:
     type: "yasb.power_menu.PowerMenuWidget"
     options:
       label: "\uf011"
-      uptime: True
-      blur: False
-      blur_background: True
+      uptime: true
+      blur: false
+      blur_background: false
       animation_duration: 200
       button_row: 5
       buttons:
@@ -524,9 +607,9 @@ widgets:
         on_right: "exec start ms-settings:notifications"
       container_padding:
         top: 0
-        left: 5
+        left: 0
         bottom: 0
-        right: 5
+        right: 0
       label_shadow:
         enabled: true
         color: "black"
@@ -582,7 +665,8 @@ widgets:
           image_per_page: 6
           show_buttons: true
           orientation: "landscape"
-          image_spacing: 10
+          image_spacing: 15
+          position_offset: 0
           lazy_load: true
           lazy_load_delay: 80
           lazy_load_fadein: 400
