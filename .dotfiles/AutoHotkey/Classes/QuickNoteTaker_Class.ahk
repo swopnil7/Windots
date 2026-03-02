@@ -3,33 +3,21 @@
 ; Features: Multiple notes, search, auto-save, Catppuccin theming
 
 class QuickNoteTaker {
-    ; Catppuccin Mocha color palette
-    colors := {
-        bg: "0x1e1e2e",       ; Background
-        mantle: "0x181825",    ; Darker background
-        surface0: "0x313244",  ; Surface
-        surface1: "0x45475a",  ; Lighter surface
-        text: "0xcdd6f4",      ; Main text
-        subtext1: "0xbac2de",  ; Dimmed text
-        blue: "0x89b4fa",      ; Accent blue
-        mauve: "0xcba6f7",     ; Purple
-        red: "0xf38ba8",       ; Red
-        green: "0xa6e3a1",     ; Green
-        yellow: "0xf9e2af",    ; Yellow
-        overlay0: "0x6c7086"   ; Overlay
-    }
+    ; Properties
+    parentManager := ""
     
     ; Settings
     settings := {
-        hotkey: "!+n",        ; Alt+Shift+N
         windowWidth: 500,
         windowHeight: 400,
         alwaysOnTop: true,
         autoSave: true,
         fontSize: 10,
         fontName: "Consolas",
-        maxNotes: 100,        ; Maximum number of notes to keep
-        exportPath: A_ScriptDir . "\Settings" ; Default export path
+        maxNotes: 100,
+        exportPath: A_ScriptDir . "\Settings",
+        sortBy: "modified",
+        sortDirection: "asc"
     }
     
     ; Internal state
@@ -39,13 +27,38 @@ class QuickNoteTaker {
     searchEdit := ""
     notesList := ""
     statusBar := ""
+    pinButton := ""
     isVisible := false
     notesFile := ""
     currentNoteIndex := -1   ; Current note index in array
     notes := []              ; Simple array of notes with {title, content}
+    settingsLoaded := false  ; Track if settings have been loaded from INI
+    
+    ; Get colors from parent manager or use defaults
+    GetColors() {
+        if this.parentManager && this.parentManager.colors {
+            return this.parentManager.colors
+        }
+        ; Fallback Catppuccin Mocha colors
+        return {
+            bg: "0x1e1e2e",
+            mantle: "0x181825",
+            surface0: "0x313244",
+            surface1: "0x45475a",
+            text: "0xcdd6f4",
+            subtext1: "0xbac2de",
+            blue: "0x89b4fa",
+            mauve: "0xcba6f7",
+            red: "0xf38ba8",
+            green: "0xa6e3a1",
+            yellow: "0xf9e2af",
+            overlay0: "0x6c7086"
+        }
+    }
     
     ; Constructor
-    __New() {
+    __New(parentManager := "") {
+        this.parentManager := parentManager
         this.notesFile := A_ScriptDir . "\Settings\quick_notes.dat"
         
         ; Initialize change tracking variables
@@ -71,7 +84,6 @@ class QuickNoteTaker {
         this.sortDirectionButton.Text := (this.settings.sortDirection = "asc") ? "↑" : "↓"
         
         this.LoadNotes()
-        this.SetupHotkey()
         
         ; Only create new note if no notes exist
         if this.notes.Length = 0 {
@@ -87,66 +99,70 @@ class QuickNoteTaker {
     ; ========================================
     
     CreateGUI() {
+        colors := this.GetColors()
         flags := "-MaximizeBox -MinimizeBox +LastFound -SysMenu +ToolWindow"
         if this.settings.alwaysOnTop {
             flags .= " +AlwaysOnTop"
         }
         
         this.gui := Gui(flags, "Quick Notes")
+        ; Use loaded font name, but with debug output
         this.gui.SetFont("s" . this.settings.fontSize, this.settings.fontName)
-        this.gui.BackColor := this.colors.bg
+        this.gui.BackColor := colors.bg
         this.gui.OnEvent("Close", (*) => this.Hide())
         this.gui.OnEvent("ContextMenu", (*) => "")  ; Disable right-click context menu
         
         ; Top section - Title and Search in one row
-        this.gui.AddText("xm ym w40 c" . this.colors.subtext1, "Title:")
-        this.titleEdit := this.gui.AddEdit("x+5 yp-3 w120 h20 Background" . this.colors.surface0 . " c" . this.colors.text)
+        this.gui.AddText("xm ym w40 c" . colors.subtext1, "Title:")
+        this.titleEdit := this.gui.AddEdit("x+5 yp-3 w120 h20 Background" . colors.surface0 . " c" . colors.text)
         this.titleEdit.OnEvent("Change", (*) => this.OnTitleChange())
         this.titleEdit.OnEvent("LoseFocus", (*) => this.OnTitleLoseFocus())
         this.titleEdit.OnEvent("ContextMenu", (*) => "")  ; Disable right-click
         ; We'll handle Enter key with global hotkey when visible
         
-        this.gui.AddText("x+10 yp+3 w45 c" . this.colors.subtext1, "Search:")
-        this.searchEdit := this.gui.AddEdit("x+5 yp-3 w90 h20 Background" . this.colors.surface0 . " c" . this.colors.text)
+        this.gui.AddText("x+10 yp+3 w45 c" . colors.subtext1, "Search:")
+        this.searchEdit := this.gui.AddEdit("x+5 yp-3 w90 h20 Background" . colors.surface0 . " c" . colors.text)
         this.searchEdit.OnEvent("Change", (*) => this.OnSearchChange())
         this.searchEdit.OnEvent("ContextMenu", (*) => "")  ; Disable right-click
         
         ; Sort dropdown on same line as search
-        this.gui.AddText("x+10 yp+3 w30 c" . this.colors.subtext1, "Sort:")
-        this.sortButton := this.gui.AddDropDownList("x+5 yp-3 w85 Background" . this.colors.surface0 . " c" . this.colors.text, ["Modified", "Created", "Title", "Length"])
+        this.gui.AddText("x+10 yp+3 w30 c" . colors.subtext1, "Sort:")
+        this.sortButton := this.gui.AddDropDownList("x+5 yp-3 w85 Background" . colors.surface0 . " c" . colors.text, ["Modified", "Created", "Title", "Length"])
         this.sortButton.OnEvent("Change", (*) => this.OnSortChange())
         
         ; Direction toggle button
-        this.sortDirectionButton := this.gui.AddButton("x+2 yp w25 h20 Background" . this.colors.surface0 . " c" . this.colors.text, "↑")
+        this.sortDirectionButton := this.gui.AddButton("x+2 yp w25 h20 Background" . colors.surface0 . " c" . colors.text, "↑")
         this.sortDirectionButton.OnEvent("Click", (*) => this.ToggleSortDirection())
         
         ; Button row - more compact
-        this.gui.AddButton("xm y+10 w50 h23 Background" . this.colors.blue . " c" . this.colors.bg, "New").OnEvent("Click", (*) => this.CreateNewNote())
-        this.gui.AddButton("x+5 yp w50 h23 Background" . this.colors.green . " c" . this.colors.bg, "Save").OnEvent("Click", (*) => this.SaveCurrentNote())
-        this.gui.AddButton("x+5 yp w50 h23 Background" . this.colors.red . " c" . this.colors.bg, "Delete").OnEvent("Click", (*) => this.DeleteCurrentNote())
-        this.gui.AddButton("x+5 yp w70 h23 Background" . this.colors.mauve . " c" . this.colors.bg, "Settings").OnEvent("Click", (*) => this.ShowSettings())
-        this.gui.AddButton("x+5 yp w90 h23 Background" . this.colors.yellow . " c" . this.colors.bg, "Export All").OnEvent("Click", (*) => this.ExportNotes())
-        this.gui.AddButton("x+5 yp w90 h23 Background" . this.colors.blue . " c" . this.colors.bg, "Export Note").OnEvent("Click", (*) => this.ExportCurrentNote())
+        this.gui.AddButton("xm y+10 w50 h23 Background" . colors.blue . " c" . colors.bg, "New").OnEvent("Click", (*) => this.CreateNewNote())
+        this.gui.AddButton("x+5 yp w50 h23 Background" . colors.green . " c" . colors.bg, "Save").OnEvent("Click", (*) => this.SaveCurrentNote())
+        this.gui.AddButton("x+5 yp w50 h23 Background" . colors.red . " c" . colors.bg, "Delete").OnEvent("Click", (*) => this.DeleteCurrentNote())
+        this.pinButton := this.gui.AddButton("x+5 yp w50 h23 Background" . colors.yellow . " c" . colors.bg, "📌 Pin")
+        this.pinButton.OnEvent("Click", (*) => this.TogglePin())
+        this.gui.AddButton("x+5 yp w70 h23 Background" . colors.mauve . " c" . colors.bg, "Settings").OnEvent("Click", (*) => this.ShowSettings())
+        this.gui.AddButton("x+5 yp w90 h23 Background" . colors.yellow . " c" . colors.bg, "Export All").OnEvent("Click", (*) => this.ExportNotes())
+        this.gui.AddButton("x+5 yp w90 h23 Background" . colors.blue . " c" . colors.bg, "Export Note").OnEvent("Click", (*) => this.ExportCurrentNote())
         
         ; Split layout - Notes list on left, content on right
-        this.gui.AddText("xm y+15 w150 c" . this.colors.subtext1, "Notes History:")
-        this.gui.AddText("x170 yp w200 c" . this.colors.subtext1, "Note Content:")
+        this.gui.AddText("xm y+15 w150 c" . colors.subtext1, "Notes History:")
+        this.gui.AddText("x170 yp w200 c" . colors.subtext1, "Note Content:")
         
         ; Main content area - calculate height to minimize gap below boxes
         listHeight := this.settings.windowHeight - 140  ; Reduced from 160 to minimize bottom gap
-        this.notesList := this.gui.AddListBox("xm y+5 w150 h" . listHeight . " Background" . this.colors.surface0 . " c" . this.colors.text . " VScroll")
+        this.notesList := this.gui.AddListBox("xm y+5 w150 h" . listHeight . " Background" . colors.surface0 . " c" . colors.text . " VScroll")
         this.notesList.OnEvent("Change", (*) => this.OnNoteSelect())
         this.notesList.OnEvent("ContextMenu", (*) => "")  ; Disable right-click
         
         textWidth := this.settings.windowWidth - 170
-        this.textBox := this.gui.AddEdit("x170 yp w" . textWidth . " h" . listHeight . " VScroll Background" . this.colors.surface0 . " c" . this.colors.text)
+        this.textBox := this.gui.AddEdit("x170 yp w" . textWidth . " h" . listHeight . " VScroll Background" . colors.surface0 . " c" . colors.text)
         this.textBox.OnEvent("Change", (*) => this.OnTextChange())
         this.textBox.OnEvent("LoseFocus", (*) => this.OnTextLoseFocus())
         this.textBox.OnEvent("ContextMenu", (*) => "")  ; Disable right-click
         
         ; Status bar - positioned closer to boxes with reduced gap
         statusY := this.settings.windowHeight - 20  ; Reduced from 25 to minimize gap
-        this.statusBar := this.gui.AddText("xm y" . statusY . " w400 c" . this.colors.subtext1, "Ctrl+S: Save • Ctrl+N: New • Ctrl+Del: Delete Note • Esc: Hide")
+        this.statusBar := this.gui.AddText("xm y" . statusY . " w400 c" . colors.subtext1, "Ctrl+S: Save • Ctrl+N: New • Ctrl+Del: Delete Note • Esc: Hide")
         
         ; Position and hide initially
         this.gui.Show("w" . this.settings.windowWidth . " h" . this.settings.windowHeight . " Hide")
@@ -229,15 +245,17 @@ class QuickNoteTaker {
         
         ; Update existing note or add new one
         if this.currentNoteIndex >= 0 && this.currentNoteIndex < this.notes.Length {
-            ; Update existing note - preserve created timestamp, update modified
+            ; Update existing note - preserve created timestamp and pin status, update modified
             existingNote := this.notes[this.currentNoteIndex + 1]
             note.created := existingNote.HasOwnProp("created") ? existingNote.created : A_Now
+            note.isPinned := existingNote.HasOwnProp("isPinned") ? existingNote.isPinned : false
             note.modified := A_Now
             this.notes[this.currentNoteIndex + 1] := note
         } else {
-            ; Add new note - set both timestamps to now
+            ; Add new note - set both timestamps to now, not pinned by default
             note.created := A_Now
             note.modified := A_Now
+            note.isPinned := false
             this.notes.InsertAt(1, note)
             this.currentNoteIndex := 0
         }
@@ -289,6 +307,46 @@ class QuickNoteTaker {
         }
     }
     
+    TogglePin() {
+        if this.currentNoteIndex < 0 || this.currentNoteIndex >= this.notes.Length {
+            MsgBox("No note selected to pin/unpin.", "Pin Note", "Icon!")
+            return
+        }
+        
+        ; Toggle pin status
+        currentNote := this.notes[this.currentNoteIndex + 1]
+        currentNote.isPinned := currentNote.HasOwnProp("isPinned") ? !currentNote.isPinned : true
+        
+        ; Update pin button text
+        this.UpdatePinButton()
+        
+        ; Save and refresh
+        this.SaveNotesToFile()
+        this.SortNotes()
+        this.RefreshNotesList()
+        
+        ; Reselect the current note after refresh
+        Loop this.notes.Length {
+            if A_Index - 1 = this.currentNoteIndex {
+                this.notesList.Choose(A_Index)
+                break
+            }
+        }
+    }
+    
+    UpdatePinButton() {
+        if this.currentNoteIndex >= 0 && this.currentNoteIndex < this.notes.Length {
+            currentNote := this.notes[this.currentNoteIndex + 1]
+            if currentNote.HasOwnProp("isPinned") && currentNote.isPinned {
+                this.pinButton.Text := "📍 Unpin"
+            } else {
+                this.pinButton.Text := "📌 Pin"
+            }
+        } else {
+            this.pinButton.Text := "📌 Pin"
+        }
+    }
+    
     OnNoteSelect() {
         selectedIndex := this.notesList.Value
         if !selectedIndex || selectedIndex < 1 {
@@ -337,6 +395,9 @@ class QuickNoteTaker {
         ; Ensure the correct list item is selected
         this.notesList.Choose(noteIndex + 1)
         
+        ; Update pin button state
+        this.UpdatePinButton()
+        
         ; Re-enable auto-save
         this.settings.autoSave := autoSaveState
     }
@@ -368,8 +429,9 @@ class QuickNoteTaker {
                 }
             }
             
-            ; Format list item - show only title
-            listText := note.title
+            ; Format list item - show pin indicator and title
+            pinIndicator := (note.HasOwnProp("isPinned") && note.isPinned) ? "📌 " : ""
+            listText := pinIndicator . note.title
             
             this.notesList.Add([listText])
             itemIndex++
@@ -468,39 +530,80 @@ class QuickNoteTaker {
             currentTitle := this.notes[this.currentNoteIndex + 1].title
         }
         
+        ; Separate pinned and unpinned notes
+        pinnedNotes := []
+        unpinnedNotes := []
+        
+        for note in this.notes {
+            if note.HasOwnProp("isPinned") && note.isPinned {
+                pinnedNotes.Push(note)
+            } else {
+                unpinnedNotes.Push(note)
+            }
+        }
+        
         ; Determine sort direction
         isAsc := (this.settings.sortDirection = "asc")
         
-        ; Sort based on current setting
+        ; Sort both arrays based on current setting
         switch this.settings.sortBy {
             case "modified":
                 ; Sort by modified date
-                this.notes := this.BubbleSort(this.notes, (a, b) => 
+                pinnedNotes := this.BubbleSort(pinnedNotes, (a, b) => 
+                    isAsc 
+                        ? (a.HasOwnProp("modified") ? a.modified : "0") > (b.HasOwnProp("modified") ? b.modified : "0")
+                        : (a.HasOwnProp("modified") ? a.modified : "0") < (b.HasOwnProp("modified") ? b.modified : "0")
+                )
+                unpinnedNotes := this.BubbleSort(unpinnedNotes, (a, b) => 
                     isAsc 
                         ? (a.HasOwnProp("modified") ? a.modified : "0") > (b.HasOwnProp("modified") ? b.modified : "0")
                         : (a.HasOwnProp("modified") ? a.modified : "0") < (b.HasOwnProp("modified") ? b.modified : "0")
                 )
             case "created":
                 ; Sort by created date
-                this.notes := this.BubbleSort(this.notes, (a, b) => 
+                pinnedNotes := this.BubbleSort(pinnedNotes, (a, b) => 
+                    isAsc
+                        ? (a.HasOwnProp("created") ? a.created : "0") > (b.HasOwnProp("created") ? b.created : "0")
+                        : (a.HasOwnProp("created") ? a.created : "0") < (b.HasOwnProp("created") ? b.created : "0")
+                )
+                unpinnedNotes := this.BubbleSort(unpinnedNotes, (a, b) => 
                     isAsc
                         ? (a.HasOwnProp("created") ? a.created : "0") > (b.HasOwnProp("created") ? b.created : "0")
                         : (a.HasOwnProp("created") ? a.created : "0") < (b.HasOwnProp("created") ? b.created : "0")
                 )
             case "title":
                 ; Sort by title
-                this.notes := this.BubbleSort(this.notes, (a, b) => 
+                pinnedNotes := this.BubbleSort(pinnedNotes, (a, b) => 
+                    isAsc
+                        ? StrCompare(String(a.title), String(b.title), 0) < 0
+                        : StrCompare(String(a.title), String(b.title), 0) > 0
+                )
+                unpinnedNotes := this.BubbleSort(unpinnedNotes, (a, b) => 
                     isAsc
                         ? StrCompare(String(a.title), String(b.title), 0) < 0
                         : StrCompare(String(a.title), String(b.title), 0) > 0
                 )
             case "length":
                 ; Sort by content length
-                this.notes := this.BubbleSort(this.notes, (a, b) => 
+                pinnedNotes := this.BubbleSort(pinnedNotes, (a, b) => 
                     isAsc
                         ? StrLen(a.content) > StrLen(b.content)
                         : StrLen(a.content) < StrLen(b.content)
                 )
+                unpinnedNotes := this.BubbleSort(unpinnedNotes, (a, b) => 
+                    isAsc
+                        ? StrLen(a.content) > StrLen(b.content)
+                        : StrLen(a.content) < StrLen(b.content)
+                )
+        }
+        
+        ; Combine pinned notes first, then unpinned notes
+        this.notes := []
+        for note in pinnedNotes {
+            this.notes.Push(note)
+        }
+        for note in unpinnedNotes {
+            this.notes.Push(note)
         }
         
         ; Restore current note index by finding the note with matching title
@@ -585,6 +688,12 @@ class QuickNoteTaker {
                         note.modified := A_Now  ; Default to current time
                     }
                     
+                    if parts.Length >= 10 && parts[9] = "PINNED" {
+                        note.isPinned := (parts[10] = "1")
+                    } else {
+                        note.isPinned := false
+                    }
+                    
                     this.notes.Push(note)
                 }
             }
@@ -618,11 +727,14 @@ class QuickNoteTaker {
                 if !note.HasOwnProp("created") {
                     note.created := A_Now
                 }
+                if !note.HasOwnProp("isPinned") {
+                    note.isPinned := false
+                }
                 if !note.HasOwnProp("modified") {
                     note.modified := A_Now
                 }
                 
-                output .= "TITLE|" . titleB64 . "|CONTENT|" . contentB64 . "|CREATED|" . note.created . "|MODIFIED|" . note.modified . "`n"
+                output .= "TITLE|" . titleB64 . "|CONTENT|" . contentB64 . "|CREATED|" . note.created . "|MODIFIED|" . note.modified . "|PINNED|" . (note.isPinned ? "1" : "0") . "`n"
             }
             
             ; Write to file
@@ -822,75 +934,59 @@ class QuickNoteTaker {
     ; ========================================
     
     ShowSettings() {
-        settingsGui := Gui("-Resize -MaximizeBox", "Quick Notes Settings")
+        colors := this.GetColors()
+        settingsGui := Gui("-Resize -MaximizeBox -MinimizeBox -SysMenu +AlwaysOnTop +ToolWindow", "Quick Notes Settings")
         settingsGui.SetFont("s10", "Segoe UI")
-        settingsGui.BackColor := this.colors.bg
-        
-        ; Hotkey setting
-        settingsGui.AddText("xm ym w100 c" . this.colors.text, "Hotkey:")
-        hotkeyEdit := settingsGui.AddEdit("x+10 yp-3 w250 Background" . this.colors.surface0 . " c" . this.colors.text, this.settings.hotkey)
+        settingsGui.BackColor := colors.bg
+        settingsGui.OnEvent("Escape", (*) => settingsGui.Destroy())
         
         ; Font settings
-        settingsGui.AddText("xm y+20 w100 c" . this.colors.text, "Font Name:")
-        fontEdit := settingsGui.AddEdit("x+10 yp-3 w250 Background" . this.colors.surface0 . " c" . this.colors.text, this.settings.fontName)
+        settingsGui.AddText("xm ym w100 c" . colors.text, "Font Name:")
+        fontEdit := settingsGui.AddEdit("x+10 yp-3 w250 Background" . colors.surface0 . " c" . colors.text, this.settings.fontName)
         
-        settingsGui.AddText("xm y+15 w100 c" . this.colors.text, "Font Size:")
-        sizeEdit := settingsGui.AddEdit("x+10 yp-3 w250 Background" . this.colors.surface0 . " c" . this.colors.text, this.settings.fontSize)
+        settingsGui.AddText("xm y+15 w100 c" . colors.text, "Font Size:")
+        sizeEdit := settingsGui.AddEdit("x+10 yp-3 w250 Background" . colors.surface0 . " c" . colors.text, this.settings.fontSize)
         
         ; Max notes setting
-        settingsGui.AddText("xm y+15 w100 c" . this.colors.text, "Max Notes:")
-        maxNotesEdit := settingsGui.AddEdit("x+10 yp-3 w250 Background" . this.colors.surface0 . " c" . this.colors.text, this.settings.maxNotes)
+        settingsGui.AddText("xm y+15 w100 c" . colors.text, "Max Notes:")
+        maxNotesEdit := settingsGui.AddEdit("x+10 yp-3 w250 Background" . colors.surface0 . " c" . colors.text, this.settings.maxNotes)
 
         ; Export path setting
-        settingsGui.AddText("xm y+15 w100 c" . this.colors.text, "Export Path:")
-        exportPathEdit := settingsGui.AddEdit("x+10 yp-3 w250 Background" . this.colors.surface0 . " c" . this.colors.text, this.settings.exportPath)
-        settingsGui.AddButton("x+5 yp w30 Background" . this.colors.mauve . " c" . this.colors.bg, "📂").OnEvent("Click", (*) => (
+        settingsGui.AddText("xm y+15 w100 c" . colors.text, "Export Path:")
+        exportPathEdit := settingsGui.AddEdit("x+10 yp-3 w250 Background" . colors.surface0 . " c" . colors.text, this.settings.exportPath)
+        settingsGui.AddButton("x+5 yp w30 Background" . colors.mauve . " c" . colors.bg, "📂").OnEvent("Click", (*) => (
             selected := DirSelect(exportPathEdit.Value),
             selected ? exportPathEdit.Value := selected : ""
         ))
         
         ; Options
-        settingsGui.AddText("xm y+20 c" . this.colors.text, "Options:")
-        alwaysOnTopCheck := settingsGui.AddCheckbox("xm y+5 c" . this.colors.text . " Checked" . (this.settings.alwaysOnTop ? "1" : "0"), "Always on top")
-        autoSaveCheck := settingsGui.AddCheckbox("xm y+5 c" . this.colors.text . " Checked" . (this.settings.autoSave ? "1" : "0"), "Auto-save")
+        settingsGui.AddText("xm y+20 c" . colors.text, "Options:")
+        alwaysOnTopCheck := settingsGui.AddCheckbox("xm y+5 c" . colors.text . " Checked" . (this.settings.alwaysOnTop ? "1" : "0"), "Always on top")
+        autoSaveCheck := settingsGui.AddCheckbox("xm y+5 c" . colors.text . " Checked" . (this.settings.autoSave ? "1" : "0"), "Auto-save")
         
         ; Info
-        settingsGui.AddText("xm y+25 w280 c" . this.colors.subtext1, "Notes are automatically saved as JSON.")
-        settingsGui.AddText("xm y+5 w280 c" . this.colors.subtext1, "Current notes: " . this.notes.Length . " | Storage: " . this.notesFile)
+        settingsGui.AddText("xm y+25 w280 c" . colors.subtext1, "Notes are automatically saved as JSON.")
+        settingsGui.AddText("xm y+5 w280 c" . colors.subtext1, "Current notes: " . this.notes.Length . " | Storage: " . this.notesFile)
         
         ; Buttons
-        settingsGui.AddButton("xm y+25 w80 Background" . this.colors.green . " c" . this.colors.bg, "Save").OnEvent("Click", (*) => this.SaveSettings(settingsGui, hotkeyEdit, fontEdit, sizeEdit, maxNotesEdit, alwaysOnTopCheck, autoSaveCheck, exportPathEdit))
-        settingsGui.AddButton("x+10 yp w80 Background" . this.colors.red . " c" . this.colors.bg, "Cancel").OnEvent("Click", (*) => settingsGui.Destroy())
-        settingsGui.AddButton("x+10 yp w100 Background" . this.colors.yellow . " c" . this.colors.bg, "Export Notes").OnEvent("Click", (*) => this.ExportNotes())
+        settingsGui.AddButton("xm y+25 w80 Background" . colors.green . " c" . colors.bg, "Save").OnEvent("Click", (*) => this.SaveSettings(settingsGui, fontEdit, sizeEdit, maxNotesEdit, alwaysOnTopCheck, autoSaveCheck, exportPathEdit))
+        settingsGui.AddButton("x+10 yp w80 Background" . colors.red . " c" . colors.bg, "Cancel").OnEvent("Click", (*) => settingsGui.Destroy())
+        settingsGui.AddButton("x+10 yp w100 Background" . colors.yellow . " c" . colors.bg, "Export Notes").OnEvent("Click", (*) => this.ExportNotes())
         
-        settingsGui.Show("w450 h450")
+        settingsGui.Show("w450 h400")
     }
     
-SaveSettings(gui, hotkeyEdit, fontEdit, sizeEdit, maxNotesEdit, alwaysOnTopCheck, autoSaveCheck, exportPathEdit) {
+SaveSettings(gui, fontEdit, sizeEdit, maxNotesEdit, alwaysOnTopCheck, autoSaveCheck, exportPathEdit) {
         ; Update export path
         if IsSet(exportPathEdit) {
             this.settings.exportPath := exportPathEdit.Value
         }
         ; Update settings
-        oldHotkey := this.settings.hotkey
-        this.settings.hotkey := hotkeyEdit.Value
         this.settings.fontName := fontEdit.Value
         this.settings.fontSize := Integer(sizeEdit.Value)
         this.settings.maxNotes := Integer(maxNotesEdit.Value)
         this.settings.alwaysOnTop := alwaysOnTopCheck.Value
         this.settings.autoSave := autoSaveCheck.Value
-        
-        ; Update hotkey if changed
-        if this.settings.hotkey != oldHotkey {
-            try {
-                if oldHotkey {
-                    Hotkey(oldHotkey, "Off")
-                }
-                this.SetupHotkey()
-            } catch as err {
-                MsgBox("Error updating hotkey: " . err.Message, "Error", "Icon!")
-            }
-        }
         
         ; Completely rebuild the GUI to apply font changes
         ; This is the most reliable way to update fonts in AutoHotkey v2
@@ -909,16 +1005,25 @@ SaveSettings(gui, hotkeyEdit, fontEdit, sizeEdit, maxNotesEdit, alwaysOnTopCheck
         ; Save settings to INI file
         this.SaveSettingsToFile()
         
-        ; Save settings to INI file
-        this.SaveSettingsToFile()
-        
         MsgBox("Settings saved! Your changes will persist between script reloads.", "Settings", "Icon!")
         gui.Destroy()
     }
     
+    ExpandExportPath() {
+        ; Expand environment variables in export path using system values
+        path := this.settings.exportPath
+        path := StrReplace(path, "%USERPROFILE%", EnvGet("USERPROFILE"))
+        path := StrReplace(path, "%APPDATA%", EnvGet("APPDATA"))
+        path := StrReplace(path, "%TEMP%", EnvGet("TEMP"))
+        path := StrReplace(path, "%LocalAppData%", EnvGet("LocalAppData"))
+        path := StrReplace(path, "%DOCUMENTS%", A_MyDocuments)
+        path := StrReplace(path, "%DESKTOP%", A_Desktop)
+        return path
+    }
+
     ExportNotes() {
         try {
-            exportDir := this.settings.exportPath
+            exportDir := this.ExpandExportPath()
             if !DirExist(exportDir) {
                 DirCreate(exportDir)
             }
@@ -956,7 +1061,7 @@ SaveSettings(gui, hotkeyEdit, fontEdit, sizeEdit, maxNotesEdit, alwaysOnTopCheck
             }
             note := this.notes[this.currentNoteIndex + 1]
             safeTitle := RegExReplace(note.title, "[^a-zA-Z0-9_-]", "_")
-            exportDir := this.settings.exportPath
+            exportDir := this.ExpandExportPath()
             if !DirExist(exportDir) {
                 DirCreate(exportDir)
             }
@@ -977,8 +1082,13 @@ SaveSettings(gui, hotkeyEdit, fontEdit, sizeEdit, maxNotesEdit, alwaysOnTopCheck
         try {
             settingsFile := A_ScriptDir . "\Settings\QuickNoteTaker_settings.ini"
             
+            ; Before saving, reload the export path from INI to preserve manual edits
+            exportPathFromIni := IniRead(settingsFile, "Settings", "ExportPath", "")
+            if (exportPathFromIni != "") {
+                this.settings.exportPath := exportPathFromIni
+            }
+            
             ; Save all settings to INI file
-            IniWrite(this.settings.hotkey, settingsFile, "Settings", "Hotkey")
             IniWrite(this.settings.fontName, settingsFile, "Settings", "FontName")
             IniWrite(this.settings.fontSize, settingsFile, "Settings", "FontSize")
             IniWrite(this.settings.maxNotes, settingsFile, "Settings", "MaxNotes")
@@ -987,6 +1097,8 @@ SaveSettings(gui, hotkeyEdit, fontEdit, sizeEdit, maxNotesEdit, alwaysOnTopCheck
             IniWrite(this.settings.windowWidth, settingsFile, "Settings", "WindowWidth")
             IniWrite(this.settings.windowHeight, settingsFile, "Settings", "WindowHeight")
             IniWrite(this.settings.exportPath, settingsFile, "Settings", "ExportPath")
+            IniWrite(this.settings.sortBy, settingsFile, "Settings", "SortBy")
+            IniWrite(this.settings.sortDirection, settingsFile, "Settings", "SortDirection")
             
             return true
         } catch as err {
@@ -996,24 +1108,23 @@ SaveSettings(gui, hotkeyEdit, fontEdit, sizeEdit, maxNotesEdit, alwaysOnTopCheck
     
     ; Load settings from INI file
     LoadSettingsFromFile() {
+        settingsFile := A_ScriptDir . "\Settings\QuickNoteTaker_settings.ini"
+        
+        ; Check if settings file exists
+        if !FileExist(settingsFile) {
+            return false
+        }
+        
         try {
-            settingsFile := A_ScriptDir . "\Settings\QuickNoteTaker_settings.ini"
-            
-            ; Check if settings file exists
-            if !FileExist(settingsFile) {
-                return false
-            }
-            
-            ; Load settings with fallbacks to defaults
-            this.settings.hotkey := IniRead(settingsFile, "Settings", "Hotkey", this.settings.hotkey)
-            this.settings.fontName := IniRead(settingsFile, "Settings", "FontName", this.settings.fontName)
-            this.settings.fontSize := Integer(IniRead(settingsFile, "Settings", "FontSize", this.settings.fontSize))
-            this.settings.maxNotes := Integer(IniRead(settingsFile, "Settings", "MaxNotes", this.settings.maxNotes))
-            this.settings.alwaysOnTop := IniRead(settingsFile, "Settings", "AlwaysOnTop", this.settings.alwaysOnTop) = "1"
-            this.settings.autoSave := IniRead(settingsFile, "Settings", "AutoSave", this.settings.autoSave) = "1"
-            this.settings.windowWidth := Integer(IniRead(settingsFile, "Settings", "WindowWidth", this.settings.windowWidth))
-            this.settings.windowHeight := Integer(IniRead(settingsFile, "Settings", "WindowHeight", this.settings.windowHeight))
-            this.settings.exportPath := IniRead(settingsFile, "Settings", "ExportPath", this.settings.exportPath)
+            ; Read settings from INI - use actual fallback values
+            this.settings.fontName := IniRead(settingsFile, "Settings", "FontName", "Consolas")
+            this.settings.fontSize := Integer(IniRead(settingsFile, "Settings", "FontSize", "10"))
+            this.settings.maxNotes := Integer(IniRead(settingsFile, "Settings", "MaxNotes", "100"))
+            this.settings.alwaysOnTop := IniRead(settingsFile, "Settings", "AlwaysOnTop", "1") = "1"
+            this.settings.autoSave := IniRead(settingsFile, "Settings", "AutoSave", "1") = "1"
+            this.settings.windowWidth := Integer(IniRead(settingsFile, "Settings", "WindowWidth", "500"))
+            this.settings.windowHeight := Integer(IniRead(settingsFile, "Settings", "WindowHeight", "400"))
+            this.settings.exportPath := IniRead(settingsFile, "Settings", "ExportPath", A_ScriptDir . "\Settings")
             this.settings.sortBy := IniRead(settingsFile, "Settings", "SortBy", "modified")
             this.settings.sortDirection := IniRead(settingsFile, "Settings", "SortDirection", "asc")
             

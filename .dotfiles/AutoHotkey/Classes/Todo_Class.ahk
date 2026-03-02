@@ -1,8 +1,7 @@
 ; To-Do Manager Class
-; Catppuccin-themed task management with reminders
 ; Features: Tasks, priorities, due dates, notifications, persistence
 
-class CatppuccinTodoReminder {
+class TodoReminder {
     ; Properties
     parentManager := ""
     isVisible := false
@@ -15,24 +14,23 @@ class CatppuccinTodoReminder {
     
     ; Settings and data
     settings := {
-        windowWidth: 800,   ; Reduced from 980 to make window more compact
-        windowHeight: 900,  ; Fixed height for better usability
+        windowWidth: 800,
+        windowHeight: 600,
         autoSave: true,
-        reminderInterval: 300000, ; 5 minutes in milliseconds
+        reminderInterval: 300000,
         showNotifications: true,
         playSound: true,
+        alwaysOnTop: false,
         windowX: -1,
         windowY: -1,
         sortBy: "priority", ; priority, date, alphabetical
-        filterBy: "all" ; all, pending, completed, overdue
+        filterBy: "all", ; all, pending, completed, overdue
+        lastSortColumn: 1 ; Track which column is being sorted (1-5)
     }
     
     tasks := []
     reminderTimer := ""
     remindedTasks := Map()  ; Track which tasks have already been reminded about to prevent spam
-    
-    ; Priority levels
-    priorities := ["🔴 High", "🟡 Medium", "🟢 Low", "⚪ None"]
     
     ; Constructor
     __New(parentManager := "") {
@@ -74,79 +72,75 @@ class CatppuccinTodoReminder {
     CreateGUI() {
         colors := this.GetColors()
         
-        this.gui := Gui("", "📝 To-Do")  ; Changed title
+        ; Use same window flags as QuickNoteTaker for consistency
+        flags := "-MaximizeBox -MinimizeBox +LastFound -SysMenu +ToolWindow"
+        if this.settings.alwaysOnTop {
+            flags .= " +AlwaysOnTop"
+        }
+        
+        this.gui := Gui(flags, "📝 To-Do")
         this.gui.SetFont("s10", "Segoe UI")
         this.gui.BackColor := colors.bg
         this.gui.OnEvent("Close", this.Hide.Bind(this))
-        ; Removed OnResize event since window is no longer resizable
+        this.gui.OnEvent("ContextMenu", (*) => "")  ; Disable right-click context menu
         
-        ; Header section
-        this.gui.AddText("xm ym w200 c" . colors.text, "📋 Task Management")
-        
-        ; Filter section
-        this.gui.AddText("x+50 yp c" . colors.subtext1, "Filter:")
-        this.filterDropdown := this.gui.AddDropDownList("x+5 yp-3 w100 Background" . colors.surface0 . " c" . colors.text, ["All Tasks", "Pending", "Completed", "Overdue"])
-        this.filterDropdown.Choose(1)
-        this.filterDropdown.OnEvent("Change", this.FilterTasks.Bind(this))
-        
-        ; Sort section
-        this.gui.AddText("x+10 yp+3 c" . colors.subtext1, "Sort:")
-        sortDropdown := this.gui.AddDropDownList("x+5 yp-3 w100 Background" . colors.surface0 . " c" . colors.text, ["Priority", "Due Date", "Alphabetical"])
-        sortDropdown.Choose(1)
-        sortDropdown.OnEvent("Change", this.OnSortChange.Bind(this, sortDropdown))
-        
-        ; Add task section
-        this.gui.AddText("xm y+15 c" . colors.text, "➕ Add New Task:")
-        this.addTaskEdit := this.gui.AddEdit("xm y+5 w300 h20 Background" . colors.surface0 . " c" . colors.text)
+        ; Add task section - Row 1: Task text and Due date
+        this.gui.AddText("xm ym c" . colors.text, "➕ New Task:")
+        this.addTaskEdit := this.gui.AddEdit("x+10 yp-3 w300 h23 Background" . colors.surface0 . " c" . colors.text)
         this.addTaskEdit.OnEvent("Change", this.OnTaskTextChange.Bind(this))
         
-        ; Priority and due date
-        this.gui.AddText("x+10 yp+3 c" . colors.subtext1, "Priority:")
-        this.priorityDropdown := this.gui.AddDropDownList("x+5 yp-3 w110 Background" . colors.surface0 . " c" . colors.text, this.priorities)
-        this.priorityDropdown.Choose(2) ; Default to Medium
-        
-        this.gui.AddText("x+10 yp+3 c" . colors.subtext1, "Due:")
-        this.dueDateEdit := this.gui.AddEdit("x+5 yp-3 w120 Background" . colors.surface0 . " c" . colors.text . " ReadOnly", "")
+        this.gui.AddText("x+15 yp+3 c" . colors.subtext1, "Due:")
+        this.dueDateEdit := this.gui.AddEdit("x+5 yp-3 w115 h23 Background" . colors.surface0 . " c" . colors.text . " ReadOnly", "")
         this.dueDateEdit.ToolTip := "Click the calendar button to select a date"
         calendarBtn := this.gui.AddButton("x+2 yp w25 h23 Background" . colors.blue . " c" . colors.bg, "📅")
         calendarBtn.OnEvent("Click", this.ShowCalendar.Bind(this))
         clearDateBtn := this.gui.AddButton("x+2 yp w25 h23 Background" . colors.red . " c" . colors.bg, "❌")
         clearDateBtn.OnEvent("Click", this.ClearDueDate.Bind(this))
         
+        ; Row 2: Priority, Recurring, and Add button
+        this.gui.AddText("xm y+10 c" . colors.subtext1, "Priority:")
+        this.priorityDropdown := this.gui.AddDropDownList("x+5 yp-3 w105 Background" . colors.surface0 . " c" . colors.text, ["🔴 High", "🟡 Medium", "🟢 Low"])
+        this.priorityDropdown.Choose(2) ; Default to Medium
+        
+        this.gui.AddText("x+15 yp+3 c" . colors.subtext1, "Recurs:")
+        this.recurringDropdown := this.gui.AddDropDownList("x+5 yp-3 w90 Background" . colors.surface0 . " c" . colors.text, ["None", "Daily", "Weekly", "Monthly"])
+        this.recurringDropdown.Choose(1)
+        
         ; Add button
-        addBtn := this.gui.AddButton("x+5 yp w60 h23 Background" . colors.green . " c" . colors.bg, "Add")
+        addBtn := this.gui.AddButton("x+15 yp w80 h23 Background" . colors.green . " c" . colors.bg, "Add Task")
         addBtn.OnEvent("Click", this.AddTaskFromButton.Bind(this))
         
-        ; Quick add buttons
-        this.gui.AddButton("xm y+10 w80 h25 Background" . colors.blue . " c" . colors.bg, "📞 Call").OnEvent("Click", this.QuickAddCall.Bind(this))
-        this.gui.AddButton("x+5 yp w80 h25 Background" . colors.mauve . " c" . colors.bg, "📧 Email").OnEvent("Click", this.QuickAddEmail.Bind(this))
-        this.gui.AddButton("x+5 yp w80 h25 Background" . colors.yellow . " c" . colors.bg, "🛒 Buy").OnEvent("Click", this.QuickAddBuy.Bind(this))
-        this.gui.AddButton("x+5 yp w80 h25 Background" . colors.overlay0 . " c" . colors.bg, "📅 Meeting").OnEvent("Click", this.QuickAddMeeting.Bind(this))
+        ; Tasks list with filter
+        this.gui.AddText("xm y+20 c" . colors.text, "📋 Tasks:")
         
-        ; Tasks list (give it more space and better positioning)
-        this.gui.AddText("xm y+15 c" . colors.text, "📋 Tasks:")
-        ; Calculate ListView height: Extend to use more space, leave room for buttons (50px) and compact status bar (35px) at bottom
-        ; Reduce height moderately to avoid partial rows while keeping status bar visible
-        listHeight := this.settings.windowHeight - 283  ; Reduced from 280 to account for more compact status bar
+        this.gui.AddText("x+320 yp c" . colors.subtext1, "Filter:")
+        this.filterDropdown := this.gui.AddDropDownList("x+5 yp-3 w100 Background" . colors.surface0 . " c" . colors.text, ["All Tasks", "Pending", "Completed", "Overdue"])
+        this.filterDropdown.Choose(1)
+        this.filterDropdown.OnEvent("Change", this.FilterTasks.Bind(this))
+        
+        ; ListView height for 10-12 rows: approximately 25px per row + header
+        listHeight := 405  ; Shows about 12 rows
         ; Calculate ListView width dynamically based on window width (leave 50px margin total)
-        listWidth := this.settings.windowWidth - 50
-        ; Add more styling options to ListView for better header appearance
-        this.tasksList := this.gui.AddListView("xm y+5 w" . listWidth . " h" . listHeight . " Background" . colors.surface0 . " c" . colors.text . " -Multi Grid Checked NoSortHdr", ["Priority", "Task", "Due Date", "Days Left", "Created"])
+        listWidth := this.settings.windowWidth - 25
+        ; Add more styling options to ListView for better header appearance (removed NoSortHdr to enable column sorting)
+        this.tasksList := this.gui.AddListView("xm y+5 w" . listWidth . " h" . listHeight . " Background" . colors.surface0 . " c" . colors.text . " -Multi Grid Checked", ["Priority", "Task", "Due Date", "Days Left", "Created"])
+        this.tasksList.SetFont("s10", "Segoe UI Emoji")  ; Use Segoe UI Emoji for better emoji rendering
         this.tasksList.OnEvent("ItemCheck", this.OnTaskCheck.Bind(this))
         this.tasksList.OnEvent("DoubleClick", this.EditSelectedTask.Bind(this))
         this.tasksList.OnEvent("ContextMenu", this.ShowContextMenu.Bind(this))
+        this.tasksList.OnEvent("ColClick", this.OnColumnClick.Bind(this))
         
-        ; Bottom buttons (positioned further down with more spacing)
-        this.gui.AddButton("xm y+20 w80 h30 Background" . colors.red . " c" . colors.bg, "🗑️ Delete").OnEvent("Click", this.DeleteSelectedTask.Bind(this))
-        this.gui.AddButton("x+8 yp w80 h30 Background" . colors.blue . " c" . colors.bg, "✏️ Edit").OnEvent("Click", this.EditSelectedTask.Bind(this))
-        this.gui.AddButton("x+8 yp w110 h30 Background" . colors.mauve . " c" . colors.bg, "🔔 Set Reminder").OnEvent("Click", this.SetReminder.Bind(this))
-        this.gui.AddButton("x+8 yp w80 h30 Background" . colors.green . " c" . colors.bg, "📊 Stats").OnEvent("Click", this.ShowStats.Bind(this))
-        this.gui.AddButton("x+8 yp w80 h30 Background" . colors.overlay0 . " c" . colors.bg, "⚙️ Settings").OnEvent("Click", this.ShowSettings.Bind(this))
+        ; Bottom action buttons
+        this.gui.AddButton("xm y+15 w80 h30 Background" . colors.red . " c" . colors.bg, "🗑️ Delete").OnEvent("Click", this.DeleteSelectedTask.Bind(this))
+        this.gui.AddButton("x+5 yp w70 h30 Background" . colors.blue . " c" . colors.bg, "✏️ Edit").OnEvent("Click", this.EditSelectedTask.Bind(this))
+        this.gui.AddButton("x+5 yp w125 h30 Background" . colors.mauve . " c" . colors.bg, "🔔 Set Reminder").OnEvent("Click", this.SetReminder.Bind(this))
+        this.gui.AddButton("x+5 yp w70 h30 Background" . colors.green . " c" . colors.bg, "📊 Stats").OnEvent("Click", this.ShowStats.Bind(this))
+        this.gui.AddButton("x+5 yp w80 h30 Background" . colors.overlay0 . " c" . colors.bg, "⚙️ Settings").OnEvent("Click", this.ShowSettings.Bind(this))
         
         ; Status bar (positioned closer to buttons, no border for compact appearance)
         ; Calculate status bar width dynamically based on window width (same as ListView)
         statusBarWidth := this.settings.windowWidth - 50
-        this.statusBar := this.gui.AddText("xm y+8 w" . statusBarWidth . " h20 c" . colors.subtext1 . " VCenter", "Ready | Total: 0 | Pending: 0 | Completed: 0")
+        this.statusBar := this.gui.AddText("xm y+10 w" . statusBarWidth . " h20 c" . colors.subtext1 . " VCenter", "Ready | Total: 0 | Pending: 0 | Completed: 0")
         
         ; Load saved position
         if this.settings.windowX >= 0 && this.settings.windowY >= 0 {
@@ -238,6 +232,10 @@ class CatppuccinTodoReminder {
             dueDate := Trim(this.dueDateEdit.Text)
         }
         
+        ; Get recurring setting
+        recurringOptions := ["none", "daily", "weekly", "monthly"]
+        recurring := recurringOptions[this.recurringDropdown.Value]
+        
         ; Parse the formatted date from the calendar picker
         parsedDate := ""
         if dueDate {
@@ -259,7 +257,8 @@ class CatppuccinTodoReminder {
             dueDate: parsedDate,
             completed: false,
             created: A_Now,
-            reminder: ""
+            reminder: "",
+            recurring: recurring
         }
         
         this.tasks.Push(task)
@@ -271,50 +270,70 @@ class CatppuccinTodoReminder {
         this.addTaskEdit.Text := ""
         this.dueDateEdit.Text := ""
         this.priorityDropdown.Choose(2)
+        this.recurringDropdown.Choose(1)
         
         this.ShowDebug("Added task: " . taskText)
     }
     
-    QuickAddTask(type, priority) {
-        prompt := ""
-        switch type {
-            case "Call":
-                prompt := "Who do you need to call?"
-            case "Email":
-                prompt := "What email do you need to send?"
-            case "Buy":
-                prompt := "What do you need to buy?"
-            case "Meeting":
-                prompt := "What meeting do you need to schedule?"
+    CreateRecurringTask(originalTask) {
+        ; Calculate new due date based on recurring type
+        newDueDate := ""
+        if originalTask.dueDate {
+            currentDate := originalTask.dueDate
+            
+            ; Extract date components (format: YYYYMMDDHHMMSS)
+            year := SubStr(currentDate, 1, 4)
+            month := SubStr(currentDate, 5, 2)
+            day := SubStr(currentDate, 7, 2)
+            
+            switch originalTask.recurring {
+                case "daily":
+                    newDueDate := DateAdd(currentDate, 1, "days")
+                case "weekly":
+                    newDueDate := DateAdd(currentDate, 7, "days")
+                case "monthly":
+                    newDueDate := DateAdd(currentDate, 1, "months")
+            }
+        } else {
+            ; If no due date, set based on today
+            switch originalTask.recurring {
+                case "daily":
+                    newDueDate := DateAdd(A_Now, 1, "days")
+                case "weekly":
+                    newDueDate := DateAdd(A_Now, 7, "days")
+                case "monthly":
+                    newDueDate := DateAdd(A_Now, 1, "months")
+            }
         }
         
-        colors := this.GetColors()
-        quickGui := Gui("+Owner" . (this.gui ? this.gui.Hwnd : "") . " -Resize", "Quick Add: " . type)
-        quickGui.SetFont("s10", "Segoe UI")
-        quickGui.BackColor := colors.bg
-        quickGui.AddText("xm ym w260 c" . colors.text, prompt)
-        inputEdit := quickGui.AddEdit("xm y+8 w260 Background" . colors.surface0 . " c" . colors.text)
-        okBtn := quickGui.AddButton("xm y+15 w80 h28 Background" . colors.green . " c" . colors.bg, "OK")
-        cancelBtn := quickGui.AddButton("x+10 yp w80 h28 Background" . colors.red . " c" . colors.bg, "Cancel")
-        okBtn.OnEvent("Click", (*) => (
-            val := Trim(inputEdit.Text),
-            quickGui.Destroy(),
-            val ? this.AddTask(type . ": " . val, priority) : ""
-        ))
-        cancelBtn.OnEvent("Click", (*) => quickGui.Destroy())
-        quickGui.Show("w290 h140")
+        ; Create new recurring task
+        newTask := {
+            id: this.GenerateTaskId(),
+            text: originalTask.text,
+            priority: originalTask.priority,
+            dueDate: newDueDate,
+            completed: false,
+            created: A_Now,
+            reminder: "",
+            recurring: originalTask.recurring
+        }
+        
+        this.tasks.Push(newTask)
+        this.ShowDebug("Created recurring task: " . originalTask.text . " for " . this.FormatDate(newDueDate))
     }
     
     DeleteSelectedTask(*) {
         selected := this.tasksList.GetNext()
         if !selected {
             colors := this.GetColors()
-        themedGui := Gui("+Owner" . (this.gui ? this.gui.Hwnd : "") . " -Resize", "📝 To-Do")
+            themedGui := Gui("+Owner" . (this.gui ? this.gui.Hwnd : "") . " -MaximizeBox -MinimizeBox +LastFound -SysMenu +ToolWindow", "📝 To-Do")
             themedGui.SetFont("s10", "Segoe UI")
             themedGui.BackColor := colors.bg
             themedGui.AddText("xm ym w260 c" . colors.text, "Please select a task to delete.")
             okBtn := themedGui.AddButton("xm y+15 w80 h28 Background" . colors.blue . " c" . colors.bg, "OK")
             okBtn.OnEvent("Click", (*) => themedGui.Destroy())
+            themedGui.OnEvent("Close", (*) => themedGui.Destroy())
+            themedGui.OnEvent("Escape", (*) => themedGui.Destroy())
             themedGui.Show("w280 h110")
             return
         }
@@ -354,7 +373,14 @@ class CatppuccinTodoReminder {
             for i, task in this.tasks {
                 if task.id = targetTask.id {
                     ; Toggle completion status
-                    this.tasks[i].completed := this.tasksList.GetNext(itemIndex - 1, "Checked") = itemIndex
+                    isChecked := this.tasksList.GetNext(itemIndex - 1, "Checked") = itemIndex
+                    this.tasks[i].completed := isChecked
+                    
+                    ; If completed and recurring, create new task
+                    if isChecked && task.HasOwnProp("recurring") && task.recurring != "none" {
+                        this.CreateRecurringTask(task)
+                    }
+                    
                     this.SaveTasks()
                     this.RefreshTasksList()
                     this.UpdateStatusBar()
@@ -364,16 +390,42 @@ class CatppuccinTodoReminder {
         }
     }
     
+    ; Handle column header clicks for sorting
+    OnColumnClick(listView, colNum, *) {
+        ; Map column numbers to sort types
+        sortMap := Map(
+            1, "priority",     ; Priority column
+            2, "alphabetical", ; Task column
+            3, "date",         ; Due Date column
+            4, "date",         ; Days Left column (same as due date)
+            5, "created"       ; Created column
+        )
+        
+        if sortMap.Has(colNum) {
+            this.settings.sortBy := sortMap[colNum]
+            this.settings.lastSortColumn := colNum
+            this.UpdateColumnHeaders()
+            this.RefreshTasksList()
+        }
+    }
+    
+    ; Update column headers to show sort indicator
+    UpdateColumnHeaders() {
+        ; This will be called before RefreshTasksList which updates the headers
+        ; No action needed here as RefreshTasksList handles it
+    }
+    
     EditSelectedTask(*) {
         selected := this.tasksList.GetNext()
         if !selected {
             colors := this.GetColors()
-            themedGui := Gui("+Owner" . (this.gui ? this.gui.Hwnd : "") . " -Resize", "📝 To-Do")
+            themedGui := Gui("+Owner" . (this.gui ? this.gui.Hwnd : "") . " -MaximizeBox -MinimizeBox +LastFound -SysMenu +ToolWindow", "📝 To-Do")
             themedGui.SetFont("s10", "Segoe UI")
             themedGui.BackColor := colors.bg
             themedGui.AddText("xm ym w260 c" . colors.text, "Please select a task to edit.")
             okBtn := themedGui.AddButton("xm y+15 w80 h28 Background" . colors.blue . " c" . colors.bg, "OK")
             okBtn.OnEvent("Click", (*) => themedGui.Destroy())
+            themedGui.OnEvent("Escape", (*) => themedGui.Destroy())
             themedGui.Show("w280 h110")
             return
         }
@@ -398,37 +450,43 @@ class CatppuccinTodoReminder {
     ShowEditTaskDialog(task, index) {
         colors := this.GetColors()
         
-        editGui := Gui("+Owner" . this.gui.Hwnd, "✏️ Edit Task")
+        editGui := Gui("+Owner" . this.gui.Hwnd . " -MaximizeBox -MinimizeBox +LastFound -SysMenu +ToolWindow", "✏️ Edit Task")
         editGui.SetFont("s10", "Segoe UI")
         editGui.BackColor := colors.bg
+        editGui.OnEvent("Escape", (*) => editGui.Destroy())
         
         editGui.AddText("xm ym c" . colors.text, "Task:")
-        taskEdit := editGui.AddEdit("xm y+5 w300 h20 Background" . colors.surface0 . " c" . colors.text, task.text)
+        taskEdit := editGui.AddEdit("xm y+5 w200 h23 Background" . colors.surface0 . " c" . colors.text, task.text)
         
         editGui.AddText("xm y+15 c" . colors.text, "Priority:")
-        priorityDD := editGui.AddDropDownList("xm y+5 w100 Background" . colors.surface0 . " c" . colors.text, this.priorities)
-        for i, priority in this.priorities {
-            if priority = task.priority {
-                priorityDD.Choose(i)
-                break
+        priorityDD := editGui.AddDropDownList("xm y+5 w120 Background" . colors.surface0 . " c" . colors.text, ["🔴 High", "🟡 Medium", "🟢 Low"])
+        priorityIndex := 2
+        if task.priority {
+            priorities := ["🔴 High", "🟡 Medium", "🟢 Low"]
+            for i, priority in priorities {
+                if priority = task.priority {
+                    priorityIndex := i
+                    break
+                }
             }
         }
+        priorityDD.Choose(priorityIndex)
         
-        editGui.AddText("x+20 yp-15 c" . colors.text, "Due Date:")
-        dueDateEdit := editGui.AddEdit("x+20 yp+20 w80 Background" . colors.surface0 . " c" . colors.text . " ReadOnly", this.FormatDate(task.dueDate))
-        editCalendarBtn := editGui.AddButton("x+2 yp w25 h20 Background" . colors.blue . " c" . colors.bg, "📅")
-        editClearBtn := editGui.AddButton("x+2 yp w25 h20 Background" . colors.red . " c" . colors.bg, "❌")
+        editGui.AddText("xm y+15 c" . colors.text, "Due Date:")
+        dueDateEdit := editGui.AddEdit("xm y+5 w120 h23 Background" . colors.surface0 . " c" . colors.text . " ReadOnly", this.FormatDate(task.dueDate))
+        editCalendarBtn := editGui.AddButton("x+5 yp w30 h23 Background" . colors.blue . " c" . colors.bg, "📅")
+        editClearBtn := editGui.AddButton("x+5 yp w30 h23 Background" . colors.red . " c" . colors.bg, "❌")
         
         editCalendarBtn.OnEvent("Click", this.ShowEditCalendar.Bind(this, dueDateEdit))
         editClearBtn.OnEvent("Click", this.ClearEditDate.Bind(this, dueDateEdit))
         
-        saveBtn := editGui.AddButton("xm y+40 w80 h30 Background" . colors.green . " c" . colors.bg, "💾 Save")
-        cancelBtn := editGui.AddButton("x+10 yp w80 h30 Background" . colors.red . " c" . colors.bg, "❌ Cancel")
+        saveBtn := editGui.AddButton("xm y+25 w90 h30 Background" . colors.green . " c" . colors.bg, "💾 Save")
+        cancelBtn := editGui.AddButton("x+10 yp w90 h30 Background" . colors.red . " c" . colors.bg, "❌ Cancel")
         
         saveBtn.OnEvent("Click", this.SaveEditedTaskWrapper.Bind(this, editGui, taskEdit, priorityDD, dueDateEdit, index))
         cancelBtn.OnEvent("Click", this.CloseEditDialog.Bind(this, editGui))
         
-        editGui.Show()
+        editGui.Show("w220")
     }
     
     SaveEditedTask(editGui, taskEdit, priorityDD, dueDateEdit, index) {
@@ -497,11 +555,6 @@ class CatppuccinTodoReminder {
         this.QuickAddTask("Meeting", "🔴 High")
     }
     
-    ; Helper method for adding tasks with details
-    AddTaskWithDetails(taskText, priority, dueDate) {
-        this.AddTask(taskText, priority, dueDate)
-    }
-    
     ; Wrapper method for Add button click event
     AddTaskFromButton(*) {
         this.AddTask("", "", "")
@@ -514,6 +567,18 @@ class CatppuccinTodoReminder {
     RefreshTasksList() {
         this.tasksList.Delete()
         
+        ; Update column headers with sort indicator
+        baseHeaders := ["Priority", "Task", "Due Date", "Days Left", "Created"]
+        sortCol := this.settings.HasOwnProp("lastSortColumn") ? this.settings.lastSortColumn : 1
+        
+        Loop 5 {
+            headerText := baseHeaders[A_Index]
+            if A_Index = sortCol {
+                headerText .= " ▼"
+            }
+            this.tasksList.ModifyCol(A_Index, , headerText)
+        }
+        
         filteredTasks := this.GetFilteredTasks()
         this.SortTasksArray(filteredTasks)
         
@@ -522,9 +587,23 @@ class CatppuccinTodoReminder {
             daysLeftStr := (task.dueDate && !task.completed) ? this.GetDaysLeft(task.dueDate) : ""
             createdStr := this.FormatDate(task.created)
             
+            ; Extract priority text without emoji for better rendering
+            priorityDisplay := task.priority
+            if InStr(task.priority, "High")
+                priorityDisplay := "🔴 High"
+            else if InStr(task.priority, "Medium")
+                priorityDisplay := "🟡 Medium"
+            else if InStr(task.priority, "Low")
+                priorityDisplay := "🟢 Low"
+            
+            ; Add recurring indicator to task text
+            taskDisplay := task.text
+            if task.HasOwnProp("recurring") && task.recurring != "none" {
+                taskDisplay := "🔄 " . taskDisplay
+            }
+            
             ; Add row: Columns are Priority, Task, Due Date, Days Left, Created
-            ; Don't pass the checkbox state as first parameter - control it separately
-            row := this.tasksList.Add("", task.priority, task.text, dueDateStr, daysLeftStr, createdStr)
+            row := this.tasksList.Add("", priorityDisplay, taskDisplay, dueDateStr, daysLeftStr, createdStr)
             
             ; Set checkbox state separately
             if task.completed {
@@ -539,15 +618,18 @@ class CatppuccinTodoReminder {
         }
         
         ; Calculate column widths proportionally based on ListView width
-        listWidth := this.settings.windowWidth - 50
-        this.tasksList.ModifyCol(1, Round(listWidth * 0.14))   ; Priority - 14% (105px at 750px width)
-        this.tasksList.ModifyCol(2, Round(listWidth * 0.45 - 4))   ; Task - 45% (338px) - more space for task text
-        this.tasksList.ModifyCol(3, Round(listWidth * 0.16))   ; Due Date - 16% (120px)
-        this.tasksList.ModifyCol(4, Round(listWidth * 0.10))   ; Days Left - 10% (75px)
+        listWidth := this.settings.windowWidth - 25
+        this.tasksList.ModifyCol(1, Round(listWidth * 0.15))   ; Priority - 14% (105px at 750px width)
+        this.tasksList.ModifyCol(2, Round(listWidth * 0.40 - 4))   ; Task - 45% (338px) - more space for task text
+        this.tasksList.ModifyCol(3, Round(listWidth * 0.15))   ; Due Date - 16% (120px)
+        this.tasksList.ModifyCol(4, Round(listWidth * 0.15))   ; Days Left - 10% (75px)
         this.tasksList.ModifyCol(5, Round(listWidth * 0.15))   ; Created - 15% (112px)
         
         ; Re-apply header styling after refresh
         this.StyleListViewHeader()
+        
+        ; Update status bar after refreshing the list
+        this.UpdateStatusBar()
     }
     
     GetFilteredTasks() {
@@ -591,14 +673,45 @@ class CatppuccinTodoReminder {
             return
         }
         
-        ; Simple bubble sort implementation for AutoHotkey v2
-        switch this.settings.sortBy {
-            case "priority":
-                this.BubbleSort(tasksArray, (a, b) => this.ComparePriority(a.priority, b.priority))
-            case "due date":
-                this.BubbleSort(tasksArray, (a, b) => this.CompareDates(a.dueDate, b.dueDate))
-            case "alphabetical":
-                this.BubbleSort(tasksArray, (a, b) => StrCompare(a.text, b.text, false))
+        ; For date-related sorting, separate completed and incomplete tasks
+        if this.settings.sortBy = "date" || this.settings.sortBy = "due date" || this.settings.sortBy = "created" {
+            incompleteTasks := []
+            completedTasks := []
+            
+            ; Separate tasks by completion status
+            for task in tasksArray {
+                if task.completed {
+                    completedTasks.Push(task)
+                } else {
+                    incompleteTasks.Push(task)
+                }
+            }
+            
+            ; Sort each group
+            if this.settings.sortBy = "created" {
+                this.BubbleSort(incompleteTasks, (a, b) => this.CompareDates(a.created, b.created))
+                this.BubbleSort(completedTasks, (a, b) => this.CompareDates(a.created, b.created))
+            } else {
+                this.BubbleSort(incompleteTasks, (a, b) => this.CompareDates(a.dueDate, b.dueDate))
+                this.BubbleSort(completedTasks, (a, b) => this.CompareDates(a.dueDate, b.dueDate))
+            }
+            
+            ; Clear and rebuild array with incomplete first, completed last
+            tasksArray.Length := 0
+            for task in incompleteTasks {
+                tasksArray.Push(task)
+            }
+            for task in completedTasks {
+                tasksArray.Push(task)
+            }
+        } else {
+            ; For non-date sorting, use normal sorting
+            switch this.settings.sortBy {
+                case "priority":
+                    this.BubbleSort(tasksArray, (a, b) => this.ComparePriority(a.priority, b.priority))
+                case "alphabetical":
+                    this.BubbleSort(tasksArray, (a, b) => StrCompare(a.text, b.text, false))
+            }
         }
     }
     
@@ -698,12 +811,13 @@ class CatppuccinTodoReminder {
         selected := this.tasksList.GetNext()
         if !selected {
             colors := this.GetColors()
-            themedGui := Gui("+Owner" . (this.gui ? this.gui.Hwnd : "") . " -Resize", "📝 To-Do")
+            themedGui := Gui("+Owner" . (this.gui ? this.gui.Hwnd : "") . " -MaximizeBox -MinimizeBox +LastFound -SysMenu +ToolWindow", "📝 To-Do")
             themedGui.SetFont("s10", "Segoe UI")
             themedGui.BackColor := colors.bg
             themedGui.AddText("xm ym w260 c" . colors.text, "Please select a task to set a reminder for.")
             okBtn := themedGui.AddButton("xm y+15 w80 h28 Background" . colors.blue . " c" . colors.bg, "OK")
             okBtn.OnEvent("Click", (*) => themedGui.Destroy())
+            themedGui.OnEvent("Escape", (*) => themedGui.Destroy())
             themedGui.Show("w280 h110")
             return
         }
@@ -741,9 +855,10 @@ class CatppuccinTodoReminder {
     ShowReminderDialog(task, taskIndex) {
         colors := this.GetColors()
         
-        reminderGui := Gui("+Owner" . this.gui.Hwnd . " -Resize", "🔔 Set Reminder")
+        reminderGui := Gui("+Owner" . this.gui.Hwnd . " -MaximizeBox -MinimizeBox +LastFound -SysMenu +ToolWindow", "🔔 Set Reminder")
         reminderGui.SetFont("s10", "Segoe UI")
         reminderGui.BackColor := colors.bg
+        reminderGui.OnEvent("Escape", (*) => reminderGui.Destroy())
         
         ; Task info section
         reminderGui.AddText("xm ym w400 c" . colors.text . " Section", "🔔 Set Reminder")
@@ -910,8 +1025,8 @@ class CatppuccinTodoReminder {
     }
     
     ComparePriority(p1, p2) {
-        priorityValues := Map("🔴 High", 1, "🟡 Medium", 2, "🟢 Low", 3, "⚪ None", 4)
-        return priorityValues.Get(p1, 4) - priorityValues.Get(p2, 4)
+        priorityValues := Map("🔴 High", 1, "🟡 Medium", 2, "🟢 Low", 3)
+        return priorityValues.Get(p1, 3) - priorityValues.Get(p2, 3)
     }
     
     CompareDates(d1, d2) {
@@ -962,39 +1077,27 @@ class CatppuccinTodoReminder {
     ShowCalendar(*) {
         colors := this.GetColors()
         
-        calendarGui := Gui("+Owner" . this.gui.Hwnd . " +ToolWindow", "📅 Select Due Date")
+        calendarGui := Gui("+Owner" . this.gui.Hwnd . " +ToolWindow -Caption", "")
         calendarGui.SetFont("s10", "Segoe UI")
         calendarGui.BackColor := colors.bg
+        calendarGui.OnEvent("Escape", this.CloseCalendarDialog.Bind(this, calendarGui))
         
         ; Calendar control
-        calendarGui.AddText("xm ym c" . colors.text, "Select due date:")
-        calendar := calendarGui.AddMonthCal("xm y+10")
+        calendar := calendarGui.AddMonthCal("xm ym")
         
-        ; Quick date buttons
-        calendarGui.AddText("xm y+10 c" . colors.text, "Quick select:")
-        todayBtn := calendarGui.AddButton("xm y+5 w70 h25 Background" . colors.blue . " c" . colors.bg, "Today")
-        tomorrowBtn := calendarGui.AddButton("x+5 yp w70 h25 Background" . colors.green . " c" . colors.bg, "Tomorrow")
-        nextWeekBtn := calendarGui.AddButton("x+5 yp w80 h25 Background" . colors.mauve . " c" . colors.bg, "Next Week")
+        selectBtn := calendarGui.AddButton("xm y+4 w55 h24 Background" . colors.green . " c" . colors.bg, "Ok")
+        cancelBtn := calendarGui.AddButton("x+4 yp w55 h24 Background" . colors.red . " c" . colors.bg, "X")
         
-        ; Action buttons
-        selectBtn := calendarGui.AddButton("xm y+15 w80 h30 Background" . colors.green . " c" . colors.bg, "✅ Select")
-        cancelBtn := calendarGui.AddButton("x+10 yp w80 h30 Background" . colors.red . " c" . colors.bg, "❌ Cancel")
-        
-        ; Event handlers
-        todayBtn.OnEvent("Click", this.SetQuickDate.Bind(this, calendarGui, calendar, 0))
-        tomorrowBtn.OnEvent("Click", this.SetQuickDate.Bind(this, calendarGui, calendar, 1))
-        nextWeekBtn.OnEvent("Click", this.SetQuickDate.Bind(this, calendarGui, calendar, 7))
         selectBtn.OnEvent("Click", this.SelectCalendarDate.Bind(this, calendarGui, calendar))
         cancelBtn.OnEvent("Click", this.CloseCalendarDialog.Bind(this, calendarGui))
         
-        calendarGui.Show()
+        calendarGui.Show("w230 h205")
     }
     
     ; Set quick date (today, tomorrow, next week)
     SetQuickDate(calendarGui, calendar, days, *) {
         targetDate := DateAdd(A_Now, days, "days")
         
-        ; Set calendar to the target date (Value expects YYYYMMDDHHMMSS format)
         calendar.Value := targetDate
     }
     
@@ -1025,32 +1128,21 @@ class CatppuccinTodoReminder {
     ShowEditCalendar(dueDateEdit, *) {
         colors := this.GetColors()
         
-        calendarGui := Gui("+Owner" . this.gui.Hwnd . " +ToolWindow", "📅 Select Due Date")
+        calendarGui := Gui("+Owner" . this.gui.Hwnd . " +ToolWindow -Caption", "")
         calendarGui.SetFont("s10", "Segoe UI")
         calendarGui.BackColor := colors.bg
+        calendarGui.OnEvent("Escape", this.CloseCalendarDialog.Bind(this, calendarGui))
         
         ; Calendar control
-        calendarGui.AddText("xm ym c" . colors.text, "Select due date:")
-        calendar := calendarGui.AddMonthCal("xm y+10")
+        calendar := calendarGui.AddMonthCal("xm ym")
         
-        ; Quick date buttons
-        calendarGui.AddText("xm y+10 c" . colors.text, "Quick select:")
-        todayBtn := calendarGui.AddButton("xm y+5 w70 h25 Background" . colors.blue . " c" . colors.bg, "Today")
-        tomorrowBtn := calendarGui.AddButton("x+5 yp w70 h25 Background" . colors.green . " c" . colors.bg, "Tomorrow")
-        nextWeekBtn := calendarGui.AddButton("x+5 yp w80 h25 Background" . colors.mauve . " c" . colors.bg, "Next Week")
+        selectBtn := calendarGui.AddButton("xm y+4 w55 h24 Background" . colors.green . " c" . colors.bg, "Ok")
+        cancelBtn := calendarGui.AddButton("x+4 yp w55 h24 Background" . colors.red . " c" . colors.bg, "X")
         
-        ; Action buttons
-        selectBtn := calendarGui.AddButton("xm y+15 w80 h30 Background" . colors.green . " c" . colors.bg, "✅ Select")
-        cancelBtn := calendarGui.AddButton("x+10 yp w80 h30 Background" . colors.red . " c" . colors.bg, "❌ Cancel")
-        
-        ; Event handlers
-        todayBtn.OnEvent("Click", this.SetEditQuickDate.Bind(this, calendarGui, calendar, dueDateEdit, 0))
-        tomorrowBtn.OnEvent("Click", this.SetEditQuickDate.Bind(this, calendarGui, calendar, dueDateEdit, 1))
-        nextWeekBtn.OnEvent("Click", this.SetEditQuickDate.Bind(this, calendarGui, calendar, dueDateEdit, 7))
         selectBtn.OnEvent("Click", this.SelectEditCalendarDate.Bind(this, calendarGui, calendar, dueDateEdit))
         cancelBtn.OnEvent("Click", this.CloseCalendarDialog.Bind(this, calendarGui))
         
-        calendarGui.Show()
+        calendarGui.Show("w240 h195")
     }
     
     ; Set quick date for edit dialog
@@ -1126,6 +1218,7 @@ class CatppuccinTodoReminder {
                 this.settings.windowHeight := IniRead(settingsFile, "Window", "Height", 900)
                 this.settings.windowX := IniRead(settingsFile, "Window", "X", -1)
                 this.settings.windowY := IniRead(settingsFile, "Window", "Y", -1)
+                this.settings.alwaysOnTop := IniRead(settingsFile, "Window", "AlwaysOnTop", "false") = "true"
                 this.settings.autoSave := IniRead(settingsFile, "General", "AutoSave", "true") = "true"
                 this.settings.reminderInterval := IniRead(settingsFile, "Reminders", "Interval", 300000)
                 this.settings.showNotifications := IniRead(settingsFile, "Reminders", "ShowNotifications", "true") = "true"
@@ -1147,13 +1240,15 @@ class CatppuccinTodoReminder {
         }
         
         try {
-            ; Get current window position
+            ; Get current window position only
             this.gui.GetPos(&x, &y, &w, &h)
             
-            IniWrite(w, settingsFile, "Window", "Width")
-            IniWrite(h, settingsFile, "Window", "Height")
+            ; Save the configured width/height from settings, not actual window size
+            IniWrite(this.settings.windowWidth, settingsFile, "Window", "Width")
+            IniWrite(this.settings.windowHeight, settingsFile, "Window", "Height")
             IniWrite(x, settingsFile, "Window", "X")
             IniWrite(y, settingsFile, "Window", "Y")
+            IniWrite(this.settings.alwaysOnTop ? "true" : "false", settingsFile, "Window", "AlwaysOnTop")
             IniWrite(this.settings.autoSave ? "true" : "false", settingsFile, "General", "AutoSave")
             IniWrite(this.settings.reminderInterval, settingsFile, "Reminders", "Interval")
             IniWrite(this.settings.showNotifications ? "true" : "false", settingsFile, "Reminders", "ShowNotifications")
@@ -1180,7 +1275,8 @@ class CatppuccinTodoReminder {
                         dueDate: IniRead(tasksFile, "Task" . A_Index, "DueDate", ""),
                         completed: IniRead(tasksFile, "Task" . A_Index, "Completed", "false") = "true",
                         created: IniRead(tasksFile, "Task" . A_Index, "Created", A_Now),
-                        reminder: IniRead(tasksFile, "Task" . A_Index, "Reminder", "")
+                        reminder: IniRead(tasksFile, "Task" . A_Index, "Reminder", ""),
+                        recurring: IniRead(tasksFile, "Task" . A_Index, "Recurring", "none")
                     }
                     if task.text {  ; Only add tasks with valid text
                         this.tasks.Push(task)
@@ -1222,6 +1318,7 @@ class CatppuccinTodoReminder {
                 IniWrite(task.completed ? "true" : "false", tasksFile, "Task" . i, "Completed")
                 IniWrite(task.created, tasksFile, "Task" . i, "Created")
                 IniWrite(task.reminder, tasksFile, "Task" . i, "Reminder")
+                IniWrite(task.HasOwnProp("recurring") ? task.recurring : "none", tasksFile, "Task" . i, "Recurring")
             }
         } catch {
             ; Ignore save errors
@@ -1242,13 +1339,16 @@ class CatppuccinTodoReminder {
     
     Show() {
         if this.gui {
-            ; Set window size explicitly based on settings
+            ; Set window size and center it on first show
             if this.settings.windowX >= 0 && this.settings.windowY >= 0 {
+                ; Use saved position if valid
                 this.gui.Show("x" . this.settings.windowX . " y" . this.settings.windowY . " w" . this.settings.windowWidth . " h" . this.settings.windowHeight)
             } else {
-                this.gui.Show("w" . this.settings.windowWidth . " h" . this.settings.windowHeight)
+                ; Center on screen for first show
+                this.gui.Show("w" . this.settings.windowWidth . " h" . this.settings.windowHeight . " Center")
             }
             this.isVisible := true
+            this.SetupGUIHotkeys()  ; Enable Escape key
             this.RefreshTasksList()
         }
     }
@@ -1256,8 +1356,27 @@ class CatppuccinTodoReminder {
     Hide(*) {
         if this.gui {
             this.SaveSettings()
+            this.RemoveGUIHotkeys()  ; Disable Escape key
             this.gui.Hide()
             this.isVisible := false
+        }
+    }
+    
+    ; Set up GUI-specific hotkeys when shown
+    SetupGUIHotkeys() {
+        try {
+            Hotkey("Escape", (*) => this.Hide(), "On")
+        } catch as err {
+            ; Ignore hotkey errors
+        }
+    }
+    
+    ; Remove GUI hotkeys when hidden
+    RemoveGUIHotkeys() {
+        try {
+            Hotkey("Escape", "Off")
+        } catch as err {
+            ; Ignore hotkey errors
         }
     }
     
@@ -1320,9 +1439,10 @@ class CatppuccinTodoReminder {
         completionRate := total > 0 ? Round((completed / total) * 100, 1) : 0
         
         ; Create a professional stats GUI
-        statsGui := Gui("+Owner" . this.gui.Hwnd . " -Resize", "📊 Task Statistics")
+        statsGui := Gui("+Owner" . this.gui.Hwnd . " -MaximizeBox -MinimizeBox", "📊 Task Statistics")
         statsGui.SetFont("s10", "Segoe UI")
         statsGui.BackColor := colors.bg
+        statsGui.OnEvent("Escape", (*) => statsGui.Destroy())
         
         ; Header
         statsGui.AddText("xm ym w400 Center c" . colors.text . " Section", "📊 Task Statistics")
@@ -1402,9 +1522,10 @@ class CatppuccinTodoReminder {
     ShowSettings(*) {
         colors := this.GetColors()
         
-        settingsGui := Gui("+Owner" . this.gui.Hwnd, "⚙️ To-Do Settings")
+        settingsGui := Gui("+Owner" . this.gui.Hwnd . " -MaximizeBox -MinimizeBox +LastFound -SysMenu +ToolWindow", "⚙️ To-Do Settings")
         settingsGui.SetFont("s10", "Segoe UI")
         settingsGui.BackColor := colors.bg
+        settingsGui.OnEvent("Escape", (*) => settingsGui.Destroy())
         
         ; Reminder settings
         settingsGui.AddText("xm ym c" . colors.text, "🔔 Reminder Settings:")
@@ -1417,22 +1538,24 @@ class CatppuccinTodoReminder {
         ; General settings
         settingsGui.AddText("xm y+20 c" . colors.text, "💾 General Settings:")
         autoSaveCheck := settingsGui.AddCheckbox("xm y+10 c" . colors.text . " Checked" . (this.settings.autoSave ? "1" : "0"), "Auto-save tasks")
+        alwaysOnTopCheck := settingsGui.AddCheckbox("xm y+5 c" . colors.text . " Checked" . (this.settings.alwaysOnTop ? "1" : "0"), "Always on top")
         
         ; Buttons
         saveBtn := settingsGui.AddButton("xm y+30 w80 h30 Background" . colors.green . " c" . colors.bg, "💾 Save")
         cancelBtn := settingsGui.AddButton("x+10 yp w80 h30 Background" . colors.red . " c" . colors.bg, "❌ Cancel")
         
-        saveBtn.OnEvent("Click", this.SaveSettingsWrapper.Bind(this, settingsGui, notificationCheck, soundCheck, intervalEdit, autoSaveCheck))
+        saveBtn.OnEvent("Click", this.SaveSettingsWrapper.Bind(this, settingsGui, notificationCheck, soundCheck, intervalEdit, autoSaveCheck, alwaysOnTopCheck))
         cancelBtn.OnEvent("Click", this.CloseSettingsDialog.Bind(this, settingsGui))
         
         settingsGui.Show()
     }
     
-    SaveSettingsFromGUI(gui, notificationCheck, soundCheck, intervalEdit, autoSaveCheck) {
+    SaveSettingsFromGUI(gui, notificationCheck, soundCheck, intervalEdit, autoSaveCheck, alwaysOnTopCheck) {
         this.settings.showNotifications := notificationCheck.Value
         this.settings.playSound := soundCheck.Value
         this.settings.reminderInterval := Integer(intervalEdit.Text) * 60000 ; Convert to milliseconds
         this.settings.autoSave := autoSaveCheck.Value
+        this.settings.alwaysOnTop := alwaysOnTopCheck.Value
         
         this.SaveSettings()
         
@@ -1442,13 +1565,20 @@ class CatppuccinTodoReminder {
         }
         this.SetupReminderTimer()
         
+        ; Apply always on top setting immediately
+        if this.settings.alwaysOnTop {
+            WinSetAlwaysOnTop(1, this.gui.Hwnd)
+        } else {
+            WinSetAlwaysOnTop(0, this.gui.Hwnd)
+        }
+        
         MsgBox("✅ Settings saved successfully!", "Settings", "Icon!")
         gui.Destroy()
     }
     
     ; Wrapper methods for settings dialog events
-    SaveSettingsWrapper(settingsGui, notificationCheck, soundCheck, intervalEdit, autoSaveCheck, *) {
-        this.SaveSettingsFromGUI(settingsGui, notificationCheck, soundCheck, intervalEdit, autoSaveCheck)
+    SaveSettingsWrapper(settingsGui, notificationCheck, soundCheck, intervalEdit, autoSaveCheck, alwaysOnTopCheck, *) {
+        this.SaveSettingsFromGUI(settingsGui, notificationCheck, soundCheck, intervalEdit, autoSaveCheck, alwaysOnTopCheck)
     }
     
     CloseSettingsDialog(settingsGui, *) {
@@ -1535,8 +1665,8 @@ class CatppuccinTodoReminder {
     
     ; Show the actual reminder notification
     ShowTaskReminder(task) {
-        if !task || task.completed {
-            return  ; Don't show reminders for completed tasks
+        if !task {
+            return
         }
         
         ; Ensure we have the task text
@@ -1585,7 +1715,7 @@ class CatppuccinTodoReminder {
     ; Schedule all existing reminders on startup
     ScheduleAllReminders() {
         for task in this.tasks {
-            if task.reminder && !task.completed {
+            if task.reminder {
                 this.ScheduleTaskReminder(task)
             }
         }

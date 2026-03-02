@@ -13,7 +13,7 @@ try {
 ; EXPLORER DIALOG CLASS
 ; ========================================
 
-class FixedExplorerDialogPathSelector {
+class ExplorerDialog {
     ; Properties
     parentManager := ""
     isInitialized := false
@@ -23,6 +23,8 @@ class FixedExplorerDialogPathSelector {
     settings := {
         hotkey: "MButton",
         favoritePaths: [],
+        recentFolders: [],
+        maxRecentFolders: 20,
         enableDebug: true,
         activePrefix: "► ",
         inactivePrefix: "    "
@@ -33,28 +35,7 @@ class FixedExplorerDialogPathSelector {
         this.parentManager := parentManager
         this.boundMenuHandler := this.ShowPathMenu.Bind(this)
         this.LoadSettings()
-        this.SetupHotkey()
         this.isInitialized := true
-    }
-    
-    ; Get colors from parent manager or use defaults
-    GetColors() {
-        if this.parentManager && this.parentManager.colors {
-            return this.parentManager.colors
-        }
-        ; Fallback colors if no parent manager
-        return {
-            bg: "0x1e1e2e",       ; Background
-            mantle: "0x181825",    ; Darker background
-            surface0: "0x313244",  ; Surface
-            surface1: "0x45475a",  ; Lighter surface
-            text: "0xcdd6f4",      ; Main text
-            subtext1: "0xbac2de",  ; Dimmed text
-            blue: "0x89b4fa",      ; Accent blue
-            mauve: "0xcba6f7",     ; Purple
-            red: "0xf38ba8",       ; Red
-            green: "0xa6e3a1"      ; Green
-        }
     }
     
     ; ========================================
@@ -62,7 +43,7 @@ class FixedExplorerDialogPathSelector {
     ; ========================================
     
     LoadSettings() {
-        settingsFile := A_AppData "\ExplorerDialogPathSelector\settings.ini"
+        settingsFile := A_ScriptDir "\Settings\explorer_settings.ini"
         if FileExist(settingsFile) {
             try {
                 this.settings.hotkey := IniRead(settingsFile, "Settings", "Hotkey", "MButton")
@@ -70,11 +51,21 @@ class FixedExplorerDialogPathSelector {
                 
                 ; Load favorite paths
                 this.settings.favoritePaths := []
-                favCount := IniRead(settingsFile, "Favorites", "Count", "0")
+                favCount := Integer(IniRead(settingsFile, "Favorites", "Count", "0"))
                 Loop favCount {
                     path := IniRead(settingsFile, "Favorites", "Path" . A_Index, "")
-                    if path && DirExist(path) {
+                    if path {
                         this.settings.favoritePaths.Push(path)
+                    }
+                }
+                
+                ; Load recent folders
+                this.settings.recentFolders := []
+                recentCount := Integer(IniRead(settingsFile, "Recent", "Count", "0"))
+                Loop recentCount {
+                    path := IniRead(settingsFile, "Recent", "Path" . A_Index, "")
+                    if path {
+                        this.settings.recentFolders.Push(path)
                     }
                 }
             } catch as err {
@@ -83,9 +74,9 @@ class FixedExplorerDialogPathSelector {
         }
     }
     
-    SaveSettings() {
-        settingsFile := A_AppData "\ExplorerDialogPathSelector\settings.ini"
-        settingsDir := A_AppData "\ExplorerDialogPathSelector"
+    SaveSettings(showMessage := true) {
+        settingsFile := A_ScriptDir "\Settings\explorer_settings.ini"
+        settingsDir := A_ScriptDir "\Settings"
         
         ; Create directory if it doesn't exist
         if !DirExist(settingsDir) {
@@ -93,7 +84,6 @@ class FixedExplorerDialogPathSelector {
         }
         
         try {
-            IniWrite(this.settings.hotkey, settingsFile, "Settings", "Hotkey")
             IniWrite(this.settings.enableDebug ? "1" : "0", settingsFile, "Settings", "EnableDebug")
             
             ; Save favorite paths
@@ -102,9 +92,19 @@ class FixedExplorerDialogPathSelector {
                 IniWrite(this.settings.favoritePaths[A_Index], settingsFile, "Favorites", "Path" . A_Index)
             }
             
-            MsgBox("✅ Settings saved successfully!", "⚙️ Settings", "Icon!")
+            ; Save recent folders
+            IniWrite(this.settings.recentFolders.Length, settingsFile, "Recent", "Count")
+            Loop this.settings.recentFolders.Length {
+                IniWrite(this.settings.recentFolders[A_Index], settingsFile, "Recent", "Path" . A_Index)
+            }
+            
+            if showMessage {
+                MsgBox("✅ Settings saved successfully!", "⚙️ Settings", "Icon!")
+            }
         } catch as err {
-            MsgBox("❌ Error saving settings: " . err.Message, "⚠️ Error", "Icon!")
+            if showMessage {
+                MsgBox("❌ Error saving settings: " . err.Message, "⚠️ Error", "Icon!")
+            }
         }
     }
     
@@ -185,44 +185,95 @@ class FixedExplorerDialogPathSelector {
             return
         }
         ; Allow menu for dialogs, consoles, Java dialogs, and Explorer windows
-        if !(windowClass ~= "i)^(#32770|ConsoleWindowClass|SunAwtDialog|CabinetWClass|ExplorerWClass)$") {
+        if !(windowClass ~= "i)^(#32770|ConsoleWindowClass|CASCADIA_HOSTING_WINDOW_CLASS|WindowsTerminalPaneWindow|SunAwtDialog|CabinetWClass|ExplorerWClass)$") {
             return
         }
+        
+        ; Collect all available items
+        recentItems := []
+        favoriteItems := []
+        explorerItems := []
+        
+        ; Get recent folders (exclude those already in favorites)
+        for path in this.settings.recentFolders {
+            isDuplicate := false
+            for favPath in this.settings.favoritePaths {
+                if path = favPath {
+                    isDuplicate := true
+                    break
+                }
+            }
+            if !isDuplicate {
+                recentItems.Push(path)
+            }
+        }
+        
+        ; Get favorites
+        for path in this.settings.favoritePaths {
+            favoriteItems.Push(path)
+        }
+        
+        ; Get Explorer windows
+        explorerPaths := this.GetExplorerPaths()
+        for pathObj in explorerPaths {
+            explorerItems.Push(pathObj)
+        }
+        
+        ; Simple distribution: Favorites (all), Explorer (all), Recent (max 4)
+        favoriteShow := favoriteItems.Length
+        explorerShow := explorerItems.Length
+        recentShow := Min(recentItems.Length, 4)
+        
         ; Create menu
         pathMenu := Menu()
         itemCount := 0
         
-        ; Add favorites
-        if this.settings.favoritePaths.Length > 0 {
+        ; Add favorites FIRST for visibility
+        if favoriteShow > 0 {
             pathMenu.Add("⭐ Favorites", (*) => "")
             pathMenu.Disable("⭐ Favorites")
             itemCount++
             
-            for path in this.settings.favoritePaths {
+            Loop favoriteShow {
+                path := favoriteItems[A_Index]
                 displayText := this.settings.inactivePrefix . path
-                ; Capture path value in closure
                 capturedPath := path
                 pathMenu.Add(displayText, ((p) => (item, pos, menu) => this.NavigateToPath(p, windowID, windowClass))(capturedPath))
                 itemCount++
             }
             
-            if itemCount > 1 { ; If we have actual favorites, add separator
-                pathMenu.Add()
-                itemCount++
-            }
+            pathMenu.Add()
+            itemCount++
         }
         
-        ; Add Explorer paths
-        explorerPaths := this.GetExplorerPaths()
-        if explorerPaths.Length > 0 {
+        ; Add recent folders
+        if recentShow > 0 {
+            pathMenu.Add("🕒 Recent Folders", (*) => "")
+            pathMenu.Disable("🕒 Recent Folders")
+            itemCount++
+            
+            Loop recentShow {
+                path := recentItems[A_Index]
+                displayText := this.settings.inactivePrefix . path
+                capturedPath := path
+                pathMenu.Add(displayText, ((p) => (item, pos, menu) => this.NavigateToPath(p, windowID, windowClass))(capturedPath))
+                itemCount++
+            }
+            
+            pathMenu.Add()
+            itemCount++
+        }
+        
+        ; Add Explorer windows
+        if explorerShow > 0 {
             pathMenu.Add("🖥️ Explorer Windows", (*) => "")
             pathMenu.Disable("🖥️ Explorer Windows")
             itemCount++
             
-            for pathObj in explorerPaths {
+            Loop explorerShow {
+                pathObj := explorerItems[A_Index]
                 prefix := pathObj.isActive ? this.settings.activePrefix : this.settings.inactivePrefix
                 displayText := prefix . pathObj.path
-                ; Capture path value in closure
                 capturedPath := pathObj.path
                 pathMenu.Add(displayText, ((p) => (item, pos, menu) => this.NavigateToPath(p, windowID, windowClass))(capturedPath))
                 itemCount++
@@ -236,6 +287,7 @@ class FixedExplorerDialogPathSelector {
         if DirExist(A_Clipboard) {
             if itemCount > 0 {
                 pathMenu.Add()
+                itemCount++
             }
             pathMenu.Add("📋 From Clipboard", (*) => "")
             pathMenu.Disable("📋 From Clipboard")
@@ -269,6 +321,10 @@ class FixedExplorerDialogPathSelector {
             MsgBox("❌ Path does not exist: " . path, "⚠️ Error", "Icon!")
             return
         }
+        
+        ; Track this folder usage
+        this.TrackFolderUsage(path)
+        
         ; Activate the target window
         try {
             WinActivate("ahk_id " . windowID)
@@ -287,7 +343,7 @@ class FixedExplorerDialogPathSelector {
         }
         ; Handle different window types
         switch windowClass {
-            case "ConsoleWindowClass":
+            case "ConsoleWindowClass", "CASCADIA_HOSTING_WINDOW_CLASS":
                 this.NavigateConsole(path)
             case "SunAwtDialog":
                 this.NavigateJavaDialog(path)
@@ -296,6 +352,36 @@ class FixedExplorerDialogPathSelector {
             default:
                 this.NavigateStandardDialog(path, windowID)
         }
+    }
+
+    ; ========================================
+    ; FOLDER TRACKING
+    ; ========================================
+    
+    TrackFolderUsage(path) {
+        if !path || !DirExist(path) {
+            return
+        }
+        
+        ; Add to recent folders
+        ; Remove if already exists
+        for i, folder in this.settings.recentFolders {
+            if folder = path {
+                this.settings.recentFolders.RemoveAt(i)
+                break
+            }
+        }
+        
+        ; Add to beginning
+        this.settings.recentFolders.InsertAt(1, path)
+        
+        ; Trim to max
+        while this.settings.recentFolders.Length > this.settings.maxRecentFolders {
+            this.settings.recentFolders.Pop()
+        }
+        
+        ; Save settings silently
+        this.SaveSettings(false)
     }
 
     NavigateExplorerWindow(path, windowID) {
@@ -311,7 +397,6 @@ class FixedExplorerDialogPathSelector {
             SendInput(path)
             Sleep(50)
             SendInput("{Enter}")
-            Sleep(100)
             ; Fallback: if path did not change, try clicking address bar
             ; Optionally, you can add ControlClick or UIA automation here if needed
         } catch {
@@ -422,19 +507,26 @@ class FixedExplorerDialogPathSelector {
     ; ========================================
     
     ShowSettingsGUI() {
-        local myWindow, hotkeyEdit, debugCheck, favEdit
-        colors := this.GetColors()
+        local myWindow, debugCheck, favEdit
+        
+        ; Catppuccin Mocha colors for settings window
+        colors := {
+            bg: "0x1e1e2e",
+            surface0: "0x313244",
+            text: "0xcdd6f4",
+            subtext1: "0xbac2de",
+            green: "0xa6e3a1",
+            red: "0xf38ba8",
+            blue: "0x89b4fa",
+            mauve: "0xcba6f7"
+        }
         
         myWindow := Gui("+Resize", "⚙️ Path Selector Settings")
         myWindow.SetFont("s10", "Segoe UI")
         myWindow.BackColor := colors.bg
         
-        ; Hotkey setting
-        myWindow.AddText("xm ym w100 c" . colors.text, "⌨️ Hotkey:")
-        hotkeyEdit := myWindow.AddEdit("x+10 yp-3 w200 Background" . colors.surface0 . " c" . colors.text, this.settings.hotkey)
-        
         ; Debug mode
-        debugCheck := myWindow.AddCheckbox("xm y+15 c" . colors.text, "🔧 Enable Debug Mode")
+        debugCheck := myWindow.AddCheckbox("xm ym c" . colors.text, "🔧 Enable Debug Mode")
         debugCheck.Value := this.settings.enableDebug
         
         ; Favorites section
@@ -450,7 +542,7 @@ class FixedExplorerDialogPathSelector {
         favEdit := myWindow.AddEdit("xm y+5 w400 h150 VScroll Background" . colors.surface0 . " c" . colors.text, Trim(favText, "`n"))
         
         ; Buttons
-        myWindow.AddButton("xm y+10 w80 Background" . colors.green . " c" . colors.bg, "💾 Save").OnEvent("Click", (*) => this.SaveSettingsFromGUI(myWindow, hotkeyEdit, debugCheck, favEdit))
+        myWindow.AddButton("xm y+10 w80 Background" . colors.green . " c" . colors.bg, "💾 Save").OnEvent("Click", (*) => this.SaveSettingsFromGUI(myWindow, debugCheck, favEdit))
         myWindow.AddButton("x+10 yp w80 Background" . colors.red . " c" . colors.bg, "❌ Cancel").OnEvent("Click", (*) => myWindow.Destroy())
         myWindow.AddButton("x+10 yp w110 Background" . colors.blue . " c" . colors.bg, "➕ Add Current").OnEvent("Click", (*) => this.AddCurrentPath(favEdit))
         myWindow.AddButton("x+10 yp w80 Background" . colors.mauve . " c" . colors.bg, "📂 Browse").OnEvent("Click", (*) => this.BrowseFavoritePath(favEdit))
@@ -458,10 +550,7 @@ class FixedExplorerDialogPathSelector {
         myWindow.Show()
     }
     
-    SaveSettingsFromGUI(myWindow, hotkeyEdit, debugCheck, favEdit) {
-        oldHotkey := this.settings.hotkey
-        
-        this.settings.hotkey := hotkeyEdit.Value
+    SaveSettingsFromGUI(myWindow, debugCheck, favEdit) {
         this.settings.enableDebug := debugCheck.Value
         
         ; Save favorites from the edit control
@@ -474,11 +563,6 @@ class FixedExplorerDialogPathSelector {
             if line && DirExist(line) {
                 this.settings.favoritePaths.Push(line)
             }
-        }
-        
-        ; Update hotkey if changed
-        if this.settings.hotkey !== oldHotkey {
-            this.UpdateHotkey(this.settings.hotkey)
         }
         
         this.SaveSettings()

@@ -1,23 +1,9 @@
 ; Text Expander Class
-; Auto-expand text shortcuts with Catppuccin-themed management
 ; Features: Custom shortcuts, instant expansion, easy management
 
-class CatppuccinTextExpander {
-    ; Catppuccin Mocha color palette
-    colors := {
-        bg: "0x1e1e2e",       ; Background
-        mantle: "0x181825",    ; Darker background
-        surface0: "0x313244",  ; Surface
-        surface1: "0x45475a",  ; Lighter surface
-        text: "0xcdd6f4",      ; Main text
-        subtext1: "0xbac2de",  ; Dimmed text
-        blue: "0x89b4fa",      ; Accent blue
-        mauve: "0xcba6f7",     ; Purple
-        red: "0xf38ba8",       ; Red
-        green: "0xa6e3a1",     ; Green
-        yellow: "0xf9e2af",    ; Yellow
-        overlay0: "0x6c7086"   ; Overlay
-    }
+class TextExpander {
+    ; Properties
+    parentManager := ""
     
     ; Settings
     settings := {
@@ -36,7 +22,8 @@ class CatppuccinTextExpander {
     isEnabled := true
     
     ; Constructor
-    __New() {
+    __New(parentManager := "") {
+        this.parentManager := parentManager
         this.shortcutsFile := A_ScriptDir . "\Settings\text_shortcuts.ini"
         this.LoadShortcuts()
         
@@ -248,21 +235,29 @@ class CatppuccinTextExpander {
     ; ========================================
     
     ShowSettings() {
+        ; Catppuccin Mocha colors for settings window
+        colors := {
+            bg: "0x1e1e2e",
+            text: "0xcdd6f4",
+            green: "0xa6e3a1",
+            red: "0xf38ba8"
+        }
+        
         settingsGui := Gui("+Resize -MaximizeBox", "Text Expander Settings")
         settingsGui.SetFont("s10", "Segoe UI")
-        settingsGui.BackColor := this.colors.bg
+        settingsGui.BackColor := colors.bg
         
         ; Status display
-        settingsGui.AddText("xm ym c" . this.colors.text, "Status: " . (this.isEnabled ? "Enabled" : "Disabled") . " (Use Ctrl+Shift+E to toggle)")
+        settingsGui.AddText("xm ym c" . colors.text, "Status: " . (this.isEnabled ? "Enabled" : "Disabled") . " (Use Ctrl+Shift+E to toggle)")
         
         ; Options
-        settingsGui.AddText("xm y+20 c" . this.colors.text, "Options:")
-        caseSensitiveCheck := settingsGui.AddCheckbox("xm y+10 c" . this.colors.text . " Checked" . (this.settings.caseSensitive ? "1" : "0"), "Case sensitive shortcuts")
-        notificationsCheck := settingsGui.AddCheckbox("xm y+5 c" . this.colors.text . " Checked" . (this.settings.showNotifications ? "1" : "0"), "Show expansion notifications")
+        settingsGui.AddText("xm y+20 c" . colors.text, "Options:")
+        caseSensitiveCheck := settingsGui.AddCheckbox("xm y+10 c" . colors.text . " Checked" . (this.settings.caseSensitive ? "1" : "0"), "Case sensitive shortcuts")
+        notificationsCheck := settingsGui.AddCheckbox("xm y+5 c" . colors.text . " Checked" . (this.settings.showNotifications ? "1" : "0"), "Show expansion notifications")
         
         ; Buttons
-        settingsGui.AddButton("xm y+30 w80 Background" . this.colors.green . " c" . this.colors.bg, "Save").OnEvent("Click", (*) => this.SaveExpanderSettings(settingsGui, caseSensitiveCheck, notificationsCheck))
-        settingsGui.AddButton("x+10 yp w80 Background" . this.colors.red . " c" . this.colors.bg, "Cancel").OnEvent("Click", (*) => settingsGui.Destroy())
+        settingsGui.AddButton("xm y+30 w80 Background" . colors.green . " c" . colors.bg, "Save").OnEvent("Click", (*) => this.SaveExpanderSettings(settingsGui, caseSensitiveCheck, notificationsCheck))
+        settingsGui.AddButton("x+10 yp w80 Background" . colors.red . " c" . colors.bg, "Cancel").OnEvent("Click", (*) => settingsGui.Destroy())
         
         settingsGui.Show("w300 h200")
     }

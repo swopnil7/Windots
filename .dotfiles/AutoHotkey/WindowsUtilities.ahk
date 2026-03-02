@@ -1,6 +1,4 @@
 ; Windows Utilities Manager
-; Unified script manager for Catppuccin-themed Windows utilities
-; Manages: App Launcher and Explorer Dialog
 
 #Requires AutoHotkey v2.0
 #SingleInstance force
@@ -12,7 +10,7 @@ SetWorkingDir(A_ScriptDir)
 ; ========================================
 
 class WindowsUtilitiesManager {
-    ; Catppuccin Mocha color palette (shared across utilities)
+    ; Catppuccin Mocha color palette
     colors := {
         bg: "0x1e1e2e",       ; Background
         mantle: "0x181825",    ; Darker background
@@ -30,20 +28,27 @@ class WindowsUtilitiesManager {
     
     ; Settings
     settings := {
-        enableAppLauncher: true,
         enableExplorerDialog: true,
         enableQuickNoteTaker: true,
         enableTextExpander: true,
         enableTodoReminder: true,
         enableDebug: true,
-        version: "1.0.0"
+        version: "1.0.0",
+        hotkeys: {
+            quickNotes: "!+n",       ; Alt+Shift+N
+            todoReminder: "!+t",     ; Alt+Shift+T
+            textExpander: "^+e",     ; Ctrl+Shift+E
+            desktopIcons: "^#i",     ; Ctrl+Win+I
+            explorerDialog: "^MButton",  ; Ctrl+Middle Mouse Button
+            suspendHotkeys: "^#p",   ; Ctrl+Win+P
+            reloadAll: "^+!r"        ; Ctrl+Shift+Alt+R
+        }
     }
     
     ; Hotkey state
     hotkeysSuspended := false
     
     ; Utility instances
-    appLauncher := ""
     explorerDialog := ""
     quickNoteTaker := ""
     textExpander := ""
@@ -51,6 +56,7 @@ class WindowsUtilitiesManager {
     
     ; Constructor
     __New() {
+        this.LoadSettings()
         this.SetupTrayMenu()
         this.InitializeUtilities()
         this.ShowDebug("Windows Utilities Manager initialized")
@@ -60,22 +66,36 @@ class WindowsUtilitiesManager {
     ; INITIALIZATION
     ; ========================================
     
-    InitializeUtilities() {
-        ; Initialize App Launcher
-        if this.settings.enableAppLauncher {
+    LoadSettings() {
+        settingsFile := A_ScriptDir . "\Settings\manager_settings.ini"
+        if FileExist(settingsFile) {
             try {
-                this.appLauncher := CatppuccinAppLauncher()
-                this.ShowDebug("App Launcher initialized")
+                ; Load utilities enable/disable settings
+                this.settings.enableExplorerDialog := IniRead(settingsFile, "Utilities", "EnableExplorerDialog", "1") = "1"
+                this.settings.enableQuickNoteTaker := IniRead(settingsFile, "Utilities", "EnableQuickNoteTaker", "1") = "1"
+                this.settings.enableTextExpander := IniRead(settingsFile, "Utilities", "EnableTextExpander", "1") = "1"
+                this.settings.enableTodoReminder := IniRead(settingsFile, "Utilities", "EnableTodoReminder", "1") = "1"
+                this.settings.enableDebug := IniRead(settingsFile, "Utilities", "EnableDebug", "1") = "1"
+                
+                ; Load hotkeys
+                this.settings.hotkeys.quickNotes := IniRead(settingsFile, "Hotkeys", "QuickNotes", "!+n")
+                this.settings.hotkeys.todoReminder := IniRead(settingsFile, "Hotkeys", "TodoReminder", "!+t")
+                this.settings.hotkeys.textExpander := IniRead(settingsFile, "Hotkeys", "TextExpander", "^+e")
+                this.settings.hotkeys.desktopIcons := IniRead(settingsFile, "Hotkeys", "DesktopIconToggle", "^#i")
+                this.settings.hotkeys.explorerDialog := IniRead(settingsFile, "Hotkeys", "ExplorerDialog", "^MButton")
+                this.settings.hotkeys.suspendHotkeys := IniRead(settingsFile, "Hotkeys", "SuspendAll", "^#p")
+                this.settings.hotkeys.reloadAll := IniRead(settingsFile, "Hotkeys", "ReloadAll", "^+!r")
             } catch as err {
-                this.ShowDebug("Failed to initialize App Launcher: " . err.Message)
-                MsgBox("Failed to initialize App Launcher: " . err.Message, "Initialization Error", "Icon!")
+                this.ShowDebug("Failed to load settings from INI: " . err.Message)
             }
         }
-        
+    }
+    
+    InitializeUtilities() {
         ; Initialize Explorer Dialog
         if this.settings.enableExplorerDialog {
             try {
-                this.explorerDialog := FixedExplorerDialogPathSelector(this)
+                this.explorerDialog := ExplorerDialog(this)
                 this.ShowDebug("Explorer Dialog initialized")
             } catch as err {
                 this.ShowDebug("Failed to initialize Explorer Dialog: " . err.Message)
@@ -86,7 +106,7 @@ class WindowsUtilitiesManager {
         ; Initialize Quick Note Taker
         if this.settings.enableQuickNoteTaker {
             try {
-                this.quickNoteTaker := QuickNoteTaker()
+                this.quickNoteTaker := QuickNoteTaker(this)
                 this.ShowDebug("Quick Note Taker initialized")
             } catch as err {
                 this.ShowDebug("Failed to initialize Quick Note Taker: " . err.Message)
@@ -97,7 +117,7 @@ class WindowsUtilitiesManager {
         ; Initialize Text Expander
         if this.settings.enableTextExpander {
             try {
-                this.textExpander := CatppuccinTextExpander()
+                this.textExpander := TextExpander(this)
                 this.ShowDebug("Text Expander initialized")
             } catch as err {
                 this.ShowDebug("Failed to initialize Text Expander: " . err.Message)
@@ -108,7 +128,7 @@ class WindowsUtilitiesManager {
         ; Initialize To-Do & Reminders
         if this.settings.enableTodoReminder {
             try {
-                this.todoReminder := CatppuccinTodoReminder(this)
+                this.todoReminder := TodoReminder(this)
                 this.ShowDebug("To-Do & Reminders initialized")
             } catch as err {
                 this.ShowDebug("Failed to initialize To-Do & Reminders: " . err.Message)
@@ -126,10 +146,9 @@ class WindowsUtilitiesManager {
         A_TrayMenu.Delete()
         
         ; Add utility controls
-        A_TrayMenu.Add("🚀 App Launcher", (*) => this.ToggleAppLauncher())
-        A_TrayMenu.Add("📝 Quick Notes", (*) => this.ToggleQuickNotes())
+        A_TrayMenu.Add("� Quick Notes", (*) => this.ToggleQuickNotes())
         A_TrayMenu.Add("📋 To-Do", (*) => this.ToggleTodoReminder())
-        A_TrayMenu.Add("🖥️ Icon Toggle", (*) => DesktopIconToggle_ToggleIcons())
+        A_TrayMenu.Add("🖥️ Icon Toggle", (*) => DesktopIconToggle())
         A_TrayMenu.Add()  ; Separator
         
         ; Explorer Dialog submenu
@@ -160,9 +179,6 @@ class WindowsUtilitiesManager {
         A_TrayMenu.Add("❓ Help", (*) => this.ShowHelp())
         A_TrayMenu.Add("❌ Exit", (*) => this.ExitApp())
         
-        ; Set default action (double-click tray icon)
-        A_TrayMenu.Default := "🚀 App Launcher"
-        
         ; Set custom tray tip
         A_IconTip := "Windows Utilities Manager"
     }
@@ -170,14 +186,6 @@ class WindowsUtilitiesManager {
     ; ========================================
     ; UTILITY ACTIONS
     ; ========================================
-    
-    ToggleAppLauncher() {
-        if this.appLauncher {
-            this.appLauncher.Toggle()
-        } else {
-            MsgBox("App Launcher is not available.", "Error", "Icon!")
-        }
-    }
     
     ToggleQuickNotes() {
         if this.quickNoteTaker {
@@ -268,45 +276,143 @@ class WindowsUtilitiesManager {
     }
     
     ShowSettings() {
-        ; Create a simple settings GUI
-        settingsGui := Gui("+Resize -MaximizeBox", "Windows Utilities Settings")
+        settingsGui := Gui("-MaximizeBox -MinimizeBox -SysMenu +ToolWindow", "Windows Utilities Settings")
         settingsGui.SetFont("s10", "Segoe UI")
         settingsGui.BackColor := this.colors.bg
         
-        ; Utility toggles
+        settingsGui.OnEvent("Escape", (*) => settingsGui.Destroy())
+        
         settingsGui.AddText("xm ym c" . this.colors.text, "Enabled Utilities:")
-        appLauncherCheck := settingsGui.AddCheckbox("xm y+10 c" . this.colors.text . " Checked" . (this.settings.enableAppLauncher ? "1" : "0"), "App Launcher (Win+Space)")
-        explorerCheck := settingsGui.AddCheckbox("xm y+5 c" . this.colors.text . " Checked" . (this.settings.enableExplorerDialog ? "1" : "0"), "Explorer Dialog (Middle-click)")
-        quickNotesCheck := settingsGui.AddCheckbox("xm y+5 c" . this.colors.text . " Checked" . (this.settings.enableQuickNoteTaker ? "1" : "0"), "Quick Note Taker (Ctrl+Shift+N)")
-        textExpanderCheck := settingsGui.AddCheckbox("xm y+5 c" . this.colors.text . " Checked" . (this.settings.enableTextExpander ? "1" : "0"), "Text Expander (@@, addr, etc.)")
-        todoReminderCheck := settingsGui.AddCheckbox("xm y+5 c" . this.colors.text . " Checked" . (this.settings.enableTodoReminder ? "1" : "0"), "To-Do & Reminders (Alt+Shift+T)")
+        explorerCheck := settingsGui.AddCheckbox("xm y+5 c" . this.colors.text . " Checked" . (this.settings.enableExplorerDialog ? "1" : "0"), "Explorer Dialog")
+        quickNotesCheck := settingsGui.AddCheckbox("xm y+3 c" . this.colors.text . " Checked" . (this.settings.enableQuickNoteTaker ? "1" : "0"), "Quick Notes")
+        textExpanderCheck := settingsGui.AddCheckbox("xm y+3 c" . this.colors.text . " Checked" . (this.settings.enableTextExpander ? "1" : "0"), "Text Expander")
+        todoReminderCheck := settingsGui.AddCheckbox("xm y+3 c" . this.colors.text . " Checked" . (this.settings.enableTodoReminder ? "1" : "0"), "To-Do & Reminders")
         
-        settingsGui.AddText("xm y+20 c" . this.colors.text, "Debug:")
-        debugCheck := settingsGui.AddCheckbox("xm y+5 c" . this.colors.text . " Checked" . (this.settings.enableDebug ? "1" : "0"), "Enable debug logging")
+        settingsGui.AddText("xm y+10 c" . this.colors.text, "Debug:")
+        debugCheck := settingsGui.AddCheckbox("xm y+3 c" . this.colors.text . " Checked" . (this.settings.enableDebug ? "1" : "0"), "Enable debug logging")
         
-        ; Buttons
-        settingsGui.AddButton("xm y+30 w80 h30", "Save").OnEvent("Click", (*) => this.SaveSettings(settingsGui, appLauncherCheck, explorerCheck, quickNotesCheck, textExpanderCheck, todoReminderCheck, debugCheck))
-        settingsGui.AddButton("x+10 w80 h30", "Cancel").OnEvent("Click", (*) => settingsGui.Destroy())
+        settingsGui.AddText("xm y+15 c" . this.colors.text, "Keybindings:")
         
-        settingsGui.Show("w400 h300")
+        settingsGui.AddText("xm y+8 c" . this.colors.subtext1, "Quick Notes:")
+        quickNotesEdit := settingsGui.AddEdit("xm y+2 w150 h22 Background" . this.colors.surface0 . " c" . this.colors.text, this.FormatHotkey(this.settings.hotkeys.quickNotes))
+        
+        settingsGui.AddText("xm y+6 c" . this.colors.subtext1, "To-Do Manager:")
+        todoEdit := settingsGui.AddEdit("xm y+2 w150 h22 Background" . this.colors.surface0 . " c" . this.colors.text, this.FormatHotkey(this.settings.hotkeys.todoReminder))
+        
+        settingsGui.AddText("xm y+6 c" . this.colors.subtext1, "Text Expander:")
+        textExpanderEdit := settingsGui.AddEdit("xm y+2 w150 h22 Background" . this.colors.surface0 . " c" . this.colors.text, this.FormatHotkey(this.settings.hotkeys.textExpander))
+        
+        settingsGui.AddText("xm y+6 c" . this.colors.subtext1, "Desktop Icons:")
+        iconToggleEdit := settingsGui.AddEdit("xm y+2 w150 h22 Background" . this.colors.surface0 . " c" . this.colors.text, this.FormatHotkey(this.settings.hotkeys.desktopIcons))
+        
+        settingsGui.AddText("xm y+6 c" . this.colors.subtext1, "Explorer Dialog:")
+        explorerEdit := settingsGui.AddEdit("xm y+2 w150 h22 Background" . this.colors.surface0 . " c" . this.colors.text, this.FormatHotkey(this.settings.hotkeys.explorerDialog))
+        
+        settingsGui.AddButton("xm y+15 w70 h25", "Save").OnEvent("Click", (*) => this.SaveSettings(settingsGui, explorerCheck, quickNotesCheck, textExpanderCheck, todoReminderCheck, debugCheck, quickNotesEdit, todoEdit, textExpanderEdit, iconToggleEdit, explorerEdit))
+        settingsGui.AddButton("x+5 w70 h25", "Cancel").OnEvent("Click", (*) => settingsGui.Destroy())
+        
+        settingsGui.Show("w170 h500")
     }
     
-    SaveSettings(gui, appCheck, explorerCheck, quickNotesCheck, textExpanderCheck, todoReminderCheck, debugCheck) {
-        this.settings.enableAppLauncher := appCheck.Value
+    SaveSettings(gui, explorerCheck, quickNotesCheck, textExpanderCheck, todoReminderCheck, debugCheck, quickNotesEdit := "", todoEdit := "", textExpanderEdit := "", iconToggleEdit := "", explorerEdit := "") {
         this.settings.enableExplorerDialog := explorerCheck.Value
         this.settings.enableQuickNoteTaker := quickNotesCheck.Value
         this.settings.enableTextExpander := textExpanderCheck.Value
         this.settings.enableTodoReminder := todoReminderCheck.Value
         this.settings.enableDebug := debugCheck.Value
         
+        if quickNotesEdit && quickNotesEdit.Value {
+            this.settings.hotkeys.quickNotes := this.ParseHotkey(quickNotesEdit.Value)
+        }
+        if todoEdit && todoEdit.Value {
+            this.settings.hotkeys.todoReminder := this.ParseHotkey(todoEdit.Value)
+        }
+        if textExpanderEdit && textExpanderEdit.Value {
+            this.settings.hotkeys.textExpander := this.ParseHotkey(textExpanderEdit.Value)
+        }
+        if iconToggleEdit && iconToggleEdit.Value {
+            this.settings.hotkeys.desktopIcons := this.ParseHotkey(iconToggleEdit.Value)
+        }
+        if explorerEdit && explorerEdit.Value {
+            this.settings.hotkeys.explorerDialog := this.ParseHotkey(explorerEdit.Value)
+        }
+        
         MsgBox("Settings saved!`nRestart the script to apply changes.", "Settings", "Icon!")
         gui.Destroy()
     }
     
+    ; ========================================
+    ; KEYBINDING UTILITIES
+    ; ========================================
+    
+    ; Convert AHK hotkey format (^+e) to human-readable format (ctrl+shift+e)
+    FormatHotkey(hotkeyStr) {
+        human := ""
+        pos := 1
+        
+        ; Process each modifier character in order
+        while pos <= StrLen(hotkeyStr) {
+            char := SubStr(hotkeyStr, pos, 1)
+            if char = "^" {
+                human .= "ctrl+"
+            } else if char = "+" {
+                human .= "shift+"
+            } else if char = "!" {
+                human .= "alt+"
+            } else if char = "#" {
+                human .= "win+"
+            } else {
+                break  ; Rest is the key
+            }
+            pos++
+        }
+        
+        ; Add the remaining key part in lowercase
+        if pos <= StrLen(hotkeyStr) {
+            human .= StrLower(SubStr(hotkeyStr, pos))
+        }
+        
+        return human
+    }
+    
+    ; Convert human-readable format (ctrl+shift+e) to AHK format (^+e)
+    ParseHotkey(humanStr) {
+        ahkFormat := ""
+        humanStr := StrLower(Trim(humanStr))
+        
+        ; Split by + and process each part
+        parts := StrSplit(humanStr, "+")
+        key := ""
+        
+        for part in parts {
+            part := Trim(part)
+            
+            if part = "ctrl" {
+                ahkFormat .= "^"
+            } else if part = "shift" {
+                ahkFormat .= "+"
+            } else if part = "alt" {
+                ahkFormat .= "!"
+            } else if part = "win" {
+                ahkFormat .= "#"
+            } else {
+                key := part
+            }
+        }
+        
+        ; Add the key in uppercase
+        ahkFormat .= StrUpper(key)
+        
+        return ahkFormat
+    }
+    
+    ; ========================================
+    ; STATUS AND HELP
+    ; ========================================
+    
     ShowStatus() {
         status := "Windows Utilities Manager v" . this.settings.version . "`n`n"
-        status .= "🚀 App Launcher: " . (this.appLauncher ? "✅ Active" : "❌ Inactive") . "`n"
-        status .= "📁 Explorer Dialog: " . (this.explorerDialog ? "✅ Active" : "❌ Inactive") . "`n"
+        status .= " Explorer Dialog: " . (this.explorerDialog ? "✅ Active" : "❌ Inactive") . "`n"
         status .= "📝 Quick Notes: " . (this.quickNoteTaker ? "✅ Active" : "❌ Inactive") . "`n"
         status .= "📋 To-Do & Reminders: " . (this.todoReminder ? "✅ Active" : "❌ Inactive") . "`n"
         
@@ -321,10 +427,6 @@ class WindowsUtilitiesManager {
         }
         status .= "✨ Text Expander: " . textExpanderStatus . "`n`n"
         
-        if this.appLauncher {
-            status .= "Apps loaded: " . this.appLauncher.apps.Length . "`n"
-        }
-        
         status .= "Debug logging: " . (this.settings.enableDebug ? "Enabled" : "Disabled") . "`n"
         
         MsgBox(status, "Utilities Status", "Icon!")
@@ -332,11 +434,7 @@ class WindowsUtilitiesManager {
     
     ShowHelp() {
         help := "Windows Utilities Manager`n`n"
-        help .= "🚀 App Launcher:`n"
-        help .= "• Win+Space: Open app launcher`n"
-        help .= "• Type to search, Enter to launch`n"
-        help .= "• Arrow keys or Tab to navigate`n`n"
-        help .= "📁 Explorer Dialog:`n"
+        help .= " Explorer Dialog:`n"
         help .= "• Middle-click in file dialogs`n"
         help .= "• Quick access to common paths`n"
         help .= "• Browse and navigate easily`n`n"
@@ -356,7 +454,7 @@ class WindowsUtilitiesManager {
         help .= "⏸️ Suspend All Hotkeys:`n"
         help .= "• Ctrl+Win+P: Suspend/Resume all hotkeys`n"
         help .= "• Use to prevent AHK from intercepting shortcuts`n`n"
-        help .= "💡 Tip: Double-click tray icon for quick launcher access"
+        help .= "💡 Tip: Double-click tray icon for quick To-Do access"
         
         MsgBox(help, "Help", "Icon!")
     }
@@ -392,9 +490,6 @@ class WindowsUtilitiesManager {
 ; ========================================
 ; INCLUDE UTILITY CLASSES
 ; ========================================
-
-; Include App Launcher class
-#Include "Classes\AppLauncher_Class.ahk"
 
 ; Include Explorer Dialog class  
 #Include "Classes\ExplorerDialog_Class.ahk"
@@ -436,6 +531,23 @@ try {
     }
 }
 
+; Toggle Quick Notes (Alt+Shift+N, or from settings)
+DynamicQuickNotesHotkey() {
+    global UtilitiesManager
+    if UtilitiesManager && IsObject(UtilitiesManager) {
+        UtilitiesManager.ToggleQuickNotes()
+    } else {
+        MsgBox("Utilities Manager not properly initialized.", "Error", "Icon!")
+    }
+}
+
+; Assign the hotkey from settings at startup
+try {
+    Hotkey(UtilitiesManager.settings.hotkeys.quickNotes, (*) => DynamicQuickNotesHotkey())
+} catch as err {
+    MsgBox("Failed to register Quick Notes hotkey (" . UtilitiesManager.settings.hotkeys.quickNotes . "):`n" . err.Message, "Hotkey Error", "Icon!")
+}
+
 ; Toggle To-Do & Reminders
 !+t:: {
     global UtilitiesManager
@@ -447,10 +559,46 @@ try {
 }
 
 ; Toggle Desktop Icons
-^#i::DesktopIconToggle_ToggleIcons()
+^#i::DesktopIconToggle()
+
+; Reload All (Ctrl+Shift+Alt+R, or from settings)
+DynamicReloadAllHotkey() {
+    global UtilitiesManager
+    if UtilitiesManager && IsObject(UtilitiesManager) {
+        UtilitiesManager.ReloadAll()
+    } else {
+        Reload
+    }
+}
+
+try {
+    Hotkey(UtilitiesManager.settings.hotkeys.reloadAll, (*) => DynamicReloadAllHotkey())
+} catch as err {
+    MsgBox("Failed to register Reload All hotkey (" . UtilitiesManager.settings.hotkeys.reloadAll . "):`n" . err.Message, "Hotkey Error", "Icon!")
+}
+
+; Toggle Explorer Dialog (Ctrl+MButton, or from settings)
+DynamicExplorerDialogHotkey() {
+    global UtilitiesManager
+    if UtilitiesManager && IsObject(UtilitiesManager) {
+        if UtilitiesManager.explorerDialog {
+            UtilitiesManager.explorerDialog.ShowPathMenu()
+        } else {
+            MsgBox("Explorer Dialog is not available.", "Error", "Icon!")
+        }
+    } else {
+        MsgBox("Utilities Manager not properly initialized.", "Error", "Icon!")
+    }
+}
+
+try {
+    Hotkey(UtilitiesManager.settings.hotkeys.explorerDialog, (*) => DynamicExplorerDialogHotkey())
+} catch as err {
+    MsgBox("Failed to register Explorer Dialog hotkey (" . UtilitiesManager.settings.hotkeys.explorerDialog . "):`n" . err.Message, "Hotkey Error", "Icon!")
+}
 
 ; Show startup notification
-TrayTip("Windows Utilities Manager", "All utilities loaded successfully!`n🚀 Win+Space: App Launcher`n📁 Middle-click: Explorer Dialog`n📝 Alt+Shift+N: Quick Notes`n📋 Alt+Shift+T: To-Do & Reminders`n✨ Ctrl+Shift+E: Toggle Text Expander`n🖥️ Ctrl+Win+I: Toggle Desktop Icons`n⏸️ Ctrl+Win+P: Suspend All Hotkeys`n💬 Type @@@, addr, date to expand", "Icon!")
+TrayTip("Windows Utilities Manager", "All utilities loaded successfully!`n Middle-click: Explorer Dialog`n📝 Alt+Shift+N: Quick Notes`n📋 Alt+Shift+T: To-Do & Reminders`n✨ Ctrl+Shift+E: Toggle Text Expander`n🖥️ Ctrl+Win+I: Toggle Desktop Icons`n⏸️ Ctrl+Win+P: Suspend All Hotkeys`n💬 Type @@@, addr, date to expand", "Icon!")
 SetTimer(() => TrayTip(), -5000)
 
 ; Create Ctrl+Win+P hotkey that works even when suspended (placed after Suspend call)
