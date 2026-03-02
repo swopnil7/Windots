@@ -3,7 +3,7 @@
   "logo": {
     "type": "file",
     "source": "C:/Users/Swopnil/.config/fastfetch/windows.txt",
-    "padding": { "top": 1, "left": 0, "right": 4 }
+    "padding": { "top": 2, "left": 0, "right": 4 }
     },
   "display": {
     "separator": "  ",
@@ -89,19 +89,19 @@
       "showExternal": true
     },
     "break",
-    {
-      "type": "battery",
-      "key": "󰂄 Battery   >",
-      "keyColor": "#f9e2af",
-      "format": "{capacity} {status}"
-    },
-    {
-      "type": "wifi",
-      "key": "󰖩 Wi-Fi     >",
-      "keyColor": "#fab387",
-      "format": "{ssid}"
-    },
-    "break",
+    // {
+    //   "type": "battery",
+    //   "key": "󰂄 Battery   >",
+    //   "keyColor": "#f9e2af",
+    //   "format": "{capacity} {status}"
+    // },
+    // {
+    //   "type": "wifi",
+    //   "key": "󰖩 Wi-Fi     >",
+    //   "keyColor": "#fab387",
+    //   "format": "{ssid}"
+    // },
+    // "break",
     {
       "type": "packages",
       "key": "󰏖 Packages  >",
