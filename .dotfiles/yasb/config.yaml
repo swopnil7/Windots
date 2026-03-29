@@ -47,7 +47,7 @@ widgets:
     options:
       class_name: "left-grouper"
       widgets: [
-        "glazewm_workspaces",
+        "glazewm_workspaces"
       ]
       collapse_options:
         enabled: false
@@ -56,7 +56,7 @@ widgets:
     options:
       class_name: "active-window-grouper"
       widgets: [
-        "active_window",
+        "active_window"
       ]
       hide_empty: true
       collapse_options:
@@ -66,7 +66,7 @@ widgets:
     options:
       class_name: "media-grouper"
       widgets: [
-        "media",
+        "media"
       ]
       hide_empty: true
       collapse_options:
@@ -78,7 +78,7 @@ widgets:
       widgets: [
         "clock",
         "power_menu",
-        "weather",
+        "weather"
       ]
       collapse_options:
         enabled: false
@@ -93,7 +93,7 @@ widgets:
         "bluetooth",
         "volume",
         "battery",
-        "notifications",
+        "notifications"
       ]
       collapse_options:
         enabled: false
@@ -106,6 +106,7 @@ widgets:
         "disk",
         "wallpapers",
         "vscode",
+        #"ai_chat"
       ]
       collapse_options:
         enabled: false
@@ -114,7 +115,7 @@ widgets:
     options:
       class_name: "systray-grouper"
       widgets: [
-        "systray",
+        "systray"
       ]
       collapse_options:
         enabled: false
@@ -323,8 +324,23 @@ widgets:
       label: "<span>\ue266</span> {virtual_mem_used}"
       update_interval: 10000
       callbacks:
-        on_left: "do_nothing"
+        on_left: "toggle_menu"
         on_right: "exec start ms-settings:about"
+      menu:
+        enabled: true
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "System"
+        alignment: "right"
+        direction: "down"
+        offset_top: 7
+        offset_left: 0
+        graph_history_size: 60
+        show_graph: true
+        show_graph_grid: false
+        pin_icon: "\ue718"
+        unpin_icon: "\ue77a"
       label_shadow:
         enabled: true
         color: "black"
@@ -420,16 +436,21 @@ widgets:
         on_middle: "do_nothing"
         on_right: "exec start ms-settings:privacy-location"
       icons:
-        sunnyDay: "\udb81\udd99"
-        clearNight: "\ue3c2"
-        cloudyDay: "\ue21d"
-        cloudyNight: "\ue226"
-        rainyDay: "\ue3aa"
-        rainyNight: "\ue3ac"
-        snowyIcyDay: "\udb81\udf17"
-        snowyIcyNight: "\udb81\udf17"
-        blizzardDay: "\udb81\udd99"
-        default: "\udb81\udd99"
+        sunnyDay: "\ue30d"
+        clearNight: "\ue32b"
+        cloudyDay: "\ue312"
+        cloudyNight: "\ue311"
+        rainyDay: "\ue308"
+        rainyNight: "\ue333"
+        snowyDay: "\ue30a"
+        snowyNight: "\ue335"
+        blizzardDay: "\udb83\udf36"
+        blizzardNight: "\udb83\udf36"
+        foggyDay: "\ue303"
+        foggyNight: "\ue346"
+        thunderstormDay: "\ue30f"
+        thunderstormNight: "\ue338"
+        default: "\uebaa"
       weather_card:
         blur: true
         round_corners: true
@@ -452,7 +473,7 @@ widgets:
     options:
       label: "<span>{wifi_icon}</span> {wifi_strength}%"
       label_alt: "<span>{wifi_icon}</span> {wifi_name} {wifi_strength}%"
-      ethernet_label: "<span>{wifi_icon}</span>"
+      ethernet_label: "<span>{wifi_icon}</span>Eth"
       ethernet_label_alt: "<span>{wifi_icon}</span> {wifi_name}"
       ethernet_icon: "\uf108"
       update_interval: 5000
@@ -582,17 +603,19 @@ widgets:
     type: "yasb.power_menu.PowerMenuWidget"
     options:
       label: "\uf011"
+      show_user: false
       uptime: true
       blur: false
-      blur_background: false
+      blur_background: true
       animation_duration: 200
-      button_row: 5
+      button_row: 6
       buttons:
         shutdown: ["\uf011", "Shut Down"]
         restart: ["\uead2", "Restart"]
         signout: ["\udb80\udf43", "Sign out"]
         hibernate: ["\uf28e", "Hibernate"]
         sleep: ["\u23fe", "Sleep"]
+        lock: ["\uea75", "Lock"]
         cancel: ["", "Cancel"]
   notifications:
     type: "yasb.notifications.NotificationsWidget"
@@ -680,3 +703,42 @@ widgets:
         color: "black"
         radius: 3
         offset: [ 1, 1 ]
+  #ai_chat:
+    #type: "yasb.ai_chat.AiChatWidget"
+    #options:
+      #label: "<span>\uDB81\uDE74</span>"
+      #chat:
+        #blur: true
+        #round_corners: true
+        #round_corners_type: "normal"
+        #border_color: "system"
+        #alignment: "center"
+        #direction: "down"
+        #offset_left: 0
+        #offset_top: 6
+      #icons:
+        #attach: "\uf067"
+        #send: "\uf1d8"
+        #stop: "\uf04d"
+        #clear: "\uf1f8"
+        #assistant: "\udb81\ude74"
+        #float_on: "\udb84\udcac"
+        #float_off: "\udb84\udca9"
+        #close: "\uf00d"
+        #copy: "\uebcc"
+        #copy_check: "\uf00c"
+      #start_floating: false
+      #notification_dot:
+        #enabled: false
+        #corner: "top_right"
+        #color: "red"
+        #margin: [ 0, 2 ]
+      #callbacks:
+        #on_left: "toggle_chat"
+      #providers:
+        #- provider: "Ollama"
+          #api_endpoint: "http://localhost:11434/v1"
+          #credential: "ollama"
+          #models:
+            #- name: "rnj-1"
+              #label: "RNJ-1"

@@ -115,6 +115,14 @@ window_rules:
       - window_process: { equals: "PowerToys.PowerAccent" }
         window_class: { regex: "HwndWrapper*" }
 
+      # Ignore PotPlayer's mini player window.
+      - window_process: { equals: 'PotPlayerMini64' }
+        window_class: { equals: 'PotShadowWnd' }
+
+      # Ignore dropshelf
+      - window_process: { equals: 'Dropshelf' }
+        window_class: { equals: 'WinUIDesktopWin32WindowClass' }
+
   - commands: ["toggle-floating --centered"]
     match:
       - window_class: { regex: "WinUIDesktopWin32WindowClass" }
@@ -212,10 +220,10 @@ keybindings:
     bindings: ["alt+shift+d"]
 
   # Focus the next/previous workspace defined in `workspaces` config.
-  - commands: ["focus --next-workspace"]
-    bindings: ["alt+shift+s"]
-  - commands: ["focus --prev-workspace"]
-    bindings: ["alt+shift+a"]
+  #- commands: ["focus --next-workspace"]
+  #  bindings: ["alt+shift+s"]
+  #- commands: ["focus --prev-workspace"]
+  #  bindings: ["alt+shift+a"]
 
   # Focus the workspace that last had focus.
   - commands: ["focus --recent-workspace"]
@@ -243,14 +251,14 @@ keybindings:
 
   # Move the focused window's parent workspace to a monitor in a given
   # direction.
-  # - commands: ["move-workspace --direction left"]
-  #   bindings: ["alt+shift+a"]
-  # - commands: ["move-workspace --direction right"]
-  #   bindings: ["alt+shift+f"]
-  # - commands: ["move-workspace --direction up"]
-  #   bindings: ["alt+shift+d"]
-  # - commands: ["move-workspace --direction down"]
-  #   bindings: ["alt+shift+s"]
+  - commands: ["move-workspace --direction left"]
+    bindings: ["alt+shift+a"]
+  - commands: ["move-workspace --direction right"]
+    bindings: ["alt+shift+f"]
+  - commands: ["move-workspace --direction up"]
+    bindings: ["alt+shift+d"]
+  - commands: ["move-workspace --direction down"]
+    bindings: ["alt+shift+s"]
 
   # Move focused window to a workspace defined in `workspaces` config.
   - commands: ["move --workspace 1", "focus --workspace 1"]
@@ -278,10 +286,6 @@ keybindings:
   - commands: ["shell-exec wt"]
     bindings: ["alt+enter"]
 
-  # Launch terminal as administrator (requires a script to be created that runs the terminal as admin).
-  - commands: ["shell-exec wscript C:\\Scripts\\wtadmin.vbs"]
-    bindings: ["alt+shift+enter"]
-
   - commands: ["shell-exec zen"]
     bindings: ["alt+b"]
 
@@ -303,9 +307,3 @@ keybindings:
   # An open source YouTube Music client: https://github.com/th-ch/youtube-music
   - commands: ["shell-exec %LocalAppData%\\Programs\\youtube-music\\YouTube Music.exe"]
     bindings: ["alt+y"]
-
-  - commands: ["shell-exec --hide-window yasbc toggle-widget launchpad --follow-mouse"]
-    bindings: ["alt+shift+l"]
-
-  - commands: ["shell-exec --hide-window yasbc toggle-widget wallpapers --follow-mouse"]
-    bindings: ["alt+shift+w"]

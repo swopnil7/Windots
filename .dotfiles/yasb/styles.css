@@ -36,8 +36,8 @@
 
 /* Base colors */
     --base: #1e1e2e;
-    --mantle: rgba(24, 24, 37, 0.95);
-    --crust: rgba(17, 17, 27, 0.85);
+    --mantle: #181825;
+    --crust: #11111b;
 }
 
 /* ================= */
@@ -226,13 +226,17 @@ QPushButton  {
     padding: 0 4px;
 }
 
+.power-menu-popup {
+    padding: 5px;
+}
+
 .power-menu-popup .button {
     padding: 0;
     width: 180px;
     height: 230px;
-    border-radius: 8px;
+    border-radius: 5px;
     background-color: var(--base);
-    margin: 0;
+    margin: 5px;
 }
 
 .power-menu-popup .button.hover {
@@ -254,8 +258,10 @@ QPushButton  {
 }
 
 .power-menu-popup .button.cancel {
-    height: 32px;
-    border-radius: 4px;
+    height: 40px;
+    border-radius: 5px;
+    min-width: 1130px;
+    padding: 0;
 }
 
 .power-menu-popup .button.cancel .icon {
@@ -265,7 +271,10 @@ QPushButton  {
 
 .power-menu-popup .button.cancel .label {
     color: var(--red);
-    margin: 0;
+    margin: 0 auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
 }
 
 .power-menu-popup .button.cancel:hover {
@@ -584,7 +593,6 @@ Example: "Windows Media" becomes "windows-media" */
     padding: 0;
     margin: 0;
 }
-.cava-widget .widget-container {}
 
 
 /* ================= */
@@ -798,15 +806,11 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .glazewm-workspaces .ws-btn {
-    border: none;
     background-color: var(--surface0);
     margin: 0 3px;
-    font-size: 0px;
     color: transparent;
-    width: 7px;
     height: 7px;
     border-radius: 3px;
-    padding: 0;
     cursor: pointer;
 }
 
@@ -1096,6 +1100,100 @@ Example: "Windows Media" becomes "windows-media" */
     background: transparent;
 }
 
+/* Memory Popup Styling */
+.memory-popup {
+    background-color: var(--crust);
+    min-width: 380px;
+    border-radius: 8px;
+}
+
+.memory-popup .header {
+    background: var(--mantle);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--surface1);
+}
+
+.memory-popup .header .text {
+    font-size: 14px;
+    font-family: "JetBrainsMono NFP", "Segoe UI";
+    color: var(--og);
+    font-weight: 700;
+}
+
+.memory-popup .header .pin-btn {
+    font-size: 13px;
+    background: transparent;
+    font-family: "Segoe Fluent Icons";
+    border: none;
+    padding: 4px 6px;
+    color: var(--subtext1);
+    cursor: pointer;
+}
+
+.memory-popup .header .pin-btn:hover {
+    color: var(--text);
+}
+
+.memory-popup .header .pin-btn.pinned {
+    color: var(--og);
+}
+
+/* Graph area */
+.memory-popup .graph-container {
+    background: var(--base);
+    min-height: 64px;
+    padding: 8px 16px;
+}
+
+.memory-popup .memory-graph {
+    color: var(--blue);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 6px;
+}
+
+.memory-popup .memory-graph-grid {
+    color: rgba(255, 255, 255, 0.05);
+}
+
+.memory-popup .graph-title {
+    font-size: 11px;
+    color: var(--subtext0);
+    font-family: 'JetBrainsMono NFP', 'Segoe UI';
+    padding: 6px 16px 4px 16px;
+    font-weight: 600;
+}
+
+/* Stats grid */
+.memory-popup .stats {
+    background: var(--base);
+    padding: 12px 16px 16px 16px;
+    border-top: 1px solid var(--surface1);
+}
+
+.memory-popup .stats .stat-item {
+    background-color: var(--surface0);
+    border: 1px solid var(--surface1);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 6px 4px;
+}
+
+.memory-popup .stats .stat-label {
+    font-size: 11px;
+    color: var(--subtext1);
+    font-family: 'JetBrainsMono NFP', 'Segoe UI';
+    font-weight: 400;
+    padding: 4px 0 2px 0;
+}
+
+.memory-popup .stats .stat-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    font-family: 'JetBrainsMono NFP', 'Segoe UI';
+    padding: 2px 0;
+}
+
 /* ================= */
 /* === UPTIME WIDGET === */
 /* ================= */
@@ -1216,11 +1314,9 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .libre-menu {
-    background: rgb(24, 24, 37);
-    border: 1px solid var(--og);
+    background: var(--mantle);
     border-radius: 6px;
     padding: 10px 12px 6px 12px;
-    color: var(--og);
     min-width: 260px;
     max-width: 340px;
 }
@@ -1230,53 +1326,37 @@ Example: "Windows Media" becomes "windows-media" */
     font-weight: 700;
     color: var(--og);
     font-family: "JetBrainsMono NFP", "Segoe UI", sans-serif;
-    padding: 4px 0 4px 0;
-    margin: 8px 0 4px 0;
+    padding: 4px 0;
+    margin: 4px 0;
     letter-spacing: 0.5px;
-    background: transparent;
 }
 
 .libre-menu .sensor-item {
-    background-color: var(--og);
+    background-color: var(--surface0);
     padding: 3px 8px;
     border-radius: 5px;
-    border: 1px solid var(--og);
+    border: 1px solid var(--surface1);
     margin-bottom: 2px;
-    display: flex;
-    align-items: center;
-}
-
-.libre-menu .sensor-item:last-child {
-    margin-bottom: 0;
+    color: var(--text);
 }
 
 .libre-menu .sensor-item:hover {
-    background-color: var(--og);
+    background-color: var(--mantle);
     border: 1px solid var(--og);
 }
 
-.libre-menu .sensor-item:hover .sensor-name,
-.libre-menu .sensor-item:hover .sensor-value {
-    color: var(--surface0);
-}
-
 .libre-menu .sensor-name {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 700;
     font-family: "JetBrainsMono NFP", "Segoe UI", sans-serif;
-    color: var(--surface0);
-    flex: 1;
-    background: transparent;
+    color: var(--text);
 }
 
 .libre-menu .sensor-value {
-    font-size: 12px;
+    font-size: 13px;
     font-family: "JetBrainsMono NFP", "Segoe UI", sans-serif;
-    font-weight: 700;
-    color: var(--surface0);
-    min-width: 54px;
-    text-align: right;
-    background: transparent;
+    font-weight: 900;
+    color: var(--og);
 }
 
 /* ============================== */
@@ -1320,7 +1400,7 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .vscode-widget .widget-container .icon {
-    color: var(--sapphire);
+    color: var(--mauve);
 }
 
 .vscode-menu {
@@ -1420,19 +1500,23 @@ Example: "Windows Media" becomes "windows-media" */
 
 /* Widget style */
 .launchpad-widget {
-    padding: 0;
-    margin: 0 4px 0 0;
+    padding: 1px;
+    margin-right: 4px;
+    background: var(--base);
+    border-radius: 14px;
+    border: 0.5px solid var(--surface0);
 }
 
 .launchpad-widget .icon {
     font-size: 20px;
-    color: #6a9ced;
+    color: var(--lavender);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.25);
 }
 
 /* Launchpad context menu style */
 .launchpad .context-menu {
     background-color: var(--base);
-    border: none;
+    border: 1px solid var(--surface1);
     border-radius: 6px;
     padding: 4px 0px;
     font-family: 'JetBrainsMono NFP', 'Segoe UI', sans-serif;
@@ -1662,12 +1746,241 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 /* ==================== */
-/* === ACTIVE WINDOW WIDGET === */
+/* ==== AI WIDGET ==== */
 /* ==================== */
 
-.active-window-widget {
-    margin: 0;
+/* .ai-chat-widget {
+    padding: 0;
 }
-.active-window-widget .widget-container .icon {
-    margin: 0;
+.ai-chat-widget .icon {
+    color: var(--blue);
 }
+.ai-chat-popup {
+    background-color: var(--base);
+    min-width: 500px;
+    max-width: 500px;
+    min-height: 600px;
+    max-height: 600px;
+}
+.ai-chat-popup.floating {
+    background-color: var(--base);
+    min-width: 1000px;
+    max-width: 1000px;
+    min-height: 800px;
+    max-height: 800px;
+}
+.ai-chat-popup .chat-header {
+    background-color: var(--crust);
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--surface2);
+}
+.ai-chat-popup .chat-header .loader-line {
+    color: var(--og);
+ }
+.ai-chat-popup .chat-header .float-button,
+.ai-chat-popup .chat-header .close-button {
+    background-color: transparent;
+    font-family: "JetBrainsMono NFP";
+    border: none;
+    color: var(--text);
+    font-weight: 400;
+    font-size: 16px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-left: 4px;
+}
+.ai-chat-popup.floating .chat-header .float-button:hover,
+.ai-chat-popup.floating .chat-header .close-button:hover {
+    background-color: rgba(195, 159, 241, 0.10);
+} 
+.ai-chat-popup .chat-footer {
+    background-color: var(--mantle);
+    padding: 16px;
+}
+.ai-chat-popup .chat-header .provider-button,
+.ai-chat-popup .chat-header .model-button {
+    font-family: "Fira Code";
+    background-color: var(--mantle);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 12px;
+    color: var(--text);
+    margin-right: 8px;
+    min-width: 130px;
+    max-width: 230px;
+    border-radius: 4px;
+    padding: 4px 10px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+.ai-chat-popup .chat-header .provider-button:hover,
+.ai-chat-popup .chat-header .model-button:hover {
+    background-color: rgba(195, 159, 241, 0.2);
+    border-color: rgba(195, 159, 241, 0.2);
+}
+.ai-chat-popup .chat-header .provider-button:pressed,
+.ai-chat-popup .chat-header .model-button:pressed {
+    background-color: rgba(195, 159, 241, 0.4);
+    border-color: rgba(195, 159, 241, 0.4);
+}
+.ai-chat-popup .chat-header .provider-button:disabled,
+.ai-chat-popup .chat-header .model-button:disabled {
+    color: var(--overlay0);
+}
+
+.ai-chat-popup .context-menu {
+    background-color: var(--mantle);
+    border: 1px solid var(--surface1);
+    font-family: "Fira Code";
+    font-size: 12px;
+    color: var(--text);
+     
+}
+.ai-chat-popup .context-menu::separator {
+    height: 1px;
+    background-color: var(--surface2);
+    margin: 4px 8px;
+}
+
+.ai-chat-popup .context-menu::item {
+    background-color: transparent;
+    margin: 2px 8px;
+    border-radius: 4px;
+    min-width: 100px;
+ 
+}
+
+.ai-chat-popup .chat-header .context-menu::item {
+    min-width: 130px;
+    padding: 8px 12px
+}
+.ai-chat-popup .context-menu::item:disabled {
+    color: var(--overlay0);
+} 
+.ai-chat-popup .context-menu::item:selected {
+    background-color: rgba(195, 159, 241, 0.2);
+    color: var(--surface0);
+}
+.ai-chat-popup .context-menu::item:checked {
+    background-color: rgba(195, 159, 241, 0.4);
+    color: var(--text);
+}
+.ai-chat-popup .context-menu::item:pressed {
+    background-color: rgba(195, 159, 241, 0.6);
+     color: var(--surface0);
+}
+.ai-chat-popup .chat-content {
+    background-color: var(--base);
+    border: none;
+}
+.ai-chat-popup .chat-content .empty-chat .greeting,
+.ai-chat-popup .chat-content .empty-chat .message {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: "Fira Code";
+    font-size: 18px;
+    font-weight: 600;
+}
+.ai-chat-popup .chat-content .empty-chat .message {
+    color: rgba(255, 255, 255, 0.4);
+    padding-top: 8px;
+    color: var(--overlay0);
+}
+.ai-chat-popup .chat-content .user-message,
+.ai-chat-popup .chat-content .assistant-message {
+    padding: 12px;
+    border-radius: 8px;
+    margin: 4px 0
+}
+
+.ai-chat-popup .chat-content .user-message .text,
+.ai-chat-popup .chat-content .assistant-message .text {
+    font-family: "Fira Code";
+    font-size: 14px;
+    color: var(--text);
+}
+.ai-chat-popup .chat-content .user-message {
+    margin-left: 26px;
+ 
+}
+.ai-chat-popup .chat-content .assistant-message {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+ 
+.ai-chat-popup .chat-content .assistant-icon {
+    font-size: 24px;
+    color: var(--overlay0);
+    margin-right: 8px;
+    font-family: "JetBrainsMono NFP";
+}
+
+ .ai-chat-popup .chat-footer .chat-input-wrapper {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    max-height: 64px;
+    min-height: 32px;
+    padding: 5px 8px 3px 8px;
+}
+ 
+.ai-chat-popup .chat-footer .chat-input {
+    font-family: "Fira Code";
+    font-size: 12px;
+    color: var(--text);
+    background-color: transparent;
+}
+
+.ai-chat-popup .chat-footer .chat-input-wrapper.focused {
+    border-color: var(--og);
+}
+ 
+.ai-chat-popup .chat-footer .clear-button,
+.ai-chat-popup .chat-footer .send-button,
+.ai-chat-popup .chat-footer .stop-button,
+.ai-chat-popup .chat-footer .attach-button {
+    color: var(--text);
+    font-size: 16px;
+    max-width: 30px;
+    min-width: 30px;
+    max-height: 30px;
+    min-height: 30px;
+    border-radius: 4px;
+    border: none;
+    font-family: "JetBrainsMono NFP";
+}
+.ai-chat-popup .chat-footer .stop-button {
+    background-color: var(--red);
+    color: var(--surface0);
+    border-radius: 14px;
+    margin-left: 8px;
+}
+.ai-chat-popup .chat-footer .clear-button:hover,
+.ai-chat-popup .chat-footer .send-button:hover,
+.ai-chat-popup .chat-footer .stop-button:hover,
+.ai-chat-popup .chat-footer .attach-button:hover {
+    background-color: var(--red);
+}
+.ai-chat-popup .chat-footer .clear-button:disabled,
+.ai-chat-popup .chat-footer .send-button:disabled,
+.ai-chat-popup .chat-footer .stop-button:disabled,
+.ai-chat-popup .chat-footer .attach-button:disabled {
+    color: var(--overlay0);
+}
+.ai-chat-popup .attachment-chip {
+    background-color: rgba(195, 159, 241, 0.1);
+    border: 1px solid rgba(195, 159, 241, 0.2);
+    border-radius: 6px;
+    min-height: 28px;
+ 
+} 
+.ai-chat-popup .attachment-chip .attachment-label {
+    font-family: "Fira Code";
+    color: var(--text);
+    font-size: 12px;
+    padding: 0 4px;
+}
+.ai-chat-popup .attachment-chip .attachment-remove-button {
+    font-size: 12px;
+    font-family: "JetBrainsMono NFP";
+    background-color: transparent;
+    border: none;
+} */
