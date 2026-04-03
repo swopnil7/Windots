@@ -89,5 +89,7 @@
     "controlStyles[14].styles[2]":"BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"0.6\" />",
     "controlStyles[21].styles[4]":"BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"0.6\" />",
     "controlStyles[3].styles[0]":"Margin=-10,0,0,0",
+    "controlStyles[27].target":"ToggleButton",
+    "controlStyles[27].styles[0]":"CornerRadius=0",
     "styleConstants[0]":""
 }
