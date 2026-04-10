@@ -1,4 +1,7 @@
 {
+    "theme":"",
+    "backgroundTranslucentEffect":"",
+    "backgroundTranslucentEffectRegion":"",
     "resourceVariables[0].variableKey":"",
     "resourceVariables[0].value":"",
     "controlStyles[0].target":"Grid#MediaTransportControlsRegion",
@@ -91,5 +94,5 @@
     "controlStyles[3].styles[0]":"Margin=-10,0,0,0",
     "controlStyles[27].target":"ToggleButton",
     "controlStyles[27].styles[0]":"CornerRadius=0",
-    "styleConstants[0]":""
+    "styleConstants[0]":"accentColor="
 }
