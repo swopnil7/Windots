@@ -38,6 +38,9 @@
     --base: #1e1e2e;
     --mantle: #181825;
     --crust: #11111b;
+    --rev-surface: rgba(24, 24, 37, 0.94);
+    --rev-hover: rgba(195, 159, 241, 0.14);
+    --rev-shadow: rgba(0, 0, 0, 0.22);
 }
 
 /* ================= */
@@ -58,24 +61,8 @@
 .yasb-bar {
     padding: 0;
     margin: 0 5px;
-    background: rgba(0, 0, 0, 0.01);
+    background: rgba(17, 17, 27, 0.01);
     border-radius: 0;
-}
-
-.yasb-bar .widget-container-left {
-    margin-left: 0;
-    padding-left: 0;
-}
-
-.power-menu-popup,
-.audio-menu,
-.disk-group,
-.calendar,
-.weather-card,
-.home-menu {
-    background: rgb(24, 24, 37);
-    border: 1.5px solid rgba(69, 71, 90, 0.5);
-    border-radius: 6px;
 }
 
 /* Common widget styles */
@@ -98,33 +85,25 @@
 /* ===================== */
 /* === GROUPER STYLES === */
 /* ===================== */
-.grouper .container {
-    background-color: var(--mantle);
-    border: 0.5px solid var(--surface0);
-    margin: 0 2px;
-    padding: 0 6px;
-    border-radius: 10px;
-}
-
 .left-grouper .container {
     background-color: var(--mantle);
-    border: 0.5px solid var(--surface0);
-    margin: 0 2px 0 0;
+    border: 1px solid var(--surface1);
+    margin: 0 2px;
     padding: 0 4px;
     border-radius: 10px;
 }
 
 .active-window-grouper .container {
     background-color: var(--mantle);
-    border: 0.5px solid var(--surface0);
+    border: 1px solid var(--surface1);
     margin: 0 2px;
-    padding: 0 2px;
+    padding: 0 4px;
     border-radius: 10px;
 }
 
 .center-grouper .container {
     background-color: var(--mantle);
-    border: 0.5px solid var(--surface0);
+    border: 1px solid var(--surface1);
     margin: 0 2px;
     padding: 0 4px;
     border-radius: 10px;
@@ -132,7 +111,7 @@
 
 .right-grouper .container {
     background-color: var(--mantle);
-    border: 0.5px solid var(--surface0);
+    border: 1px solid var(--surface1);
     margin: 0 2px;
     padding: 0 4px;
     border-radius: 10px;
@@ -140,7 +119,7 @@
 
 .utils-grouper .container {
     background-color: var(--mantle);
-    border: 0.5px solid var(--surface0);
+    border: 1px solid var(--surface1);
     margin: 0 2px;
     padding: 0 4px;
     border-radius: 10px;
@@ -152,17 +131,17 @@
 
 .systray-grouper .container {
     background-color: var(--mantle);
-    border: 0.5px solid var(--surface0);
+    border: 1px solid var(--surface1);
     margin: 0 2px;
-    padding: 1px;
+    padding: 0 2px;
     border-radius: 10px;
 }
 
 .media-grouper .container {
     background-color: var(--mantle);
-    border: 0.5px solid var(--surface0);
+    border: 1px solid var(--surface1);
     margin: 0 2px;
-    padding: 0 0 0 4px;
+    padding: 0 4px;
     border-radius: 10px;
 }
 
@@ -172,42 +151,39 @@
     padding: 0 2px;
 }
 
-/* Icon hover effect */
-.power-menu-widget .label:hover,
-.battery-widget .icon:hover,
-.disk-widget .icon:hover,
-.clock-widget .icon:hover,
-.weather-widget .icon:hover,
-.wifi-widget .icon:hover,
-.bluetooth-widget .icon:hover,
-.memory-widget .icon:hover,
-.volume-widget .icon:hover,
-.libre-monitor-widget .widget-container .icon:hover,
-.cpu-widget .icon:hover,
-.notification-widget .icon:hover,
-.notification-widget .icon.new-notification:hover,
-.vscode-widget .widget-container .icon:hover,
-.traffic-widget .icon:hover,
-.home-widget .icon:hover,
-.wallpapers-widget .icon:hover,
-.systray .unpinned-visibility-btn:hover,
-.launchpad-widget .icon:hover,
-.active-window-widget .widget-container .icon:hover
-{
-    color: rgba(230, 84, 171, 0.9);
-}
+/* Icon hover effect (palette-diverse accents) */
+.power-menu-widget .label:hover { color: var(--maroon); }
+.battery-widget .icon:hover { color: var(--peach); }
+.disk-widget .icon:hover { color: var(--sapphire); }
+.clock-widget .icon:hover { color: var(--yellow); }
+.weather-widget .icon:hover { color: var(--flamingo); }
+.wifi-widget .icon:hover { color: var(--sky); }
+.bluetooth-widget .icon:hover { color: var(--lavender); }
+.memory-widget .icon:hover { color: var(--blue); }
+.volume-widget .icon:hover { color: var(--green); }
+.libre-monitor-widget .widget-container .icon:hover { color: var(--yellow); }
+.cpu-widget .icon:hover { color: var(--teal); }
+.notification-widget .icon:hover { color: var(--mauve); }
+.notification-widget .icon.new-notification:hover { color: var(--peach); }
+.vscode-widget .widget-container .icon:hover { color: var(--red); }
+.traffic-widget .icon:hover { color: var(--teal); }
+.home-widget .icon:hover { color: var(--rosewater); }
+.wallpapers-widget .icon:hover { color: var(--pink); }
+.systray .unpinned-visibility-btn:hover { color: var(--og); }
+.launchpad-widget .icon:hover { color: var(--mauve); }
+.active-window-widget .widget-container .icon:hover { color: var(--yellow); }
 
 QPushButton  {
-    outline: none
+    outline: none;
 } 
 
 .tooltip {
-    background-color: var(--base);
+    background-color: var(--mantle);
     color: var(--text);
-    border: 0.5px solid var(--surface1);
+    border: 0.5px solid var(--og);
     border-radius: 6px;
     font-size: 12px;
-    padding: 4px 8px;
+    padding: 4px;
 }
 
 /* ==================== */
@@ -228,6 +204,8 @@ QPushButton  {
 
 .power-menu-popup {
     padding: 5px;
+    background-color: var(--mantle);
+    border: 1.5px solid var(--surface2);
 }
 
 .power-menu-popup .button {
@@ -239,13 +217,17 @@ QPushButton  {
     margin: 5px;
 }
 
-.power-menu-popup .button.hover {
+.power-menu-popup .button.sleep:hover,
+.power-menu-popup .button.restart:hover,
+.power-menu-popup .button.shutdown:hover,
+.power-menu-popup .button.hibernate:hover,
+.power-menu-popup .button.signout:hover,
+.power-menu-popup .button.lock:hover {
     background-color: var(--crust);
     border: 4px solid var(--og);
 }
 
 .power-menu-popup .button .label {
-    margin-bottom: 8px;
     font-size: 16px;
     font-weight: 500;
     color: var(--og);
@@ -253,7 +235,6 @@ QPushButton  {
 
 .power-menu-popup .button .icon {
     font-size: 64px;
-    padding-top: 32px;
     color: var(--og);
 }
 
@@ -286,7 +267,7 @@ QPushButton  {
 /* === MEDIA WIDGET      === */
 /* ========================= */
 .media-widget {
-    background: rgba(0, 0, 0, 0);
+    background: transparent;
     color: var(--text);
     padding: 0;
     max-width: 300px;
@@ -297,17 +278,16 @@ QPushButton  {
     font-size: 12px;
     font-weight: 700;
     background-color: transparent;
-    margin-left: 6px;
-    margin-right: 4px;
+    margin:0 2px;
     letter-spacing: -1px;
 }
 .media-widget .btn {
     background: transparent;
     color: var(--og);
     font-family: "Segoe Fluent Icons";
-    border: 1px solid var(--og); /* og accent */
+    border: 1px solid var(--og);
     padding: 0 2px;
-    margin: 2px 0 2px 3px;
+    margin: 2px;
     color: var(--og);
     border-radius: 4px;
     font-size: 10px;
@@ -329,10 +309,10 @@ QPushButton  {
 .media-menu {
     min-width: 420px;
     max-width: 420px;
-    background: rgb(24, 24, 37);
-    border: 1.5px solid rgba(69, 71, 90, 0.5);
+    background: var(--mantle);
+    border: 1.5px solid var(--surface2);
     border-radius: 6px;
-    padding: 16px 20px 12px 20px;
+    padding: 16px 20px;
     color: var(--text);
 }
 
@@ -348,27 +328,21 @@ QPushButton  {
 .media-menu .title {
     color: var(--og);
     font-size: 16px;
-    margin-bottom: 2px;
 }
 
 .media-menu .artist {
     font-size: 13px;
     color: var(--overlay1);
-    margin-top: 0px;
-    margin-bottom: 8px;
 }
 
 .media-menu .source {
-    font-size: 11px;
+    font-size: 13px;
     color: var(--surface0);
-    font-weight: normal;
+    font-weight: bold;
     border-radius: 3px;
     background-color: var(--og);
     color: #fff;
     padding: 2px 6px;
-    margin-bottom: 8px;
-    margin-left: 0;
-    letter-spacing: 0.5px;
 }
 
 /* The source class name is the same as what you see in the media widget; just replace spaces with dashes and convert it to lowercase.
@@ -386,12 +360,21 @@ Example: "Windows Media" becomes "windows-media" */
     background-color: #0078d4;
     color: #ffffff;
 }
+.media-menu .source.zen {
+    background-color: #332a41;
+    color: #ffffff;
+}
+
+.media-menu .thumbnail {
+    border: 1px solid var(--subtext0);
+    border-radius: 8px;
+}
 
 .media-menu .btn {
     font-family: "Segoe Fluent Icons";
     font-size: 15px;
     font-weight: 500;
-    margin: 6px 2px 0px 2px;
+    margin: 3px;
     min-width: 32px;
     max-width: 32px;
     min-height: 28px;
@@ -402,14 +385,14 @@ Example: "Windows Media" becomes "windows-media" */
     border: 1px solid var(--og);
 }
 
-.media-menu .btn.prev {
-    margin-left: 8px;
+.media-menu .btn.prev{
+    margin-left: 20px;
 }
 
 .media-menu .btn:hover {
     color: var(--surface0);
     background-color: var(--og);
-    border-color: var(--og);
+    border-color: var(--surface0);
 }
 
 .media-menu .btn.play {
@@ -422,10 +405,8 @@ Example: "Windows Media" becomes "windows-media" */
 .media-menu .btn.disabled,
 .media-menu .btn.disabled:hover {
     color: var(--overlay0);
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
     border-color: rgba(195, 159, 241, 0.15);
-    cursor: not-allowed;
-    opacity: 0.7;
 }
 
 .media-menu .playback-time {
@@ -433,12 +414,11 @@ Example: "Windows Media" becomes "windows-media" */
     font-family: "JetBrainsMono NFP", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--overlay1);
     margin-top: 20px;
-    min-width: 100px;
 }
 
 .media-menu .progress-slider {
     height: 10px;
-    margin: 5px 4px;
+    margin: 5px;
     border-radius: 3px;
 }
 
@@ -462,28 +442,28 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .media-menu .app-volume-container {
-    background-color: rgba(2, 1, 3, 0.07); /* catppuccin mocha og accent */
+    background-color: var(--base);
     padding: 8px 6px;
-    border-radius: 16px;
+    border-radius: 12px;
     margin-left: 10px; 
 }
+
 .media-menu .app-volume-container .volume-slider::groove {
-    background: rgba(88, 70, 110, 0.18); /* og accent */
+    background: transparent;
     width: 2px;
-    border-radius: 3px;
 }
+
+.media-menu .app-volume-container .volume-slider::groove:hover {
+    background: transparent;
+    width: 6px;    
+}
+
 .media-menu .app-volume-container .volume-slider::add-page {
     background: var(--og);
-    border-radius: 3px;
 }
-.media-menu .app-volume-container .volume-slider::groove:hover {
-    background: rgba(18, 4, 35, 0.3); /* og accent */
-    width:  6px;    
-    border-radius: 3px;
-}
+
 .media-menu .app-volume-container .volume-slider::sub-page {
     background: var(--overlay0);
-    border-radius: 3px;
 }
 .media-menu .app-volume-container .mute-button,
 .media-menu .app-volume-container .unmute-button {
@@ -512,37 +492,35 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .audio-menu {
-    background: rgb(24, 24, 37);
-    border: 1.5px solid rgba(69, 71, 90, 0.5);
+    background-color:var(--mantle);
+    min-width: 250px;
+    border: 1.5px solid var(--surface2);
     border-radius: 6px;
-    padding: 8px;
-    min-width: 220px;
 }
-
+/* System volume */
 .audio-menu .system-volume-container .volume-slider {
     border: none;
-    margin-top: 15px;
 }
-
+/* Device list styles */
 .audio-menu .audio-container .device {
-    font-size: 10px;
-    background-color: transparent;
+    background-color:transparent;
     border: none;
-    padding: 6px 8px 6px 4px;
+    padding:6px 8px 6px 4px;
     margin: 2px 0;
+    font-size: 12px;
+    font-weight: bold;
     border-radius: 4px;
 }
-
 .audio-menu .audio-container .device.selected {
-    background-color: rgba(211, 133, 188, 0.264);
+    background-color: rgba(195, 159, 241, 0.24);
+   
+}
+.audio-menu .audio-container .device:hover {
+    background-color: rgba(195, 159, 241, 0.14);
 }
 
 .audio-menu .audio-container .device.selected:hover {
-    background-color: rgba(211, 133, 188, 0.364);
-}
-
-.audio-menu .audio-container .device:hover {
-    background-color: rgba(124, 88, 113, 0.264);
+    background-color: rgba(195, 159, 241, 0.34);
 }
 
 /* Toggle button for application volumes (if is enabled) */
@@ -550,39 +528,35 @@ Example: "Windows Media" becomes "windows-media" */
     background-color: transparent;
     border: none;
     padding: 0;
-    margin: 0;
-    min-height: 15px;
-    min-width: 15px;
+    margin: 0 4px;
+    min-height: 20px;
+    min-width: 20px;
     border-radius: 6px;
 }
 .audio-menu .toggle-apps.expanded {
-    background-color: transparent;
+background-color: transparent;
 }
 .audio-menu .toggle-apps:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(195, 159, 241, 0.14);
+    
 }
-
 /* Container for application volumes (if is enabled) */
 .audio-menu .apps-container {
-    padding: 5px;
-    margin-top: 10px;
+    padding: 8px;
+    margin-top:20px;
     border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.062);
+    background-color: var(--base);
 }
 .audio-menu .apps-container .app-volume .app-icon-container {
-    min-width: 30px;
-    min-height: 30px;
-    max-width: 30px;
-    max-height: 30px;
-    border-radius: 6px;
-    margin-right: 5px;
-}
-.audio-menu .apps-container .app-volume .app-slider {
+    min-width: 40px;
     min-height: 40px;
+    max-width: 40px;
     max-height: 40px;
+    border-radius: 6px;
+    margin-right: 8px;
 }
 .audio-menu .apps-container .app-volume .app-icon-container:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(195, 159, 241, 0.14);
 }
 
 /* ================== */
@@ -602,6 +576,13 @@ Example: "Windows Media" becomes "windows-media" */
     color: var(--teal);
 }
 
+.disk-group {
+    background-color: var(--mantle);
+    padding: 0;
+    border: 1.5px solid var(--surface2);
+    border-radius: 6px;
+}
+
 .disk-group-row {
     min-width: 220px;
     max-width: 220px;
@@ -609,16 +590,15 @@ Example: "Windows Media" becomes "windows-media" */
     margin: 0;
     padding: 0;
     border-radius: 6px;
-    border: 1px solid transparent;
+    border: 1px solid var(--surface1);
 }
 
 .disk-group-row:hover {
-    background-color: rgba(195, 159, 241, 0.4); 
+    background-color: rgba(195, 159, 241, 0.14);
 }
 
 .disk-group-label-bar {
     max-height: 8px;
-    border: 0;
     background-color: var(--surface0);
     border-radius: 4px;
 }
@@ -634,7 +614,7 @@ Example: "Windows Media" becomes "windows-media" */
 
 .disk-group-label-size {
     font-size: 12px;
-    color: rgba(205, 214, 244, 0.5);
+    color: var(--overlay0);
 }
 
 /* ================= */
@@ -653,8 +633,8 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .calendar {
-    background: rgb(24, 24, 37);
-    border: 1.5px solid rgba(69, 71, 90, 0.5);
+    background: var(--mantle);
+    border: 1.5px solid var(--surface2);
     border-radius: 6px;
     padding: 12px;
     color: var(--text);
@@ -667,7 +647,6 @@ Example: "Windows Media" becomes "windows-media" */
     margin: 0;
     padding: 0;
     border: none;
-    outline: none;
 }
 
 .calendar .calendar-table::item {
@@ -675,15 +654,13 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .calendar .calendar-table::item:hover {
-    background-color: var(--pink);
+    background-color: var(--lavender);
     color: var(--surface0);
 }
 
 .calendar .calendar-table::item:selected {
     color: var(--crust);
     background-color: var(--og);
-    border-radius: 5px;
-    font-weight: 900;
 }
 
 .calendar .day-label {
@@ -731,10 +708,9 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .weather-card {
-    background: rgb(24, 24, 37);
-    border: 1.5px solid rgba(69, 71, 90, 0.5);
+    background: var(--mantle);
+    border: 1.5px solid var(--surface2);
     border-radius: 6px;
-    padding: 12px 16px;
     color: var(--text);
 }
 
@@ -800,18 +776,15 @@ Example: "Windows Media" becomes "windows-media" */
     background-color: transparent;
     margin: 0;
     border-radius: 0;
-    padding: 2px 0;
-    display: flex;
-    align-items: center;
+    padding: 0;
 }
 
 .glazewm-workspaces .ws-btn {
     background-color: var(--surface0);
-    margin: 0 3px;
+    margin: 3px;
     color: transparent;
-    height: 7px;
-    border-radius: 3px;
-    cursor: pointer;
+    height: 8px;
+    border-radius: 4px;
 }
 
 .glazewm-workspaces .ws-btn:hover,
@@ -827,17 +800,15 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .glazewm-workspaces .ws-btn.populated {
-    background-color: var(--blue);
+    background-color: var(--subtext0);
 }
 
 .glazewm-workspaces .ws-btn.active_populated,
 .glazewm-workspaces .ws-btn.active_empty {
-    color: transparent;
-    background-color: var(--red);
-    width: 20px;
-    max-width: 20px;
-    height: 7px;
-    border-radius: 3px;
+    background-color: var(--og);
+    width: 25px;
+    height: 8px;
+    border-radius: 4px;
 }
 
 /* ================= */
@@ -859,6 +830,7 @@ Example: "Windows Media" becomes "windows-media" */
     background-color: var(--crust);
     min-height: 400px;
     min-width: 400px;
+    border: 1.5px solid var(--surface2);
 }
 
 .wifi-menu .progress-bar {
@@ -880,7 +852,11 @@ Example: "Windows Media" becomes "windows-media" */
     padding: 12px;
     background-color: var(--mantle);
     color: var(--og);
+    border-left: 1.5px solid var(--surface2);
+    border-right: 1.5px solid var(--surface2);
+    border-top: 1.5px solid var(--surface2);
     border-bottom: 1px solid var(--og);
+    border-radius: 0 0 6px 6px;
 }
 
 .wifi-menu .error-message {
@@ -895,6 +871,8 @@ Example: "Windows Media" becomes "windows-media" */
 .wifi-menu .wifi-list {
     background-color: var(--base);
     margin: 0;
+    border-left: 1.5px solid var(--surface2);
+    border-right: 1.5px solid var(--surface2);
 }
 
 .wifi-menu .wifi-item {
@@ -905,7 +883,7 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .wifi-menu .wifi-item:hover {
-    background-color: rgba(195, 159, 241, 0.10);
+    background-color: var(--rev-hover);
 }
 
 .wifi-menu .wifi-item[active=true] {
@@ -977,7 +955,10 @@ Example: "Windows Media" becomes "windows-media" */
     margin-top: 2px;
     background-color: var(--mantle);
     border-top: 1px solid var(--og);
-    border-radius: 0 0 8px 8px;
+    border-left: 1.5px solid var(--surface2);
+    border-right: 1.5px solid var(--surface2);
+    border-bottom: 1.5px solid var(--surface2);
+    border-radius: 0 0 6px 6px;
 }
 
 .wifi-menu .footer .settings-button {
@@ -992,8 +973,8 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .wifi-menu .footer .settings-button:hover {
-    background-color: var(--og);
-    color: var(--surface0);
+    background-color: var(--rev-hover);
+    color: var(--text);
 }
 
 .wifi-menu .footer .refresh-icon {
@@ -1007,12 +988,12 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .wifi-menu .footer .refresh-icon:hover {
-    background-color: var(--og);
-    color: var(--surface0);
+    background-color: var(--rev-hover);
+    color: var(--text);
 }
 
 .context-menu {
-    background: var(--base);
+    background: var(--mantle);
     border-radius: 4px;
     border: 1px solid var(--surface1);
     padding: 4px;
@@ -1039,8 +1020,8 @@ Example: "Windows Media" becomes "windows-media" */
 .context-menu::item:selected,
 .context-menu .menu-checkbox:hover,
 .context-menu .menu-checkbox .checkbox:hover {
-    background: var(--og);
-    color: var(--surface0);
+    background: var(--rev-hover);
+    color: var(--text);
 }
 
 
@@ -1102,15 +1083,20 @@ Example: "Windows Media" becomes "windows-media" */
 
 /* Memory Popup Styling */
 .memory-popup {
-    background-color: var(--crust);
+    background-color: var(--mantle);
     min-width: 380px;
-    border-radius: 8px;
+    border: 1.5px solid var(--surface2);
+    border-radius: 6px;
 }
 
 .memory-popup .header {
     background: var(--mantle);
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--surface1);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--og);
+    border-left: 1.5px solid var(--surface2);
+    border-right: 1.5px solid var(--surface2);
+    border-top: 1.5px solid var(--surface2);
+    border-radius: 0 0 6px 6px;
 }
 
 .memory-popup .header .text {
@@ -1127,11 +1113,12 @@ Example: "Windows Media" becomes "windows-media" */
     border: none;
     padding: 4px 6px;
     color: var(--subtext1);
-    cursor: pointer;
 }
 
 .memory-popup .header .pin-btn:hover {
     color: var(--text);
+    background: rgba(137, 180, 250, 0.08);
+    border-radius: 4px;
 }
 
 .memory-popup .header .pin-btn.pinned {
@@ -1142,39 +1129,45 @@ Example: "Windows Media" becomes "windows-media" */
 .memory-popup .graph-container {
     background: var(--base);
     min-height: 64px;
-    padding: 8px 16px;
+    padding: 7px 14px;
+    border-left: 1.5px solid var(--surface2);
+    border-right: 1.5px solid var(--surface2);
 }
 
 .memory-popup .memory-graph {
     color: var(--blue);
-    background: rgba(255, 255, 255, 0.02);
+    background: transparent;
     border-radius: 6px;
 }
 
 .memory-popup .memory-graph-grid {
-    color: rgba(255, 255, 255, 0.05);
+    color: transparent;
 }
 
 .memory-popup .graph-title {
     font-size: 11px;
     color: var(--subtext0);
     font-family: 'JetBrainsMono NFP', 'Segoe UI';
-    padding: 6px 16px 4px 16px;
-    font-weight: 600;
+    padding: 6px 14px 4px 14px;
+    font-weight: 700;
 }
 
 /* Stats grid */
 .memory-popup .stats {
     background: var(--base);
-    padding: 12px 16px 16px 16px;
+    padding: 14px;
     border-top: 1px solid var(--surface1);
+    border-left: 1.5px solid var(--surface2);
+    border-right: 1.5px solid var(--surface2);
+    border-bottom: 1.5px solid var(--surface2);
+    border-radius: 0 0 6px 6px;
 }
 
 .memory-popup .stats .stat-item {
     background-color: var(--surface0);
     border: 1px solid var(--surface1);
     border-radius: 6px;
-    padding: 8px 12px;
+    padding: 8px 10px;
     margin: 6px 4px;
 }
 
@@ -1266,7 +1259,7 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .systray .button:hover {
-    background: rgba(195, 159, 241, 0.7);
+    background: rgba(195, 159, 241, 0.14);
     border-radius: 4px;
 }
 
@@ -1315,6 +1308,7 @@ Example: "Windows Media" becomes "windows-media" */
 
 .libre-menu {
     background: var(--mantle);
+    border: 1.5px solid var(--surface2);
     border-radius: 6px;
     padding: 10px 12px 6px 12px;
     min-width: 260px;
@@ -1337,12 +1331,6 @@ Example: "Windows Media" becomes "windows-media" */
     border-radius: 5px;
     border: 1px solid var(--surface1);
     margin-bottom: 2px;
-    color: var(--text);
-}
-
-.libre-menu .sensor-item:hover {
-    background-color: var(--mantle);
-    border: 1px solid var(--og);
 }
 
 .libre-menu .sensor-name {
@@ -1388,7 +1376,7 @@ Example: "Windows Media" becomes "windows-media" */
 .traffic-widget {
     padding: 0 0px;
     margin: 0px;
-    background: rgb(24, 24, 37);
+    background: var(--mantle);
 }
 
 /* ======================= */
@@ -1409,16 +1397,25 @@ Example: "Windows Media" becomes "windows-media" */
 }
 
 .vscode-menu .header {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.075);
     font-size: 15px;
     font-weight: 400;
     padding: 8px;
-    color: var(--text);
+    color: var(--og);
     background-color: var(--crust);
+    border-bottom: 1px solid var(--surface1);
+    border-left: 1.5px solid var(--surface2);
+    border-right: 1.5px solid var(--surface2);
+    border-top: 1.5px solid var(--surface2);
+    border-radius: 0 0 6px 6px;
+
+
 }
 
 .vscode-menu .contents {
     background-color: var(--base);
+    border-left: 1.5px solid var(--surface2);
+    border-right: 1.5px solid var(--surface2);
+    border-bottom: 1.5px solid var(--surface2);
 }
 
 .vscode-menu .contents .item {
@@ -1435,17 +1432,17 @@ Example: "Windows Media" becomes "windows-media" */
 .vscode-menu .contents .item .folder-icon {
     font-size: 16px;
     margin-left: 8px;
-    color: #89b4fa;
+    color: var(--blue);
 }
 
 .vscode-menu .contents .item .file-icon {
     font-size: 16px;
     margin-left: 8px;
-    color: #f5c2e7;
+    color: var(--red);
 }
 
 .vscode-menu .contents .item:hover {
-    background-color: rgba(195, 159, 241, 0.4);
+    background-color: rgba(195, 159, 241, 0.14);
 }
 
 /* ========================= */
@@ -1459,7 +1456,7 @@ Example: "Windows Media" becomes "windows-media" */
 
 .wallpapers-gallery-window {
     background: var(--crust);
-    border: 2.5px solid var(--surface1);
+    border: 1.5px solid var(--surface2);
     border-radius: 8px;
     margin: 0;
 }
@@ -1500,17 +1497,16 @@ Example: "Windows Media" becomes "windows-media" */
 
 /* Widget style */
 .launchpad-widget {
-    padding: 1px;
-    margin-right: 4px;
+    padding: 2px;
+    margin: 0 2px;
     background: var(--base);
     border-radius: 14px;
-    border: 0.5px solid var(--surface0);
+    border: 1px solid var(--surface1);
 }
 
 .launchpad-widget .icon {
-    font-size: 20px;
+    font-size: 18px;
     color: var(--lavender);
-    text-shadow: 0 1px 4px rgba(0,0,0,0.25);
 }
 
 /* Launchpad context menu style */
@@ -1599,7 +1595,6 @@ Example: "Windows Media" becomes "windows-media" */
     padding: 0 6px;
     margin: 10px 0 5px 6px;
     min-height: 28px;
-    outline: none;
 }
 .launchpad .app-dialog .buttons-container .button {
     margin: 10px 0 5px 0px;
