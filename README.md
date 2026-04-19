@@ -279,12 +279,12 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 - **Install** [**Windhawk**](https://windhawk.net/).
 - **Install Relevant Mods** from the [Windhawk Store](https://windhawk.net/explore):
-  - Notification Center Styler
-  - Start Menu Styler
-  - Taskbar Styler
+  - Windows 11 Notification Center Styler
+  - Windows 11 Start Menu Styler
+  - Windows 11 Taskbar Styler
   - Windows 11 File Explorer Styler
-  - Translucent Windows
   - Taskbar auto-hide when maximized
+  - Control Panel Color Fix
 - **Copy** the Windhawk config files from [`windots/.dotfiles/windhawk/`](.dotfiles/windhawk/)
 - Open the relevant mod’s **details page**, go to **Advanced > Mod Settings**, paste the config, and click **"Load"** to apply it.
 
@@ -409,7 +409,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
   winget install JanDeDobbeleer.OhMyPosh -s winget
   ```
 
-- [`windots/.dotfiles/ohmyposh/zen.toml`](.dotfiles/ohmyposh/zen.toml) → `%USERPROFILE%\.config\ohmyposh\`
+- [`windots/.dotfiles/ohmyposh/catppuccin.json`](.dotfiles/ohmyposh/catppuccin.json) → `%USERPROFILE%\.config\ohmyposh\`
 
 </details>
 
@@ -478,8 +478,6 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 | <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>e</kbd> | Exit GlazeWM |
 | <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>r</kbd> | Reload GlazeWM config |
 | <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>p</kbd> | Pause/Resume all GlazeWM keybindings |
-| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>l</kbd> | Toggle YASB launchpad widget |
-| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>w</kbd> | Toggle YASB wallpapers widget |
 
 ### Application Shortcuts
 
