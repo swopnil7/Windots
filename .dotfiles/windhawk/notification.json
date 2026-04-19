@@ -1,166 +1,441 @@
 {
-    "resourceVariables[0].variableKey":"",
-    "resourceVariables[0].value":"",
+  "theme": "",
+  "resourceVariables[0].variableKey": "",
+  "resourceVariables[0].value": "",
 
-    "controlStyles[0].target":"Grid#MediaTransportControlsRegion",
-    "controlStyles[0].styles[0]":"Height=192",
-    "controlStyles[0].styles[1]":"Margin=0,400,0,-590",
-    "controlStyles[0].styles[2]":"BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
-    "controlStyles[0].styles[3]":"Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
-    "controlStyles[0].styles[4]":"BorderThickness=1.5",
+  "controlStyles[0].target": "Grid#MediaTransportControlsRegion",
+  "controlStyles[0].styles[0]": "Height=192",
+  "controlStyles[0].styles[1]": "Margin=0,400,0,-590",
+  "controlStyles[0].styles[2]": "BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
+  "controlStyles[0].styles[3]": "Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
+  "controlStyles[0].styles[4]": "BorderThickness=1.5",
+  "controlStyles[0].styles[5]": "CornerRadius=10",
 
-    "controlStyles[1].target":"Grid#ThumbnailImage",
-    "controlStyles[1].styles[0]":"CornerRadius=6",
-    "controlStyles[1].styles[1]":"Margin=88,-50,0,0",
-    "controlStyles[1].styles[2]":"Height=80",
-    "controlStyles[1].styles[3]":"Width=80",
-    "controlStyles[0].styles[5]":"CornerRadius=10",
+  "controlStyles[1].target": "Grid#ThumbnailImage",
+  "controlStyles[1].styles[0]": "CornerRadius=6",
+  "controlStyles[1].styles[1]": "Margin=0,-75,110,0",
+  "controlStyles[1].styles[2]": "Height=80",
+  "controlStyles[1].styles[3]": "Width=80",
 
-    "controlStyles[2].target":"Windows.UI.Xaml.Controls.ListView#MediaButtonsListView",
-    "controlStyles[2].styles[0]":"HorizontalAlignment=2",
-    "controlStyles[2].styles[1]":"VerticalAlignment=2",
-    "controlStyles[2].styles[2]":"Margin=0,0,65,0",
+  "controlStyles[2].target": "Windows.UI.Xaml.Controls.ListView#MediaButtonsListView",
+  "controlStyles[2].styles[0]": "HorizontalAlignment=2",
+  "controlStyles[2].styles[1]": "VerticalAlignment=2",
+  "controlStyles[2].styles[2]": "Margin=0,0,65,0",
 
-    "controlStyles[3].target":"Windows.UI.Xaml.Controls.Image#IconImage",
-    "controlStyles[3].styles[0]":"Margin=-10,0,0,0",
+  "controlStyles[3].target": "Windows.UI.Xaml.Controls.Image#IconImage",
+  "controlStyles[3].styles[0]": "Margin=-10,0,0,0",
 
-    "controlStyles[4].target":"Windows.UI.Xaml.Controls.TextBlock#AppNameText",
-    "controlStyles[4].styles[0]":"Margin=10,0,0,0",
+  "controlStyles[4].target": "Windows.UI.Xaml.Controls.TextBlock#AppNameText",
+  "controlStyles[4].styles[0]": "Margin=10,0,0,0",
+  "controlStyles[4].styles[1]": "FontSize=14",
+  "controlStyles[4].styles[2]": "FontWeight=SemiBold",
+  "controlStyles[4].styles[3]": "FontFamily=JetBrains Mono",
 
-    "controlStyles[5].target":"Grid#NotificationCenterGrid",
-    "controlStyles[5].styles[0]":"Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
-    "controlStyles[5].styles[1]":"BorderThickness=1.5",
-    "controlStyles[5].styles[2]":"CornerRadius=10",
-    "controlStyles[5].styles[3]":"BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
-    "controlStyles[5].styles[4]":"Margin=0,0,0,0",
-    "controlStyles[5].styles[5]":"VerticalAlignment=Stretch",
+  "controlStyles[5].target": "Grid#NotificationCenterGrid",
+  "controlStyles[5].styles[0]": "Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
+  "controlStyles[5].styles[1]": "BorderThickness=1.5",
+  "controlStyles[5].styles[2]": "CornerRadius=10",
+  "controlStyles[5].styles[3]": "BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
+  "controlStyles[5].styles[4]": "Margin=0,0,0,0",
+  "controlStyles[5].styles[5]": "VerticalAlignment=Stretch",
 
-    "controlStyles[6].target":"Grid#CalendarCenterGrid",
-    "controlStyles[6].styles[0]":"Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
-    "controlStyles[6].styles[1]":"BorderThickness=1.5",
-    "controlStyles[6].styles[2]":"CornerRadius=10",
-    "controlStyles[6].styles[3]":"BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
-    "controlStyles[6].styles[4]":"Margin=0,2,0,150",
+  "controlStyles[6].target": "Grid#CalendarCenterGrid",
+  "controlStyles[6].styles[0]": "Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
+  "controlStyles[6].styles[1]": "BorderThickness=1.5",
+  "controlStyles[6].styles[2]": "CornerRadius=10",
+  "controlStyles[6].styles[3]": "BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
+  "controlStyles[6].styles[4]": "Margin=0,10,0,50",
 
-    "controlStyles[7].target":"ScrollViewer#CalendarControlScrollViewer",
-    "controlStyles[7].styles[0]":"Background:=<AcrylicBrush Opacity=\"0\"/>",
+  "controlStyles[7].target": "ScrollViewer#CalendarControlScrollViewer",
+  "controlStyles[7].styles[0]": "Background:=<AcrylicBrush Opacity=\"0\"/>",
 
-    "controlStyles[8].target":"Border#CalendarHeaderMinimizedOverlay",
-    "controlStyles[8].styles[0]":"Background:=<AcrylicBrush Opacity=\"0\"/>",
+  "controlStyles[8].target": "ActionCenter.FocusSessionControl#FocusSessionControl > Grid#FocusGrid",
+  "controlStyles[8].styles[0]": "Background:=<AcrylicBrush TintColor=\"#181825\" Opacity=\"1\"/>",
 
-    "controlStyles[9].target":"ActionCenter.FocusSessionControl#FocusSessionControl > Grid#FocusGrid",
-    "controlStyles[9].styles[0]":"Background:=<AcrylicBrush TintColor=\"#181825\" Opacity=\"1\"/>",
+  "controlStyles[9].target": "MenuFlyoutPresenter",
+  "controlStyles[9].styles[0]": "Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
+  "controlStyles[9].styles[1]": "BorderThickness=1.5",
+  "controlStyles[9].styles[2]": "CornerRadius=10",
+  "controlStyles[9].styles[3]": "Padding=2,4,2,4",
+  "controlStyles[9].styles[4]": "BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
 
-    "controlStyles[10].target":"MenuFlyoutPresenter",
-    "controlStyles[10].styles[0]":"Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
-    "controlStyles[10].styles[1]":"BorderThickness=1.5",
-    "controlStyles[10].styles[2]":"CornerRadius=10",
-    "controlStyles[10].styles[3]":"Padding=2,4,2,4",
-    "controlStyles[10].styles[4]":"BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
+  "controlStyles[10].target": "Border#JumpListRestyledAcrylic",
+  "controlStyles[10].styles[0]": "Background:=<AcrylicBrush TintColor=\"#181825\" TintLuminosityOpacity=\"0.8\" TintOpacity=\"0.58\" Opacity=\"1\" FallbackColor=\"#2b283f\"/>",
+  "controlStyles[10].styles[1]": "BorderThickness=0",
+  "controlStyles[10].styles[2]": "CornerRadius=6",
+  "controlStyles[10].styles[3]": "Margin=0,0,0,0",
+  "controlStyles[10].styles[4]": "BorderBrush=Transparent",
 
-    "controlStyles[11].target":"Border#JumpListRestyledAcrylic",
-    "controlStyles[11].styles[0]":"Background:=<AcrylicBrush TintColor=\"#181825\" TintLuminosityOpacity=\"0.8\" TintOpacity=\"0.58\" Opacity=\"1\" FallbackColor=\"#2b283f\"/>",
-    "controlStyles[11].styles[1]":"BorderThickness=0,0,0,0",
-    "controlStyles[11].styles[2]":"CornerRadius=6",
-    "controlStyles[11].styles[3]":"Margin=-2,-2,-2,-2",
+  "controlStyles[11].target": "Grid#ControlCenterRegion",
+  "controlStyles[11].styles[0]": "Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
+  "controlStyles[11].styles[1]": "BorderThickness=1.5",
+  "controlStyles[11].styles[2]": "CornerRadius=10",
+  "controlStyles[11].styles[3]": "BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
+  "controlStyles[11].styles[4]": "Margin=0,0,0,370",
 
-    "controlStyles[12].target":"Grid#ControlCenterRegion",
-    "controlStyles[12].styles[0]":"Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
-    "controlStyles[12].styles[1]":"BorderThickness=1.5",
-    "controlStyles[12].styles[2]":"CornerRadius=10",
-    "controlStyles[12].styles[3]":"BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
-    "controlStyles[12].styles[4]":"Margin=0,0,0,370",
+  "controlStyles[12].target": "Windows.UI.Xaml.Controls.Grid#L1Grid > Border",
+  "controlStyles[12].styles[0]": "Background:=<SolidColorBrush Color=\"Transparent\"/>",
 
-    "controlStyles[13].target":"Windows.UI.Xaml.Controls.Grid#L1Grid > Border",
-    "controlStyles[13].styles[0]":"Background:=<SolidColorBrush Color=\"Transparent\"/>",
+  "controlStyles[13].target": "ContentPresenter#PageContent",
+  "controlStyles[13].styles[0]": "Background:=<SolidColorBrush Color=\"Transparent\"/>",
 
-    "controlStyles[14].target":"Grid#MediaTransportControlsRoot",
-    "controlStyles[14].styles[0]":"Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
-    "controlStyles[14].styles[1]":"BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
+  "controlStyles[14].target": "ContentPresenter#PageContent > Grid > Border",
+  "controlStyles[14].styles[0]": "Background:=<SolidColorBrush Color=\"Transparent\"/>",
 
-    "controlStyles[15].target":"ContentPresenter#PageContent",
-    "controlStyles[15].styles[0]":"Background:=<SolidColorBrush Color=\"Transparent\"/>",
+  "controlStyles[15].target": "QuickActions.ControlCenter.AccessibleWindow#PageWindow > ContentPresenter > Grid#FullScreenPageRoot",
+  "controlStyles[15].styles[0]": "Background:=<SolidColorBrush Color=\"Transparent\"/>",
 
-    "controlStyles[16].target":"ContentPresenter#PageContent > Grid > Border",
-    "controlStyles[16].styles[0]":"Background:=<SolidColorBrush Color=\"Transparent\"/>",
+  "controlStyles[16].target": "QuickActions.ControlCenter.AccessibleWindow#PageWindow > ContentPresenter > Grid#FullScreenPageRoot > ContentPresenter#PageHeader",
+  "controlStyles[16].styles[0]": "Background:=<SolidColorBrush Color=\"Transparent\"/>",
 
-    "controlStyles[17].target":"QuickActions.ControlCenter.AccessibleWindow#PageWindow > ContentPresenter > Grid#FullScreenPageRoot",
-    "controlStyles[17].styles[0]":"Background:=<SolidColorBrush Color=\"Transparent\"/>",
+  "controlStyles[17].target": "ScrollViewer#ListContent",
+  "controlStyles[17].styles[0]": "Background:=<SolidColorBrush Color=\"Transparent\"/>",
 
-    "controlStyles[18].target":"QuickActions.ControlCenter.AccessibleWindow#PageWindow > ContentPresenter > Grid#FullScreenPageRoot > ContentPresenter#PageHeader",
-    "controlStyles[18].styles[0]":"Background:=<SolidColorBrush Color=\"Transparent\"/>",
+  "controlStyles[18].target": "ActionCenter.FlexibleToastView#FlexibleNormalToastView",
+  "controlStyles[18].styles[0]": "Background:=<SolidColorBrush Color=\"Transparent\"/>",
 
-    "controlStyles[19].target":"ScrollViewer#ListContent",
-    "controlStyles[19].styles[0]":"Background:=<SolidColorBrush Color=\"Transparent\"/>",
+  "controlStyles[19].target": "Border#ToastBackgroundBorder2",
+  "controlStyles[19].styles[0]": "Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
+  "controlStyles[19].styles[1]": "BorderThickness=1.5",
+  "controlStyles[19].styles[2]": "CornerRadius=6",
+  "controlStyles[19].styles[3]": "BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
 
-    "controlStyles[20].target":"ActionCenter.FlexibleToastView#FlexibleNormalToastView",
-    "controlStyles[20].styles[0]":"Background:=<SolidColorBrush Color=\"Transparent\"/>",
+  "controlStyles[20].target": "JumpViewUI.SystemItemListViewItem > Grid#LayoutRoot > Border#BackgroundBorder",
+  "controlStyles[20].styles[0]": "FocusVisualPrimaryThickness=0,0,0,0",
+  "controlStyles[20].styles[1]": "FocusVisualSecondaryThickness=0,0,0,0",
 
-    "controlStyles[21].target":"Border#ToastBackgroundBorder2",
-    "controlStyles[21].styles[0]":"Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
-    "controlStyles[21].styles[1]":"BorderThickness=1.5",
-    "controlStyles[21].styles[2]":"CornerRadius=6",
-    "controlStyles[21].styles[3]":"BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
+  "controlStyles[21].target": "ActionCenter.FlexibleItemView",
+  "controlStyles[21].styles[0]": "CornerRadius=6",
 
-    "controlStyles[22].target":"JumpViewUI.SystemItemListViewItem > Grid#LayoutRoot > Border#BackgroundBorder",
-    "controlStyles[22].styles[0]":"FocusVisualPrimaryThickness=0,0,0,0",
-    "controlStyles[22].styles[1]":"FocusVisualSecondaryThickness=0,0,0,0",
+  "controlStyles[22].target": "ActionCenter.FocusSessionControl",
+  "controlStyles[22].styles[0]": "Height=50",
 
-    "controlStyles[23].target":"JumpViewUI.JumpListListViewItem > Grid#LayoutRoot > Border#BackgroundBorder",
-    "controlStyles[23].styles[0]":"FocusVisualPrimaryThickness=0,0,0,0",
+  "controlStyles[23].target": "StackPanel#PrimaryAndSecondaryTextContainer",
+  "controlStyles[23].styles[0]": "Margin=0,60,0,0",
 
-    "controlStyles[24].target":"ActionCenter.FlexibleItemView",
-    "controlStyles[24].styles[0]":"CornerRadius=6",
+  "controlStyles[24].target": "Windows.UI.Xaml.Controls.Primitives.Thumb#HorizontalThumb",
+  "controlStyles[24].styles[0]": "Height=20",
+  "controlStyles[24].styles[1]": "Width=30",
+  "controlStyles[24].styles[2]": "Margin=0,0,-40,0",
 
-    "controlStyles[25].target":"ActionCenter.FocusSessionControl",
-    "controlStyles[25].styles[0]":"Height=50",
+  "controlStyles[25].target": "Windows.UI.Xaml.Shapes.Rectangle#HorizontalTrackRect",
+  "controlStyles[25].styles[0]": "Height=6",
+  "controlStyles[25].styles[1]": "Fill:=<SolidColorBrush Color=\"#313244\" Opacity=\"0.9\" />",
+  "controlStyles[25].styles[2]": "RadiusY=4",
+  "controlStyles[25].styles[3]": "RadiusX=4",
 
-    "controlStyles[26].target":"StackPanel#PrimaryAndSecondaryTextContainer",
-    "controlStyles[26].styles[0]":"Margin=0,60,0,0",
+  "controlStyles[26].target": "Windows.UI.Xaml.Shapes.Rectangle#HorizontalDecreaseRect",
+  "controlStyles[26].styles[0]": "Height=6",
+  "controlStyles[26].styles[1]": "Fill:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"0.95\" />",
+  "controlStyles[26].styles[2]": "RadiusY=4",
+  "controlStyles[26].styles[3]": "RadiusX=4",
+  "controlStyles[26].styles[4]": "Margin=0,0,-7,0",
 
-    "controlStyles[27].target":"Windows.UI.Xaml.Controls.Primitives.Thumb#HorizontalThumb",
-    "controlStyles[27].styles[0]":"Height=20",
-    "controlStyles[27].styles[1]":"Width=30",
-    "controlStyles[27].styles[2]":"Margin=0",
+  "controlStyles[27].target": "Windows.UI.Xaml.Controls.Primitives.Thumb#HorizontalThumb > Windows.UI.Xaml.Controls.Border",
+  "controlStyles[27].styles[0]": "CornerRadius=10",
+  "controlStyles[27].styles[1]": "Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\" />",
+  "controlStyles[27].styles[2]": "BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"0.8\" />",
+  "controlStyles[27].styles[3]": "BorderThickness=1.5",
 
-    "controlStyles[28].target":"Windows.UI.Xaml.Controls.Primitives.Thumb#HorizontalThumb > Windows.UI.Xaml.Controls.Border > Windows.UI.Xaml.Shapes.Ellipse#SliderInnerThumb",
-    "controlStyles[28].styles[0]":"Visibility=Collapsed",
+  "controlStyles[28].target": "Windows.UI.Xaml.Controls.Primitives.Thumb#HorizontalThumb > Windows.UI.Xaml.Controls.Border > Windows.UI.Xaml.Shapes.Ellipse#SliderInnerThumb",
+  "controlStyles[28].styles[0]": "Visibility=Collapsed",
 
-    "controlStyles[29].target":"Windows.UI.Xaml.Shapes.Rectangle#HorizontalTrackRect",
-    "controlStyles[29].styles[0]":"Height=6",
-    "controlStyles[29].styles[1]":"Fill:=<SolidColorBrush Color=\"#313244\" Opacity=\"0.9\" />",
-    "controlStyles[29].styles[2]":"RadiusY=4",
-    "controlStyles[29].styles[3]":"RadiusX=4",
+  "controlStyles[29].target": "Windows.UI.Xaml.Controls.Button#FooterButton[AutomationProperties.Name=Edit quick settings]",
+  "controlStyles[29].styles[0]": "CornerRadius=8",
+  "controlStyles[29].styles[1]": "Margin=0,0,8,0",
 
-    "controlStyles[30].target":"Windows.UI.Xaml.Shapes.Rectangle#HorizontalDecreaseRect",
-    "controlStyles[30].styles[0]":"Height=6",
-    "controlStyles[30].styles[1]":"Fill:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"0.95\" />",
-    "controlStyles[30].styles[2]":"RadiusY=4",
-    "controlStyles[30].styles[3]":"RadiusX=4",
-    "controlStyles[30].styles[4]":"Margin=0,0,-6,0",
+  "controlStyles[30].target": "Windows.UI.Xaml.Controls.Button#FooterButton[AutomationProperties.Name=All settings]",
+  "controlStyles[30].styles[0]": "CornerRadius=8",
+  "controlStyles[30].styles[1]": "Margin=0,0,-1,0",
 
-    "controlStyles[31].target":"Windows.UI.Xaml.Controls.Primitives.Thumb#HorizontalThumb > Windows.UI.Xaml.Controls.Border",
-    "controlStyles[31].styles[0]":"CornerRadius=10",
-    "controlStyles[31].styles[1]":"Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\" />",
-    "controlStyles[31].styles[2]":"BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"0.8\" />",
-    "controlStyles[31].styles[3]":"BorderThickness=1.2",
+  "controlStyles[31].target": "Windows.UI.Xaml.Controls.Button[AutomationProperties.AutomationId=Microsoft.QuickAction.Volume]",
+  "controlStyles[31].styles[0]": "CornerRadius=10",
 
-    "controlStyles[32].target":"Windows.UI.Xaml.Controls.Primitives.Thumb#HorizontalThumb > Windows.UI.Xaml.Controls.Border > Windows.UI.Xaml.Shapes.Ellipse#SliderInnerThumb",
-    "controlStyles[32].styles[0]":"Visibility=Collapsed",
+  "controlStyles[32].target": "Windows.UI.Xaml.Controls.Button#VolumeL2Button[AutomationProperties.Name=Select a sound output]",
+  "controlStyles[32].styles[0]": "CornerRadius=10",
 
-    "controlStyles[33].target":"Windows.UI.Xaml.Controls.Button#FooterButton[AutomationProperties.Name=Edit quick settings]",
-    "controlStyles[33].styles[0]":"CornerRadius=8",
-    "controlStyles[33].styles[1]":"Margin=0,0,8,0",
+  "controlStyles[33].target": "MenuFlyoutPresenter > Border",
+  "controlStyles[33].styles[0]": "Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
+  "controlStyles[33].styles[1]": "BorderThickness=1.5",
+  "controlStyles[33].styles[2]": "CornerRadius=10",
+  "controlStyles[33].styles[3]": "BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
 
-    "controlStyles[34].target":"Windows.UI.Xaml.Controls.Button#FooterButton[AutomationProperties.Name=All settings]",
-    "controlStyles[34].styles[0]":"CornerRadius=8",
-    "controlStyles[34].styles[1]":"Margin=0,0,-1,0",
+  "controlStyles[34].target": "Grid#JumpListGrid",
+  "controlStyles[34].styles[0]": "CornerRadius=10",
+  "controlStyles[34].styles[1]": "BorderThickness=1.5",
+  "controlStyles[34].styles[2]": "BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
+  "controlStyles[34].styles[3]": "Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
 
-    "controlStyles[35].target":"Windows.UI.Xaml.Controls.Button[AutomationProperties.AutomationId=Microsoft.QuickAction.Volume]",
-    "controlStyles[35].styles[0]":"CornerRadius=10",
+  "controlStyles[35].target": "JumpViewUI.SystemItemListViewItem > Grid#LayoutRoot@CommonStates > Border#BackgroundBorder",
+  "controlStyles[35].styles[0]": "Background@Normal=Transparent",
+  "controlStyles[35].styles[1]": "Background@PointerOver:=<SolidColorBrush Color=\"#313244\" Opacity=\"0.45\"/>",
+  "controlStyles[35].styles[2]": "Background@Pressed:=<SolidColorBrush Color=\"#11111b\" Opacity=\"0.6\"/>",
 
-    "controlStyles[36].target":"Windows.UI.Xaml.Controls.Button#VolumeL2Button[AutomationProperties.Name=Select a sound output]",
-    "controlStyles[36].styles[0]":"CornerRadius=10",
+  "controlStyles[36].target": "JumpViewUI.JumpListListViewItem > Grid#LayoutRoot > Border#BackgroundBorder",
+  "controlStyles[36].styles[0]": "FocusVisualPrimaryThickness=0,0,0,0",
+  "controlStyles[36].styles[1]": "Background@Normal=Transparent",
+  "controlStyles[36].styles[2]": "Background@PointerOver:=<SolidColorBrush Color=\"#313244\" Opacity=\"0.45\"/>",
+  "controlStyles[36].styles[3]": "Background@Pressed:=<SolidColorBrush Color=\"#11111b\" Opacity=\"0.6\"/>",
 
-    "styleConstants[0]":""
+  "controlStyles[37].target": "Grid#JumpListGrid > Border",
+  "controlStyles[37].styles[0]": "BorderThickness=0",
+  "controlStyles[37].styles[1]": "BorderBrush=Transparent",
+  "controlStyles[37].styles[2]": "Background=Transparent",
+
+  "controlStyles[38].target": "Windows.UI.Xaml.Controls.StackPanel#PrimaryAndSecondaryTextContainer",
+  "controlStyles[38].styles[0]": "Margin=0,50,-170,0",
+  "controlStyles[38].styles[1]": "VerticalAlignment=Top",
+  "controlStyles[38].styles[2]": "Grid.Column=0",
+
+  "controlStyles[39].target": "StackPanel#PrimaryAndSecondaryTextContainer > TextBlock#TitleText",
+  "controlStyles[39].styles[0]": "FontFamily=JetBrains Mono",
+  "controlStyles[39].styles[1]": "FontSize=13",
+
+  "controlStyles[40].target": "StackPanel#PrimaryAndSecondaryTextContainer > TextBlock#SubtitleText",
+  "controlStyles[40].styles[0]": "FontFamily=JetBrains Mono",
+  "controlStyles[40].styles[1]": "FontSize=11",
+
+  "controlStyles[41].target": "Windows.UI.Xaml.Controls.TextBlock#StatusText",
+  "controlStyles[41].styles[0]": "FontFamily=JetBrains Mono",
+  "controlStyles[41].styles[1]": "FontSize=11",
+
+  "controlStyles[42].target": "Windows.UI.Xaml.Controls.Button > Windows.UI.Xaml.Controls.Grid#RootGrid > Windows.UI.Xaml.Controls.ContentPresenter#Content > Windows.UI.Xaml.Controls.StackPanel > Windows.UI.Xaml.Controls.TextBlock#TitleText",
+  "controlStyles[42].styles[0]": "FontFamily=JetBrains Mono",
+  "controlStyles[42].styles[1]": "FontSize=11",
+
+  "controlStyles[43].target": "Windows.UI.Xaml.Controls.TextBlock#NotificationsTextBlock",
+  "controlStyles[43].styles[0]": "FontFamily=JetBrains Mono",
+  "controlStyles[43].styles[1]": "FontSize=13",
+
+  "controlStyles[44].target": "TextBlock#StartButtonText",
+  "controlStyles[44].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[45].target": "Button#HeaderButton > ContentPresenter#Text > TextBlock",
+  "controlStyles[45].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[46].target": "CalendarViewDayItem > TextBlock",
+  "controlStyles[46].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[47].target": "Grid#WeekDayNames > TextBlock",
+  "controlStyles[47].styles[0]": "FontFamily=JetBrains Mono",
+  "controlStyles[47].styles[1]": "FontSize=11",
+
+  "controlStyles[48].target": "ToolTip > ContentPresenter#LayoutRoot > TextBlock",
+  "controlStyles[48].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[49].target": "Grid#DoNotDisturbSubtext > TextBlock[3]",
+  "controlStyles[49].styles[0]": "Visibility=1",
+
+  "controlStyles[50].target": "Grid#DoNotDisturbSubtext > TextBlock[2]",
+  "controlStyles[50].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[51].target": "ToolTip",
+  "controlStyles[51].styles[0]": "Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
+  "controlStyles[51].styles[1]": "BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"1.0\" />",
+
+  "controlStyles[52].target": "TextBlock#DurationTextBlock",
+  "controlStyles[52].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[53].target": "TextBlock#NoNotificationsTextBlock",
+  "controlStyles[53].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[54].target": "TextBlock[AutomationProperties.AutomationId=TextTopologyTileDescription]",
+  "controlStyles[54].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[55].target": "TextBlock#PageTitleText",
+  "controlStyles[55].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[56].target": "TextBlock#PageTitle",
+  "controlStyles[56].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[57].target": "Button[AutomationProperties.AutomationId=Microsoft.QuickAction.Battery] > ContentPresenter#ContentPresenter > StackPanel > TextBlock",
+  "controlStyles[57].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[58].target": "Grid#GroupTitleGrid > TextBlock#Title",
+  "controlStyles[58].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[59].target": "StackPanel#TextContentPanel > TextBlock",
+  "controlStyles[59].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[60].target": "TextBlock#TimeStamp",
+  "controlStyles[60].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[61].target": "TextBlock[AutomationProperties.AutomationId=TextBluetoothDisabled]",
+  "controlStyles[61].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[62].target": "TextBlock[AutomationProperties.AutomationId=HeaderBluetoothDisabled]",
+  "controlStyles[62].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[63].target": "TextBlock[AutomationProperties.AutomationId=YourDevices]",
+  "controlStyles[63].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[64].target": "NetworkUX.View.EntityListItemControl#EntityListItemControl > Grid > TextBlock",
+  "controlStyles[64].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[65].target": "ActionCenter.ClearAllButton#ClearAllButtonControl > Button#ClearAll > ContentPresenter#ContentPresenter@CommonStates > TextBlock",
+  "controlStyles[65].styles[0]": "FontFamily=JetBrains Mono",
+  "controlStyles[65].styles[1]": "Foreground@PointerOver:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
+  "controlStyles[65].styles[2]": "Foreground@Pressed:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
+
+  "controlStyles[66].target": "StackPanel#OffUxPanel > TextBlock",
+  "controlStyles[66].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[67].target": "ContentControl#QuickActionContentControl > ContentPresenter > Grid > StackPanel > TextBlock",
+  "controlStyles[67].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[68].target": "NetworkUX.View.EntityListItemControl#EntityListItemControl > Grid > StackPanel > TextBlock",
+  "controlStyles[68].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[69].target": "JumpViewUI.SystemItemControl > Grid > TextBlock",
+  "controlStyles[69].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[70].target": "JumpViewUI.JumpListItemControl > Grid > Grid > TextBlock",
+  "controlStyles[70].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[71].target": "TextBlock[AutomationProperties.AutomationId=TextDeviceListEmpty]",
+  "controlStyles[71].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[72].target": "TextBlock[AutomationProperties.AutomationId=AvailableDisplaysTextBlock]",
+  "controlStyles[72].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[73].target": "Grid#RootGrid > ContentPresenter#Content > TextBlock",
+  "controlStyles[73].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[74].target": "TextBlock#MixerGroupTitle",
+  "controlStyles[74].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[75].target": "TextBlock#SpatialGroupTitle",
+  "controlStyles[75].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[76].target": "TextBlock#OutputGroupTitle",
+  "controlStyles[76].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[77].target": "ContentPresenter#PageContent > Grid > ScrollViewer#ListContent > Border#Root > Grid > ScrollContentPresenter#ScrollContentPresenter > ItemsControl > ItemsPresenter > StackPanel > ContentPresenter > StackPanel > TextBlock",
+  "controlStyles[77].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[78].target": "Button#DisconnectButton > ContentPresenter#ContentPresenter > TextBlock",
+  "controlStyles[78].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[79].target": "StackPanel > StackPanel > CheckBox > Grid#RootGrid > ContentPresenter#ContentPresenter > TextBlock",
+  "controlStyles[79].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[80].target": "StackPanel > StackPanel > Button > ContentPresenter#ContentPresenter > TextBlock",
+  "controlStyles[80].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[81].target": "TextBlock#ProjectInterfaceDeviceTileTextDeviceStatus",
+  "controlStyles[81].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[82].target": "TextBlock#ProjectInterfaceDeviceTileTextDeviceName",
+  "controlStyles[82].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[83].target": "Windows.UI.Xaml.Controls.Button#DateTextButtonOld > Windows.UI.Xaml.Controls.Grid > Windows.UI.Xaml.Controls.Border#Border > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter > Windows.UI.Xaml.Controls.TextBlock",
+  "controlStyles[83].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[84].target": "TextBlock#ClockWithMeridianOld",
+  "controlStyles[84].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[85].target": "Button#VolumeL2Button > ContentPresenter#ContentPresenter > StackPanel > FontIcon[1] > Grid > TextBlock",
+  "controlStyles[85].styles[0]": "Text=",
+  
+  "controlStyles[86].target": "Button#VolumeL2Button > ContentPresenter#ContentPresenter > StackPanel > FontIcon[2] > Grid > TextBlock",
+  "controlStyles[86].styles[0]": "Visibility=1",
+
+  "controlStyles[87].target": "TextBlock#StopButtonText",
+  "controlStyles[87].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[88].target": "StackPanel#MainContent > TextBlock#Title2",
+  "controlStyles[88].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[89].target": "StackPanel#MainContent > TextBlock#MessageText",
+  "controlStyles[89].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[90].target": "TextBlock#Attribution",
+  "controlStyles[90].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[91].target": "TextBlock#SubgroupTitleText",
+  "controlStyles[91].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[92].target": "TextBlock#SenderName",
+  "controlStyles[92].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[93].target": "TextBlock#VerbText",
+  "controlStyles[93].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[94].target": "StackPanel#MainContent > TextBlock#MessageText2",
+  "controlStyles[94].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[95].target": "TextBlock#FocusingText",
+  "controlStyles[95].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[96].target": "Windows.UI.Xaml.Controls.Primitives.CalendarPanel#YearViewPanel > Windows.UI.Xaml.Controls.Primitives.CalendarViewItem > TextBlock",
+  "controlStyles[96].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[97].target": "NetworkUX.View.CFEWiFiPassKey > StackPanel > TextBlock#WiFiPassKeyLabel",
+  "controlStyles[97].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[98].target": "NetworkUX.View.CFEConnectionCompletion > StackPanel > TextBlock#ErrorMessageLabel",
+  "controlStyles[98].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[99].target": "NetworkUX.View.CFEConnectionCompletion > StackPanel > Button > ContentPresenter#ContentPresenter > TextBlock",
+  "controlStyles[99].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[100].target": "MenuFlyoutItem > Grid > TextBlock",
+  "controlStyles[100].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[101].target": "StackPanel#PrimaryAndSecondaryTextContainer > TextBlock#Title",
+  "controlStyles[101].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[102].target": "StackPanel#PrimaryAndSecondaryTextContainer > TextBlock#Subtitle",
+  "controlStyles[102].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[103].target": "TextBlock#TitleText",
+  "controlStyles[103].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[104].target": "TextBlock#ClockWithMeridian",
+  "controlStyles[104].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[105].target": "Windows.UI.Xaml.Controls.Primitives.RepeatButton > ContentPresenter#ContentPresenter > TextBlock",
+  "controlStyles[105].styles[0]": "FontFamily=Segoe Fluent Icons",
+
+  "controlStyles[106].target": "Button#PlayPauseButton > ContentPresenter#ContentPresenter > TextBlock",
+  "controlStyles[106].styles[0]": "FontFamily=Segoe Fluent Icons",
+
+  "controlStyles[107].target": "Windows.UI.Xaml.Controls.Primitives.ListViewItemPresenter#Root > Grid > TextBlock#TitleText",
+  "controlStyles[107].styles[0]": "FontFamily=JetBrains Mono",
+
+  "controlStyles[108].target": "Microsoft.UI.Xaml.Controls.AnimatedIcon#BrightnessPlayer",
+  "controlStyles[108].styles[0]": "Height=22",
+  "controlStyles[108].styles[1]": "Width=22",
+
+  "controlStyles[109].target": "Grid#DoNotDisturbSubtext > Button",
+  "controlStyles[109].styles[0]": "Visibility=1",
+
+  "controlStyles[110].target": "ContentPresenter#PageHeader",
+  "controlStyles[110].styles[0]": "BorderThickness=1",
+  "controlStyles[110].styles[1]": "BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"0.6\" />",
+  "controlStyles[110].styles[2]": "Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"0.85\"/>",
+
+  "controlStyles[111].target": "Grid#DoNotDisturbSubtext",
+  "controlStyles[111].styles[0]": "BorderThickness=0,0,0,1",
+  "controlStyles[111].styles[1]": "BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"0.45\" />",
+
+  "controlStyles[112].target": "Grid#NotificationCenterTopBanner",
+  "controlStyles[112].styles[0]": "BorderThickness=1",
+  "controlStyles[112].styles[1]": "BorderBrush:=<SolidColorBrush Color=\"#cba6f7\" Opacity=\"0.55\" />",
+
+  "controlStyles[113].target": "Grid#MediaTransportControlsRoot",
+  "controlStyles[113].styles[0]": "Background:=<SolidColorBrush Color=\"#181825\" Opacity=\"1.0\"/>",
+
+  "controlStyles[114].target": "Windows.UI.Xaml.Controls.TextBlock#Title",
+  "controlStyles[114].styles[0]": "FontFamily=JetBrains Mono",
+  "controlStyles[114].styles[1]": "FontSize=14",
+
+  "controlStyles[115].target": "Windows.UI.Xaml.Controls.TextBlock#Content",
+  "controlStyles[115].styles[0]": "FontFamily=JetBrains Mono",
+  "controlStyles[115].styles[1]": "FontSize=13",
+
+  "controlStyles[116].target": "Windows.UI.Xaml.Controls.Primitives.CalendarPanel#YearViewPanel > Windows.UI.Xaml.Controls.Primitives.CalendarViewItem > TextBlock",
+  "controlStyles[116].styles[0]": "FontFamily=JetBrains Mono",
+
+  "styleConstants[0]": ""
 }
