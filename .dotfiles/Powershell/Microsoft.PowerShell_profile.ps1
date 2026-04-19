@@ -10,7 +10,7 @@ if ($PROMPT_THEME -eq "starship") {
     $ENV:STARSHIP_CONFIG = "$HOME\.config\starship\starship.toml"
     Invoke-Expression (&starship init powershell)
 } else {
-    oh-my-posh init pwsh --config "~\.config\ohmyposh\zen.toml" | Invoke-Expression
+    oh-my-posh init pwsh --config "$HOME\.config\ohmyposh\catppuccin.json" | Invoke-Expression
 }
 
 # ============================================================================
@@ -92,6 +92,16 @@ function update-all {
     Write-Host "Done!" -ForegroundColor Green
 }
 
+function clean-all {
+    Write-Host "Cleaning Scoop..." -ForegroundColor Cyan
+    scoop cleanup *
+    scoop cache rm *
+    Write-Host "Done!" -ForegroundColor Green
+    Write-Host "Cleaning temp files..." -ForegroundColor Cyan
+    Remove-Item -Recurse -Force "$env:TEMP\*" 2>$null
+    Remove-Item -Recurse -Force "C:\Windows\TEMP\*" 2>$null
+    Write-Host "Done!" -ForegroundColor Green
+}
 function fetch {
     param($style = "default")
     $cfg = "$HOME\.config\fastfetch\$style.jsonc"
