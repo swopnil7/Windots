@@ -12,7 +12,7 @@ modify(find="pin*" pos="top" menu="Pin/Unpin")
 modify(type="dir.back|drive.back" where=this.id==id.customize_this_folder pos=1 sep="top" menu="file manage")
 
 modify(where=str.equals(this.name, ["open in terminal", "open linux shell here"]) || this.id==id.open_powershell_window_here
-	pos="bottom" menu="Terminal")
+	vis=vis.remove)
 
 modify(mode=mode.multiple
 	where=this.id(

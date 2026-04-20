@@ -28,5 +28,7 @@ import 'imports/taskbar.nss'
 import 'imports/adb.nss'
 import 'imports/nss.mode.nss'
 import 'imports/all.clipboard.save.nss'
+import 'imports/terminal.nss'
+import 'imports/power-profiles.nss'
 
 import 'imports/user.nss'

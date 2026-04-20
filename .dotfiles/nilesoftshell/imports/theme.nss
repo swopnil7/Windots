@@ -32,19 +32,19 @@ theme
 		}
 	}
 
-	// font
-	// {
-	// 	size = 14
-	// 	name = "Segoe UI Variable Text"
-	// 	weight = 2
-	// 	italic = 0
-	// }
+	 font
+	 {
+	 	size = 16
+	 	name = "JetBrains Mono"
+	 	weight = 2
+	 	italic = 0
+	 }
 
 	border
 	{
 		enabled = true
-		size = 1
-		color = #b4befe
+		size = 2
+		color = #cba6f7
 		opacity = 90
 		radius = 2
 	}
@@ -74,6 +74,6 @@ theme
 	image
 	{
 		enabled = true
-		color = [#cdd6f4, #b4befe, #1e1e2e]
+		color = [#cdd6f4, #cba6f7, #1e1e2e]
 	}
 }

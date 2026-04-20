@@ -4,8 +4,25 @@ modify(
 )
 
 modify(
+	find="Open with Code"
+	where=wnd.is_desktop
+	vis=vis.remove
+)
+
+modify(
+	find="NanaZip"
+	image = svg_nanazip
+)
+
+modify(
+	find="File Converter"
+	image = svg_file_converter
+	menu="File manage" pos=1
+)
+
+modify(
 	mode=mode.multiple
-	where=(this.name=="Scan with Microsoft Defender" || this.name=="Upload With ShareX" || this.name=="7-Zip" || this.name=="UnLock IT")
+	where=(this.name=="Scan with Microsoft Defender" || this.name=="Upload With ShareX" || this.name=="7-Zip")
 	menu=title.more_options
 )
 

@@ -1,5 +1,12 @@
-﻿menu(where=!wnd.is_desktop && sel.count>0 type='file|dir|drive|namespace|back' mode="multiple" title='File manage' image=\uE253)
+menu(where=!wnd.is_desktop && sel.count>0 type='file|dir|drive|namespace|back' mode="multiple" title='File manage' image=\uE253)
 {
+	menu(type='file|dir' mode="single" title='UnLock IT' image=svg_unlockit)
+	{
+		item(title='Check' cmd='pwsh.exe' args='-command "unlockit /check \"@sel.path\""' window=hidden)
+		item(title='Unlock' admin cmd='pwsh.exe' args='-command "unlockit /unlock \"@sel.path\""' window=hidden)
+		item(title='Delete' admin cmd='pwsh.exe' args='-command "unlockit /delete \"@sel.path\""' window=hidden)
+	}
+
 	menu(separator="after" title=title.copy_path image=icon.copy_path)
 	{
 		item(where=sel.count > 1 title='Copy (@sel.count) items selected' cmd=command.copy(sel(false, "\n")))
