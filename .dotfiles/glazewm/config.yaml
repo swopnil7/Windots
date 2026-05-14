@@ -17,7 +17,7 @@ general:
     # Trigger for cursor jump:
     # - 'monitor_focus': Jump when focus changes between monitors.
     # - 'window_focus': Jump when focus changes between windows.
-    trigger: "monitor_focus"
+    trigger: "window_focus"
 
      # How windows should be hidden when switching workspaces.
   # - 'cloak': Recommended. Hides windows with no animation.
@@ -33,14 +33,14 @@ general:
 
 gaps:
   # Gap between adjacent windows.
-  inner_gap: "5px"
+  inner_gap: "12px"
 
   # Gap between windows and the screen edge.
   outer_gap:
-    top: "8px"
-    right: "8px"
-    bottom: "8px"
-    left: "8px"
+    top: "12px"
+    right: "12px"
+    bottom: "12px"
+    left: "12px"
 
 window_effects:
   # Visual effects to apply to the focused window.

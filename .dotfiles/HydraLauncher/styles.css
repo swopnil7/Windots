@@ -1,23 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
 
-/* Catppuccin Mocha Colors */
+/* Catppuccin Mocha Colors (adjusted translucency) */
 :root {
-    --ctp-bg: rgba(24, 24, 37, 0.7);         /* base */
-    --ctp-surface: rgba(30, 30, 46, 0.7);    /* mantle */
-    --ctp-overlay: rgba(49, 50, 68, 0.5);    /* overlay */
-    --ctp-accent: #c39ff1;                   /* lavender */
-    --ctp-accent2: #f5c2e7;                  /* pink */
-    --ctp-text: #cdd6f4;                     /* text */
-    --ctp-subtext: #a6adc8;                  /* subtext1 */
-    --ctp-border: rgba(108, 112, 134, 0.5);  /* surface1 */
-    --ctp-shadow: rgba(30, 30, 46, 0.8);
+    --ctp-bg: rgba(24, 24, 37, 0.55);         /* base (more translucent) */
+    --ctp-surface: rgba(30, 30, 46, 0.55);    /* mantle (more translucent) */
+    --ctp-overlay: rgba(49, 50, 68, 0.36);    /* overlay (softer) */
+    --ctp-accent: #c39ff1;                    /* lavender */
+    --ctp-accent2: #f5c2e7;                   /* pink */
+    --ctp-text: #cdd6f4;                      /* text */
+    --ctp-subtext: #a6adc8;                   /* subtext1 */
+    --ctp-border: rgba(108, 112, 134, 0.42);  /* surface1 */
+    --ctp-shadow: rgba(30, 30, 46, 0.7);
 
 }
 
 body {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
     color: var(--ctp-text);
-    background: linear-gradient(135deg, #1e1e2e 0%, #181825 100%);
+    background: linear-gradient(135deg, rgba(30,30,40,0.6) 0%, rgba(24,24,34,0.6) 100%);
     overflow: hidden;
 }
 
@@ -56,7 +56,7 @@ body {
 }
 
 #root {
-    background: url('https://preview.redd.it/need-real-madrid-wallpapers-for-pc-v0-lo797ifjaese1.jpeg?width=1680&format=pjpg&auto=webp&s=b13c289d361c52db5373a28ec2d800876fa8a426') no-repeat center center fixed;
+    background: url('https://github.com/swopnil7/Windots/blob/main/wallies/Catppuccin.png?raw=true') no-repeat center center fixed;
     background-size: cover;
     opacity: 1;
     image-rendering: auto;
@@ -96,36 +96,90 @@ body {
 }
 
 .container__content .button--outline:hover {
-    background-color: var(--ctp-accent);
-    color: #1e1e2e;
-    box-shadow: 0 0 15px var(--ctp-accent2);
+    background-color: rgba(195,159,241,0.08);
+    color: var(--ctp-text);
+    box-shadow: 0 6px 12px rgba(195,159,241,0.06);
+    border-color: rgba(195,159,241,0.12);
+}
+
+.button--primary {
+    background-color: rgba(49, 50, 68, 0.72);
+    color: var(--ctp-text) !important;
+    border: 1px solid var(--ctp-border);
+}
+
+.button--primary:hover {
+    background-color: rgba(49, 50, 68, 0.8);
+    color: var(--ctp-text) !important;
+    border-color: rgba(195,159,241,0.18);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: var(--ctp-accent);
-    text-shadow: 2px 2px 8px var(--ctp-shadow);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.45);
 }
 
 @keyframes glow {
-    0% { text-shadow: 0 0 5px var(--ctp-accent2); }
-    100% { text-shadow: 0 0 15px var(--ctp-accent); }
+    0% {
+        text-shadow:
+            0 0 4px rgba(245,194,231,0.10),
+            0 0 10px rgba(195,159,241,0.06);
+    }
+
+    100% {
+        text-shadow:
+            0 0 6px rgba(245,194,231,0.16),
+            0 0 14px rgba(195,159,241,0.12);
+    }
 }
 
 .glow-text {
     animation: glow 1.5s infinite alternate;
 }
 
+#workwonders-feedback-widget-trigger {
+    background-color: var(--ctp-overlay);
+    font-family: 'JetBrains Mono', monospace;
+}
+
 @keyframes pulse {
-    0% { box-shadow: 0 0 5px var(--ctp-accent2); }
-    50% { box-shadow: 0 0 15px var(--ctp-accent); }
-    100% { box-shadow: 0 0 5px var(--ctp-accent2); }
+    0% {
+        box-shadow:
+            0 0 0 0 rgba(245,194,231,0.05),
+            0 0 6px rgba(195,159,241,0.06);
+    }
+
+    50% {
+        box-shadow:
+            0 0 0 2px rgba(245,194,231,0.03),
+            0 0 12px rgba(195,159,241,0.10);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(245,194,231,0.05),
+            0 0 6px rgba(195,159,241,0.06);
+    }
 }
 
 .pulse-hover:hover {
-    animation: pulse 0.8s infinite alternate;
+    animation: pulse 1.4s ease-in-out infinite;
+}
+
+/* Minimal, classy hover styles for interactive elements */
+a:hover,
+button:hover,
+.clickable:hover,
+.interactive:hover {
+    background-color: rgba(195,159,241,0.04);
+    color: var(--ctp-text);
+    border-color: rgba(195,159,241,0.08);
+    box-shadow: none;
+    transform: none;
 }
 
 * {

@@ -72,6 +72,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 | **Shells** | [PowerShell](https://learn.microsoft.com/en-us/powershell/) 💻 |
 | **Terminal** | [Windows Terminal](https://github.com/microsoft/terminal) 🖲️ |
 | **Status Bar** | [YASB](https://github.com/amnweb/yasb) 📊 |
+| **Windows Border** | [Tacky Borders](https://github.com/lukeyou05/tacky-borders) 🖼️ |
 | **Editors** | [VSCode](https://code.visualstudio.com/) 📝 |
 | **Launcher** | [Flow Launcher](https://www.flowlauncher.com/) 🔍 |
 | **File Managers** | [File Explorer](https://www.microsoft.com/en-us/windows/tips/file-explorer) 🗂️ |
@@ -155,6 +156,15 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 - **Install** [**YASB**](https://github.com/amnweb/yasb/releases/).
 - [`windots/.dotfiles/yasb/`](.dotfiles/yasb/) → `%USERPROFILE%\.config\yasb\`
 - **Restart YASB** for the changes to take effect.
+
+</details>
+
+<details>
+<summary><strong>🖼️ Tacky Borders</strong></summary>
+
+- **Install** [**Tacky Borders**](https://github.com/lukeyou05/tacky-borders/releases/).
+- [`windots/.dotfiles/tackyborders/config.yaml`](.dotfiles/tackyborders/config.yaml) → `%USERPROFILE%\.config\tacky-borders\`
+- **Restart Tacky Borders** for the changes to take effect.
 
 </details>
 
