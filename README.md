@@ -208,17 +208,7 @@ SecureUxTheme allows custom themes to be applied on Windows 11.
 - Click **Patch and Apply**
 - The theme is now active! You can now change it anytime from **Settings** → **Personalization** → **Themes**
 
-#### Step 3: Apply Custom Icons (Windhawk)
-
-> [!NOTE]
-> Ensure you have [**Windhawk**](https://windhawk.net/) installed first.
-
-- Open **Windhawk** and install the [**Icon Resource Redirect**](https://windhawk.net/mods/icon-resource-redirect) mod
-- Open the mod's **settings**
-- Select **Linuxfx 11 AIO** from the available icon theme presets
-- Click **Apply**
-
-#### Step 4: Add Explorer Blur Effect
+#### Step 3: Add Explorer Blur Effect
 
 - **Create** a folder for custom scripts (e.g., `C:\scripts\`)
 - **Copy** the [`Explorerblur`](.dotfiles/explorer/Explorerblur/) folder → `C:\scripts\`
@@ -288,15 +278,11 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 <summary><strong>🦅 Windhawk</strong></summary>
 
 - **Install** [**Windhawk**](https://windhawk.net/).
-- **Install Relevant Mods** from the [Windhawk Store](https://windhawk.net/explore):
-  - Windows 11 Notification Center Styler
-  - Windows 11 Start Menu Styler
-  - Windows 11 Taskbar Styler
-  - Windows 11 File Explorer Styler
-  - Taskbar auto-hide when maximized
-  - Control Panel Color Fix
-- **Copy** the Windhawk config files from [`windots/.dotfiles/windhawk/`](.dotfiles/windhawk/)
-- Open the relevant mod’s **details page**, go to **Advanced > Mod Settings**, paste the config, and click **"Load"** to apply it.
+- **Download** the [`WindhawkMods.zip`](.dotfiles/windhawk/WindhawkMods.zip) file.
+- **Download** [**Windhawk Backup Manager**](https://github.com/osmanonurkoc/Windhawk-Backup-Manager/releases) and Run it.
+> [!NOTE]
+> You can first backup your current configs using the backup manager before applying the new ones as it will overwrite the existing configs.
+- **Click** on **Import** and select the downloaded `WindhawkMods.zip` file.
 
 </details>
 
@@ -545,8 +531,9 @@ Visit the [Discussions](https://github.com/swopnil7/windots/discussions) section
 
 Special mention to the following resources and projects that were especially helpful during setup:
 
-- [**pivoshenko**](https://github.com/pivoshenko/catppuccin-startpage) for the clean and aesthetic **browser startpage** 🌐
 - [**GlazeWM**](https://github.com/glzr-io/glazewm) for delivering an outstanding **tiling window manager** that boosts productivity ✨
 - [**YASB**](https://github.com/amnweb/yasb) for a **customizable and feature-rich status bar** that fits seamlessly into the setup 🚀
 - [**Catppuccin**](https://catppuccin.com) for creating the **best color scheme** ever 🖌️
-- [**Ashish**](https://github.com/ashish0kumar) for some of the **file configs** & **readme design** 🤍
+- [**pivoshenko**](https://github.com/pivoshenko/catppuccin-startpage) for the clean and aesthetic **browser startpage** 🌐
+- [**ashish**](https://github.com/ashish0kumar/windots) for some of the **config files** & **readme design** 🤍
+- [**Osman Onur KOÇ**](https://github.com/osmanonurkoc/windhawk-backup-manager) for the outstanding **Windhawk Backup Manager** 🛠️
