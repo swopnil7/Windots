@@ -1,7 +1,11 @@
+# GlazeWM configuration file.
+# I have used win as the modifier key for all keybindings for convenience reasons.
+# You can change it to alt if you want to avoid overriding some default Windows shortcuts.
+
 general:
   # Commands to run when the WM has started (e.g. to run a script or launch
-  # another application). Here we are running a batch script to start Yasb.
-  startup_commands: ["shell-exec C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Yasb.lnk"]
+  # another application). Here we are running a shortcut to start Yasb.
+  #startup_commands: ["shell-exec C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Yasb.lnk"]
 
   # Whether to automatically focus windows underneath the cursor.
   focus_follows_cursor: true
@@ -12,7 +16,7 @@ general:
 
   cursor_jump:
     # Whether to automatically move the cursor on the specified trigger.
-    enabled: true
+    enabled: false
 
     # Trigger for cursor jump:
     # - 'monitor_focus': Jump when focus changes between monitors.
@@ -123,187 +127,193 @@ window_rules:
       - window_process: { equals: 'Dropshelf' }
         window_class: { equals: 'WinUIDesktopWin32WindowClass' }
 
+      #Ignore Phone Link Casted Windows
+      - window_process: { equals: 'YourPhoneAppProxy' }
+        window_class: { regex: 'HwndWrapper.*YourPhoneAppProxy.*' }
+      
   - commands: ["toggle-floating --centered"]
     match:
-      - window_class: { regex: "WinUIDesktopWin32WindowClass" }
-      - window_process: { equals: "AutoHotkey64" }
-        window_title: { equals: "Windows Utilities Settings" }
-      - window_process: { equals: "AutoHotkey64" }
-        window_title: { equals: "⚙️ Path Selector Settings" }
-      - window_process: { equals: "AutoHotkey64" }
-        window_title: { equals: "Text Expander Settings" }
+      #- window_process: { equals: "SomeApp.exe" }
+      #  window_class: { regex: "SomeAppClass" }
 
 binding_modes:
   - name: "pause"
     keybindings:
       - commands: ["wm-disable-binding-mode --name pause"]
-        bindings: ["alt+shift+p"]
+        bindings: ["win+shift+p"]
 
 keybindings:
-  # Disables all keybindings until alt+shift+p is pressed again.
+  # Disables all keybindings until win+shift+p is pressed again.
   - commands: ["wm-enable-binding-mode --name pause"]
-    bindings: ["alt+shift+p"]
+    bindings: ["win+shift+p"]
 
   # Resize focused window.
   - commands: ["resize --width -2%"]
-    bindings: ["alt+,"]
+    bindings: ["win+,"]
   - commands: ["resize --width +2%"]
-    bindings: ["alt+."]
+    bindings: ["win+."]
   - commands: ["resize --height +2%"]
-    bindings: ["alt+up"]
+    bindings: ["win+up"]
   - commands: ["resize --height -2%"]
-    bindings: ["alt+down"]
-  - commands: ["wm-enable-binding-mode --name resize"]
-    bindings: ["alt+r"]
-  - commands: ["wm-disable-binding-mode --name resize"]
-    bindings: ["alt+r"]
+    bindings: ["win+down"]
 
   # Shift focus in a given direction.
   - commands: ["focus --direction left"]
-    bindings: ["alt+h"]
+    bindings: ["win+h"]
   - commands: ["focus --direction right"]
-    bindings: ["alt+l"]
+    bindings: ["win+l"]
   - commands: ["focus --direction up"]
-    bindings: ["alt+k"]
+    bindings: ["win+k"]
   - commands: ["focus --direction down"]
-    bindings: ["alt+j"]
+    bindings: ["win+j"]
 
   # Move focused window in a given direction.
   - commands: ["move --direction left"]
-    bindings: ["alt+shift+h", "alt+shift+left"]
+    bindings: ["win+shift+h", "win+shift+left"]
   - commands: ["move --direction right"]
-    bindings: ["alt+shift+l", "alt+shift+right"]
+    bindings: ["win+shift+l", "win+shift+right"]
   - commands: ["move --direction up"]
-    bindings: ["alt+shift+k", "alt+shift+up"]
+    bindings: ["win+shift+k", "win+shift+up"]
   - commands: ["move --direction down"]
-    bindings: ["alt+shift+j", "alt+shift+down"]
+    bindings: ["win+shift+j", "win+shift+down"]
 
   # Change tiling direction. This determines where new tiling windows will
   # be inserted.
   - commands: ["toggle-tiling-direction"]
-    bindings: ["alt+shift+v"]
+    bindings: ["win+shift+v"]
 
   # Change focus from tiling windows -> floating -> fullscreen.
   - commands: ["wm-cycle-focus"]
-    bindings: ["alt+shift+space"]
+    bindings: ["win+shift+space"]
 
   # Change the focused window to be floating.
   - commands: ["toggle-floating --centered"]
-    bindings: ["alt+space"]
+    bindings: ["win+space"]
 
   # Change the focused window to be tiling.
   - commands: ["toggle-tiling"]
-    bindings: ["alt+t"]
+    bindings: ["win+t"]
 
   # Change the focused window to be fullscreen.
   - commands: ["toggle-fullscreen"]
-    bindings: ["alt+f"]
+    bindings: ["win+f"]
 
   # Minimize focused window.
   - commands: ["toggle-minimized"]
-    bindings: ["alt+m"]
+    bindings: ["win+m"]
 
   # Close focused window.
   - commands: ["close"]
-    bindings: ["alt+q"]
+    bindings: ["win+q"]
 
   # Kill GlazeWM process safely.
   - commands: ["wm-exit"]
-    bindings: ["alt+shift+e"]
+    bindings: ["win+shift+e"]
 
   # Re-evaluate configuration file.
   - commands: ["wm-reload-config"]
-    bindings: ["alt+shift+r"]
+    bindings: ["win+shift+r"]
 
   # Redraw all windows.
   - commands: ["wm-redraw"]
-    bindings: ["alt+shift+d"]
+    bindings: ["win+shift+d"]
 
   # Focus the next/previous workspace defined in `workspaces` config.
-  #- commands: ["focus --next-workspace"]
-  #  bindings: ["alt+shift+s"]
-  #- commands: ["focus --prev-workspace"]
-  #  bindings: ["alt+shift+a"]
+  - commands: ["focus --next-workspace"]
+    bindings: ["win+shift+c"]
+  - commands: ["focus --prev-workspace"]
+    bindings: ["win+shift+z"]
 
   # Focus the workspace that last had focus.
   - commands: ["focus --recent-workspace"]
-    bindings: ["alt+w"]
+    bindings: ["win+w"]
 
   # Change focus to a workspace defined in `workspaces` config.
   - commands: ["focus --workspace 1"]
-    bindings: ["alt+1"]
+    bindings: ["win+1"]
   - commands: ["focus --workspace 2"]
-    bindings: ["alt+2"]
+    bindings: ["win+2"]
   - commands: ["focus --workspace 3"]
-    bindings: ["alt+3"]
+    bindings: ["win+3"]
   - commands: ["focus --workspace 4"]
-    bindings: ["alt+4"]
+    bindings: ["win+4"]
   - commands: ["focus --workspace 5"]
-    bindings: ["alt+5"]
+    bindings: ["win+5"]
   - commands: ["focus --workspace 6"]
-    bindings: ["alt+6"]
+    bindings: ["win+6"]
   - commands: ["focus --workspace 7"]
-    bindings: ["alt+7"]
+    bindings: ["win+7"]
   - commands: ["focus --workspace 8"]
-    bindings: ["alt+8"]
+    bindings: ["win+8"]
   - commands: ["focus --workspace 9"]
-    bindings: ["alt+9"]
+    bindings: ["win+9"]
 
   # Move the focused window's parent workspace to a monitor in a given
   # direction.
   - commands: ["move-workspace --direction left"]
-    bindings: ["alt+shift+a"]
+    bindings: ["win+shift+j"]
   - commands: ["move-workspace --direction right"]
-    bindings: ["alt+shift+f"]
+    bindings: ["win+shift+l"]
   - commands: ["move-workspace --direction up"]
-    bindings: ["alt+shift+d"]
+    bindings: ["win+shift+i"]
   - commands: ["move-workspace --direction down"]
-    bindings: ["alt+shift+s"]
+    bindings: ["win+shift+k"]
 
   # Move focused window to a workspace defined in `workspaces` config.
   - commands: ["move --workspace 1", "focus --workspace 1"]
-    bindings: ["alt+shift+1"]
+    bindings: ["win+shift+1"]
   - commands: ["move --workspace 2", "focus --workspace 2"]
-    bindings: ["alt+shift+2"]
+    bindings: ["win+shift+2"]
   - commands: ["move --workspace 3", "focus --workspace 3"]
-    bindings: ["alt+shift+3"]
+    bindings: ["win+shift+3"]
   - commands: ["move --workspace 4", "focus --workspace 4"]
-    bindings: ["alt+shift+4"]
+    bindings: ["win+shift+4"]
   - commands: ["move --workspace 5", "focus --workspace 5"]
-    bindings: ["alt+shift+5"]
+    bindings: ["win+shift+5"]
   - commands: ["move --workspace 6", "focus --workspace 6"]
-    bindings: ["alt+shift+6"]
+    bindings: ["win+shift+6"]
   - commands: ["move --workspace 7", "focus --workspace 7"]
-    bindings: ["alt+shift+7"]
+    bindings: ["win+shift+7"]
   - commands: ["move --workspace 8", "focus --workspace 8"]
-    bindings: ["alt+shift+8"]
+    bindings: ["win+shift+8"]
   - commands: ["move --workspace 9", "focus --workspace 9"]
-    bindings: ["alt+shift+9"]
+    bindings: ["win+shift+9"]
 
   ## Custom keybindings for applications.
+  ## Adjust these to your needs. You can also add more keybindings for other applications here.
 
   # Launch terminal with the default profile.
-  - commands: ["shell-exec wt"]
-    bindings: ["alt+enter"]
+  - commands: ["shell-exec C:\\Program Files\\PowerShell\\7\\pwsh.exe"]
+    bindings: ["win+enter"]
+
+  # Launch terminal as administrator
+  - commands: ["shell-exec C:\\Scripts\\wtadmin.vbs"]
+    bindings: ["win+shift+enter"]
 
   - commands: ["shell-exec zen"]
-    bindings: ["alt+b"]
+    bindings: ["win+b"]
 
   - commands: ["shell-exec code"]
-    bindings: ["alt+v"]
-
-  - commands: ["shell-exec C:\\Windows\\SysWOW64\\notepad.exe"]
-    bindings: ["alt+n"]
+    bindings: ["win+c"]
 
   - commands: ["shell-exec %USERPROFILE%\\Desktop\\Discord.lnk"]
-    bindings: ["alt+d"]
+    bindings: ["win+d"]
 
   - commands: ["shell-exec %AppData%\\Spotify\\Spotify.exe"]
-    bindings: ["alt+s"]
-
-  - commands: ["shell-exec explorer.exe"]
-    bindings: ["alt+e"]
+    bindings: ["win+s"]
 
   # An open source YouTube Music client: https://github.com/th-ch/youtube-music
-  - commands: ["shell-exec %LocalAppData%\\Programs\\youtube-music\\YouTube Music.exe"]
-    bindings: ["alt+y"]
+  - commands: ["shell-exec %USERPROFILE%\\scoop\\apps\\pear-desktop\\current\\YouTube Music.exe"]
+    bindings: ["win+y"]
+
+  ## Be careful while using win+ combinations as it may override important default Windows shortcuts. So you won't be able to access those native features with shortcuts unless you pause keybindings using win+shift+p, or close GlazeWM.
+  # Some important default Windows shortcuts that you should avoid overriding:
+  # win+e: Open File Explorer
+  # win+n: Open Notification Center
+  # win+a: Open Action Center
+  # win+d: Show Desktop (I overrode this since I use 3 finger swipe down touchpad gesture to show desktop, but you may want to change it back)
+  # win+s: Open Search (I overrode this since you can directly start searching after opening start menu, but you may want to change it back)
+  # win+shift+s: Snip Screen
+  # win+shift+t: OCR Screen (Windows 11)
+  # win+. and win+;: Open Emoji Panel (I overrode win+. for resizing, but win+; still works for opening emoji panel)
+  # win+v: Open Clipboard History
