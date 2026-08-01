@@ -1,0 +1,68 @@
+; Copyright   NIIVU DESIGNS 2024.
+
+[Theme]
+; Windows - IDS_THEME_DISPLAYNAME_Catppuccin Mocha
+DisplayName=Catppuccin Mocha
+SetLogonBackground=0
+
+; Computer - SHIDI_SERVER
+[CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\DefaultIcon]
+DefaultValue=%SystemRoot%\Resources\Themes\Catppuccin\Icons\Mocha\This PC.ico
+
+; UsersFiles - SHIDI_USERFILES
+[CLSID\{59031A47-3F72-44A7-89C5-5595FE6B30EE}\DefaultIcon]
+DefaultValue=%SystemRoot%\System32\imageres.dll,-123
+
+; Network - SHIDI_MYNETWORK
+[CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\DefaultIcon]
+DefaultValue=%SystemRoot%\System32\imageres.dll,-25
+
+; Recycle Bin - SHIDI_RECYCLERFULL SHIDI_RECYCLER
+[CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\DefaultIcon]
+Full=%SystemRoot%\System32\imageres.dll,-54
+Empty=%SystemRoot%\System32\imageres.dll,-55
+
+[Control Panel\Cursors]
+Arrow=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\normal-select.cur
+Help=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\help-select.cur
+AppStarting=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\working-in-background.ani
+Wait=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\busy.ani
+Crosshair=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\precision-select.cur
+IBeam=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\text-select.cur
+NWPen=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\handwriting.cur
+No=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\unavailable.cur
+SizeNS=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\vertical-resize.cur
+SizeWE=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\horizontal-resize.cur
+SizeNWSE=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\diagonal-resize-1.cur
+SizeNESW=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\diagonal-resize-2.cur
+SizeAll=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\move.cur
+UpArrow=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\normal-select.cur
+Alternate=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\alt-select.cur
+Hand=%SystemRoot%\Resources\Themes\Catppuccin\Cursors\link-select.cur
+DefaultValue=Catppuccin Mocha
+DefaultValue.MUI=
+
+[Control Panel\Desktop]
+Wallpaper=%SystemRoot%\Resources\Themes\Catppuccin\Wallpapers\Mocha.png
+TileWallpaper=0
+WallpaperStyle=10
+Pattern=
+
+[VisualStyles]
+Path=%ResourceDir%\Themes\Catppuccin\CatppuccinMocha.msstyles
+ColorStyle=NormalColor
+Size=NormalSize
+AutoColorization=0
+ColorizationColor=0xFFCBA6F7
+SystemMode=Dark
+AppMode=Dark
+
+[boot]
+SCRNSAVE.EXE=
+
+[MasterThemeSelector]
+MTSM=RJSPBS
+
+[Sounds]
+; IDS_SCHEME_DEFAULT
+SchemeName=@%SystemRoot%\System32\mmres.dll,-800
