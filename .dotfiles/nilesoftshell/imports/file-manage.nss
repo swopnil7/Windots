@@ -1,4 +1,4 @@
-menu(where=!wnd.is_desktop && sel.count>0 type='file|dir|drive|namespace|back' mode="multiple" title='File manage' image=\uE253)
+menu(where=!wnd.is_desktop && sel.count>0 type='file|dir|drive|namespace|back' mode="multiple" title='File manage' image=icon.manage)
 {
 	menu(type='file|dir' mode="single" title='UnLock IT' image=svg_unlockit)
 	{
@@ -48,14 +48,14 @@ menu(where=!wnd.is_desktop && sel.count>0 type='file|dir|drive|namespace|back' m
 	item(mode="single" type="file" title="Change extension" image=\uE0B5 cmd=if(input("Change extension", "Type extension"),
 		io.rename(sel.path, path.join(sel.dir, sel.file.title + "." + input.result))))
 
-	menu(separator="after" image=\uE290 title=title.select)
+	menu(separator="after" image=icon.select title=title.select)
 	{
 		item(title="All" image=icon.select_all cmd=command.select_all)
 		item(title="Invert" image=icon.invert_selection cmd=command.invert_selection)
 		item(title="None" image=icon.select_none cmd=command.select_none)
 	}
 
-	item(type='file|dir|back.dir|drive' title='Take ownership' image=[\uE194,#f00] admin
+	item(type='file|dir|back.dir|drive' title='Take ownership' image=icon.ownership admin
 		cmd args='/K takeown /f "@sel.path" @if(sel.type==1,null,"/r /d y") && icacls "@sel.path" /grant *S-1-5-32-544:F @if(sel.type==1,"/c /l","/t /c /l /q")')
 	separator
 	menu(title="Show/Hide" image=icon.show_hidden_files)

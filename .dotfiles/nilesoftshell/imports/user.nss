@@ -1,10 +1,30 @@
 modify(
 	find="Open with Code"
-	image = \uE272
+	image = svg_code
 )
 
 modify(
-	find="Open with Code"
+	find="Partition Master"
+	image = icon.partition_master
+)
+
+modify(
+	find="Open with Zed"
+	image = svg_zed
+)
+
+modify(
+	find="NVIDIA Control Panel"
+	image = svg_nvidia
+)
+
+modify(
+	find="O+ Connect"
+	image = svg_phone
+)
+
+modify(
+	find='Open with Code|Open with Zed'
 	where=wnd.is_desktop
 	vis=vis.remove
 )
