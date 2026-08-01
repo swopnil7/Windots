@@ -1,10 +1,6 @@
-# GlazeWM configuration file.
-# I have used win as the modifier key for all keybindings for convenience reasons.
-# You can change it to alt if you want to avoid overriding some default Windows shortcuts.
-
 general:
   # Commands to run when the WM has started (e.g. to run a script or launch
-  # another application). Here we are running a shortcut to start Yasb.
+  # another application). Here we are running a batch script to start Yasb.
   #startup_commands: ["shell-exec C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Yasb.lnk"]
 
   # Whether to automatically focus windows underneath the cursor.
@@ -75,7 +71,7 @@ window_behavior:
       centered: true
 
       # Whether to show floating windows as always on top.
-      shown_on_top: true
+      shown_on_top: false
 
     fullscreen:
       # Maximize the window if possible. If the window doesn't have a
@@ -130,11 +126,12 @@ window_rules:
       #Ignore Phone Link Casted Windows
       - window_process: { equals: 'YourPhoneAppProxy' }
         window_class: { regex: 'HwndWrapper.*YourPhoneAppProxy.*' }
-      
+
   - commands: ["toggle-floating --centered"]
     match:
+      #- window_class: { regex: "SomeAppClass" }
       #- window_process: { equals: "SomeApp.exe" }
-      #  window_class: { regex: "SomeAppClass" }
+      #  window_title: { equals: "Some Title" }
 
 binding_modes:
   - name: "pause"
@@ -149,33 +146,33 @@ keybindings:
 
   # Resize focused window.
   - commands: ["resize --width -2%"]
-    bindings: ["win+,"]
+    bindings: ["win+alt+left"]
   - commands: ["resize --width +2%"]
-    bindings: ["win+."]
+    bindings: ["win+alt+right"]
   - commands: ["resize --height +2%"]
-    bindings: ["win+up"]
+    bindings: ["win+alt+up"]
   - commands: ["resize --height -2%"]
-    bindings: ["win+down"]
+    bindings: ["win+alt+down"]
 
   # Shift focus in a given direction.
   - commands: ["focus --direction left"]
-    bindings: ["win+h"]
+    bindings: ["win+left"]
   - commands: ["focus --direction right"]
-    bindings: ["win+l"]
+    bindings: ["win+right"]
   - commands: ["focus --direction up"]
-    bindings: ["win+k"]
+    bindings: ["win+up"]
   - commands: ["focus --direction down"]
-    bindings: ["win+j"]
+    bindings: ["win+down"]
 
   # Move focused window in a given direction.
   - commands: ["move --direction left"]
-    bindings: ["win+shift+h", "win+shift+left"]
+    bindings: ["win+shift+left"]
   - commands: ["move --direction right"]
-    bindings: ["win+shift+l", "win+shift+right"]
+    bindings: ["win+shift+right"]
   - commands: ["move --direction up"]
-    bindings: ["win+shift+k", "win+shift+up"]
+    bindings: ["win+shift+up"]
   - commands: ["move --direction down"]
-    bindings: ["win+shift+j", "win+shift+down"]
+    bindings: ["win+shift+down"]
 
   # Change tiling direction. This determines where new tiling windows will
   # be inserted.
@@ -219,10 +216,10 @@ keybindings:
     bindings: ["win+shift+d"]
 
   # Focus the next/previous workspace defined in `workspaces` config.
-  - commands: ["focus --next-workspace"]
-    bindings: ["win+shift+c"]
-  - commands: ["focus --prev-workspace"]
-    bindings: ["win+shift+z"]
+  #- commands: ["focus --next-workspace"]
+  #  bindings: ["win+shift+c"]
+  #- commands: ["focus --prev-workspace"]
+  #  bindings: ["win+shift+z"]
 
   # Focus the workspace that last had focus.
   - commands: ["focus --recent-workspace"]
@@ -280,10 +277,9 @@ keybindings:
     bindings: ["win+shift+9"]
 
   ## Custom keybindings for applications.
-  ## Adjust these to your needs. You can also add more keybindings for other applications here.
 
   # Launch terminal with the default profile.
-  - commands: ["shell-exec C:\\Program Files\\PowerShell\\7\\pwsh.exe"]
+  - commands: ["shell-exec wt"]
     bindings: ["win+enter"]
 
   # Launch terminal as administrator
@@ -306,14 +302,20 @@ keybindings:
   - commands: ["shell-exec %USERPROFILE%\\scoop\\apps\\pear-desktop\\current\\YouTube Music.exe"]
     bindings: ["win+y"]
 
-  ## Be careful while using win+ combinations as it may override important default Windows shortcuts. So you won't be able to access those native features with shortcuts unless you pause keybindings using win+shift+p, or close GlazeWM.
+
+  ## I have used win key combinations for all my keybindings. You can switch to alt key combinations if you want.
+  ## Be careful while using win+ combinations as it may override important default Windows shortcuts.
+  ## To be able to access overridden native shortcuts, you need to pause keybindings using win+shift+p, or close GlazeWM.
+
   # Some important default Windows shortcuts that you should avoid overriding:
   # win+e: Open File Explorer
   # win+n: Open Notification Center
-  # win+a: Open Action Center
-  # win+d: Show Desktop (I overrode this since I use 3 finger swipe down touchpad gesture to show desktop, but you may want to change it back)
-  # win+s: Open Search (I overrode this since you can directly start searching after opening start menu, but you may want to change it back)
+  # win+a: Open Quick Settings
+  # win+d: Show Desktop (I overrode this coz I use 3 finger swipe down touchpad gesture to show desktop)
+  # win+s: Open Search (I overrode this coz I search from the start menu)
   # win+shift+s: Snip Screen
   # win+shift+t: OCR Screen (Windows 11)
-  # win+. and win+;: Open Emoji Panel (I overrode win+. for resizing, but win+; still works for opening emoji panel)
+  # win+,: Desktop Peek
+  # win+.: Open Emoji Picker
+  # win+.g: Open Xbox Game Bar
   # win+v: Open Clipboard History
