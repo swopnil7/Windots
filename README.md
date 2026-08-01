@@ -27,22 +27,40 @@
 
 <br>
 
-![](previews/fastfetch.png)<br/><br/>
-![](previews/code.png)<br/><br/>
 ![](previews/hawktchoua.png)<br/><br/>
-![](previews/hydra.png)<br/><br/>
-![](previews/explorer.png)<br/><br/>
-![](previews/controlpanel.png)<br/><br/>
-![](previews/startpage.png)<br><br/>
-![](previews/yasbpowermenu.png)<br>
+
+<div align="center">
+  <img src="previews/fastfetch.png" alt="fastfetch" width="49%"/>
+  <img src="previews/startpage.png" alt="Startpage" width="49%"/>
+</div>
+
+<div align="center">
+  <img src="previews/explorer.png" alt="Explorer" width="49%"/>
+  <img src="previews/controlpanel.png" alt="Control Panel" width="49%"/>
+</div>
+
+<div align="center">
+  <img src="previews/zen.png" alt="Zen Browser" width="49%"/>
+  <img src="previews/spotify.png" alt="Spotify" width="49%"/>
+</div>
+
+<div align="center">
+  <img src="previews/discord.png" alt="Discord" width="49%"/>
+  <img src="previews/vscode.png" alt="VSCode" width="49%"/>
+</div>
+
+<div align="center">
+  <img src="previews/yasblaunchpad.png" alt="YASB Launch Pad" width="49%"/>
+  <img src="previews/yasbpowermenu.png" alt="YASB Power Menu" width="49%"/>
+</div>
 
 <hr>
 
 ## 💕 About
 
-> _A Catppuccin Mocha themed Windows dotfiles setup for those who love a beautiful, unified, and productive desktop._
+> _A Catppuccin Mocha themed Windows setup, built for looks, kept for how well it works._
 
-If you love customizing every detail or just want a gorgeous, cohesive look with minimal hassle, **Windots** is for you. Whether you're a power user or just want things to look and work great out of the box, you'll find something here to make your Windows experience smoother and more enjoyable.
+Made this because I wanted my Windows setup to look and work good without fighting it every day, and honestly it took longer than it should have. Figured others might want the same, so here it is. Feel free to steal all or part of this setup and make it your own. I hope you enjoy it as much as I do!
 
 ---
 
@@ -50,14 +68,14 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 
 <div align="center">
 
-| | |
-|---|---|
-| 🪟 **GlazeWM** tiling window manager | 🍫 **YASB** status bar |
-| 🧑‍💻 **VSCode** clean setup | >_ **Windows Terminal** modern look |
-| 🐚 **PowerShell** enhancements | 🎨 **Oh My Posh** prompt |
-| ⚙️ **fastfetch** system info | 🚀 **Flow Launcher** workflow |
-| 🦅 Themed Start menu, Taskbar, Notification Center | 🧱 [Wallpapers](https://github.com/swopnil7/windots/tree/main/wallies#readme) |
-| 🐈‍⬛ [Catppuccin Mocha](https://github.com/catppuccin) color scheme everywhere | 🌺 Theme for Almost Everything |
+|                                                                              |                                                                               |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| 🪟 **GlazeWM** tiling window manager                                         | 🍫 **YASB** status bar                                                        |
+| 🧑‍💻 **VSCode** clean setup                                                    | >\_ **Windows Terminal** modern look                                          |
+| 🐚 **PowerShell** enhancements                                               | 🎨 **Oh My Posh** prompt                                                      |
+| ⚙️ **fastfetch** system info                                                 | 🚀 **Flow Launcher** workflow                                                 |
+| 🦅 Themed Start menu, Taskbar, Notification Center                           | 🧱 [Wallpapers](https://github.com/swopnil7/windots/tree/main/wallies#readme) |
+| 🐈‍⬛ [Catppuccin Mocha](https://github.com/catppuccin) color scheme everywhere | 🌺 Theme for Almost Everything                                                |
 
 </div>
 
@@ -65,19 +83,19 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 
 ## 🌺 Core System Overview
 
-| Component | Tool |
-|---|---|
-| **OS** | [Windows 11](https://www.microsoft.com/en-in/windows/windows-11) 🖥️ |
-| **Window Manager** | [GlazeWM](https://github.com/glzr-io/glazewm) 🪟 |
-| **Shells** | [PowerShell](https://learn.microsoft.com/en-us/powershell/) 💻 |
-| **Terminal** | [Windows Terminal](https://github.com/microsoft/terminal) 🖲️ |
-| **Status Bar** | [YASB](https://github.com/amnweb/yasb) 📊 |
-| **Windows Border** | [Tacky Borders](https://github.com/lukeyou05/tacky-borders) 🖼️ |
-| **Editors** | [VSCode](https://code.visualstudio.com/) 📝 |
-| **Launcher** | [Flow Launcher](https://www.flowlauncher.com/) 🔍 |
-| **File Managers** | [File Explorer](https://www.microsoft.com/en-us/windows/tips/file-explorer) 🗂️ |
-| **Web Browser** | [Zen-Browser](https://zen-browser.app) 🌎 |
-| **Theme** | [Catppuccin Mocha](https://catppuccin.com/) 🧁 |
+| Component          | Tool                                                                           |
+| ------------------ | ------------------------------------------------------------------------------ |
+| **OS**             | [Windows 11](https://www.microsoft.com/en-in/windows/windows-11) 🖥️            |
+| **Window Manager** | [GlazeWM](https://github.com/glzr-io/glazewm) 🪟                               |
+| **Shells**         | [PowerShell](https://learn.microsoft.com/en-us/powershell/) 💻                 |
+| **Terminal**       | [Windows Terminal](https://github.com/microsoft/terminal) 🖲️                   |
+| **Status Bar**     | [YASB](https://github.com/amnweb/yasb) 📊                                      |
+| **Windows Border** | [Tacky Borders](https://github.com/lukeyou05/tacky-borders) 🖼️                 |
+| **Editors**        | [VSCode](https://code.visualstudio.com/) 📝                                    |
+| **Launcher**       | [Flow Launcher](https://www.flowlauncher.com/) 🔍                              |
+| **File Managers**  | [File Explorer](https://www.microsoft.com/en-us/windows/tips/file-explorer) 🗂️ |
+| **Web Browser**    | [Zen-Browser](https://zen-browser.app) 🌎                                      |
+| **Theme**          | [Catppuccin Mocha](https://catppuccin.com/) 🧁                                 |
 
 ---
 
@@ -86,48 +104,48 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 
 #### 🪟 System
 
-| 📚 Entry | ✨ App |
-|---|---|
-| **OS** | [Windows 11](https://www.microsoft.com/en-in/windows/windows-11) |
-| **Window Manager** | 🤍 [GlazeWM](https://github.com/glzr-io/glazewm) [⚙️](https://github.com/swopnil7/windots/blob/master/.dotfiles/glazewm/config.yaml) |
-| **Bar** | 🤍 [YASB](https://github.com/amnweb/yasb) [⚙️](https://github.com/swopnil7/windots/blob/master/.dotfiles/yasb/) |
-| **Application Launcher** | 🤍 [Flow Launcher](https://www.flowlauncher.com/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/FlowLauncher/Settings.json) |
-| **Mods** | 🤍 [Windhawk](https://windhawk.net/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/windhawk/) |
-| **Context Menu** | [Nilesoft Shell](https://nilesoft.org/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/nilesoftshell/) |
-| **Theme** | 🤍 [SecureUxTheme](https://github.com/namazso/SecureUxTheme) with [Nivuu's Catppuccin Mocha theme](https://www.deviantart.com/niivu/art/Catppuccin-for-Windows-11-1076249390) |
+| 📚 Entry                 | ✨ App                                                                                                                                                                        |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **OS**                   | [Windows 11](https://www.microsoft.com/en-in/windows/windows-11)                                                                                                              |
+| **Window Manager**       | 🤍 [GlazeWM](https://github.com/glzr-io/glazewm) [⚙️](https://github.com/swopnil7/windots/blob/master/.dotfiles/glazewm/config.yaml)                                          |
+| **Bar**                  | 🤍 [YASB](https://github.com/amnweb/yasb) [⚙️](https://github.com/swopnil7/windots/blob/master/.dotfiles/yasb/)                                                               |
+| **Application Launcher** | 🤍 [Flow Launcher](https://www.flowlauncher.com/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/FlowLauncher/Settings.json)                                    |
+| **Mods**                 | 🤍 [Windhawk](https://windhawk.net/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/windhawk/)                                                                  |
+| **Context Menu**         | [Nilesoft Shell](https://nilesoft.org/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/nilesoftshell/)                                                          |
+| **Theme**                | 🤍 [SecureUxTheme](https://github.com/namazso/SecureUxTheme) with [Nivuu's Catppuccin Mocha theme](https://www.deviantart.com/niivu/art/Catppuccin-for-Windows-11-1076249390) |
 
 #### 🖥️ CLI/TUI Apps
 
-| 📚 Entry | ✨ App |
-|---|---|
-| **Shell** | [pwsh](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pwsh?view=powershell-7.4) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1) |
-| **Terminal Emulator** | [windows terminal](https://github.com/microsoft/terminal) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/terminal/settings.json) |
-| **Shell Prompt** | [ohmyposh](https://ohmyposh.dev/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/ohmyposh/zen.toml) |
-| **System Fetch** | 🤍 [fastfetch](https://github.com/fastfetch-cli/fastfetch) [⚙️](https://github.com/swopnil7/dotfiles/blob/master/.dotfiles/fastfetch/config.jsonc) |
-| **Terminal File Manager** | [superfile](https://github.com/yorukot/superfile) |
+| 📚 Entry                  | ✨ App                                                                                                                                                                                                                               |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Shell**                 | [pwsh](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pwsh?view=powershell-7.4) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1) |
+| **Terminal Emulator**     | [windows terminal](https://github.com/microsoft/terminal) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/terminal/settings.json)                                                                                       |
+| **Shell Prompt**          | [ohmyposh](https://ohmyposh.dev/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/ohmyposh/zen.toml)                                                                                                                    |
+| **System Fetch**          | 🤍 [fastfetch](https://github.com/fastfetch-cli/fastfetch) [⚙️](https://github.com/swopnil7/dotfiles/blob/master/.dotfiles/fastfetch/config.jsonc)                                                                                   |
+| **Terminal File Manager** | [superfile](https://github.com/yorukot/superfile)                                                                                                                                                                                    |
 
 #### 🖱️ GUI Apps
 
-| 📚 Entry | ✨ App |
-|---|---|
-| **Fallback Text Editor** | [VSCode](https://code.visualstudio.com/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/vscode/settings.json) |
-| **Music Player** | 🤍 [Spotify](https://open.spotify.com/) (patched with [Spicetify](https://spicetify.app/)) |
-| **Web Browser** | 🤍 [Zen-Browser](https://zen-browser.app) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/zen/) |
-| **Note Taking App** | 🤍 [Obsidian](https://obsidian.md/) |
-| **File Manager** | [File Explorer](https://www.microsoft.com/en-us/windows/tips/file-explorer) | [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/explorer/) |
-| **Game Launcher** | [Hydra Launcher](https://hydralauncher.gg/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/HydraLauncher/styles.css) |
-| **Clipboard Manager** | [CopyQ](https://github.com/hluk/CopyQ) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/copyq/catppuccin-mocha.ini) |
-| **Torrent Manager** | [qBittorrent](https://www.qbittorrent.org/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/qBittorrent/catppuccin-mocha.qbtheme) |
-| **Discord Client** | 🤍 [Vencord](https://vencord.dev/) |
-| **YouTube Music Client** | [Th-Ch YouTube Music](https://github.com/th-ch/youtube-music) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/youtubemusic/) |
-| **Web Themer** | 🤍 [Stylus](https://addons.mozilla.org/en-US/firefox/addon/stylus/) (for Firefox) with 🤍 [Catppuccin Mocha](https://github.com/catppuccin) [⚙️](https://github.com/catppuccin/userstyles/blob/main/docs/USAGE.md) |
+| 📚 Entry                 | ✨ App                                                                                                                                                                                                             |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| **Fallback Text Editor** | [VSCode](https://code.visualstudio.com/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/vscode/settings.json)                                                                                        |
+| **Music Player**         | 🤍 [Spotify](https://open.spotify.com/) (patched with [Spicetify](https://spicetify.app/))                                                                                                                         |
+| **Web Browser**          | 🤍 [Zen-Browser](https://zen-browser.app) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/zen/)                                                                                                       |
+| **Note Taking App**      | 🤍 [Obsidian](https://obsidian.md/)                                                                                                                                                                                |
+| **File Manager**         | [File Explorer](https://www.microsoft.com/en-us/windows/tips/file-explorer)                                                                                                                                        | [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/explorer/) |
+| **Game Launcher**        | [Hydra Launcher](https://hydralauncher.gg/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/HydraLauncher/styles.css)                                                                                 |
+| **Clipboard Manager**    | [CopyQ](https://github.com/hluk/CopyQ) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/copyq/catppuccin-mocha.ini)                                                                                    |
+| **Torrent Manager**      | [qBittorrent](https://www.qbittorrent.org/) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/qBittorrent/catppuccin-mocha.qbtheme)                                                                     |
+| **Discord Client**       | 🤍 [Equicord](https://equicord.org)                                                                                                                                                                                |
+| **YouTube Music Client** | [Th-Ch YouTube Music](https://github.com/th-ch/youtube-music) [⚙️](https://github.com/swopnil7/windots/blob/main/.dotfiles/youtubemusic/)                                                                          |
+| **Web Themer**           | 🤍 [Stylus](https://addons.mozilla.org/en-US/firefox/addon/stylus/) (for Firefox) with 🤍 [Catppuccin Mocha](https://github.com/catppuccin) [⚙️](https://github.com/catppuccin/userstyles/blob/main/docs/USAGE.md) |
 
 #### 🔍 Other
 
-| 📚 Entry | ✨ App |
-|---|---|
-| **Colorscheme** | 🤍 [Catppuccin Mocha](https://catppuccin.com) |
-| **Font** | [JetBrainsMono Nerd Font](https://www.jetbrains.com/lp/mono/) |
+| 📚 Entry        | ✨ App                                                        |
+| --------------- | ------------------------------------------------------------- |
+| **Colorscheme** | 🤍 [Catppuccin Mocha](https://catppuccin.com)                 |
+| **Font**        | [JetBrainsMono Nerd Font](https://www.jetbrains.com/lp/mono/) |
 
 </details>
 
@@ -135,14 +153,14 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 
 ## 🔧 Setup
 
-> **⚠️ Backup your current configuration files before continuing.**  
+> **⚠️ Backup your current configuration files before continuing.**
 > Applying these settings may overwrite existing configs, so be sure to manually merge or restore as needed.
 
 <details>
 <summary><strong>🪟 GlazeWM</strong></summary>
 
 - **Install** [**GlazeWM**](https://github.com/glzr-io/glazewm/releases/).
-- [`windots/.dotfiles/glazewm/config.yaml`](.dotfiles/glazewm/config.yaml) → `%USERPROFILE%\.glzr\glazewm\`
+- [`windots/.dotfiles/glazewm/config.yaml`](.dotfiles/glazewm/config.yaml) → `%USERPROFILE%\.glzr\glazewm\config.yaml`
 - **Restart GlazeWM** for the changes to take effect.
 
 </details>
@@ -151,7 +169,8 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 <summary><strong>📊 YASB (Yet Another Status Bar)</strong></summary>
 
 > [!NOTE]
-> Ensure you have a Nerd Font installed for correct icon display. I use [**JetBrainsMono Nerd Font**](https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip); if you use another Nerd Font, adjust the font settings in the YASB `styles.css` as needed.
+> Ensure you have [**JetBrainsMono Nerd Font**](https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip) installed for correct icon display. If you want to use another Nerd Font, adjust the font settings and unicode mappings in the YASB `styles.css` & `config.yaml` respectively.<br>
+> To setup Libre Hardware Monitor for your specific hardware, check the YASB [Wiki](<https://github.com/amnweb/yasb/wiki/(Widget)-Libre-HW-Monitor#set-up-instructions>).
 
 - **Install** [**YASB**](https://github.com/amnweb/yasb/releases/).
 - [`windots/.dotfiles/yasb/`](.dotfiles/yasb/) → `%USERPROFILE%\.config\yasb\`
@@ -163,7 +182,7 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 <summary><strong>🖼️ Tacky Borders</strong></summary>
 
 - **Install** [**Tacky Borders**](https://github.com/lukeyou05/tacky-borders/releases/).
-- [`windots/.dotfiles/tackyborders/config.yaml`](.dotfiles/tackyborders/config.yaml) → `%USERPROFILE%\.config\tacky-borders\`
+- [`windots/.dotfiles/tackyborders/config.yaml`](.dotfiles/tackyborders/config.yaml) → `%USERPROFILE%\.config\tacky-borders\config.yaml`
 - **Restart Tacky Borders** for the changes to take effect.
 
 </details>
@@ -171,9 +190,12 @@ If you love customizing every detail or just want a gorgeous, cohesive look with
 <details>
 <summary><strong>📝 VSCode</strong></summary>
 
-- **Install** the [Alt Catppuccin Theme](https://marketplace.visualstudio.com/items?itemName=dooez.alt-catppuccin-vsc) extension.
-- **Install** the [GlassIt-VSC](https://marketplace.visualstudio.com/items?itemName=s-nlf-fh.glassit) extension and set the transparency level between 240-250 in its settings. *(Optional)*
-- [`windots/.dotfiles/vscode/settings.json`](.dotfiles/vscode/settings.json) → `%APPDATA%\Code\User\`
+- **Install** the [Catppuccin Theme](https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc) extension.
+- **Install** the [Catppuccin Icons](https://marketplace.visualstudio.com/items?itemName=thang-nm.catppuccin-perfect-icons) extension.
+- **Install** the [Material Product Icons](https://marketplace.visualstudio.com/items?itemName=PKief.material-product-icons) extension.
+- **Install** the [Custom UI Style](https://marketplace.visualstudio.com/items?itemName=subframe7536.custom-ui-style) extension.
+- **Install** the [GlassIt-VSC](https://marketplace.visualstudio.com/items?itemName=s-nlf-fh.glassit) extension.
+- [`windots/.dotfiles/vscode/settings.json`](.dotfiles/vscode/settings.json) → `%APPDATA%\Code\User\settings.json`
 - **Restart VSCode** to load the updated settings.
 
 </details>
@@ -244,10 +266,9 @@ SecureUxTheme allows custom themes to be applied on Windows 11.
 #### Optional: Theme websites
 
 - **Install** the [**Stylus**](https://addons.mozilla.org/en-GB/firefox/addon/styl-us/) extension.
-- **Download the [**Userstyles**](https://github.com/catppuccin/userstyles/releases/download/all-userstyles-export/import.json) import file.
+- **Download the [**Userstyles\*\*](https://github.com/catppuccin/userstyles/releases/download/all-userstyles-export/import.json) import file.
 - Open the Stylus "manage" page.
 - On the sidebar panel, click the Import button in the Backup section, and select the downloaded Userstyles file.
-
 
 For websites without userstyles, you can use the [**Dark Reader**](https://addons.mozilla.org/en-US/firefox/addon/darkreader/) extension:
 
@@ -277,12 +298,11 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 <details>
 <summary><strong>🦅 Windhawk</strong></summary>
 
-- **Install** [**Windhawk**](https://windhawk.net/).
-- **Download** the [`WindhawkMods.zip`](.dotfiles/windhawk/WindhawkMods.zip) file.
-- **Download** [**Windhawk Backup Manager**](https://github.com/osmanonurkoc/Windhawk-Backup-Manager/releases) and Run it.
-> [!NOTE]
-> You can first backup your current configs using the backup manager before applying the new ones as it will overwrite the existing configs.
-- **Click** on **Import** and select the downloaded `WindhawkMods.zip` file.
+- **Install** [**Windhawk**](https://github.com/ramensoftware/windhawk/releases) version 2.0 alpha 2 or later.
+- **Download** the [`Windhawk.json`](.dotfiles/windhawk/Windhawk.json) file.
+- **Open** **Windhawk**, Go to **Settings** > **Backup & Restore** > **Import** > **From a backup file** and select the downloaded `Windhawk.json` and click **Import**.
+  > [!NOTE]
+  > You may backup your current configs just to be safe.
 
 </details>
 
@@ -298,7 +318,7 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 <details>
 <summary><strong>🚀 Hydra Launcher</strong></summary>
 
-- **Copy the content inside [`windots/.dotfiles/HydraLauncher/styles.css`](.dotfiles/HydraLauncher/styles.css)
+- \*\*Copy the content inside [`windots/.dotfiles/HydraLauncher/styles.css`](.dotfiles/HydraLauncher/styles.css)
 - **Open** Hydra Launcher and go to **Settings** > **Appearance** > **Create**, type any name and press enter, then paste the config and save the file to apply it.
 
 </details>
@@ -321,13 +341,15 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
     ```powershell
     iwr -useb https://raw.githubusercontent.com/spicetify/cli/main/install.ps1 | iex
     ```
+
   - Spicetify Marketplace:
 
     ```powershell
     iwr -useb https://raw.githubusercontent.com/spicetify/marketplace/main/resources/install.ps1 | iex
     ```
 
-- Open **Spotify** and in the top bar, click on the **Marketplace** icon, then search for **Comfy** theme and install it. Then, select Catppuccin Mocha as the scheme.
+- Open **Spotify** and in the top bar, click on the **Marketplace** icon, then search for **Catppuccin** theme and install it. Then, select **Mocha** as the scheme.
+  > You can instead search for and install **Termspot** theme and set **Mocha** as the scheme if you want a terminal-like look.
 
 </details>
 
@@ -335,12 +357,13 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 <summary><strong>🐈‍⬛ Discord</strong></summary>
 
 - **Install** [**Discord**](https://discord.com/download) if you haven't already.
-- **Download** [**Vencord**](https://github.com/Vencord/Installer/releases/latest/download/VencordInstaller.exe) and **Install** it.
-- Open Discord and the click on the **Settings** icon at the bottom beside your profile. Under the **Vencord** section, click on **Themes** and then click on **Edit QuickCSS**. Paste the text below into the editor:
+- **Download** [**Equilotl**](https://github.com/Equicord/Installer/releases/latest/download/Equilotl.exe) and **Install** it.
+- Open Discord and the click on the **Settings** icon at the bottom beside your profile. Under the **Equicord** section, click on **Themes** and then click on **Edit QuickCSS**. Paste the text below into the editor:
 
   ```css
-  @import url("https://catppuccin.github.io/discord/dist/catppuccin-mocha-pink.theme.css");
+  @import url("https://catppuccin.github.io/discord/dist/catppuccin-mocha-mauve.theme.css");
   ```
+
 - **Save** the changes with Ctrl + S and quit the editor.
 
 </details>
@@ -368,18 +391,18 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 - **Install** [**ShareX**](https://getsharex.com/).
 - **Copy** the content of [`windots/.dotfiles/sharex/sharex.json`](.dotfiles/sharex/sharex.json) to your clipboard.
-- **Open** ShareX's **Application Settings** and click to **Theme** > **Import** > **From Clipboard**.
+- **Open** ShareX's **Application Settings** and go to **Theme** > **Import** > **From Clipboard**.
 
 </details>
 
 ---
 
-## \>_ Terminal & Shell Setup
+## \>\_ Terminal & Shell Setup
 
 <details>
 <summary><strong>🖥️ Windows Terminal</strong></summary>
 
-- **Install** [**Windows Terminal**](https://github.com/microsoft/terminal)
+- **Install** [**Windows Terminal**](https://github.com/microsoft/terminal/releases).
 - [`windots/.dotfiles/terminal/settings.json`](.dotfiles/terminal/settings.json) → `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\`
 - **Restart Windows Terminal** to see the updated config.
 
@@ -388,11 +411,25 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 <details>
 <summary><strong>🐚 PowerShell</strong></summary>
 
-> [!TIP]
-> For the best experience, install the latest version of PowerShell from the [official GitHub releases](https://github.com/PowerShell/PowerShell/releases) instead of using the default Windows PowerShell.
+> [!Note]
+> This only applies to the recent versions of PowerShell from the [official GitHub releases](https://github.com/PowerShell/PowerShell/releases). If you want to stick with the default Windows PowerShell, you should figure out the steps yourself.
 
 - [`windots/.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1`](.dotfiles/Powershell/Microsoft.PowerShell_profile.ps1) → `%USERPROFILE%\Documents\PowerShell\`
 - Restart PowerShell to apply the changes.
+
+  > If you get an error about the execution policy, run the following command in PowerShell as administrator:
+
+  ```powershell
+  Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+  ```
+
+> Installing the following dependencies is recommended for a better experience with PowerShell:
+
+```powershell
+winget install -e --id junegunn.fzf
+winget install ajeetdsouza.zoxide
+Install-Module -Name PSFzf -Scope CurrentUser -Force
+```
 
 </details>
 
@@ -435,19 +472,6 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 </details>
 
-<details>
-<summary><strong>⌨️ AutoHotKey</strong></summary>
-
-- [`windots/.dotfiles/AutoHotKey/`](.dotfiles/AutoHotkey/) → `%USERPROFILE%\Documents\AutoHotKey`
-- **Open** the AutoHotkey Folder and **Launch** the **WindowsUtilities.ahk** script.. You will see it appear in the tray menu.
-
-> To configure the script to start with the system on boot:
-
-- Create a shortcut of the **WindowsUtilities.ahk** filescript.
-- Open **Run** (Win+R) and type shell:startup then hit Enter. Copy the created shortcut to the just launched directory.
-
-</details>
-
 ---
 
 ## ⌨️ GlazeWM Keybindings
@@ -457,35 +481,36 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 ### Window Management
 
-| Keys | Action |
-|---|---|
-| <kbd>alt</kbd> + <kbd>h</kbd> / <kbd>j</kbd> / <kbd>k</kbd> / <kbd>l</kbd> | Focus window left / down / up / right |
-| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>h</kbd> / <kbd>j</kbd> / <kbd>k</kbd> / <kbd>l</kbd> | Move focusing window left / down / up / right |
-| <kbd>alt</kbd> + <kbd>q</kbd> | Close focusing window |
-| <kbd>alt</kbd> + <kbd>m</kbd> | Toggle window minimization |
-| <kbd>alt</kbd> + <kbd>f</kbd> | Toggle fullscreen |
-| <kbd>alt</kbd> + <kbd>t</kbd> | Toggle tiling mode |
-| <kbd>alt</kbd> + <kbd>space</kbd> | Toggle floating (centered) |
-| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>v</kbd> | Toggle tiling direction |
-| <kbd>alt</kbd> + <kbd>1-9</kbd> | Focus workspace {n} |
-| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>1-9</kbd> | Move focusing window to workspace {n} |
-| <kbd>alt</kbd> + <kbd>,</kbd> / <kbd>.</kbd> | Resize active window's width -/+ 2% |
-| <kbd>alt</kbd> + <kbd>⬆️</kbd> / <kbd>⬇️</kbd> | Resize acive window's height +/- 2% |
-| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>e</kbd> | Exit GlazeWM |
-| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>r</kbd> | Reload GlazeWM config |
-| <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>p</kbd> | Pause/Resume all GlazeWM keybindings |
+| Keys                                                                                                     | Action                                                              |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| <kbd>win</kbd> + <kbd>left</kbd> / <kbd>down</kbd> / <kbd>up</kbd> / <kbd>right</kbd>                    | Focus window left / down / up / right                               |
+| <kbd>win</kbd> + <kbd>shift</kbd> + <kbd>left</kbd> / <kbd>down</kbd> / <kbd>up</kbd> / <kbd>right</kbd> | Move focused window left / down / up / right                        |
+| <kbd>win</kbd> + <kbd>q</kbd>                                                                            | Close focused window                                                |
+| <kbd>win</kbd> + <kbd>m</kbd>                                                                            | Toggle window minimization                                          |
+| <kbd>win</kbd> + <kbd>f</kbd>                                                                            | Toggle fullscreen                                                   |
+| <kbd>win</kbd> + <kbd>t</kbd>                                                                            | Toggle tiling mode                                                  |
+| <kbd>win</kbd> + <kbd>space</kbd>                                                                        | Toggle floating mode                                                |
+| <kbd>win</kbd> + <kbd>shift</kbd> + <kbd>v</kbd>                                                         | Toggle tiling direction                                             |
+| <kbd>win</kbd> + <kbd>shift</kbd> + <kbd>space</kbd>                                                     | Cycle focus: tiling → floating → fullscreen                         |
+| <kbd>win</kbd> + <kbd>1-9</kbd>                                                                          | Focus workspace {1-9}                                               |
+| <kbd>win</kbd> + <kbd>shift</kbd> + <kbd>1-9</kbd>                                                       | Move focused window to workspace {1-9}                              |
+| <kbd>win</kbd> + <kbd>shift</kbd> + <kbd>j</kbd> / <kbd>l</kbd> / <kbd>i</kbd> / <kbd>k</kbd>            | Move focused window's workspace to monitor left / right / up / down |
+| <kbd>win</kbd> + <kbd>alt</kbd> + <kbd>left</kbd> / <kbd>right</kbd>                                     | Resize active window's width -/+ 2%                                 |
+| <kbd>win</kbd> + <kbd>alt</kbd> + <kbd>up</kbd> / <kbd>down</kbd>                                        | Resize active window's height +/- 2%                                |
+| <kbd>win</kbd> + <kbd>shift</kbd> + <kbd>e</kbd>                                                         | Exit GlazeWM                                                        |
+| <kbd>win</kbd> + <kbd>shift</kbd> + <kbd>r</kbd>                                                         | Reload GlazeWM config                                               |
+| <kbd>win</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>                                                         | Pause/Resume all GlazeWM keybindings                                |
 
 ### Application Shortcuts
 
-| Keys | Action |
-|---|---|
-| <kbd>alt</kbd> + <kbd>enter</kbd> | Open terminal |
-| <kbd>alt</kbd> + <kbd>e</kbd> | Open File Explorer |
-| <kbd>alt</kbd> + <kbd>v</kbd> | Open VSCode |
-| <kbd>alt</kbd> + <kbd>n</kbd> | Open Notepad |
-| <kbd>alt</kbd> + <kbd>b</kbd> | Open Zen Browser |
-| <kbd>alt</kbd> + <kbd>s</kbd> | Open Spotify |
-| <kbd>alt</kbd> + <kbd>y</kbd> | Open Youtube Music |
+| Keys                              | Action             |
+| --------------------------------- | ------------------ |
+| <kbd>win</kbd> + <kbd>enter</kbd> | Open terminal      |
+| <kbd>win</kbd> + <kbd>e</kbd>     | Open File Explorer |
+| <kbd>win</kbd> + <kbd>c</kbd>     | Open VSCode        |
+| <kbd>win</kbd> + <kbd>b</kbd>     | Open Zen Browser   |
+| <kbd>win</kbd> + <kbd>s</kbd>     | Open Spotify       |
+| <kbd>win</kbd> + <kbd>y</kbd>     | Open Youtube Music |
 
 </details>
 
@@ -497,32 +522,34 @@ For websites without userstyles, you can use the [**Dark Reader**](https://addon
 
 <div align="center">
 
-| **GUI Text Editor** | **Start Menu, Taskbar and Notification Center** |
-|:--:|:--:|
-| ![](previews/code.png) | ![](previews/hawktchoua.png) |
+|   **GUI Text Editor**    | **Start Menu, Taskbar and Notification Center** |
+| :----------------------: | :---------------------------------------------: |
+| ![](previews/vscode.png) |          ![](previews/hawktchoua.png)           |
 
-| **Spotify with Spicetify** | **Power Menu** |
-|:--:|:--:|
-| ![](previews/spotify.png) | ![](previews/yasbpowermenu.png) |
+| **Spotify with Spicetify** |         **Power Menu**          |
+| :------------------------: | :-----------------------------: |
+| ![](previews/spotify.png)  | ![](previews/yasbpowermenu.png) |
 
-| **GlazeWM Window Manager** | **Flow Launcher** |
-|:--:|:--:|
+|   **GlazeWM Window Manager**    |       **Flow Launcher**        |
+| :-----------------------------: | :----------------------------: |
 | ![](previews/glazewmtiling.png) | ![](previews/flowlauncher.png) |
 
-| **Discord Client** | **Web Browser** |
-|:--:|:--:|
+|    **Discord Client**     |    **Web Browser**    |
+| :-----------------------: | :-------------------: |
 | ![](previews/discord.png) | ![](previews/zen.png) |
 
 </div>
+
+> You can check out all the **previews** [**here**](https://github.com/swopnil7/windots/tree/main/previews#readme)!
 
 ---
 
 ## 📢 Discussions
 
-Have questions, suggestions, or want to showcase your setup? Or maybe you need some help?  
+Have questions, suggestions, or want to showcase your setup? Or maybe you need some help?
 Visit the [Discussions](https://github.com/swopnil7/windots/discussions) section.
 
-> **⚠️ Please open an [issue](https://github.com/swopnil7/windots/issues) _only_ for reproducible bugs or critical problems.**  
+> **⚠️ Please open an [issue](https://github.com/swopnil7/windots/issues) _only_ for reproducible bugs or critical problems.**
 > For all other questions, feedback, or general help, [Discussions](https://github.com/swopnil7/windots/discussions) is **preferred**.
 
 ---
@@ -534,6 +561,7 @@ Special mention to the following resources and projects that were especially hel
 - [**GlazeWM**](https://github.com/glzr-io/glazewm) for delivering an outstanding **tiling window manager** that boosts productivity ✨
 - [**YASB**](https://github.com/amnweb/yasb) for a **customizable and feature-rich status bar** that fits seamlessly into the setup 🚀
 - [**Catppuccin**](https://catppuccin.com) for creating the **best color scheme** ever 🖌️
+- [**Windhawk**](https://windhawk.net/) for providing a **powerful and flexible modding framework** for Windows 🛠️
+- [**Nilesoft Shell**](https://nilesoft.org/) for the **custom context menu** that enhances usability 🖱️
 - [**pivoshenko**](https://github.com/pivoshenko/catppuccin-startpage) for the clean and aesthetic **browser startpage** 🌐
 - [**ashish**](https://github.com/ashish0kumar/windots) for some of the **config files** & **readme design** 🤍
-- [**Osman Onur KOÇ**](https://github.com/osmanonurkoc/windhawk-backup-manager) for the outstanding **Windhawk Backup Manager** 🛠️
