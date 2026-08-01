@@ -31,6 +31,10 @@
     --zen-themed-toolbar-bg-transparent: #181825 !important;
   }
 
+  *{
+    font-family: "JetBrains Mono", monospace !important;
+  }
+
   #permissions-granted-icon {
     color: #181825 !important;
   }
@@ -158,5 +162,33 @@
   #zen-browser-background {
     --zen-main-browser-background: #181825 !important;
     --zen-main-browser-background-old: #181825 !important;
+  }
+
+  #tabContextMenu{
+    color: #cdd6f4 !important;
+  }
+
+  .panel-subview-body{
+    color: #cdd6f4 !important;
+  }
+
+  #tabContextMenu > menuitem:hover,
+  #tabContextMenu > menu:hover,
+  #tabContextMenu > menu > menupopup > menuitem:hover{
+    background-color: #cba6f7 !important;
+    color: #1e1e2e !important;
+  }
+
+  .subviewbutton:hover:not(#appMenu-zoom-controls) {
+    background-color: #cba6f7 !important;
+    color: #1e1e2e !important;
+  }
+
+  #appMenu-zoom-controls > toolbarbutton:hover .toolbarbutton-icon {
+    fill: #1e1e2e !important;
+  }
+
+  zen-workspace-icons#zen-workspaces-button{
+    background-color: var(--zen-colors-tertiary) !important;
   }
 }
