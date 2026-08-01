@@ -1,40 +1,142 @@
 {
-    "workbench.colorTheme": "Alt Catppuccin Mocha",
-    "security.workspace.trust.untrustedFiles": "open",
-    "glassit.alpha": 230,
-    "terminal.integrated.defaultProfile.windows": "Windows PowerShell",
-    "terminal.integrated.profiles.windows": {
-        "PowerShell": {
-            "source": "PowerShell",
-            "icon": "terminal-powershell"
-        },
-        "Command Prompt": {
-            "path": [
-                "${env:windir}\\Sysnative\\cmd.exe",
-                "${env:windir}\\System32\\cmd.exe"
-            ],
-            "args": [],
-            "icon": "terminal-cmd"
-        },
-        "Git Bash": {
-            "source": "Git Bash"
-        },
-        "bash (MSYS2)": {
-            "path": "C:\\msys64\\usr\\bin\\bash.exe",
-            "args": [
-                "--login",
-                "-i"
-            ],
-            "env": {
-                "CHERE_INVOKING": "1"
-            }
-        },
-        "Windows PowerShell": {
-            "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
-        }
-    },
-    "git.confirmSync": false,
-    "git.autofetch": true,
-    "workbench.iconTheme": "catppuccin-mocha",
-    "github.copilot.nextEditSuggestions.enabled": true
+  // Security
+  "security.workspace.trust.untrustedFiles": "open",
+
+  // Terminal
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.smoothScrolling": true,
+
+  // Git
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.ignoreMissingGitWarning": true,
+  "git.openRepositoryInParentFolders": "never",
+
+  // Appearance
+  "workbench.colorTheme": "Catppuccin Mocha",
+  "workbench.iconTheme": "catppuccin-perfect-mocha",
+  "workbench.productIconTheme": "material-product-icons",
+
+  // Catppuccin
+  "catppuccin.accentColor": "mauve",
+  "catppuccin.bracketMode": "neovim",
+  "catppuccin.workbenchMode": "flat",
+
+  // Editor
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.codeLensFontFamily": "JetBrains Mono",
+  "editor.fontLigatures": false,
+  "editor.lineHeight": 1.5,
+
+  "editor.minimap.enabled": false,
+  "editor.wordWrap": "on",
+
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+
+  "editor.linkedEditing": true,
+  "editor.inlineSuggest.enabled": true,
+
+  "editor.smoothScrolling": true,
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorSurroundingLines": 3,
+
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": false,
+  "editor.guides.bracketPairs": false,
+  "editor.matchBrackets": "always",
+
+  "editor.renderWhitespace": "selection",
+  "editor.detectIndentation": true,
+  "editor.mouseWheelZoom": true,
+
+  "editor.occurrencesHighlight": "singleFile",
+  "editor.selectionHighlight": false,
+
+  "editor.stickyScroll.enabled": true,
+
+  // Files
+  "files.autoSave": "off", // can be set to "afterDelay", "onFocusChange" or "onWindowChange" if desired
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.eol": "\n",
+
+  // Explorer
+  "explorer.confirmDragAndDrop": false,
+  "explorer.compactFolders": false,
+  "explorer.decorations.colors": true,
+
+  // Workbench
+  "workbench.startupEditor": "none",
+  "workbench.layoutControl.enabled": false,
+  "workbench.statusBar.visible": false, // set this to true if you want to see the bottom status bar
+  "workbench.list.smoothScrolling": true,
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.editor.enablePreview": true,
+  "workbench.activityBar.location": "default",
+  "workbench.sideBar.location": "left",
+
+  // Window
+  "window.commandCenter": false,
+  "window.title": "",
+  "window.restoreWindows": "all",
+  "window.titleBarStyle": "native",
+
+  // Breadcrumbs
+  "breadcrumbs.enabled": false,
+
+  // GlassIt
+  "glassit.alpha": 250,
+
+  // Custom UI Style
+  "custom-ui-style.electron": {
+    "frame": false
+  },
+  "custom-ui-style.font.sansSerif": "JetBrains Mono",
+
+  // GitHub Copilot
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.nextEditSuggestions.eagerness": "medium",
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "scminput": false,
+    "markdown": true
+  },
+
+  // Live Server
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.donotVerifyTags": true,
+
+  // Formatter
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  "[yaml]": {
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false
+  },
+
+  // JSON / YAML
+  "json.schemaDownload.trustedDomains": {
+    "https://schemastore.azurewebsites.net/": true,
+    "https://raw.githubusercontent.com/": true,
+    "https://www.schemastore.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://json-schema.org/": true,
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://biomejs.dev": true
+  },
+
+  "yaml.disableSchemaDetection": [
+    "**/.github/workflows/*.yml",
+    "**/.github/workflows/*.yaml",
+    "**/.gitea/workflows/*.yml",
+    "**/.gitea/workflows/*.yaml",
+    "**/.forgejo/workflows/*.yml",
+    "**/.forgejo/workflows/*.yaml"
+  ],
+
+  "chat.viewSessions.orientation": "stacked",
+  "biome.suggestInstallingGlobally": false
 }
