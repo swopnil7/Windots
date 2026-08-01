@@ -1,10 +1,14 @@
 watch_stylesheet: true
 watch_config: true
 debug: false
+glazewm:
+  start_command: "glazewm.exe start"
+  stop_command: "glazewm.exe command wm-exit"
+  reload_command: "glazewm.exe command wm-exit && glazewm.exe start"
 bars:
   primary-bar:
     enabled: true
-    screens: ['*'] 
+    screens: ['*']
     class_name: "yasb-bar"
     alignment:
       position: "top"
@@ -41,9 +45,9 @@ bars:
         ]
       right: [
           "cava",
+          "systray-grouper",
           "utils-grouper",
-          "right-grouper",
-          "systray-grouper"
+          "right-grouper"
       ]
 widgets:
   left-grouper:
@@ -88,6 +92,18 @@ widgets:
       ]
       collapse_options:
         enabled: false
+  utils-grouper:
+    type: "yasb.grouper.GrouperWidget"
+    options:
+      class_name: "utils-grouper"
+      widgets: [
+        "disk",
+        "wallpapers",
+        "vscode",
+        "todo"
+      ]
+      collapse_options:
+        enabled: false
   right-grouper:
     type: "yasb.grouper.GrouperWidget"
     options:
@@ -100,19 +116,6 @@ widgets:
         "volume",
         "battery",
         "notifications"
-      ]
-      collapse_options:
-        enabled: false
-  utils-grouper:
-    type: "yasb.grouper.GrouperWidget"
-    options:
-      class_name: "utils-grouper"
-      widgets: [
-        "disk",
-        "wallpapers",
-        "vscode",
-        "todo",
-        #"ai_chat"
       ]
       collapse_options:
         enabled: false
@@ -165,6 +168,10 @@ widgets:
       window_animation:
         fade_in_duration: 200
         fade_out_duration: 200
+      keybindings:
+        - keys: "alt+space"
+          action: "toggle_launchpad"
+          screen: "cursor"
       callbacks:
         on_left: "toggle_launchpad"
   glazewm_workspaces:
@@ -202,10 +209,10 @@ widgets:
         on_middle: "do_nothing"
         on_right: "toggle_label"
       icons:
-        prev_track: "\ue892"
-        next_track: "\ue893"
-        play: "\ue768"
-        pause: "\ue769"
+        prev_track: "\uf048"
+        next_track: "\uf051"
+        play: "\uf04b"
+        pause: "\uf04c"
       media_menu:
         blur: false
         round_corners: true
@@ -221,10 +228,12 @@ widgets:
         show_source: true
         show_volume_slider: true
       media_menu_icons:
-        play: "\ue768"
-        pause: "\ue769"
-        prev_track: "\ue892"
-        next_track: "\ue893"
+        play: "\uf04b"
+        pause: "\uf04c"
+        prev_track: "\uf048"
+        next_track: "\uf051"
+        mute: "\ueb75"
+        unmute: "\ueb24"
       scrolling_label:
         enabled: false
         update_interval_ms: 33
@@ -315,8 +324,9 @@ widgets:
       label_position: "right"
       use_hook: true
       show_in_popup: true
+      icons_per_row: 3
       popup:
-        blur: false
+        blur: true
         round_corners: true
         round_corners_type: "normal"
         border_color: "#2b2e43"
@@ -345,8 +355,8 @@ widgets:
         graph_history_size: 60
         show_graph: true
         show_graph_grid: false
-        pin_icon: "\ue718"
-        unpin_icon: "\ue77a"
+        pin_icon: "\udb81\udc03"
+        unpin_icon: "\udb81\udc04"
   disk:
     type: "yasb.disk.DiskWidget"
     options:
@@ -418,7 +428,7 @@ widgets:
         clock_10 : "\udb85\udc48"
         clock_11 : "\udb85\udc49"
         clock_12 : "\udb85\udc4a"
-        clock_22 : "Zzz..."
+        clock_22 : "\udb85\udc4b"
         clock_23 : "Zzz..."
       alarm_icons:
         enabled: "\uf0f3"
@@ -472,7 +482,7 @@ widgets:
         thunderstormNight: "\ue338"
         default: "\uebaa"
       weather_card:
-        blur: false
+        blur: true
         round_corners: true
         round_corners_type: "normal"
         border_color: "#2b2e43"
@@ -481,9 +491,30 @@ widgets:
         offset_top: 7
         icon_size: 64
         icon_smoothing: true
+        temp_line_width: 2
         hourly_point_spacing: 76
         show_hourly_forecast: true
         current_line_width: 2
+        current_line_style: "dashDotDot" # can be "solid", "dash", "dot", "dashDot", "dashDotDot"
+        current_line_color: "#cba6f7"
+        hourly_gradient:
+          enabled: true
+          top_color: "#1E1E2F"
+          bottom_color: "#1A1A2B"
+        hourly_forecast_buttons: # Optional hourly forecast data type toggle buttons, default disabled
+          enabled: false # Set to false to hide the buttons
+          default_view: "temperature" # Default view when opening the weather card. Options: "temperature", "rain", "snow"
+          temperature_icon: "\udb81\udd99"
+          rain_icon: "\udb81\udd96"
+          snow_icon: "\udb81\udd98"
+        weather_animation:
+          enabled: true
+          snow_overrides_rain: true
+          temp_line_animation_style: both # can be "rain", "snow", "both", or "none"
+          rain_effect_intensity: 1.0 # 0.01 - 10.0
+          snow_effect_intensity: 1.0 # 0.01 - 10.0
+          scale_with_chance: true
+          enable_debug: false
   wifi:
     type: "yasb.wifi.WifiWidget"
     options:
@@ -533,7 +564,7 @@ widgets:
       label_device_separator: ", "
       max_length: 10
       max_length_ellipsis: ".."
-      icons: 
+      icons:
         bluetooth_on: "\udb80\udcaf"
         bluetooth_off: "\udb80\udcb2"
         bluetooth_connected: "\udb80\udcb1"
@@ -720,21 +751,33 @@ widgets:
       image_path: "C:\\Users\\Swopnil\\Pictures\\Walls" # Path to folder with images
       change_automatically: false # Automatically change wallpaper
       update_interval: 60 # If change_automatically is true, update interval in seconds
+      engine:
+        enabled: true
+        animation: "split" # circle/slide_top/diamond/split
       gallery:
-          enabled: true
-          blur: false
-          image_width: 235
-          image_per_page: 6
-          show_buttons: true
-          orientation: "landscape"
-          image_spacing: 15
-          position_offset: 0
-          lazy_load: true
-          lazy_load_fadein: 400
-          image_corner_radius: 20
+        enabled: true
+        blur: true
+        image_width: 280
+        gallery_columns: 5
+        image_per_page: 15
+        show_buttons: false
+        orientation: "landscape" # can be "portrait" or "landscape"
+        image_spacing: 2
+        position_offset: 0
+        lazy_load: true
+        lazy_load_fadein: 400
+        image_corner_radius: 4
+      keybindings:
+        - keys: "alt+shift+w"
+          action: "toggle_gallery"
+          screen: "cursor"
       #run_after: # List of functions to run after wallpaper is updated
         #- "wal -s -t -e -q -n -i {image}" # Example command to run after wallpaper is updated
         #- "cmd.exe /c start /min pwsh ./yasb.ps1" # Example command to run after wallpaper is updated
+      callbacks:
+        on_left: "toggle_gallery"
+        on_middle: "do_nothing"
+        on_right: "change_wallpaper"
   window_switcher:
     type: "yasb.window_switcher.WindowSwitcherWidget"
     options:
@@ -751,42 +794,3 @@ widgets:
         - keys: "alt+w"
           action: "toggle_window_switcher"
           screen: "cursor"
-  #ai_chat:
-    #type: "yasb.ai_chat.AiChatWidget"
-    #options:
-      #label: "<span>\uDB81\uDE74</span>"
-      #chat:
-        #blur: false
-        #round_corners: true
-        #round_corners_type: "normal"
-        #border_color: "system"
-        #alignment: "center"
-        #direction: "down"
-        #offset_left: 0
-        #offset_top: 7
-      #icons:
-        #attach: "\uf067"
-        #send: "\uf1d8"
-        #stop: "\uf04d"
-        #clear: "\uf1f8"
-        #assistant: "\udb81\ude74"
-        #float_on: "\udb84\udcac"
-        #float_off: "\udb84\udca9"
-        #close: "\uf00d"
-        #copy: "\uebcc"
-        #copy_check: "\uf00c"
-      #start_floating: false
-      #notification_dot:
-        #enabled: false
-        #corner: "top_right"
-        #color: "red"
-        #margin: [ 0, 2 ]
-      #callbacks:
-        #on_left: "toggle_chat"
-      #providers:
-        #- provider: "Ollama"
-          #api_endpoint: "http://localhost:11434/v1"
-          #credential: "ollama"
-          #models:
-            #- name: "rnj-1"
-              #label: "RNJ-1"
