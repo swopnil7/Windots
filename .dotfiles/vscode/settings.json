@@ -82,6 +82,7 @@
   "window.title": "",
   "window.restoreWindows": "all",
   "window.titleBarStyle": "native",
+  "window.menuStyle": "custom",
 
   // Breadcrumbs
   "breadcrumbs.enabled": false,
